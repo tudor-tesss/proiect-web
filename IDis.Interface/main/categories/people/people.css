@@ -1,0 +1,162 @@
+body {
+    background-color: #EDF1D6;
+    font-family: 'Poppins', Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #9DC08B;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    margin: 50px 20px 20px 20px;
+    border-radius: 7px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.6);
+    position: relative;
+    padding-top: 20px;
+}
+
+.logo img {
+    max-width: 200px;
+    max-height: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.title {
+    margin: 0;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    padding: 10px 10px 10px 10px;
+    display: inline-block;
+    background-color: #6D8B74;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.6);
+    max-height: 30px;
+}
+
+nav a:hover {
+    background-color: #f5f5f5;
+    color: #364f6b;
+}
+
+.post {
+    max-width: 1000px;
+    margin: 50px auto 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #9DC08B;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.6);
+}
+
+.post_information {
+    flex: 1 1 100%;
+    max-height: 50px;
+    background-color: #6D8B74;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 20px;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    margin: 10px auto 10px auto;
+    border-radius: 7px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.6);
+    position: relative;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.post_author {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    max-height: 50px;
+    justify-content: center;
+}
+
+.post_title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 25px;
+    max-height: 50px;
+    justify-content: center;
+}
+
+.post_information:hover {
+    background-color: #f5f5f5;
+    color: #364f6b;
+    transform: translateY(-5px);
+}
+
+/* make logo disappear when it overlaps nav */
+@media screen and (max-width: 800px) {
+    .logo {
+        display: none;
+    }
+
+    header {
+        justify-content: center;
+    }
+}
+
+/* make header fit screen when zooming much */
+@media screen and (max-width: 600px) {
+    header {
+        margin: 0;
+        justify-content: center;
+    }
+}
+
+/* make nav taller when zooming in order to fit the text */
+@media screen and (max-width: 400px) {
+    nav {
+        flex-direction: column;
+    }
+}
+
+/* make post information taller and display it post_author and post_title on separate lines when zooming in */
+@media screen and (max-width: 450px) {
+    .post_information {
+        justify-content: center;
+        /* make height bigger */
+        height: 300px;
+    }
+
+    .post_title {
+        font-size: 20px;
+    }
+
+    .post_author {
+        display: none;
+    }
+}
+

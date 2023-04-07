@@ -1,3 +1,9 @@
+.prevent-select {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
 body {
     background-color: #EDF1D6;
     font-family: 'Poppins', Arial, sans-serif;
@@ -49,7 +55,7 @@ nav a {
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
     box-shadow: 0 4px 6px rgba(0,0,0,0.6);
     max-height: 30px;
 }
@@ -57,6 +63,7 @@ nav a {
 nav a:hover {
     background-color: #f5f5f5;
     color: #364f6b;
+    transform: translateY(-5px);
 }
 
 .post {
@@ -71,6 +78,7 @@ nav a:hover {
     background-color: #9DC08B;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.6);
+    margin-bottom: 20px;
 }
 
 .post_information {
@@ -84,15 +92,24 @@ nav a:hover {
     font-size: 20px;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
     margin: 10px auto 10px auto;
     border-radius: 7px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.6);
     position: relative;
     padding-top: 5px;
     padding-bottom: 5px;
+    gap: 20px;
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
 }
+
+.post_information:hover {
+    background-color: #f5f5f5;
+    color: #364f6b;
+    transform: translateY(-5px);
+}
+
 
 .post_author {
     display: flex;
@@ -111,10 +128,63 @@ nav a:hover {
     justify-content: center;
 }
 
-.post_information:hover {
+.post_data {
+    display: flex;
+}
+
+/* category_information is a div that contains a category div and multiple rating divs. each div should be on a separate line. the category_information div must be on the left */
+.category_information {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 10px auto 10px auto;
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1 1 150px;
+    margin-left: 0;
+}
+
+/* make the category like the post_information */
+.category, .rating {
+    flex: 1 1 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #6D8B74;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.6);
+    padding: 5px;
+    max-height: 30px;
+    margin-bottom: 10px;
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.category:hover {
     background-color: #f5f5f5;
     color: #364f6b;
     transform: translateY(-5px);
+}
+
+/* place post_content to the right of the category_information, in the post */
+.post_content {
+    flex: 1 1 100%;
+    margin: 10px auto 10px 30px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #9DC08B;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.6);
+    align-self: flex-end;
+    margin-bottom: 50px;
 }
 
 /* make logo disappear when it overlaps nav */
@@ -144,18 +214,16 @@ nav a:hover {
 }
 
 /* make post information taller and display it post_author and post_title on separate lines when zooming in */
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 500px) {
     .post_information {
         justify-content: center;
-        /* make height bigger */
-        height: 300px;
     }
 
     .post_title {
         font-size: 20px;
     }
 
-    .post_author {
+    .post_information .post_author {
         display: none;
     }
 }

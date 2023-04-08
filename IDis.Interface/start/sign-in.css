@@ -16,6 +16,25 @@ body {
     padding: 0;
 }
 
+
+body::-webkit-scrollbar {
+    width: 10px; /* width of the scrollbar */
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: #f1f1f1; /* color of the track */
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background: #9DC08B; /* color of the thumb */
+    border-radius: 5px; /* rounded corners */
+  }
+  
+  body::-webkit-scrollbar-thumb:hover {
+    background: #6D8B74; /* color of the thumb on hover */
+  }
+
+
 header {
     background-color: #9DC08B;
     color: #fff;

@@ -1,7 +1,10 @@
 .prevent-select {
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
 }
 
 body {
@@ -24,7 +27,7 @@ header {
     margin-bottom: 40px;
     margin: 50px 20px 20px 20px;
     border-radius: 7px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.6);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
     position: relative;
     padding-top: 20px;
 }
@@ -64,13 +67,13 @@ nav {
     padding: 20px;
     background-color: #9DC08B;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.6);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
     text-align: center;
-    
+
 }
 
-.container-header  {
-    
+.container-header {
+
     position: relative;
     display: flex;
     flex-direction: column;
@@ -78,10 +81,12 @@ nav {
     padding: 10px 0 10px 0;
     margin-bottom: 100px;
     margin-top: 40px;
-    
+
+
+
 }
 
-.container-header img{
+.container-header img {
     display: flex;
     justify-self: center;
     max-width: 200px;
@@ -94,7 +99,7 @@ nav {
 }
 
 
-.SignUp {
+.SignIn {
     display: flex;
     justify-self: center;
     align-items: center;
@@ -102,23 +107,23 @@ nav {
     line-height: 1;
     margin: 0;
     transform: translateY(80%);
-  }
+}
 
 
 .input-container {
     display: flex;
     width: 100%;
     text-align: center;
-  }
+}
 
-.input-field{
+.input-field {
 
     width: 90%;
     text-align: center;
 
 }
 
-form{
+form {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -127,9 +132,9 @@ form{
 
 }
 
-.input{
+.input {
     height: 45px;
-    width: 100%; 
+    width: 100%;
     padding: 10px;
     border-radius: 25px;
     border: none;
@@ -137,7 +142,7 @@ form{
     border-bottom: 1px solid #113f1d;
 }
 
-.submit-field{
+.submit-field {
     display: flex;
     justify-self: center;
     align-items: center;
@@ -147,7 +152,7 @@ form{
 
 .submit-b {
     flex: 1 1 150px;
-    display: flex; 
+    display: flex;
     justify-content: center;
     align-items: center;
     background-color: #6D8B74;
@@ -158,7 +163,7 @@ form{
     text-align: center;
     text-decoration: none;
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.6);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
     padding: 20px;
 }
 

@@ -153,12 +153,14 @@ form{
     border-bottom: 1px solid #113f1d;
 }
 
-.submit-field{
+
+.submit-field {
     display: flex;
     justify-self: center;
     align-items: center;
+    flex-direction: column;
     width: 50%;
-    transform: translateX(50%);
+    
 }
 
 .submit-b {

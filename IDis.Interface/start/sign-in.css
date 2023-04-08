@@ -165,8 +165,8 @@ form {
     display: flex;
     justify-self: center;
     align-items: center;
+    flex-direction: column;
     width: 50%;
-    transform: translateX(50%);
 }
 
 .submit-b {

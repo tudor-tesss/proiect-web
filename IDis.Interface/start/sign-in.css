@@ -191,7 +191,9 @@ form {
     transform: translateY(-5px);
 }
 
-
+p{
+    color: #6D8B74;
+}
 
 /* make logo disappear when it overlaps nav */
 @media screen and (max-width: 800px) {

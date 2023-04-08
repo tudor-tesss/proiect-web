@@ -83,12 +83,13 @@ nav {
     background-color: #9DC08B;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.6);
+    margin-top: 70px;
     
 }
 
 .buttons {
     flex: 1 1 150px;
-    display: flex; /* changed from flex to block */
+    display: flex; 
     justify-content: center;
     align-items: center;
     background-color: #6D8B74;

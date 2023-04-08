@@ -170,7 +170,6 @@ form {
 }
 
 .submit-b {
-    flex: 1 1 150px;
     display: flex;
     justify-content: center;
     align-items: center;

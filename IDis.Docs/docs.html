@@ -8,414 +8,598 @@
 </head>
 
 <body>
-    <h1>I Dislike It!</h1>
-    <p>Authors:</p>
-    <ul>
-        <li>Radeanu Roxana-Valentina - 2E1</li>
-        <li>Tescu Tudor - 2E1</li>
-        <li>Stirbu Larisa-Mihaela - 2E1</li>
-    </ul>
-    <h2>Table of contents</h2>
-    <ol>
-        <li>
-            <a href="#introduction">Introduction</a>
+    <article typeof="schema:ScholarlyArticle" resource="#">
+
+        <h1 property="schema:name">I Dislike It!</h1>
+        <section id="authors" typeof="sa:AuthorsList">
+            <p>Authors:</p>
             <ul>
-                <li><a href="#purpose">Purpose</a></li>
-                <li><a href="#intended-audience">Intended audience</a></li>
-                <li><a href="#references">References</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#overall-description">Overall description</a>
-            <ul>
-                <li><a href="#product-perspective">Product perspective</a></li>
-                <li><a href="#product-functions">Product functions</a></li>
-                <li><a href="#operating-environment">Operating environment</a></li>
-                <li>
-                    <a href="#design-and-implementation-constraints">Design and implementation constraints</a>
+                <li typeof="sa:ContributorRole" property="schema:author">
+                    <span typeof="schema:Person">
+                        <meta property="schema:givenName" content="Roxana-Valentina">
+                        <meta property="schema:familyName" content="Radeanu">
+                        <span property="schema:name">Radeanu Roxana-Valentina </span>
+                    </span>
+                    <ul>
+                        <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+                            <a href="mailto:radeanu1roxana@gmail.com"
+                                property="schema:email">radeanu1roxana@gmail.com</a>
+                        </li>
+                    </ul>
                 </li>
-                <li><a href="#user-documentation">User documentation</a></li>
-                <li>
-                    <a href="#assumptions-and-dependencies">Assumptions and dependencies</a>
+                <li typeof="sa:ContributorRole" property="schema:author">
+                    <span typeof="schema:Person">
+                        <meta property="schema:givenName" content="Tudor">
+                        <meta property="schema:familyName" content="Tescu">
+                        <span property="schema:name">Tescu Tudor</span>
+                    </span>
+                    <ul>
+                        <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+                            <a href="mailto:tudor.tescu@hotmail.com" property="schema:email">tudor.tescu@hotmail.com</a>
+                        </li>
+                    </ul>
+                </li>
+                <li typeof="sa:ContributorRole" property="schema:author">
+                    <span typeof="schema:Person">
+                        <meta property="schema:givenName" content="Larisa-Mihaela">
+                        <meta property="schema:familyName" content="Stirbu">
+                        <span property="schema:name">Stirbu Larisa-Mihaela</span>
+                    </span>
+                    <ul>
+                        <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+                            <a href="mailto:eusuntlarisa@gmail.com" property="schema:email">eusuntlarisa@gmail.com</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
-        </li>
-        <li>
-            <a href="#external-interface-requirements">External interface requirements</a>
-            <ul>
-                <li><a href="#user-interfaces">User interfaces</a></li>
-                <li><a href="#software-interfaces">Software interfaces</a></li>
+        </section>
+
+        <div class="table_of_content">
+
+            <h2>Table of contents</h2>
+            <ol>
                 <li>
-                    <a href="#communication-interfaces">Communication interfaces</a>
+                    <a href="#introduction">Introduction</a>
+                    <ul>
+                        <li><a href="#purpose">Purpose</a></li>
+                        <li><a href="#intended-audience">Intended audience</a></li>
+                        <li><a href="#references">References</a></li>
+                    </ul>
                 </li>
-            </ul>
-        </li>
-        <li><a href="#system-features">System features</a></li>
-        <li>
-            <a href="#other-non-functional-requirements">Other non-functional requirements</a>
-            <ul>
                 <li>
-                    <a href="#performance-requirements">Performance requirements</a>
+                    <a href="#overall-description">Overall description</a>
+                    <ul>
+                        <li><a href="#product-perspective">Product perspective</a></li>
+                        <li><a href="#product-functions">Product functions</a></li>
+                        <li><a href="#user-classes">User classes and characteristics</a></li>
+                        <li><a href="#operating-environment">Operating environment</a></li>
+                        <li>
+                            <a href="#design-and-implementation-constraints">Design and implementation constraints</a>
+                        </li>
+                    </ul>
                 </li>
-                <li><a href="#security-requirements">Security requirements</a></li>
-            </ul>
-        </li>
-    </ol>
-    <h2 id="introduction">1. Introduction</h2>
-
-    <h3>1.1 Purpose & Product Scope</h3>
-
-    <p>
-        The software submitted to your viewing is called <em>I Dislike It!</em>, a
-        web platform dedicated to the online community of people that wish to
-        share their opinions about certain topics. The platform is designed to be
-        used by anyone that has an account on it, and it is meant to be used by
-        people that want to share their opinions about various topics. These
-        topics are divided into categories, which may be created by the user and
-        which should have various rating criteria. The user can then create a
-        topic of discussion under a certain category, where they will rate the
-        topic and provide a description of their opinion. Other users may also
-        rate the topic and provide their own opinions.
-    </p>
-
-    <h3>1.2 Intended audience</h3>
-
-    <p>
-        This product is intended for anyone that wishes to share their opinions
-        about various topics.
-    </p>
-
-    <h3>1.3 References</h3>
-
-    <ul>
-        <li>
-            Github repo:
-            <a href="https://github.com/tudor-tesss/proiect-web/">https://github.com/tudor-tesss/proiect-web/</a>
-        </li>
-        <li>
-            Font resources:
-            <a href="https://fonts.google.com/">https://fonts.google.com/</a>
-        </li>
-        <li>
-            W3Schools HTML Element Reference:
-            <a href="https://www.w3schools.com/tags/default.asp">https://www.w3schools.com/tags/default.asp</a>
-        </li>
-        <li>
-            W3Schools CSS Reference:
-            <a href="https://www.w3schools.com/cssref/index.php">https://www.w3schools.com/cssref/index.php</a>
-        </li>
-        <li>
-            Web Technologies Course:
-            <a
-                href="https://profs.info.uaic.ro/~busaco/teach/courses/web/web-biblio.html">https://profs.info.uaic.ro/~busaco/teach/courses/web/web-biblio.html</a>
-        </li>
-    </ul>
-
-    <h2 id="overall-description">2. Overall description</h2>
-
-    <h3>2.1 Product perspective</h3>
-
-    <p>
-        I Dislike It! is a web platform that allows users to share their opinions.
-        Its' specifications can be observed below.
-    </p>
-
-    <h3>2.2 Product functions</h3>
-
-    <p>The product allows users to perform the following actions:</p>
-
-    <ul>
-        <li>Sign up</li>
-        <li>Sign in</li>
-        <li>View all categories</li>
-        <li>View all posts in a category</li>
-        <li>View a post and all of its' replies</li>
-        <li>Create a category</li>
-        <li>Create a post</li>
-        <li>View statistics</li>
-    </ul>
-    <h3>2.3 User classes and characteristics</h3>
-
-    <p>There are three main user types for the I Dislike It! application:</p>
-    <ol>
-        <li>
-            Unregistered users: users that have not created an account on the
-            platform. They do not have access to any pages other than the Sign in
-            and Sign up pages.
-        </li>
-        <li>
-            Registered users: users who have created an account on the platform.
-            They can login, browse categories, browse posts, create categories and
-            create new posts.
-        </li>
-        <li>
-            Administrators: users who have special privileges and can manage the
-            platform. They have the right to delete categories and posts which
-            violate common decency.
-        </li>
-    </ol>
-
-    <h3>2.4 Operating environment</h3>
-
-    <p>
-        I Dislike It! is a web application that can be accessed from any device
-        that has a web browser installed, and functions on any browser such as
-        Chrome, Firefox, Safari, Opera, etc. (some display features may only be
-        available in Chromium based browsers - i.e. the custom scroll bar).
-    </p>
-
-    <h3>2.5 Design and implementation constraints</h3>
-
-    <p>
-        The website has been designed and developed using HTML, CSS, and
-        JavaScript for frontend development, while the backend is built using
-        Java, with a custom-built library for routing and database management. The
-        database is a PostgreSQL database, which is hosted on the same server as
-        the backend.
-    </p>
-
-    <ul>
-        <li>Ensuring cross-browser compatibility</li>
-        <li>Adhering to web accessibility guidelines</li>
-        <li>Maintaining a consistent look and feel across the website</li>
-        <li>Optimizing the website for performance and load times</li>
-    </ul>
-
-    <h2 id="system-features">3. System Features</h2>
-
-    <h3>3.1 Account management</h3>
-
-    <p>
-        Users can create an account and login to the website. To avoid generic
-        security issues such as password phishing and stealing, we have opted to
-        use a passwordless authentication system, based on email gates. This means
-        that the user, upon entering their email address on the sign in page, will
-        receive an email with a code. Then, they will be prompted to enter the
-        code in the website and we will verify that the code is correct. If it is,
-        the user will be logged in.
-    </p>
-
-    <h3>3.2 Landing page (categories overview)</h3>
-
-    <p>
-        The landing page, or the categories overview page, is a page that displays
-        all the categories that are available on the website. The categories are
-        displayed in a grid with their name. The user can click on a category to
-        access all of the posts in that category.
-    </p>
-
-    <h3>3.3 Category overview</h3>
-
-    <p>
-        Upon entering this page, users will be greeted with a list of all the
-        posts in the category. The posts are displayed in a single column, and
-        contain the title, the author, the rating criteria and the ratings given
-        by the author, and the description of the post. The user can click on a
-        post to view it in more detail.
-    </p>
-
-    <h3>3.4 Post overview</h3>
-
-    <p>
-        Upon accessing this page, users will be greeted with a post, which
-        contains the title, the author, the rating criteria and the ratings given
-        by the author, and the description of the post. The user can also see all
-        the replies to the post, along with the authors and ratings of the new
-        replies. The user may also reply to the post and express their own
-        opinion.
-    </p>
-
-    <h3>3.5 Create category</h3>
-
-    <p>
-        Registered users can add new categories, which will be displayed on the
-        landing page. The category name must be unique. The category must also
-        contain between one and five rating criteria.
-    </p>
-
-    <h3>3.6 Add post</h3>
-
-    <p>
-        While viewing a category, registered users can add new posts to the
-        category. The post must contain a title, a description, and a rating for
-        each of the rating criteria.
-    </p>
-
-    <h3>3.7 Add reply</h3>
-
-    <p>
-        While viewing a post, registered users can add new replies to the post.
-        The reply must contain a description, and a rating for each of the rating
-        criteria.
-    </p>
-
-    <h3>3.8 Generate statistics</h3>
-
-    <p>
-        Registered users can generate statistics for a category or a post. The
-        statistics will be available in CSV, DocBook or PDF format.
-    </p>
-
-    <h2 id="external-interface-requirements">
-        4. External Interface Requirements
-    </h2>
-
-    <h3>4.1 User interfaces</h3>
-
-    <p>
-        The I Dislike It! website features a user-friendly interface that is easy
-        to navigate and control. The colour palette is consistent throughout the
-        website and generally follows a 60-30-10 rule, and was chosen to be easy
-        on the eyes and to provide a comforting experience to the user. The use of
-        calming colours such as green helps convey a sense of trust and safety.
-        The website also features a custom scroll bar, which is only available in
-        Chromium based browsers, for now. All of the buttons and links are clearly
-        visible and easy to click on, and the website is responsive and adapts to
-        different screen sizes. Here are some of the key features of the user
-        interface:
-    </p>
-
-    <ul>
-        <li>Clear navigation menus and buttons</li>
-        <li>Responsive design that adapts to different screen sizes</li>
-        <li>Readable fonts and colors</li>
-        <li>Pleasant colour palette</li>
-    </ul>
-
-    <h3>4.2 Application Programming Interfaces (APIs)</h3>
-
-    <p>
-        The I Dislike It! may use external APIs, such as SendGrid, to send emails
-        to users.
-    </p>
-
-    <h3>4.3 Hardware interfaces</h3>
-
-    <p>
-        As a web-based application, I Dislike It! does not have any hardware
-        requirements. However, in order to access the website, users must have a
-        device with a web browser installed, and an internet connection.
-    </p>
-
-    <h3>4.4 Software interfaces</h3>
-
-    <p>
-        I Dislike It! is built using HTML, CSS, and JavaScript for the frontend,
-        and a server-side programming language (Java) and a database management
-        system (PostgreSQL) for the backend. The platform is designed to work with
-        modern web browsers, such as Google Chrome, Mozilla Firefox, and Microsoft
-        Edge.
-    </p>
-    <h2 id="system-features">5. System Features</h2>
-
-    <h3>5.1 User account management</h3>
-
-    <p>
-        I Dislike It! provides basic account management features, such as creating
-        an account and logging in. For the purpose of this application, we have
-        opted not to use a password-based authentication system, but rather a
-        passwordless authentication system, based on email gates. This means that
-        the user, upon entering their email address on the sign in page, will
-        receive an email with a code. Then, they will be prompted to enter the
-        code in the website and we will verify that the code is correct. If it is,
-        the user will be logged in. Furthermore, we have opted not to allow the
-        upload of images on the website, as we believe that this would be a
-        security risk. Since this is, in the end, a platform for expressing
-        opinions, there is always the risk of generating negative feedback, and we
-        do not want to encourage users to upload images that could be used to
-        identify them or other individuals.
-    </p>
-
-    <h3>5.2 Categories overview</h3>
-
-    <p>
-        Users can browse the various categories that are available on the website
-        and may also filter the categories by name. Additionally, users can search
-        for categories by name.
-    </p>
-
-    <h3>5.3 Category overview</h3>
-
-    <p>
-        Registered users can view all of the posts in a certain category and, if
-        they desire, they can press the "Add post" button to add a new post to the
-        category. The posts are displayed in a single column, and contain the
-        title, the author, the rating criteria and the ratings given by the
-        author, and the description of the post. The user can click on a post to
-        view it in more detail.
-    </p>
-
-    <h3>5.4 Post overview</h3>
-
-    <p>
-        Users can view a post in more detail. The post contains the title, the
-        author, the rating criteria and the ratings given by the author, and the
-        description of the post. The user can also see all the replies to the
-        post, along with the authors and ratings of the new replies. The user may
-        also reply to the post and express their own opinion.
-    </p>
-
-    <h3>5.5 Statistics</h3>
-
-    <p>
-        Registered users can view statistics for a category or a post. The
-        statistics are displayed in a CSV, DocBook or PDF format. These statistics
-        can include the average rating for a category, the average ratings for a
-        post, the number of posts in a category, a graph of the ratings for a
-        category, and a graph of the ratings for a post.
-    </p>
-
-    <h3>5.6 Notifications</h3>
-
-    <p>
-        Users can receive notifications by email, for the purpose of allowing
-        authentication.
-    </p>
-
-    <h3>5.7 Administrator dashboard</h3>
-
-    <p>
-        Administrators have access to a special dashboard that allows them to
-        manage the platform. The dashboard includes functionality to:
-    </p>
-
-    <ul>
-        <li>View and delete posts or categories</li>
-        <li>View and manage user accounts</li>
-    </ul>
-
-    <h2 id="other-non-functional-requirements">
-        6. Other Non-Functional Requirements
-    </h2>
-
-    <h3>6.1 Performance requirements</h3>
-
-    <p>
-        I Dislike It! is designed to be fast and responsive, with a page load time
-        as short as possible. The website is lightweight and uses a minimal amount
-        of resources, allowing it to run smoothly on a wide range of devices.
-    </p>
-
-    <h3>6.2 Security requirements</h3>
-
-    <p>
-        I Dislike It! takes user privacy and security seriously and thus, in order
-        to avoid any risk of data breaches or leaks, we have opted not to allow
-        the upload of images on the website and we have also opted not to allow
-        the use of passwords for authentication.
-    </p>
-
-    <h3>6.3 Scalability requirements</h3>
-
-    <p>
-        I Dislike It! is designed to be scalable and can be easily adapted to
-        accommodate a larger number of users. The website is built using a
-        monolithic architecture, which is a good choice for a small website such
-        as this one. However, if the website were to grow in popularity and the
-        number of users were to increase, we could easily migrate to a
-        microservices architecture, which would allow us to scale the website
-        horizontally and to add new features more easily.
-    </p>
+                <li><a href="#system-features">System features</a>
+                    <ul>
+                        <li><a href="#account-management">Account management</a></li>
+                        <li><a href="#landing-page">Landing page</a></li>
+                        <li><a href="#category-overview">Category overview</a></li>
+                        <li><a href="#post-overview">Post overview</a></li>
+                        <li><a href="#create-category">Create category</a></li>
+                        <li><a href="#add-post">Add post</a></li>
+                        <li><a href="#add-reply">Add reply</a></li>
+                        <li><a href="#generate-statistics">Generate statistics</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#external-interface-requirements">External interface requirements</a>
+                    <ul>
+                        <li><a href="#user-interfaces">User interfaces</a></li>
+                        <li><a href="#api">Application Programming Interfaces</a></li>
+                        <li><a href="#hard-interfaces">Hardware interfaces</a></li>
+                        <li>
+                            <a href="#soft-interfaces">Software interfaces</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#system-features">System Features</a>
+                    <ul>
+                        <li><a href="#user-acc-management">User account management</a></li>
+                        <li><a href="#categories-overview">Categories overview</a></li>
+                        <li><a href="#category--overview">Category overview</a></li>
+                        <li><a href="#post--overview">Post overview</a></li>
+                        <li><a href="#statistics">Statistics</a></li>
+                        <li><a href="#notifications">Notifications</a></li>
+                        <li><a href="#admin-dashboard">Administrator dashboard</a></li>
+
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#other-non-functional-requirements">Other non-functional requirements</a>
+                    <ul>
+                        <li>
+                            <a href="#performance-requirements">Performance requirements</a>
+                        </li>
+                        <li><a href="#security-requirements">Security requirements</a></li>
+                        <li><a href="#scalability-req">Scalability requirements</a></li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <section id="introduction" role="doc-introduction">
+            <h2>1. Introduction</h2>
+            <section id="purpose">
+                <h3>1.1 Purpose & Product Scope</h3>
+
+                <p>
+                    The software submitted to your viewing is called <em>I Dislike It!</em>, a
+                    web platform dedicated to the online community of people that wish to
+                    share their opinions about certain topics. The platform is designed to be
+                    used by anyone that has an account on it, and it is meant to be used by
+                    people that want to share their opinions about various topics. These
+                    topics are divided into categories, which may be created by the user and
+                    which should have various rating criteria. The user can then create a
+                    topic of discussion under a certain category, where they will rate the
+                    topic and provide a description of their opinion. Other users may also
+                    rate the topic and provide their own opinions.
+                </p>
+            </section>
+            <section id="intended-audience">
+                <h3>1.2 Intended audience</h3>
+
+                <p>
+                    This product is intended for anyone that wishes to share their opinions
+                    about various topics.
+                </p>
+            </section>
+
+            <section id="references">
+                <h3>1.3 References</h3>
+
+                <ul>
+                    <li>
+                        Github repo:
+                        <a
+                            href="https://github.com/tudor-tesss/proiect-web/">https://github.com/tudor-tesss/proiect-web/</a>
+                    </li>
+                    <li>
+                        Font resources:
+                        <a href="https://fonts.google.com/">https://fonts.google.com/</a>
+                    </li>
+                    <li>
+                        W3Schools HTML Element Reference:
+                        <a
+                            href="https://www.w3schools.com/tags/default.asp">https://www.w3schools.com/tags/default.asp</a>
+                    </li>
+                    <li>
+                        W3Schools CSS Reference:
+                        <a
+                            href="https://www.w3schools.com/cssref/index.php">https://www.w3schools.com/cssref/index.php</a>
+                    </li>
+                    <li>
+                        Web Technologies Course:
+                        <a
+                            href="https://profs.info.uaic.ro/~busaco/teach/courses/web/web-biblio.html">https://profs.info.uaic.ro/~busaco/teach/courses/web/web-biblio.html</a>
+                    </li>
+                </ul>
+            </section>
+
+        </section>
+
+        <section id="overall-description">
+
+            <h2>2. Overall description</h2>
+
+            <section id="product-perspective">
+                <h3>2.1 Product perspective</h3>
+
+                <p>
+                    I Dislike It! is a web platform that allows users to share their opinions.
+                    Its' specifications can be observed below.
+                </p>
+            </section>
+
+            <section id="product-functions">
+
+                <h3>2.2 Product functions</h3>
+
+                <p>The product allows users to perform the following actions:</p>
+
+                <ul>
+                    <li>Sign up</li>
+                    <li>Sign in</li>
+                    <li>View all categories</li>
+                    <li>View all posts in a category</li>
+                    <li>View a post and all of its' replies</li>
+                    <li>Create a category</li>
+                    <li>Create a post</li>
+                    <li>View statistics</li>
+                </ul>
+            </section>
+
+            <section id="user-classes">
+                <h3>2.3 User classes and characteristics</h3>
+
+                <p>There are three main user types for the I Dislike It! application:</p>
+                <ol>
+                    <li>
+                        Unregistered users: users that have not created an account on the
+                        platform. They do not have access to any pages other than the Sign in
+                        and Sign up pages.
+                    </li>
+                    <li>
+                        Registered users: users who have created an account on the platform.
+                        They can login, browse categories, browse posts, create categories and
+                        create new posts.
+                    </li>
+                    <li>
+                        Administrators: users who have special privileges and can manage the
+                        platform. They have the right to delete categories and posts which
+                        violate common decency.
+                    </li>
+                </ol>
+
+            </section>
+
+            <section id="operating-environment">
+
+                <h3>2.4 Operating environment</h3>
+
+                <p>
+                    I Dislike It! is a web application that can be accessed from any device
+                    that has a web browser installed, and functions on any browser such as
+                    Chrome, Firefox, Safari, Opera, etc. (some display features may only be
+                    available in Chromium based browsers - i.e. the custom scroll bar).
+                </p>
+            </section>
+
+            <section id="design-and-implementation-constraints">
+
+                <h3>2.5 Design and implementation constraints</h3>
+
+                <p>
+                    The website has been designed and developed using HTML, CSS, and
+                    JavaScript for frontend development, while the backend is built using
+                    Java, with a custom-built library for routing and database management. The
+                    database is a PostgreSQL database, which is hosted on the same server as
+                    the backend.
+                </p>
+
+                <ul>
+                    <li>Ensuring cross-browser compatibility</li>
+                    <li>Adhering to web accessibility guidelines</li>
+                    <li>Maintaining a consistent look and feel across the website</li>
+                    <li>Optimizing the website for performance and load times</li>
+                </ul>
+            </section>
+
+        </section>
+
+        <section id="system-features">
+
+            <h2>3. System Features</h2>
+
+            <section id="account-management">
+                <h3>3.1 Account management</h3>
+
+                <p>
+                    Users can create an account and login to the website. To avoid generic
+                    security issues such as password phishing and stealing, we have opted to
+                    use a passwordless authentication system, based on email gates. This means
+                    that the user, upon entering their email address on the sign in page, will
+                    receive an email with a code. Then, they will be prompted to enter the
+                    code in the website and we will verify that the code is correct. If it is,
+                    the user will be logged in.
+                </p>
+            </section>
+
+            <section id="landing-page">
+
+                <h3>3.2 Landing page (categories overview)</h3>
+
+                <p>
+                    The landing page, or the categories overview page, is a page that displays
+                    all the categories that are available on the website. The categories are
+                    displayed in a grid with their name. The user can click on a category to
+                    access all of the posts in that category.
+                </p>
+
+            </section>
+
+            <section id="category-overview">
+
+                <h3>3.3 Category overview</h3>
+
+                <p>
+                    Upon entering this page, users will be greeted with a list of all the
+                    posts in the category. The posts are displayed in a single column, and
+                    contain the title, the author, the rating criteria and the ratings given
+                    by the author, and the description of the post. The user can click on a
+                    post to view it in more detail.
+                </p>
+            </section>
+
+            <section id="post-overview">
+                <h3>3.4 Post overview</h3>
+
+                <p>
+                    Upon accessing this page, users will be greeted with a post, which
+                    contains the title, the author, the rating criteria and the ratings given
+                    by the author, and the description of the post. The user can also see all
+                    the replies to the post, along with the authors and ratings of the new
+                    replies. The user may also reply to the post and express their own
+                    opinion.
+                </p>
+            </section>
+
+            <section id="create-category">
+
+                <h3>3.5 Create category</h3>
+
+                <p>
+                    Registered users can add new categories, which will be displayed on the
+                    landing page. The category name must be unique. The category must also
+                    contain between one and five rating criteria.
+                </p>
+            </section>
+
+            <section id="add-post">
+
+                <h3>3.6 Add post</h3>
+
+                <p>
+                    While viewing a category, registered users can add new posts to the
+                    category. The post must contain a title, a description, and a rating for
+                    each of the rating criteria.
+                </p>
+            </section>
+
+            <section id="add-reply">
+
+                <h3>3.7 Add reply</h3>
+
+                <p>
+                    While viewing a post, registered users can add new replies to the post.
+                    The reply must contain a description, and a rating for each of the rating
+                    criteria.
+                </p>
+            </section>
+
+            <section id="generate-statistics">
+
+                <h3>3.8 Generate statistics</h3>
+
+                <p>
+                    Registered users can generate statistics for a category or a post. The
+                    statistics will be available in CSV, DocBook or PDF format.
+                </p>
+
+            </section>
+        </section>
+
+        <section id="external-interface-requirements">
+
+            <h2>
+                4. External Interface Requirements
+            </h2>
+
+            <section id="user-interfaces">
+
+                <h3>4.1 User interfaces</h3>
+
+                <p>
+                    The I Dislike It! website features a user-friendly interface that is easy
+                    to navigate and control. The colour palette is consistent throughout the
+                    website and generally follows a 60-30-10 rule, and was chosen to be easy
+                    on the eyes and to provide a comforting experience to the user. The use of
+                    calming colours such as green helps convey a sense of trust and safety.
+                    The website also features a custom scroll bar, which is only available in
+                    Chromium based browsers, for now. All of the buttons and links are clearly
+                    visible and easy to click on, and the website is responsive and adapts to
+                    different screen sizes. Here are some of the key features of the user
+                    interface:
+                </p>
+
+                <ul>
+                    <li>Clear navigation menus and buttons</li>
+                    <li>Responsive design that adapts to different screen sizes</li>
+                    <li>Readable fonts and colors</li>
+                    <li>Pleasant colour palette</li>
+                </ul>
+            </section>
+
+            <section id="api">
+
+                <h3>4.2 Application Programming Interfaces (APIs)</h3>
+
+                <p>
+                    The I Dislike It! may use external APIs, such as SendGrid, to send emails
+                    to users.
+                </p>
+            </section>
+            <section id="hard-interfaces">
+
+                <h3>4.3 Hardware interfaces</h3>
+
+                <p>
+                    As a web-based application, I Dislike It! does not have any hardware
+                    requirements. However, in order to access the website, users must have a
+                    device with a web browser installed, and an internet connection.
+                </p>
+            </section>
+            <section id="soft-interfaces">
+
+                <h3>4.4 Software interfaces</h3>
+
+                <p>
+                    I Dislike It! is built using HTML, CSS, and JavaScript for the frontend,
+                    and a server-side programming language (Java) and a database management
+                    system (PostgreSQL) for the backend. The platform is designed to work with
+                    modern web browsers, such as Google Chrome, Mozilla Firefox, and Microsoft
+                    Edge.
+                </p>
+            </section>
+        </section>
+
+        <section id="system-features">
+            <h2>5. System Features</h2>
+
+            <section id="user-acc-management">
+
+                <h3>5.1 User account management</h3>
+
+                <p>
+                    I Dislike It! provides basic account management features, such as creating
+                    an account and logging in. For the purpose of this application, we have
+                    opted not to use a password-based authentication system, but rather a
+                    passwordless authentication system, based on email gates. This means that
+                    the user, upon entering their email address on the sign in page, will
+                    receive an email with a code. Then, they will be prompted to enter the
+                    code in the website and we will verify that the code is correct. If it is,
+                    the user will be logged in. Furthermore, we have opted not to allow the
+                    upload of images on the website, as we believe that this would be a
+                    security risk. Since this is, in the end, a platform for expressing
+                    opinions, there is always the risk of generating negative feedback, and we
+                    do not want to encourage users to upload images that could be used to
+                    identify them or other individuals.
+                </p>
+            </section>
+
+            <section id="categories-overview">
+
+                <h3>5.2 Categories overview</h3>
+
+                <p>
+                    Users can browse the various categories that are available on the website
+                    and may also filter the categories by name. Additionally, users can search
+                    for categories by name.
+                </p>
+
+            </section>
+
+            <section id="category--overview">
+
+                <h3>5.3 Category overview</h3>
+
+                <p>
+                    Registered users can view all of the posts in a certain category and, if
+                    they desire, they can press the "Add post" button to add a new post to the
+                    category. The posts are displayed in a single column, and contain the
+                    title, the author, the rating criteria and the ratings given by the
+                    author, and the description of the post. The user can click on a post to
+                    view it in more detail.
+                </p>
+            </section>
+
+            <section id="post--overview">
+
+                <h3>5.4 Post overview</h3>
+
+                <p>
+                    Users can view a post in more detail. The post contains the title, the
+                    author, the rating criteria and the ratings given by the author, and the
+                    description of the post. The user can also see all the replies to the
+                    post, along with the authors and ratings of the new replies. The user may
+                    also reply to the post and express their own opinion.
+                </p>
+            </section>
+
+            <section id="statistics">
+
+                <h3>5.5 Statistics</h3>
+
+                <p>
+                    Registered users can view statistics for a category or a post. The
+                    statistics are displayed in a CSV, DocBook or PDF format. These statistics
+                    can include the average rating for a category, the average ratings for a
+                    post, the number of posts in a category, a graph of the ratings for a
+                    category, and a graph of the ratings for a post.
+                </p>
+            </section>
+
+            <section id="notifications">
+
+                <h3>5.6 Notifications</h3>
+
+                <p>
+                    Users can receive notifications by email, for the purpose of allowing
+                    authentication.
+                </p>
+            </section>
+
+            <section id="admin-dashboard">
+
+                <h3>5.7 Administrator dashboard</h3>
+
+                <p>
+                    Administrators have access to a special dashboard that allows them to
+                    manage the platform. The dashboard includes functionality to:
+                </p>
+
+                <ul>
+                    <li>View and delete posts or categories</li>
+                    <li>View and manage user accounts</li>
+                </ul>
+            </section>
+        </section>
+
+        <section id="other-non-functional-requirements">
+
+            <h2>
+                6. Other Non-Functional Requirements
+            </h2>
+
+            <section id="performance-req">
+
+                <h3>6.1 Performance requirements</h3>
+
+                <p>
+                    I Dislike It! is designed to be fast and responsive, with a page load time
+                    as short as possible. The website is lightweight and uses a minimal amount
+                    of resources, allowing it to run smoothly on a wide range of devices.
+                </p>
+            </section>
+
+            <section id="security-req">
+
+                <h3>6.2 Security requirements</h3>
+
+                <p>
+                    I Dislike It! takes user privacy and security seriously and thus, in order
+                    to avoid any risk of data breaches or leaks, we have opted not to allow
+                    the upload of images on the website. For the sign in functionality we are going to use an email
+                    based system with
+                    which the user will receive a token (that will be used as a password) or a standard password based
+                    sign in, but the
+                    password will be hashed before being stored in the database to ensure security in case of a data
+                    breach.
+                    Moreover, the communication between the frontend and the backend will be made using the HTTPS
+                    protocol, that encrypts all traffic.
+                </p>
+            </section>
+
+            <section id="Scalability-req">
+
+                <h3>6.3 Scalability requirements</h3>
+
+                <p>
+                    I Dislike It! is designed to be scalable and can be easily adapted to
+                    accommodate a larger number of users. The website is built using a
+                    monolithic architecture, which is a good choice for a small website such
+                    as this one. However, if the website were to grow in popularity and the
+                    number of users were to increase, we could easily migrate to a
+                    microservices architecture, which would allow us to scale the website
+                    horizontally and to add new features more easily.
+                </p>
+
+            </section>
+        </section>
+    </article>
+
 </body>
 
 </html>

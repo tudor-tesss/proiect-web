@@ -162,7 +162,11 @@ nav a:hover {
 .post_data {
     display: flex;
 }
-
+.comments {
+    align-items: center;
+    justify-content: center;
+    max-width: 600px;
+}
 /* category_information is a div that contains a category div and multiple rating divs. each div should be on a separate line. the category_information div must be on the left */
 .category_information {
     display: flex;
@@ -216,6 +220,7 @@ nav a:hover {
     box-shadow: 0 4px 6px rgba(0,0,0,0.6);
     align-self: flex-end;
     margin-bottom: 50px;
+    min-width: 500px;
 }
 
 /* make logo disappear when it overlaps nav */

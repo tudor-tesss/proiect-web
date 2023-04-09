@@ -27,6 +27,8 @@ header {
     box-shadow: 0 4px 6px rgba(0,0,0,0.6);
     position: relative;
     padding-top: 20px;
+    z-index: 10;
+
 }
 
 .logo img {
@@ -48,6 +50,7 @@ nav {
 }
 
 nav a {
+    
     padding: 10px 10px 10px 10px;
     display: inline-block;
     background-color: #6D8B74;
@@ -60,10 +63,38 @@ nav a {
     max-height: 30px;
 }
 
+button {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    padding: 40px 40px 66px 40px;
+    display: inline-block;
+    background-color: #6D8B74;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.6);
+    max-height: 30px;
+    font-size: 25px;
+    z-index: 20;
+}
+
+button:hover{
+    background-color: #f5f5f5;
+    color: #364f6b;
+    transform: translateY(-5px);
+}
+
+
+
 nav a:hover {
     background-color: #f5f5f5;
     color: #364f6b;
     transform: translateY(-5px);
+    z-index: 10;
+
 }
 
 .post {

@@ -18,6 +18,7 @@ public class GenericOptionsController implements IUserController {
         headers.put("Access-Control-Allow-Origin", "*");
         headers.put("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
         headers.put("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        headers.put("Content-Type", "application/json");
 
         return HttpResponse.create(200, "", headers);
     }

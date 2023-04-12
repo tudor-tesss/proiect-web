@@ -1,9 +1,12 @@
 package com.idis.presentation;
 
 import com.idis.core.business.commandhandlers.test.CreateTestObjCommandHandler;
+import com.idis.core.business.commandhandlers.user.CreateUserCommandHandler;
 import com.idis.core.business.commands.test.CreateTestObjCommand;
+import com.idis.core.business.commands.user.CreateUserCommand;
 import com.idis.core.domain.test.TestObj;
-import com.idis.presentation.functions.test.TestController;
+import com.idis.core.domain.user.User;
+import com.idis.presentation.functions.UserFunctions;
 import com.nimblej.core.Mediator;
 import com.nimblej.networking.database.NimbleJQueryProvider;
 import com.nimblej.networking.http.server.HttpServer;
@@ -20,7 +23,7 @@ public class Main {
         var server = HttpServer
                 .create(7101)
                 .withControllers(
-                        new TestController()
+                        new UserFunctions()
                 );
 
         server.start();
@@ -28,11 +31,13 @@ public class Main {
 
     private static void addManagedClasses() {
         NimbleJQueryProvider.addManagedClass(TestObj.class);
+        NimbleJQueryProvider.addManagedClass(User.class);
     }
 
     private static void addMediatorHandlers() {
         var mediator = Mediator.getInstance();
 
         mediator.registerHandler(CreateTestObjCommand.class, new CreateTestObjCommandHandler());
+        mediator.registerHandler(CreateUserCommand.class, new CreateUserCommandHandler());
     }
 }

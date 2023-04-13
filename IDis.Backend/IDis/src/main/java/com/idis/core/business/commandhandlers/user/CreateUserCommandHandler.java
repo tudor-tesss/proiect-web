@@ -20,16 +20,14 @@ public final class CreateUserCommandHandler implements IRequestHandler<CreateUse
             throw new IllegalArgumentException(BusinessErrors.User.UserAlreadyExists);
         }
 
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                var user = User.create(createUserCommand.name(), createUserCommand.firstName(), createUserCommand.emailAddress());
-                NimbleJQueryProvider.insert(user);
+        try {
+            var user = User.create(createUserCommand.name(), createUserCommand.firstName(), createUserCommand.emailAddress());
+            NimbleJQueryProvider.insert(user);
 
-                return user;
-            }
-            catch (Exception e) {
-                throw e;
-            }
-        });
+            return CompletableFuture.completedFuture(user);
+        }
+        catch (Exception e) {
+            throw e;
+        }
     }
 }

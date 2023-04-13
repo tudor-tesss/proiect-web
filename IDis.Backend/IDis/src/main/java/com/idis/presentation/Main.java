@@ -3,6 +3,7 @@ package com.idis.presentation;
 import com.idis.core.business.commandhandlers.user.CreateUserCommandHandler;
 import com.idis.core.business.commands.user.CreateUserCommand;
 import com.idis.core.domain.user.User;
+import com.idis.presentation.functions.GenericOptionsController;
 import com.idis.presentation.functions.UserFunctions;
 import com.nimblej.core.Mediator;
 import com.nimblej.networking.database.NimbleJQueryProvider;
@@ -20,6 +21,7 @@ public class Main {
         var server = HttpServer
                 .create(7101)
                 .withControllers(
+                        new GenericOptionsController(),
                         new UserFunctions()
                 );
 

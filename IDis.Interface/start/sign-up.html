@@ -19,25 +19,22 @@
             <div class="SignUp">
 			<h1>Sign Up</h1>
             </div>
-		</div> 
-
-		
+		</div> 		
+			<script src="sign-up.js"></script>
 			<div class="input-container">
+				<div id="error-container" class="error-container"></div>
                 <form action="../main/main.html">
 				<div class="input-field">
-					<input type="text" class="input" placeholder="Email" name="email" required>
+					<input type="text" class="input" placeholder="Email" id="email" name="email" required>
 				</div>
 				<div class="input-field">
-					<input type="text" class="input" placeholder="Name" name="name" required>
+					<input type="text" class="input" placeholder="Name" id="name" name="name" required>
 				</div>
 				<div class="input-field">
-					<input type="text" class="input" placeholder="Surname" name="surname" required>
-				</div>
-				<div class="input-field">
-					<input type="password" class="input" placeholder="Password" name="password" required>
+					<input type="text" class="input" placeholder="First Name" id="first-name" name="first-name" required>
 				</div>
 				<div class="submit-field">
-					<input type="submit" class="submit-b" value="Submit" >
+					<button type="button" class="submit-b" onClick="createUser()">Submit</button>
 			    </div>
             </form>
 		</div>

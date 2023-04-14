@@ -2,6 +2,7 @@ package com.idis.presentation.functions;
 
 import com.idis.core.business.commands.user.CreateUserCommand;
 import com.idis.core.business.commands.user.CreateUserGateCommand;
+import com.idis.core.business.commands.user.PassUserGateCommand;
 import com.nimblej.core.Function;
 import com.nimblej.core.IUserController;
 import com.nimblej.core.Mediator;
@@ -10,6 +11,7 @@ import com.nimblej.networking.http.communication.HttpResponse;
 import com.nimblej.networking.http.communication.HttpVerbs;
 import com.nimblej.networking.http.routing.Route;
 
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 public class UserFunctions implements IUserController {
@@ -45,7 +47,28 @@ public class UserFunctions implements IUserController {
         try {
             return mediator
                     .send(command)
-                    .thenCompose(r -> HttpResponse.create(200, ""));
+                    .thenCompose(r -> HttpResponse.create(200, "Success"));
+        }
+        catch (Exception e) {
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400, responseContent);
+        }
+    }
+
+    @Route(path = "/users/{id}/gates", method = HttpVerbs.PATCH)
+    @Function(name = "passUserGate")
+    public static CompletableFuture<HttpResponse> passUserGate(String id, String requestBody) {
+        var command = Serialization.deserialize(requestBody, PassUserGateCommand.class);
+        command = new PassUserGateCommand(UUID.fromString(id), command.code());
+
+        System.out.println(command.code() + "      " + command.userId());
+
+        //catch exception
+        try {
+            return mediator
+                    .send(command)
+                    .thenCompose(r -> HttpResponse.create(200, "Success"));
         }
         catch (Exception e) {
             var responseContent = Serialization.serialize(e.getMessage());

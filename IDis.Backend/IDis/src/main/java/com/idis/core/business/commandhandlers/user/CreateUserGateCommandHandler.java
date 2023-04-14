@@ -22,7 +22,7 @@ public final class CreateUserGateCommandHandler implements IRequestHandler<Creat
                 .stream().findFirst();
 
         if (user.isEmpty()) {
-            throw new IllegalArgumentException(BusinessErrors.UserGate.UserDoesNotExist);
+            throw new IllegalArgumentException(BusinessErrors.UserGate.Create.UserDoesNotExist);
         }
 
         try {

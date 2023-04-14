@@ -6,4 +6,12 @@ public class DomainErrors {
         public static final String FirstNameNullOrEmpty = "User.FirstName.NullOrEmpty";
         public static final String EmailAddressNullOrEmpty = "User.EmailAddress.NullOrEmpty";
     }
+
+    public static class UserGate {
+        public static class Pass {
+            public static final String UserGateExpired = "UserGate.Pass.UserGateExpired";
+            public static final String InvalidCode = "UserGate.Pass.InvalidCode";
+            public static final String UserGateAlreadyPassed = "UserGate.Pass.UserGateAlreadyPassed";
+        }
+    }
 }

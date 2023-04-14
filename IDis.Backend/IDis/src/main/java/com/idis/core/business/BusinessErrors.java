@@ -6,6 +6,12 @@ public class BusinessErrors {
     }
 
     public static class UserGate {
-        public static final String UserDoesNotExist = "UserGate.UserDoesNotExist";
+        public static class Create {
+            public static final String UserDoesNotExist = "UserGate.Create.UserDoesNotExist";
+        }
+
+        public static class Pass {
+            public static final String UserGateDoesNotExist = "UserGate.Pass.UserGateDoesNotExist";
+        }
     }
 }

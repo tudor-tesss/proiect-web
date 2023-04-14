@@ -1,8 +1,11 @@
 package com.idis.presentation;
 
 import com.idis.core.business.commandhandlers.user.CreateUserCommandHandler;
+import com.idis.core.business.commandhandlers.user.CreateUserGateCommandHandler;
 import com.idis.core.business.commands.user.CreateUserCommand;
+import com.idis.core.business.commands.user.CreateUserGateCommand;
 import com.idis.core.domain.user.User;
+import com.idis.core.domain.user.UserGate;
 import com.idis.presentation.functions.GenericOptionsController;
 import com.idis.presentation.functions.UserFunctions;
 import com.nimblej.core.Mediator;
@@ -30,11 +33,13 @@ public class Main {
 
     private static void addManagedClasses() {
         NimbleJQueryProvider.addManagedClass(User.class);
+        NimbleJQueryProvider.addManagedClass(UserGate.class);
     }
 
     private static void addMediatorHandlers() {
         var mediator = Mediator.getInstance();
 
         mediator.registerHandler(CreateUserCommand.class, new CreateUserCommandHandler());
+        mediator.registerHandler(CreateUserGateCommand.class, new CreateUserGateCommandHandler());
     }
 }

@@ -1,6 +1,7 @@
 package com.idis.presentation.functions;
 
 import com.idis.core.business.commands.user.CreateUserCommand;
+import com.idis.core.business.commands.user.CreateUserGateCommand;
 import com.nimblej.core.Function;
 import com.nimblej.core.IUserController;
 import com.nimblej.core.Mediator;
@@ -29,6 +30,24 @@ public class UserFunctions implements IUserController {
                         return HttpResponse.create(200, responseContent);
                     });
         } catch (Exception e) {
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400, responseContent);
+        }
+    }
+
+    @Route(path = "/users/gates", method = HttpVerbs.POST)
+    @Function(name = "createUserGate")
+    public static CompletableFuture<HttpResponse> createUserGate(String requestBody) {
+        var command = Serialization.deserialize(requestBody, CreateUserGateCommand.class);
+
+        //catch exception
+        try {
+            return mediator
+                    .send(command)
+                    .thenCompose(r -> HttpResponse.create(200, ""));
+        }
+        catch (Exception e) {
             var responseContent = Serialization.serialize(e.getMessage());
 
             return HttpResponse.create(400, responseContent);

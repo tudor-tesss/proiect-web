@@ -61,6 +61,18 @@ nav a {
     box-shadow: 0 4px 6px rgba(0,0,0,0.6);
     max-height: 30px;
 }
+nav button {
+    padding: 10px 10px 10px 10px;
+    display: inline-block;
+    background-color: #6D8B74;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.6);
+    max-height: 30px;
+}
 
 nav a:hover {
     background-color: #f5f5f5;

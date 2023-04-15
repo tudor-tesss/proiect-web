@@ -47,7 +47,11 @@ public class UserFunctions implements IUserController {
         try {
             return mediator
                     .send(command)
-                    .thenCompose(r -> HttpResponse.create(200, ""));
+                    .thenCompose(r -> {
+                        var responseContent = Serialization.serialize(r);
+
+                        return HttpResponse.create(200, responseContent);
+                    });
         }
         catch (Exception e) {
             var responseContent = Serialization.serialize(e.getMessage());
@@ -66,12 +70,20 @@ public class UserFunctions implements IUserController {
         try {
             return mediator
                     .send(command)
-                    .thenCompose(r -> HttpResponse.create(200, ""));
-        }
-        catch (Exception e) {
+                    .thenCompose(r -> {
+                        HttpResponse res = HttpResponse.create(200, Serialization.serialize(r)).join();
+
+                        // When the user gate is passed, set the session ID as a cookie.
+                        String sessionId = r.sessionId(); // Replace this with the appropriate session ID.
+                        res.setCookie("sessionId", sessionId, 3600); // Set the cookie to expire in 1 hour.
+
+                        return CompletableFuture.completedFuture(res);
+                    });
+        } catch (Exception e) {
             var responseContent = Serialization.serialize(e.getMessage());
 
             return HttpResponse.create(400, responseContent);
         }
     }
+
 }

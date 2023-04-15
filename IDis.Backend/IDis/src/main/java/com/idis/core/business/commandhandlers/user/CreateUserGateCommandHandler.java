@@ -9,13 +9,19 @@ import com.idis.infrastructure.services.SendGridTemplates;
 import com.nimblej.core.IRequestHandler;
 import com.nimblej.networking.database.NimbleJQueryProvider;
 
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 import static com.nimblej.extensions.functional.FunctionalExtensions.*;
 
-public final class CreateUserGateCommandHandler implements IRequestHandler<CreateUserGateCommand, String> {
+public final class CreateUserGateCommandHandler implements IRequestHandler<CreateUserGateCommand, UUID> {
     @Override
-    public CompletableFuture<String> handle(CreateUserGateCommand createUserGateCommand) {
+    public CompletableFuture<UUID> handle(CreateUserGateCommand createUserGateCommand) {
+        var users = NimbleJQueryProvider.getAll(User.class);
+        for (var user : users) {
+            System.out.println(user.getEmailAddress());
+        }
+
         var user = filter(
                         NimbleJQueryProvider.getAll(User.class),
                         u -> u.getEmailAddress().equals(createUserGateCommand.emailAddress()))
@@ -31,7 +37,7 @@ public final class CreateUserGateCommandHandler implements IRequestHandler<Creat
 
             SendGridService.sendEmail(user.get().getEmailAddress(), "Login code for IDis", SendGridTemplates.userGateTemplate(user.get().getFirstName(), userGate.getCode()));
 
-            return CompletableFuture.completedFuture("Success");
+            return CompletableFuture.completedFuture(user.get().getId());
         }
         catch (Exception e) {
             throw new RuntimeException(e);

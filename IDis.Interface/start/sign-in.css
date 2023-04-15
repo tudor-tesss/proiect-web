@@ -34,6 +34,23 @@ body::-webkit-scrollbar {
     background: #6D8B74; /* color of the thumb on hover */
   }
 
+  
+  .error-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff; /* White color */
+    background-color: rgba(211, 47, 47, 0.9); /* Red background with some transparency */
+    padding: 20px 30px;
+    border-radius: 8px;
+    z-index: 9999;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
 
 header {
     background-color: #9DC08B;

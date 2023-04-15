@@ -1,16 +1,18 @@
 package com.idis.core.business.commandhandlers.user;
 
 import com.idis.core.business.BusinessErrors;
+import com.idis.core.business.commandresponses.user.PassUserGateCommandResponse;
 import com.idis.core.business.commands.user.PassUserGateCommand;
 import com.idis.core.domain.user.UserGate;
+import com.idis.infrastructure.session.SessionStore;
 import com.nimblej.core.IRequestHandler;
 import com.nimblej.networking.database.NimbleJQueryProvider;
 
 import java.util.concurrent.CompletableFuture;
 
-public final class PassUserGateCommandHandler implements IRequestHandler<PassUserGateCommand, String> {
+public final class PassUserGateCommandHandler implements IRequestHandler<PassUserGateCommand, PassUserGateCommandResponse> {
     @Override
-    public CompletableFuture<String> handle(PassUserGateCommand passUserGateCommand) {
+    public CompletableFuture<PassUserGateCommandResponse> handle(PassUserGateCommand passUserGateCommand) {
         var userGates = NimbleJQueryProvider.getAll(UserGate.class);
         userGates.sort((a, b) -> b.getCreatedAt().compareTo(a.getCreatedAt()));
         var latestUserGate = userGates.stream().findFirst();
@@ -24,7 +26,10 @@ public final class PassUserGateCommandHandler implements IRequestHandler<PassUse
             userGate.pass(passUserGateCommand.code());
             NimbleJQueryProvider.insert(userGate);
 
-            return CompletableFuture.completedFuture("Success");
+            var sessionId = SessionStore.createSession(userGate.getUserId());
+            var userGateResponse = new PassUserGateCommandResponse(sessionId);
+
+            return CompletableFuture.completedFuture(userGateResponse);
         }
         catch (Exception e) {
             throw new RuntimeException(e.getMessage());

@@ -8,6 +8,10 @@
 </head>
 
 <body class="prevent-select">
+	<script src="../check-session.js"></script>
+    <script>
+        resumeSession();
+    </script>
 	<header>
 		<div class="logo">
 			<img src="../resources/Iogopng.png" />
@@ -22,17 +26,15 @@
 				<h1>Sign In</h1>
 			</div>
 		</div>
-
+		<script src="sign-in.js"></script>
 		<div class="input-container">
 			<form action="../main/main.html">
+				<div id="error-container" class="error-container"></div>
 				<div class="input-field">
-					<input type="text" class="input" placeholder="Email" name="email" required>
-				</div>
-				<div class="input-field">
-					<input type="password" class="input" placeholder="Password" name="password" required>
+					<input type="text" class="input" placeholder="Email" name="email" id="email" required>
 				</div>
 				<div class="submit-field">
-					<input type="submit" class="submit-b" value="Submit">
+					<button type="button" class="submit-b" onClick="createUserGate()">Submit</button>
 				</div>
 			</form>
 		</div>

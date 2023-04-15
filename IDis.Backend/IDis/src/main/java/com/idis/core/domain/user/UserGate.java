@@ -1,6 +1,7 @@
 package com.idis.core.domain.user;
 
 import com.idis.core.domain.DomainErrors;
+import com.idis.core.domain.constants.UserGateConstants;
 import com.nimblej.core.BaseObject;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -27,17 +28,17 @@ public final class UserGate extends BaseObject {
         return new UserGate(userId);
     }
 
-    public void pass(String code) {
-        if (createdAt.getTime() + 300000 < new Date().getTime()) {
-            throw new IllegalStateException(DomainErrors.UserGate.Pass.UserGateExpired);
+    public void pass(String code) throws Exception {
+        if (createdAt.getTime() + UserGateConstants.UserGateTimeToLive < new Date().getTime()) {
+            throw new Exception(DomainErrors.UserGate.Pass.UserGateExpired);
         }
 
         if (!this.code.equals(code)) {
-            throw new IllegalStateException(DomainErrors.UserGate.Pass.InvalidCode);
+            throw new Exception(DomainErrors.UserGate.Pass.InvalidCode);
         }
 
         if (passedAt != null) {
-            throw new IllegalStateException(DomainErrors.UserGate.Pass.UserGateAlreadyPassed);
+            throw new Exception(DomainErrors.UserGate.Pass.UserGateAlreadyPassed);
         }
 
         passedAt = new Date();
@@ -53,6 +54,10 @@ public final class UserGate extends BaseObject {
 
     public Date getCreatedAt() {
         return createdAt;
+    }
+
+    public Date getPassedAt() {
+        return passedAt;
     }
 
     private static String generateCode() {

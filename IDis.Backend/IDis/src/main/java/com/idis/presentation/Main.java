@@ -1,15 +1,9 @@
 package com.idis.presentation;
 
-import com.idis.core.business.commandhandlers.user.CreateUserCommandHandler;
-import com.idis.core.business.commandhandlers.user.CreateUserGateCommandHandler;
-import com.idis.core.business.commandhandlers.user.PassUserGateCommandHandler;
-import com.idis.core.business.commands.user.CreateUserCommand;
-import com.idis.core.business.commands.user.CreateUserGateCommand;
-import com.idis.core.business.commands.user.PassUserGateCommand;
-import com.idis.core.domain.user.User;
-import com.idis.core.domain.user.UserGate;
-import com.idis.presentation.functions.GenericOptionsController;
-import com.idis.presentation.functions.UserFunctions;
+import com.idis.core.business.commandhandlers.user.*;
+import com.idis.core.business.commands.user.*;
+import com.idis.core.domain.user.*;
+import com.idis.presentation.functions.*;
 import com.nimblej.core.Mediator;
 import com.nimblej.networking.database.NimbleJQueryProvider;
 import com.nimblej.networking.http.server.HttpServer;

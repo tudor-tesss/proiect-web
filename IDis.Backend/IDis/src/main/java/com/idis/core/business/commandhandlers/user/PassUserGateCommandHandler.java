@@ -20,13 +20,14 @@ public final class PassUserGateCommandHandler implements IRequestHandler<PassUse
         }
 
         try {
-            latestUserGate.get().pass(passUserGateCommand.code());
-            NimbleJQueryProvider.insert(latestUserGate.get());
+            var userGate = latestUserGate.get();
+            userGate.pass(passUserGateCommand.code());
+            NimbleJQueryProvider.insert(userGate);
 
             return CompletableFuture.completedFuture("Success");
         }
         catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 }

@@ -47,7 +47,7 @@ public class UserFunctions implements IUserController {
         try {
             return mediator
                     .send(command)
-                    .thenCompose(r -> HttpResponse.create(200, "Success"));
+                    .thenCompose(r -> HttpResponse.create(200, ""));
         }
         catch (Exception e) {
             var responseContent = Serialization.serialize(e.getMessage());
@@ -62,13 +62,11 @@ public class UserFunctions implements IUserController {
         var command = Serialization.deserialize(requestBody, PassUserGateCommand.class);
         command = new PassUserGateCommand(UUID.fromString(id), command.code());
 
-        System.out.println(command.code() + "      " + command.userId());
-
         //catch exception
         try {
             return mediator
                     .send(command)
-                    .thenCompose(r -> HttpResponse.create(200, "Success"));
+                    .thenCompose(r -> HttpResponse.create(200, ""));
         }
         catch (Exception e) {
             var responseContent = Serialization.serialize(e.getMessage());

@@ -26,8 +26,7 @@ public final class PassUserGateCommandHandler implements IRequestHandler<PassUse
             userGate.pass(passUserGateCommand.code());
             NimbleJQueryProvider.insert(userGate);
 
-            var sessionId = SessionStore.createSession(userGate.getUserId());
-            var userGateResponse = new PassUserGateCommandResponse(sessionId);
+            var userGateResponse = new PassUserGateCommandResponse(userGate.getUserId());
 
             return CompletableFuture.completedFuture(userGateResponse);
         }

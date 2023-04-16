@@ -1,4 +1,4 @@
-function createUser() {
+async function createUser() {
     const endpoint = 'http://localhost:7101/users';
 
     const name = document.getElementById('name').value;
@@ -11,18 +11,17 @@ function createUser() {
         emailAddress: email
     };
 
-    fetch(endpoint, {
+    await fetch(endpoint, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(createUserCommand)
     })
-    .then(response => {
+    .then(async response => {
         if (!response.ok) {
-            return response.json().then(error => {
-                throw new Error(error);
-            });
+            const error = await response.json();
+            throw new Error(error);
         }
 
         return response.json();

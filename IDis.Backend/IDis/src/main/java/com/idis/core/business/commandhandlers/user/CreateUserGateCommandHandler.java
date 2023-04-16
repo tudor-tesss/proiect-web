@@ -17,11 +17,6 @@ import static com.nimblej.extensions.functional.FunctionalExtensions.*;
 public final class CreateUserGateCommandHandler implements IRequestHandler<CreateUserGateCommand, UUID> {
     @Override
     public CompletableFuture<UUID> handle(CreateUserGateCommand createUserGateCommand) {
-        var users = NimbleJQueryProvider.getAll(User.class);
-        for (var user : users) {
-            System.out.println(user.getEmailAddress());
-        }
-
         var user = filter(
                         NimbleJQueryProvider.getAll(User.class),
                         u -> u.getEmailAddress().equals(createUserGateCommand.emailAddress()))

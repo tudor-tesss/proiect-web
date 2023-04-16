@@ -1,5 +1,5 @@
 function passUserGate() {
-    var userUuid = localStorage.getItem('userUuid');
+    const userUuid = localStorage.getItem('userUuid');
 
     const endpoint = 'http://localhost:7101/users/' + userUuid + '/gates';
 
@@ -9,6 +9,7 @@ function passUserGate() {
         code: code
     };
 
+    console.log('before fetch');
     fetch(endpoint, {
         method: 'PATCH',
         headers: {
@@ -18,17 +19,18 @@ function passUserGate() {
     })
     .then(response => {
         if (!response.ok) {
-            return response.json().then(error => {
-                throw new Error(error);
-            });
+            const error = response.json();
+
+            console.log(error);
+
+            throw new Error(error);
         }
 
         return response.json();
     })
     .then(data => {
-        var sessionId = data.sessionId;
-        setCookie('sessionToken', sessionId, 7); // Store the token in a cookie for 7 days        
-        window.location.href = "../main/main.html";
+        console.log('Success:', data);
+        createSession(data);
     })
     .catch(error => {
         console.error('Error:', error);
@@ -78,5 +80,53 @@ errorMessages = {
     "UserGate.Pass.UserGateDoesNotExist": "No user gate found matching the given code.",
     "UserGate.Pass.UserGateExpired": "The code has expired.",
     "UserGate.Pass.InvalidCode": "The code is invalid.",
-    "UserGate.Pass.UserGateAlreadyPassed": "The code has already been used."
+    "UserGate.Pass.UserGateAlreadyPassed": "The code has already been used.",
 }
+
+async function createSession(data) {
+    const endpoint = 'http://localhost:7101/users/' + data.userId + '/sessions';
+
+    const createSessionCommand = {
+        userId: data.userId,
+        userIpAddress: await getUserIP()
+    };
+
+    await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(createSessionCommand)
+    })
+    .then(async response => {
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error);
+        }
+
+        return response.json();
+    })
+    .then(d => {
+        setCookie('sessionId', d.sessionId, 1);
+        setCookie('userId', data.userId, 1);
+        window.location.href = '/main/main.html';
+    })
+    .catch(error => {
+        deleteSessionTokenCookie();
+        console.error('Error:', error);
+        displayError("An error occurred while creating the session.");
+        window.location.href = '/start/start.html';
+    })
+}
+
+async function getUserIP() {
+    try {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        return data.ip;
+    } 
+    catch (error) {
+        console.error('Error fetching IP address:', error);
+    }
+  } 
+  

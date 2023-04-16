@@ -14,4 +14,17 @@ public class BusinessErrors {
             public static final String UserGateDoesNotExist = "UserGate.Pass.UserGateDoesNotExist";
         }
     }
+
+    public static class UserSession {
+        public static class Create {
+            public static final String UserDoesNotExist = "UserSession.Create.UserDoesNotExist";
+        }
+
+        public static class Check {
+            public static final String UserSessionDoesNotExist = "UserSession.Check.UserSessionDoesNotExist";
+            public static final String UserSessionExpired = "UserSession.Check.UserSessionExpired";
+            public static final String UserSessionIpAddressDoesNotMatch = "UserSession.Check.UserSessionIpAddressDoesNotMatch";
+            public static final String UserSessionUserIdDoesNotMatch = "UserSession.Check.UserSessionUserIdDoesNotMatch";
+        }
+    }
 }

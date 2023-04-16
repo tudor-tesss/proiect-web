@@ -30,6 +30,7 @@ public class Main {
     private static void addManagedClasses() {
         NimbleJQueryProvider.addManagedClass(User.class);
         NimbleJQueryProvider.addManagedClass(UserGate.class);
+        NimbleJQueryProvider.addManagedClass(UserSession.class);
     }
 
     private static void addMediatorHandlers() {
@@ -37,6 +38,11 @@ public class Main {
 
         mediator.registerHandler(CreateUserCommand.class, new CreateUserCommandHandler());
         mediator.registerHandler(CreateUserGateCommand.class, new CreateUserGateCommandHandler());
+
         mediator.registerHandler(PassUserGateCommand.class, new PassUserGateCommandHandler());
+
+        mediator.registerHandler(CreateUserSessionCommand.class, new CreateUserSessionCommandHandler());
+        mediator.registerHandler(CheckUserSessionCommand.class, new CheckUserSessionCommandHandler());
+        mediator.registerHandler(DeleteUserSessionCommand.class, new DeleteUserSessionCommandHandler());
     }
 }

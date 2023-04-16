@@ -1,4 +1,4 @@
-function createUserGate() {
+async function createUserGate() {
     const endpoint = 'http://localhost:7101/users/gates';
 
     const emailAddress = document.getElementById('email').value;
@@ -7,18 +7,17 @@ function createUserGate() {
         emailAddress: emailAddress
     };
 
-    fetch(endpoint, {
+    await fetch(endpoint, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(createUserGateCommand)
     })
-    .then(response => {
+    .then(async response => {
         if (!response.ok) {
-            return response.json().then(error => {
-                throw new Error(error);
-            });
+            const error = await response.json();
+            throw new Error(error);
         }
 
         return response.json();

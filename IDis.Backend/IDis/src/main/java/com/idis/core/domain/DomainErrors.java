@@ -14,4 +14,8 @@ public class DomainErrors {
             public static final String UserGateAlreadyPassed = "UserGate.Pass.UserGateAlreadyPassed";
         }
     }
+
+    public static class UserSession {
+        public static final String IpAddressNullOrEmpty = "UserSession.IpAddress.NullOrEmpty";
+    }
 }

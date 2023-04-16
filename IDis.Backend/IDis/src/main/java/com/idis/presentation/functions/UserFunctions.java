@@ -107,8 +107,17 @@ public class UserFunctions implements IUserController {
     @Route(path = "/users/{id}/sessions", method = HttpVerbs.PATCH)
     @Function(name = "checkUserSession")
     public static CompletableFuture<HttpResponse> checkUserSession(String id, String requestBody) {
+        UUID userId;
+        try {
+            userId = UUID.fromString(id);
+        } catch (Exception e) {
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400, responseContent);
+        }
+
         var command = Serialization.deserialize(requestBody, CheckUserSessionCommand.class);
-        command = new CheckUserSessionCommand(UUID.fromString(id), command.sessionId(), command.ipAddress());
+        command = new CheckUserSessionCommand(userId, command.sessionId(), command.ipAddress());
 
         //catch exception
         try {

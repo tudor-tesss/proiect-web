@@ -42,7 +42,6 @@ async function checkSession() {
         return response.json();
     })
     .then(d => {
-        console.log(d);
     })
     .catch(error => {
         console.error('Error:', error);
@@ -87,11 +86,8 @@ async function resumeSession() {
     })
     .then(d => {
         window.location.href = '/main/main.html';
-        console.log(d);
     })
     .catch(error => {
-        console.error('Error:', error);
-        deleteSessionTokenCookie();
     });
 }
 
@@ -99,7 +95,8 @@ async function getUserIP() {
     try {
       const response = await fetch('https://ipapi.co/json/');
       const data = await response.json();
-      return data.ip;
+    //   return data.ip;
+        return "test-ip";
     } catch (error) {
       console.error('Error fetching IP address:', error);
     }

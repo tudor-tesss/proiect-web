@@ -14,6 +14,17 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 
     implementation files('libs/NimbleJ.jar')
+
+    implementation('com.sendgrid:sendgrid-java:4.9.3')
+    implementation('com.auth0:java-jwt:4.3.0')
+    implementation 'com.sparkjava:spark-core:2.9.4'
+    implementation 'org.slf4j:slf4j-simple:2.0.5'
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(19))
+    }
 }
 
 test {

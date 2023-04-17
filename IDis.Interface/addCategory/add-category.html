@@ -3,20 +3,22 @@
 
 <head>
     <title>I Dislike It!-Sign Up</title>
-    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="add-category.css" />
-        
 </head>
 
 <body class="prevent-select">
+    <script src="../check-session.js"></script>
+    <script>
+        checkSession();
+    </script>
     <header>
         <div class="logo">
             <a href="../main/main.html">
                 <img src="../resources/Iogopng.png" />
             </a>
         </div>
-        <nav>
-        </nav>
+        <nav></nav>
     </header>
     <div class="container">
         <div class="container-header">
@@ -26,11 +28,10 @@
             </div>
         </div>
 
-
         <div class="input-container">
             <form action="../main/main.html">
                 <div class="input-field">
-                    <input type="text" class="input" placeholder="Category Name" name="name" required>
+                    <input type="text" class="input" placeholder="Category Name" name="name" required />
                 </div>
                 <div class="input-field">
                     <label for="Number of Rating fields">Choose the number of raiting fields:</label>
@@ -44,18 +45,16 @@
                         </select>
                     </div>
                 </div>
-                <div id="rating-fields">
-
-                </div>
+                <div id="rating-fields"></div>
                 <div class="submit-field">
-                    <input type="submit" class="submit-b" value="Submit">
+                    <input type="submit" class="submit-b" value="Submit" />
                 </div>
                 <div class="input-field" id="text-input-fields"></div>
             </form>
         </div>
-       
     </div>
 
-        <script src="add-category.js"></script>
+    <script src="add-category.js"></script>
 </body>
+
 </html>

@@ -1,10 +1,9 @@
 package com.idis.presentation;
 
-import com.idis.core.business.commandhandlers.user.CreateUserCommandHandler;
-import com.idis.core.business.commands.user.CreateUserCommand;
-import com.idis.core.domain.user.User;
-import com.idis.presentation.functions.GenericOptionsController;
-import com.idis.presentation.functions.UserFunctions;
+import com.idis.core.business.commandhandlers.user.*;
+import com.idis.core.business.commands.user.*;
+import com.idis.core.domain.user.*;
+import com.idis.presentation.functions.*;
 import com.nimblej.core.Mediator;
 import com.nimblej.networking.database.NimbleJQueryProvider;
 import com.nimblej.networking.http.server.HttpServer;
@@ -30,11 +29,20 @@ public class Main {
 
     private static void addManagedClasses() {
         NimbleJQueryProvider.addManagedClass(User.class);
+        NimbleJQueryProvider.addManagedClass(UserGate.class);
+        NimbleJQueryProvider.addManagedClass(UserSession.class);
     }
 
     private static void addMediatorHandlers() {
         var mediator = Mediator.getInstance();
 
         mediator.registerHandler(CreateUserCommand.class, new CreateUserCommandHandler());
+        mediator.registerHandler(CreateUserGateCommand.class, new CreateUserGateCommandHandler());
+
+        mediator.registerHandler(PassUserGateCommand.class, new PassUserGateCommandHandler());
+
+        mediator.registerHandler(CreateUserSessionCommand.class, new CreateUserSessionCommandHandler());
+        mediator.registerHandler(CheckUserSessionCommand.class, new CheckUserSessionCommandHandler());
+        mediator.registerHandler(DeleteUserSessionCommand.class, new DeleteUserSessionCommandHandler());
     }
 }

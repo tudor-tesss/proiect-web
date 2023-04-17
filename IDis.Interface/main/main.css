@@ -49,7 +49,7 @@ nav {
     gap: 20px;
 }
 
-nav a {
+.nav-link {
     padding: 10px 10px 10px 10px;
     display: inline-block;
     background-color: #6D8B74;
@@ -59,14 +59,26 @@ nav a {
     font-weight: bold;
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
     box-shadow: 0 4px 6px rgba(0,0,0,0.6);
-    max-height: 30px;
+    border: none; /* Add this to remove the default border from the button */
+    font-size: 16px;
+    font-family: 'Poppins', Arial, sans-serif;
 }
 
-nav a:hover {
+nav button {
+    min-height: 50px;
+}
+
+.nav-link:hover {
     background-color: #f5f5f5;
     color: #364f6b;
     transform: translateY(-5px);
 }
+
+/* Add this rule to remove the default outline on button focus */
+.nav-link:focus {
+    outline: none;
+}
+
 
 .container {
     max-width: 1000px;

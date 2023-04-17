@@ -60,8 +60,17 @@ public class UserFunctions implements IUserController {
     @Route(path = "/users/{id}/gates", method = HttpVerbs.PATCH)
     @Function(name = "passUserGate")
     public static CompletableFuture<HttpResponse> passUserGate(String id, String requestBody) {
+        UUID userId;
+        try {
+            userId = UUID.fromString(id);
+        } catch (Exception e) {
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400, responseContent);
+        }
+
         var command = Serialization.deserialize(requestBody, PassUserGateCommand.class);
-        command = new PassUserGateCommand(UUID.fromString(id), command.code());
+        command = new PassUserGateCommand(userId, command.code());
 
         //catch exception
         try {
@@ -82,8 +91,17 @@ public class UserFunctions implements IUserController {
     @Route(path = "/users/{id}/sessions", method = HttpVerbs.POST)
     @Function(name = "createUserSession")
     public static CompletableFuture<HttpResponse> createUserSession(String id, String requestBody) {
+        UUID userId;
+        try {
+            userId = UUID.fromString(id);
+        } catch (Exception e) {
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400, responseContent);
+        }
+
         var command = Serialization.deserialize(requestBody, CreateUserSessionCommand.class);
-        command = new CreateUserSessionCommand(UUID.fromString(id), command.userIpAddress());
+        command = new CreateUserSessionCommand(userId, command.userIpAddress());
 
         //catch exception
         try {

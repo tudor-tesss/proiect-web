@@ -9,7 +9,6 @@ function passUserGate() {
         code: code
     };
 
-    console.log('before fetch');
     fetch(endpoint, {
         method: 'PATCH',
         headers: {
@@ -21,15 +20,12 @@ function passUserGate() {
         if (!response.ok) {
             const error = response.json();
 
-            console.log(error);
-
             throw new Error(error);
         }
 
         return response.json();
     })
     .then(data => {
-        console.log('Success:', data);
         createSession(data);
     })
     .catch(error => {
@@ -120,14 +116,27 @@ async function createSession(data) {
 }
 
 async function getUserIP() {
-    try {
-        const response = await fetch('https://ipapi.co/json/');
-        const data = await response.json();
-        // return data.ip;
-        return "test-ip";
-    } 
-    catch (error) {
-        console.error('Error fetching IP address:', error);
+    const cookies = document.cookie.split('; ').reduce((acc, cookie) => {
+        const [name, value] = cookie.split('=');
+        acc[name] = value;
+        return acc;
+    }, {});
+
+    var userIp = cookies['userIpAddress'];
+
+    if (userIp) {
+        return userIp;
     }
-  } 
-  
+
+    try {
+      const response = await fetch('https://ipapi.co/json/');
+      const data = await response.json();
+
+        setCookie('userIpAddress', data.ip, 1);
+
+      return data.ip;
+        // return "test-ip";
+    } catch (error) {
+      console.error('Error fetching IP address:', error);
+    }
+} 

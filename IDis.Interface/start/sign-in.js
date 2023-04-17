@@ -23,7 +23,6 @@ async function createUserGate() {
         return response.json();
     })
     .then(data => {
-        console.log('Success:', data);
         localStorage.setItem('userUuid', data);
         window.location.href = "sign-in-code-gate.html";
     })

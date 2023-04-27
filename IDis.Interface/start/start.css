@@ -1,163 +1,333 @@
 .prevent-select {
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
 }
 
 body {
-    background-color: #EDF1D6;
     font-family: 'Poppins', Arial, sans-serif;
     color: #333;
     line-height: 1.6;
     margin: 0;
     padding: 0;
+    background-color: #F1F5FD;
 }
 
+.top-gradient {
+    width: 100%;
+    min-height: 100vh; /* Change this to min-height */
+    background-image: linear-gradient(to top right, #6563ED, #26C3DE);
+    clip-path: polygon(0 0, 100% 0, 100% 900px, 0 1000px);
+}
 
 body::-webkit-scrollbar {
-    width: 10px; /* width of the scrollbar */
-  }
-  
-  body::-webkit-scrollbar-track {
-    background: #f1f1f1; /* color of the track */
-  }
-  
-  body::-webkit-scrollbar-thumb {
-    background: #9DC08B; /* color of the thumb */
-    border-radius: 5px; /* rounded corners */
-  }
-  
-  body::-webkit-scrollbar-thumb:hover {
-    background: #6D8B74; /* color of the thumb on hover */
-  }
+    width: 10px;
+    /* width of the scrollbar */
+}
 
+body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* color of the track */
+}
 
-header {
-    background-color: #9DC08B;
-    color: #fff;
+body::-webkit-scrollbar-thumb {
+    background: #9DC08B;
+    /* color of the thumb */
+    border-radius: 5px;
+    /* rounded corners */
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #6D8B74;
+    /* color of the thumb on hover */
+}
+
+.header {
+    margin-top: 20px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 90%; /* You can adjust this value based on your preference */
     padding: 20px;
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 40px;
-    margin: 50px 20px 20px 20px;
-    border-radius: 7px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.6);
-    position: relative;
-    padding-top: 20px;
+    align-items: center;
+    background-color: transparent;
+    z-index: 1000;
+    transform: translateX(-50%);
+}
+
+.get-started {
+    border: 2px solid #fff;
+    border-radius: 5px;
+    padding: 5px 15px;
+    font-weight: bold;
+}
+
+.get-started:hover {
+    background-color: #fff;
+    color: #6563ED;
+    text-decoration: none;
 }
 
 .logo img {
-    max-width: 200px;
-    max-height: 200px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    overflow: hidden;
-}
-
-.title {
-    margin: 0;
-    font-weight: bold;
+    height: 50px;
 }
 
 nav {
     display: flex;
-    gap: 20px;
-    min-height: 40px;
-
+    align-items: center;
 }
 
-.container {
-    position: relative;
-    max-width: 300px;
-    margin: 50px auto 0;
+nav a {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    margin-left: 20px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+.text-button {
+    text-decoration: none;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: calc(100vh - 1000px); /* Change this to min-height */
+    padding: 20px; /* Add some padding around the content */
+    padding-top: 250px;
+}
+
+.description {
+    flex: 1;
+    padding: 20px;
+    font-size: 18px;
+    color: #fff;
+    text-align: justify;
+}
+
+.form-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box {
+    width: 400px;
+    padding: 40px;
+    background: rgba(0, 0, 0, .5);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
     align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background-color: #9DC08B;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.6);
-    margin-top: 70px;
-    
 }
 
-.buttons {
-    flex: 1 1 150px;
-    display: flex; 
-    justify-content: center;
-    align-items: center;
-    background-color: #6D8B74;
+.login-box h2 {
+    margin: 0 0 30px;
+    padding: 0;
     color: #fff;
-    font-size: 24px;
-    border-radius: 5px;
-    text-decoration: none;
     text-align: center;
-    text-decoration: none;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.6);
-    padding: 20px;
-    max-height: 30px;
-    border: none
 }
 
-.buttons:hover {
-    background-color: #f5f5f5;
-    color: #364f6b;
-    transform: translateY(-5px);
-}
-
-.container-header  {
-    
+/* Update these styles in the existing CSS */
+.login-box .user-box {
+    position: relative;
+    width: 90%; /* Adjust this value as needed */
+    margin: 0 auto;
     display: flex;
     justify-content: center;
-    position: relative;
-    padding: 10px 0 10px 0;
-    margin-bottom: 80px;
-    margin-top: 80px;
-    
 }
 
-.container-header img{
-    display: flex;
-    justify-self: center;
-    max-width: 200px;
-    max-height: 200px;
+.error-container {
+    color: #ffffff;
+    text-align: center;
+}
+
+.login-box .user-box input {
+    width: 100%;
+    padding: 10px 5px; /* Adjust the left and right padding */
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+    width: 300px;
+}
+
+.login-box .user-box label {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.login-box .user-box input:focus~label,
+.login-box .user-box input:valid~label {
+    top: -20px;
+    left: 0;
+    color: #f68e44;
+    font-size: 12px;
+}
+
+.login-box form .submit-b {
+    position: relative;
+    padding: 10px 20px;
+    color: #b79726;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
     overflow: hidden;
+    transition: .5s;
+    margin-top: 40px;
+    letter-spacing: 4px;
+    background: transparent; /* Add this */
+    border: none; /* Add this */
 }
 
+.submit-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
 
-/* make logo disappear when it overlaps nav */
-@media screen and (max-width: 800px) {
-    .logo {
-        display: none;
+.login-box .submit-b:hover {
+    background: #f49803;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #f4c803,
+        0 0 25px #bd9d0b,
+        0 0 50px #f4e403,
+        0 0 100px #d5cf1e;
+}
+
+.login-box .submit-b span {
+    position: absolute;
+    display: block;
+}
+
+.login-box .submit-b span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #f4c003);
+    animation: btn-anim1 1s linear infinite;
+}
+
+@keyframes btn-anim1 {
+    0% {
+        left: -100%;
     }
 
-    header {
-        justify-content: center;
+    50%,
+    100% {
+        left: 100%;
     }
 }
 
-/* make header fit screen when zooming much */
-@media screen and (max-width: 600px) {
-    header {
-        margin: 0;
-        justify-content: center;
+.login-box .submit-b span:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #f4bc03);
+    animation: btn-anim2 1s linear infinite;
+    animation-delay: .25s
+}
+
+@keyframes btn-anim2 {
+    0% {
+        top: -100%;
+    }
+
+    50%,
+    100% {
+        top: 100%;
     }
 }
 
-/* make nav taller when zooming in order to fit the text */
-@media screen and (max-width: 400px) {
-    nav {
-        flex-direction: column;
+.login-box .submit-b span:nth-child(3) {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg, transparent, #f4dc03);
+    animation: btn-anim3 1s linear infinite;
+    animation-delay: .5s
+}
+
+@keyframes btn-anim3 {
+    0% {
+        right: -100%;
+    }
+
+    50%,
+    100% {
+        right: 100%;
+    }
+}
+
+.login-box .submit-b span:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, #f4b003);
+    animation: btn-anim4 1s linear infinite;
+    animation-delay: .75s
+}
+
+@keyframes btn-anim4 {
+    0% {
+        bottom: -100%;
+    }
+
+    50%,
+    100% {
+        bottom: 100%;
+    }
+}
+
+/* Responsive styles for screens less than 600px in height */
+@media (max-height: 599px) {
+    .description {
+        margin-top: 100px;
+    }
+
+    .form-wrapper {
+        margin-top: 50px;
     }
 }

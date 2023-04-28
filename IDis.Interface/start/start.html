@@ -15,12 +15,12 @@
     <div class="top-gradient">
         <div class="header">
 			<div class="logo">
-				<img src="../resources/Iogopng.png" alt="Logo">
+				<img src="../resources/logopng.png" alt="Logo">
 			</div>
 			<nav>
 				<a href="#" class="about-us-button">About Us</a>
-				<a href="sign-in.html" class="login-button">Log In</a>
-				<a href="#" class="get-started">Get Started</a>
+				<button class="login-button" onClick="displayLoginForm()">Log In</button>
+				<button class="get-started" onClick="displaySignUpForm()">Get Started</a>
 			</nav>
 		</div>		
 
@@ -32,25 +32,7 @@
             <div class="form-wrapper">
                 <div class="login-box">
 					<script src="sign-up.js"></script>
-                    <h2>Sign Up</h2>
-                    <form>
-                        <div class="user-box">
-                            <input type="text" name="first-name" id="first-name" required>
-                            <label>First Name</label>
-                        </div>
-                        <div class="user-box">
-                            <input type="text" name="name" id="name" required>
-                            <label>Name</label>
-                        </div>
-                        <div class="user-box">
-                            <input type="text" name="email" id="email" required>
-                            <label>Email</label>
-                        </div>
-						<div id="error-container" class="error-container"></div>
-						<div class="submit-wrapper">
-                            <button type="button" class="submit-b" onClick="createUser()">Submit</button>
-                        </div>
-                    </form>
+                    <script>displaySignUpForm()</script>
                 </div>
             </div>
         </div>

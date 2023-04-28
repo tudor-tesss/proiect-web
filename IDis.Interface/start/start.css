@@ -61,20 +61,27 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .get-started {
+    background-color: transparent;
     border: 2px solid #fff;
     border-radius: 5px;
-    padding: 5px 15px;
-    font-weight: bold;
-}
-
-.get-started:hover {
-    background-color: #fff;
-    color: #6563ED;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 20px;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+  }
+  
+  .get-started:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
     text-decoration: none;
-}
+  }
+  
 
 .logo img {
-    height: 50px;
+    height: 100px;
 }
 
 nav {
@@ -97,6 +104,24 @@ nav a:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
+.login-button {
+    background: none;
+    border: none;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    margin-left: 20px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s;
+}
+
+.login-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
 
 .text-button {
     text-decoration: none;
@@ -106,28 +131,22 @@ html {
     height: 100%;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-}
-
 .content-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
     min-height: calc(100vh - 1000px); /* Change this to min-height */
     padding: 20px; /* Add some padding around the content */
     padding-top: 250px;
 }
 
 .description {
-    flex: 1;
     padding: 20px;
     font-size: 18px;
     color: #fff;
     text-align: justify;
+    margin-left: 50px;
+    margin-right: 25px;
 }
 
 .form-wrapper {
@@ -147,6 +166,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-right: 50px;
+    margin-left: 25px;
 }
 
 .login-box h2 {
@@ -233,101 +254,36 @@ body {
         0 0 100px #d5cf1e;
 }
 
-.login-box .submit-b span {
-    position: absolute;
-    display: block;
-}
-
-.login-box .submit-b span:nth-child(1) {
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #f4c003);
-    animation: btn-anim1 1s linear infinite;
-}
-
-@keyframes btn-anim1 {
-    0% {
-        left: -100%;
-    }
-
-    50%,
-    100% {
-        left: 100%;
-    }
-}
-
-.login-box .submit-b span:nth-child(2) {
-    top: -100%;
-    right: 0;
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(180deg, transparent, #f4bc03);
-    animation: btn-anim2 1s linear infinite;
-    animation-delay: .25s
-}
-
-@keyframes btn-anim2 {
-    0% {
-        top: -100%;
-    }
-
-    50%,
-    100% {
-        top: 100%;
-    }
-}
-
-.login-box .submit-b span:nth-child(3) {
-    bottom: 0;
-    right: -100%;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(270deg, transparent, #f4dc03);
-    animation: btn-anim3 1s linear infinite;
-    animation-delay: .5s
-}
-
-@keyframes btn-anim3 {
-    0% {
-        right: -100%;
-    }
-
-    50%,
-    100% {
-        right: 100%;
-    }
-}
-
-.login-box .submit-b span:nth-child(4) {
-    bottom: -100%;
-    left: 0;
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(360deg, transparent, #f4b003);
-    animation: btn-anim4 1s linear infinite;
-    animation-delay: .75s
-}
-
-@keyframes btn-anim4 {
-    0% {
-        bottom: -100%;
-    }
-
-    50%,
-    100% {
-        bottom: 100%;
-    }
-}
-
 /* Responsive styles for screens less than 600px in height */
 @media (max-height: 599px) {
     .description {
         margin-top: 100px;
     }
 
-    .form-wrapper {
-        margin-top: 50px;
+    .content-wrapper {
+        padding-top: 150px;
+    }
+}
+
+@media (max-width: 850px) {
+    .description {
+        display: none;
+    }
+
+    .content-wrapper {
+        padding-top: 150px;
+    }
+}
+
+@media (min-width: 1000px) {
+    .body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content-wrapper {
+        max-height: 700px;
+        min-height: 500px;
+    
     }
 }

@@ -2,29 +2,46 @@
 <html>
 
 <head>
-	<title>I Dislike It!</title>
-	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet" />
-	<link rel="stylesheet" type="text/css" href="start.css" />
+    <title>I Dislike It!</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="start.css" />
+    <script src="../check-session.js"></script>
+    <script>
+        resumeSession();
+    </script>
 </head>
 
 <body class="prevent-select">
-	<script src="../check-session.js"></script>
-	<script>
-		resumeSession();
-	</script>
-	<header>
-		<div class="logo">
-			<img src="../resources/Iogopng.png" />
-		</div>
-		<nav></nav>
-	</header>
-	<div class="container">
-		<div class="container-header">
-			<img src="../resources/start.png" />
-		</div>
-		<a href="sign-up.html" class="buttons">Sign Up</a>
-		<a href="sign-in.html" class="buttons">Sign In</a>
-	</div>
+    <div class="top-gradient">
+        <div class="header">
+            <div class="logo">
+                <img src="../resources/logopng.png" alt="Logo">
+            </div>
+            <nav>
+                <a href="#" class="about-us-button">About Us</a>
+                <button class="login-button" onClick="displayLoginForm()">Log In</button>
+                <button class="get-started" onClick="displaySignUpForm()">Get Started</a>
+            </nav>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="description">
+                <h1>I Dislike It!</h1>
+                <p>
+                    Welcome to "I Dislike It!", a unique platform where users can create posts about various topics, rate
+                    them, and share their thoughts. Our community thrives on open discussions, allowing users to comment
+                    on existing posts and rate the topic. Join us today and start sharing your opinions on the things
+                    you dislike!
+                </p>
+            </div>
+            <div class="form-wrapper">
+                <div class="login-box">
+                    <script src="sign-up.js"></script>
+                    <script>displaySignUpForm()</script>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

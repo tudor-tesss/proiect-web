@@ -18,4 +18,10 @@ public class DomainErrors {
     public static class UserSession {
         public static final String IpAddressNullOrEmpty = "UserSession.IpAddress.NullOrEmpty";
     }
+
+    public static class Category{
+        public static final String NameNullOrEmpty = "Category.Name.NullOrEmpty";
+        public static final String RatingFieldNullOrEmpty = "Category.RatingField.NullOrEmpty";
+    }
+
 }

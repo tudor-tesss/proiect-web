@@ -18,7 +18,7 @@ function generateTextInputFields() {
         input.type = "text";
         input.placeholder = "Rating " + i;
         input.name = "rating-" + i;
-        input.id = "rating" +i;
+        input.id = "ratingId";
         input.required = true;
         input.classList.add("input-field");
 
@@ -55,12 +55,11 @@ function displayCategoryForm() {
         <div id="input-field"></div>
         <div id="error-container" class="error-container"></div>
         <div class="submit-wrapper">
-          <button type="button" class="submit-b" onClick="createUser()">Submit</button>
+          <button type="button" class="submit-b" onClick="createCategory()">Submit</button>
         </div>
       </form>
     </div>
   `;
-
     // Generate the initial set of input fields after adding form content to the DOM
     generateTextInputFields();
 }

@@ -27,4 +27,8 @@ public class BusinessErrors {
             public static final String UserSessionUserIdDoesNotMatch = "UserSession.Check.UserSessionUserIdDoesNotMatch";
         }
     }
+
+    public static class Category{
+        public static final String CategoryAlreadyExists = "Category.AlreadyExists";
+    }
 }

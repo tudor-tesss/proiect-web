@@ -1,7 +1,6 @@
 package com.idis.presentation.functions;
 
 import com.idis.core.business.commands.category.CreateCategoryCommand;
-import com.idis.core.business.commands.user.*;
 import com.nimblej.core.Function;
 import com.nimblej.core.IUserController;
 import com.nimblej.core.Mediator;

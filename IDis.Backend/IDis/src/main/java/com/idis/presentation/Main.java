@@ -1,7 +1,10 @@
 package com.idis.presentation;
 
+import com.idis.core.business.commandhandlers.category.CreateCategoryCommandHandler;
 import com.idis.core.business.commandhandlers.user.*;
+import com.idis.core.business.commands.category.CreateCategoryCommand;
 import com.idis.core.business.commands.user.*;
+import com.idis.core.domain.category.Category;
 import com.idis.core.domain.user.*;
 import com.idis.presentation.functions.*;
 import com.nimblej.core.Mediator;
@@ -21,7 +24,8 @@ public class Main {
                 .create(7101)
                 .withControllers(
                         new GenericOptionsController(),
-                        new UserFunctions()
+                        new UserFunctions(),
+                        new CategoryFunctions()
                 );
 
         server.start();
@@ -31,6 +35,7 @@ public class Main {
         NimbleJQueryProvider.addManagedClass(User.class);
         NimbleJQueryProvider.addManagedClass(UserGate.class);
         NimbleJQueryProvider.addManagedClass(UserSession.class);
+        NimbleJQueryProvider.addManagedClass(Category.class);
     }
 
     private static void addMediatorHandlers() {
@@ -44,5 +49,7 @@ public class Main {
         mediator.registerHandler(CreateUserSessionCommand.class, new CreateUserSessionCommandHandler());
         mediator.registerHandler(CheckUserSessionCommand.class, new CheckUserSessionCommandHandler());
         mediator.registerHandler(DeleteUserSessionCommand.class, new DeleteUserSessionCommandHandler());
+
+        mediator.registerHandler(CreateCategoryCommand.class, new CreateCategoryCommandHandler());
     }
 }

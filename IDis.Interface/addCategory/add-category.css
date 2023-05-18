@@ -213,37 +213,43 @@ nav a:hover {
 }
 
 
-.selection-options{
-    display: flex;
-    text-align: center;
-    align-items: center;
-    padding-top: 80px;
 
-}
 
-select {
-    display: flex;
-    flex-direction: column;
-    font-size: 16px;
-    padding: 10px;
-    border: none;
+.remove-field-btn{
+    justify-content: right;
+    background-color: transparent;
+    border: 2px solid #fff;
     border-radius: 5px;
-    background-color: #9bc4d7;
-    margin-bottom: 35px;
-    text-align: center;
-    align-items: center;
+    border-color: rgba(255, 255, 255, 0.32);
+    color: rgba(255, 255, 255, 0.79);
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 20px;
+    padding: 5px 10px;
+
 }
 
-select:focus {
-    outline: none;
-    background-color: #77bed5;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+.add-field-btn{
+    justify-content: left;
+    background-color: transparent;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    border-color: rgba(255, 255, 255, 0.32);
+    color: rgba(255, 255, 255, 0.79);
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 20px;
+    padding: 5px 10px;
+
 }
 
 .submit-wrapper {
     display: flex;
     justify-content: center;
     width: 100%;
+
 }
 
 
@@ -257,26 +263,28 @@ select:focus {
 }
 
 .submit-b {
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #6D8B74;
-    color: #fff;
-    font-size: 24px;
-    border-radius: 5px;
+    position: relative;
+    padding: 10px 20px;
+    color: #b79726;
+    font-size: 16px;
     text-decoration: none;
-    text-align: center;
-    text-decoration: none;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
-    padding: 20px;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    margin-top: 40px;
+    letter-spacing: 4px;
+    background: transparent; /* Add this */
+    border: none; /* Add this */
 }
 
 .submit-b:hover {
-    background-color: #f5f5f5;
-    color: #364f6b;
-    transform: translateY(-5px);
+    background: #f49803;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #f4c803,
+    0 0 25px #bd9d0b,
+    0 0 50px #f4e403,
+    0 0 100px #d5cf1e;
 }
 
 

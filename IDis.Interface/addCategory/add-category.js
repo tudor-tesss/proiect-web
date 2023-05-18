@@ -1,21 +1,16 @@
-var numberOfFieldsDropdown = document.getElementById('numberOfFields');
-numberOfFieldsDropdown.addEventListener('change', generateTextInputFields);
-generateTextInputFields();
-
-
 
 
 async function createCategory(){
     const endpoint = 'http://localhost:7101/categories';
 
-    const name = document.getElementById('#category-name.input').value;
-    var inputs = document.querySelectorAll("#ratingId.input-field")
-    var ratingFields =[];
+    const name = document.getElementById('category-name').value;
+    var inputs = document.querySelectorAll(".rating-field")
+    var ratingFields = Array.from(inputs).map(input => input.value);
+
+    console.log(ratingFields);
+
     var creatorId = localStorage.getItem('userUuid');
 
-    inputs.forEach(function (input) {
-        values.push(input.value);
-    })
 
     const createCategoryCommand={
         name: name,
@@ -39,7 +34,9 @@ async function createCategory(){
             return response.json();
         })
         .then(() => {
+
             window.location.href = "../main/add-post.html";
+
         })
         .catch(error => {
             console.error('Error:', error);
@@ -71,64 +68,78 @@ errorMessages = {
 }
 
 
-function generateTextInputFields() {
-    var numberOfFields = parseInt(numberOfFieldsDropdown.value);
+function updateTextInputFields() {
     var textInputFields = document.getElementById("input-field");
 
     // Clear the div where the text input fields will be inserted
     textInputFields.innerHTML = "";
 
-    // Generate a dynamic number of text input fields based on the selected value
-    for (var i = 1; i <= numberOfFields; i++) {
+    // Generate the initial set of text input fields
+    for (var i = 1; i <= 1; i++) {
         var inputContainer = document.createElement("div");
-        inputContainer.classList.add("name-label", "input-field");
+        inputContainer.classList.add("input-field");
 
         var input = document.createElement("input");
         input.type = "text";
-        input.placeholder = "Rating " + i;
+        input.placeholder = "New Rating Field ";
         input.name = "rating-" + i;
-        input.id = "ratingId";
         input.required = true;
-        input.classList.add("input-field");
-
+        input.classList.add("rating-field");
 
         inputContainer.appendChild(input);
         textInputFields.appendChild(inputContainer);
     }
 }
 
+
 function displayCategoryForm() {
     const categoryForm = document.querySelector('.category-form');
     categoryForm.innerHTML = `
     <div class="category-box">
       <h2>Add Category</h2>
-      <form>
-        <div class="name-label">
-          <input type="text" class="input" id="category-name" required>
-          <label>Name</label>
-        </div>
-        <div class="input-field">
-        
-          <label>Choose the number of rating fields:</label>
-          
-          <div class="selection-options" id="selection-options">
-            <select id="numberOfFields" name="number">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-        </div>
-        <div id="input-field"></div>
-        <div id="error-container" class="error-container"></div>
-        <div class="submit-wrapper">
-          <button type="button" class="submit-b" onClick="createCategory()">Submit</button>
-        </div>
-      </form>
+      <div class="name-label">
+        <input type="text" class="input" id="category-name" required>
+        <label>Name</label>
+      </div>
+      <div id="input-field"></div>
+      <div class="btn-wrapper">
+        <button type="button" class="add-field-btn" onClick="addField()">Add</button>
+        <button type="button" class="remove-field-btn" onClick="removeField()">Remove</button>
+      </div>
+      <div id="error-container" class="error-container"></div>
+      <div class="submit-wrapper">
+        <button type="button" class="submit-b" onClick="createCategory()">Submit</button>
+      </div>
     </div>
   `;
+
     // Generate the initial set of input fields after adding form content to the DOM
-    generateTextInputFields();
+    updateTextInputFields();
 }
+
+function addField() {
+    var inputContainer = document.createElement("div");
+    inputContainer.classList.add("input-field");
+
+    var input = document.createElement("input");
+    input.type = "text";
+    input.placeholder = "New Rating Field";
+    input.name = "rating";
+    input.required = true;
+    input.classList.add("rating-field");
+
+    inputContainer.appendChild(input);
+
+    var inputField = document.getElementById("input-field");
+    inputField.appendChild(inputContainer);
+}
+
+function removeField() {
+    var inputField = document.getElementById("input-field");
+    var inputContainers = inputField.getElementsByClassName("input-field");
+
+    if (inputContainers.length > 1) {
+        inputField.removeChild(inputContainers[inputContainers.length - 1]);
+    }
+}
+

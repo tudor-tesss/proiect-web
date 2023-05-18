@@ -2,59 +2,41 @@
 <html>
 
 <head>
-    <title>I Dislike It!-Sign Up</title>
+    <title>I Dislike It!</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="add-category.css" />
-</head>
-
-<body class="prevent-select">
     <script src="../check-session.js"></script>
     <script>
         checkSession();
     </script>
-    <header>
+</head>
+
+<body class="prevent-select">
+    <div class="top-gradient"></div>
+
+    <div class = "header">
         <div class="logo">
             <a href="../main/main.html">
-                <img src="../resources/Iogopng.png" />
+                <img src="../resources/logopng.png" alt="Logo">
             </a>
         </div>
-        <nav></nav>
-    </header>
-    <div class="container">
-        <div class="container-header">
-            <img src="../resources/addcat.png" />
-            <div class="AddCategory">
-                <h1>Add Category</h1>
-            </div>
-        </div>
+        <nav>
+           <button class="help-button" onClick="displayLoginForm()">Help</button>
+        </nav>
+    </div>
 
-        <div class="input-container">
-            <form action="../main/main.html">
-                <div class="input-field">
-                    <input type="text" class="input" placeholder="Category Name" name="name" required />
-                </div>
-                <div class="input-field">
-                    <label for="Number of Rating fields">Choose the number of raiting fields:</label>
-                    <div class="selection-options" id="selection-options">
-                        <select id="numberOfFields" name="number">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                    </div>
-                </div>
-                <div id="rating-fields"></div>
-                <div class="submit-field">
-                    <input type="submit" class="submit-b" value="Submit" />
-                </div>
-                <div class="input-field" id="text-input-fields"></div>
-            </form>
+    <div class="content">
+        <div class="category-form">
+            <div class="category-box">
+                <script src="add-category.js"></script>
+                <script>displayCategoryForm()</script>
+            </div>
         </div>
     </div>
 
+
     <script src="add-category.js"></script>
+
 </body>
 
 </html>

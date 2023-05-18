@@ -213,10 +213,7 @@ nav a:hover {
 }
 
 
-
-
 .remove-field-btn{
-    justify-content: right;
     background-color: transparent;
     border: 2px solid #fff;
     border-radius: 5px;

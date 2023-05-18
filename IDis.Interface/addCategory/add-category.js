@@ -2,6 +2,75 @@ var numberOfFieldsDropdown = document.getElementById('numberOfFields');
 numberOfFieldsDropdown.addEventListener('change', generateTextInputFields);
 generateTextInputFields();
 
+
+
+
+async function createCategory(){
+    const endpoint = 'http://localhost:7101/categories';
+
+    const name = document.getElementById('#category-name.input').value;
+    var inputs = document.querySelectorAll("#ratingId.input-field")
+    var ratingFields =[];
+    var creatorId = localStorage.getItem('userUuid');
+
+    inputs.forEach(function (input) {
+        values.push(input.value);
+    })
+
+    const createCategoryCommand={
+        name: name,
+        ratingFields: ratingFields,
+        creatorId: creatorId
+    };
+
+    await fetch(endpoint,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(createCategoryCommand)
+    })
+        .then(async response => {
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error);
+            }
+
+            return response.json();
+        })
+        .then(() => {
+            window.location.href = "../main/add-post.html";
+        })
+        .catch(error => {
+            console.error('Error:', error);
+
+            var errorMessage = error.message;
+
+            if (errorMessages[errorMessage] == undefined) {
+                errorMessage = "An error occurred while creating your account.";
+            }
+
+            displayError(errorMessages[errorMessage]);
+        });
+}
+
+function displayError(errorMessage) {
+    const errorContainer = document.getElementById('error-container');
+    errorContainer.textContent = errorMessage;
+    errorContainer.style.display = 'block';
+
+    setTimeout(() => {
+        errorContainer.style.display = 'none';
+    }, 5000);
+}
+
+errorMessages = {
+    "Category.AlreadyExists": "There is already a category with the same name.",
+    "Category.Name.NullOrEmpty": "Name is required.",
+    "Category.RatingField.NullOrEmpty": "Rating field cannot be empty.",
+}
+
+
 function generateTextInputFields() {
     var numberOfFields = parseInt(numberOfFieldsDropdown.value);
     var textInputFields = document.getElementById("input-field");

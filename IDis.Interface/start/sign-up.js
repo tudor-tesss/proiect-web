@@ -202,7 +202,7 @@ async function createSession(data) {
     .then(d => {
         setCookie('sessionId', d.sessionId, 1);
         setCookie('userId', data.userId, 1);
-        window.location.href = '/main/main.html';
+        window.location.href = '../main/main.html';
     })
     .catch(error => {
         deleteSessionTokenCookie();

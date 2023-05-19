@@ -8,39 +8,39 @@
 }
 
 body {
-    font-family: 'Poppins', Arial, sans-serif;
+    font-family: "Poppins", Arial, sans-serif;
     color: #333;
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #F1F5FD;
+    background-color: #f1f5fd;
 }
 
 .top-gradient {
     position: relative;
     width: 100%;
     min-height: 75vh;
-    background-image: linear-gradient(to top right, #6563ED, #26C3DE);
+    background-image: linear-gradient(to top right, #6563ed, #26c3de);
     clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
     z-index: 1;
 }
 
 body::-webkit-scrollbar {
     width: 10px; /* width of the scrollbar */
-  }
-  
-  body::-webkit-scrollbar-track {
+}
+
+body::-webkit-scrollbar-track {
     background: #f1f1f1; /* color of the track */
-  }
-  
-  body::-webkit-scrollbar-thumb {
+}
+
+body::-webkit-scrollbar-thumb {
     background: #4868fd; /* color of the thumb */
     border-radius: 5px; /* rounded corners */
-  }
-  
-  body::-webkit-scrollbar-thumb:hover {
+}
+
+body::-webkit-scrollbar-thumb:hover {
     background: #002dff; /* color of the thumb on hover */
-  }
+}
 
 .header {
     margin-top: 20px;
@@ -57,7 +57,7 @@ body::-webkit-scrollbar {
     transform: translateX(-50%);
 }
 
-.help-button{
+.help-button {
     background-color: transparent;
     border: 2px solid #fff;
     border-radius: 5px;
@@ -65,7 +65,6 @@ body::-webkit-scrollbar {
     cursor: pointer;
     font-size: 18px;
     font-weight: 500;
-    margin-left: 20px;
     padding: 5px 10px;
     transition: background-color 0.3s;
 }
@@ -79,7 +78,6 @@ body::-webkit-scrollbar {
 .logo img {
     height: 100px;
 }
-
 
 nav {
     display: flex;
@@ -124,9 +122,9 @@ nav a:hover {
 .category-box {
     width: 400px;
     padding: 40px;
-    background: rgba(0, 0, 0, .5);
+    background: rgba(0, 0, 0, 0.5);
     box-sizing: border-box;
-    box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -151,7 +149,7 @@ nav a:hover {
     text-decoration: none;
     text-transform: uppercase;
     overflow: hidden;
-    transition: .5s;
+    transition: 0.5s;
     margin-top: 40px;
     letter-spacing: 4px;
     background: transparent; /* Add this */
@@ -162,10 +160,8 @@ nav a:hover {
     background: #f49803;
     color: #fff;
     border-radius: 5px;
-    box-shadow: 0 0 5px #f4c803,
-    0 0 25px #bd9d0b,
-    0 0 50px #f4e403,
-    0 0 100px #d5cf1e;
+    box-shadow: 0 0 5px #f4c803, 0 0 25px #bd9d0b, 0 0 50px #f4e403,
+        0 0 100px #d5cf1e;
 }
 
 .category-box .name-label,
@@ -178,7 +174,7 @@ nav a:hover {
 }
 
 .category-box .name-label input,
-.category-box .input-field input{
+.category-box .input-field input {
     width: 100%;
     padding: 10px 5px; /* Adjust the left and right padding */
     font-size: 16px;
@@ -191,9 +187,8 @@ nav a:hover {
     width: 300px;
 }
 
-
 .category-box .name-label label,
-.category-box .input-field label{
+.category-box .input-field label {
     position: absolute;
     top: 0;
     left: 0;
@@ -201,21 +196,20 @@ nav a:hover {
     font-size: 16px;
     color: #fff;
     pointer-events: none;
-    transition: .5s;
+    transition: 0.5s;
 }
 
-.category-box .name-label input:focus~label,
-.category-box .name-label input:valid~label,
-.category-box .input-field input:focus~label,
-.category-box .input-field input:valid~label{
+.category-box .name-label input:focus ~ label,
+.category-box .name-label input:valid ~ label,
+.category-box .input-field input:focus ~ label,
+.category-box .input-field input:valid ~ label {
     top: -20px;
     left: 0;
     color: #f68e44;
     font-size: 12px;
 }
 
-
-.remove-field-btn{
+.remove-field-btn {
     background-color: transparent;
     border: none;
     border-radius: 5px;
@@ -227,7 +221,7 @@ nav a:hover {
     margin-left: 20px;
     padding: 5px 10px;
     max-height: 40px;
-    transition: .5s;
+    transition: 0.5s;
 }
 
 .remove-field-btn:hover {
@@ -236,7 +230,7 @@ nav a:hover {
     text-decoration: none;
 }
 
-.add-field-btn{
+.add-field-btn {
     justify-content: left;
     background-color: transparent;
     border: 2px solid #fff;
@@ -246,18 +240,21 @@ nav a:hover {
     cursor: pointer;
     font-size: 18px;
     font-weight: 500;
-    margin-left: 20px;
     padding: 5px 10px;
+    transition: 0.5s;
+}
 
+.add-field-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    text-decoration: none;
 }
 
 .submit-wrapper {
     display: flex;
     justify-content: center;
     width: 100%;
-
 }
-
 
 .submit-field {
     display: flex;
@@ -265,7 +262,6 @@ nav a:hover {
     align-items: center;
     flex-direction: column;
     width: 50%;
-    
 }
 
 .submit-b {
@@ -276,7 +272,7 @@ nav a:hover {
     text-decoration: none;
     text-transform: uppercase;
     overflow: hidden;
-    transition: .5s;
+    transition: 0.5s;
     margin-top: 40px;
     letter-spacing: 4px;
     background: transparent; /* Add this */
@@ -287,26 +283,35 @@ nav a:hover {
     background: #f49803;
     color: #fff;
     border-radius: 5px;
-    box-shadow: 0 0 5px #f4c803,
-    0 0 25px #bd9d0b,
-    0 0 50px #f4e403,
-    0 0 100px #d5cf1e;
+    box-shadow: 0 0 5px #f4c803, 0 0 25px #bd9d0b, 0 0 50px #f4e403,
+        0 0 100px #d5cf1e;
 }
-
-
 
 /* Responsive styles for screens less than 600px in height */
 @media (max-height: 599px) {
-
     .content {
         padding-top: 150px;
     }
 }
 
 @media (max-width: 850px) {
-
     .content {
         padding-top: 150px;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .category-box {
+        margin-left: 0;
+        margin-right: 0;
     }
 }
 
@@ -315,5 +320,4 @@ nav a:hover {
         display: flex;
         flex-direction: column;
     }
-
 }

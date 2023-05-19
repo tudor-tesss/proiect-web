@@ -1,63 +1,57 @@
+async function createCategory() {
+    const endpoint = "http://localhost:7101/categories";
 
-
-async function createCategory(){
-    const endpoint = 'http://localhost:7101/categories';
-
-    const name = document.getElementById('category-name').value;
-    var inputs = document.querySelectorAll(".rating-field")
-    var ratingFields = Array.from(inputs).map(input => input.value);
+    const name = document.getElementById("category-name").value;
+    var inputs = document.querySelectorAll(".rating-field");
+    var ratingFields = Array.from(inputs).map((input) => input.value);
 
     console.log(ratingFields);
 
-    var creatorId = localStorage.getItem('userUuid');
+    var creatorId = localStorage.getItem("userUuid");
 
-
-    const createCategoryCommand={
+    const createCategoryCommand = {
         name: name,
         ratingFields: ratingFields,
-        creatorId: creatorId
+        creatorId: creatorId,
     };
 
-    await fetch(endpoint,{
-        method: 'POST',
+    await fetch(endpoint, {
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
         },
-        body: JSON.stringify(createCategoryCommand)
+        body: JSON.stringify(createCategoryCommand),
     })
-        .then(async response => {
-            if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error);
-            }
+    .then(async (response) => {
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error);
+        }
 
-            return response.json();
-        })
-        .then(() => {
+        return response.json();
+    })
+    .then(() => {
+        window.location.href = "../main/add-post.html";
+    })
+    .catch((error) => {
+        console.error("Error:", error);
 
-            window.location.href = "../main/add-post.html";
+        var errorMessage = error.message;
 
-        })
-        .catch(error => {
-            console.error('Error:', error);
-
-            var errorMessage = error.message;
-
-            if (errorMessages[errorMessage] == undefined) {
-                errorMessage = "An error occurred while creating your account.";
-            }
-
-            displayError(errorMessages[errorMessage]);
-        });
+        if (errorMessages[errorMessage] == undefined) {
+            errorMessage = "An error occurred while creating your account.";
+        }
+        displayError(errorMessages[errorMessage]);
+    });
 }
 
 function displayError(errorMessage) {
-    const errorContainer = document.getElementById('error-container');
+    const errorContainer = document.getElementById("error-container");
     errorContainer.textContent = errorMessage;
-    errorContainer.style.display = 'block';
+    errorContainer.style.display = "block";
 
     setTimeout(() => {
-        errorContainer.style.display = 'none';
+        errorContainer.style.display = "none";
     }, 5000);
 }
 
@@ -65,36 +59,34 @@ errorMessages = {
     "Category.AlreadyExists": "There is already a category with the same name.",
     "Category.Name.NullOrEmpty": "Name is required.",
     "Category.RatingField.NullOrEmpty": "Rating field cannot be empty.",
-}
+};
 
 function updateTextInputFields() {
-  var textInputFields = document.getElementById("input-field");
+    var textInputFields = document.getElementById("input-field");
 
-  // Clear the div where the text input fields will be inserted
-  textInputFields.innerHTML = "";
+    textInputFields.innerHTML = "";
 
-  // Generate the initial set of text input fields
-  for (var i = 1; i <= 1; i++) {
-      var inputContainer = document.createElement("div");
-      inputContainer.classList.add("input-field");
+    for (var i = 1; i <= 1; i++) {
+        var inputContainer = document.createElement("div");
+        inputContainer.classList.add("input-field");
 
-      var input = document.createElement("input");
-      input.type = "text";
-      input.placeholder = "New Rating Field ";
-      input.name = "rating-" + i;
-      input.required = true;
-      input.classList.add("rating-field");
+        var input = document.createElement("input");
+        input.type = "text";
+        input.placeholder = "New Rating Field ";
+        input.name = "rating-" + i;
+        input.required = true;
+        input.classList.add("rating-field");
 
-      var deleteButton = createDeleteButton(); 
+        var deleteButton = createDeleteButton();
 
-      inputContainer.appendChild(input);
-      inputContainer.appendChild(deleteButton);
-      textInputFields.appendChild(inputContainer);
-  }
+        inputContainer.appendChild(input);
+        inputContainer.appendChild(deleteButton);
+        textInputFields.appendChild(inputContainer);
+    }
 }
 
 function displayCategoryForm() {
-    const categoryForm = document.querySelector('.category-form');
+    const categoryForm = document.querySelector(".category-form");
     categoryForm.innerHTML = `
     <div class="category-box">
       <h2>Add Category</h2>
@@ -113,7 +105,6 @@ function displayCategoryForm() {
     </div>
   `;
 
-    // Generate the initial set of input fields after adding form content to the DOM
     updateTextInputFields();
 }
 
@@ -128,7 +119,7 @@ function createDeleteButton() {
         </svg>  
     `;
 
-    deleteButton.onclick = function() {
+    deleteButton.onclick = function () {
         this.parentNode.remove();
     };
 
@@ -163,4 +154,3 @@ function removeField() {
         inputField.removeChild(inputContainers[inputContainers.length - 1]);
     }
 }
-

@@ -128,10 +128,8 @@ async function passUserGate() {
 
     const endpoint = 'http://localhost:7101/users/' + userUuid + '/gates';
 
-    const code = document.getElementById('code').value;
-
     const passUserGateCommand = {
-        code: code
+        code: document.getElementById('code').value
     };
 
     await fetch(endpoint, {
@@ -232,7 +230,6 @@ async function getUserIP() {
         setCookie('userIpAddress', data.ip, 1);
 
       return data.ip;
-        // return "test-ip";
     } catch (error) {
       console.error('Error fetching IP address:', error);
     }

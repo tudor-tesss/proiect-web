@@ -9,7 +9,6 @@ async function checkSession() {
     var userId = localStorage.getItem('userUuid');
     const sessionId = cookies['sessionId'];
 
-    // If the session ID is not set, redirect the user to the sign-in page.
     if (!sessionId) {
         window.location.href = '/start/start.html';
     }
@@ -115,7 +114,6 @@ async function getUserIP() {
         setCookie('userIpAddress', data.ip, 1);
 
       return data.ip;
-        // return "test-ip";
     } catch (error) {
       console.error('Error fetching IP address:', error);
     }

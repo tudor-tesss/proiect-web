@@ -87,6 +87,7 @@ body::-webkit-scrollbar-thumb:hover {
 nav {
     display: flex;
     align-items: center;
+    align-content: center;
 }
 
 nav a {
@@ -268,6 +269,21 @@ html {
 @media (max-width: 850px) {
     .description {
         display: none;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login-box {
+        margin-left: 0;
+        margin-right: 0;
     }
 
     .content-wrapper {

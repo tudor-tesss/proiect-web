@@ -15,11 +15,39 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class Main {
-    public static void main(String[] args) throws SQLException, IOException {
+    public static void main(String[] args) throws IOException {
+        var maxRetries = 5;
         addManagedClasses();
         addMediatorHandlers();
 
-        NimbleJQueryProvider.initiate("jdbc:postgresql://localhost:5432/IDisDev", "postgres", "Pass4Postgres1!");
+        var url = "jdbc:postgresql://localhost:5432/IDisDev";
+        var username = "postgres";
+        var password = "Pass4Postgres1!";
+
+        // check if command-line arguments are provided
+        if (args.length == 3) {
+            url = args[0];
+            username = args[1];
+            password = args[2];
+        }
+
+        for (var i = 0; i < maxRetries; i++) {
+            try {
+                NimbleJQueryProvider.initiate(url, username, password);
+                System.out.println("Connected to database");
+                break;
+            } catch (SQLException e) {
+                System.out.println("Failed to connect to database");
+                System.out.println("Retrying...");
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException interruptedException) {
+                    System.out.println("Interrupted exception");
+                    interruptedException.printStackTrace();
+                }
+            }
+        }
+
         var server = HttpServer
                 .create(7101)
                 .withControllers(

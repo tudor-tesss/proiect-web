@@ -11,13 +11,14 @@ import com.nimblej.core.Mediator;
 import com.nimblej.networking.database.NimbleJQueryProvider;
 import com.nimblej.networking.http.server.HttpServer;
 
-import javax.print.Doc;
 import java.io.IOException;
 import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        var maxRetries = 5;
+        var maxRetries = 2;
+        var delay = 100;
+
         addManagedClasses();
         addMediatorHandlers();
 
@@ -33,10 +34,10 @@ public class Main {
 
                 break;
             } catch (SQLException e) {
-                System.out.println("Failed to connect to deployed database. Retrying...");
+                System.out.println("Failed to connect to deployed database. Retrying... in " + delay + "ms");
 
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(delay);
                 } catch (InterruptedException ex) {
                     ex.printStackTrace();
                 }
@@ -58,10 +59,10 @@ public class Main {
 
                     break;
                 } catch (SQLException e) {
-                    System.out.println("Failed to connect to docker database. Retrying...");
+                    System.out.println("Failed to connect to docker database. Retrying... in " + delay + "ms");
 
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(delay);
                     } catch (InterruptedException ex) {
                         ex.printStackTrace();
                     }
@@ -83,10 +84,10 @@ public class Main {
 
                     break;
                 } catch (SQLException e) {
-                    System.out.println("Failed to connect to local database. Retrying...");
+                    System.out.println("Failed to connect to local database. Retrying... in " + delay + "ms");
 
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(delay);
                     } catch (InterruptedException ex) {
                         ex.printStackTrace();
                     }

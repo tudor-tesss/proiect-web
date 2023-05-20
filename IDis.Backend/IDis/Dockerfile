@@ -30,7 +30,6 @@ RUN curl -L -o /tmp/gradle.zip "https://services.gradle.org/distributions/gradle
     ln -s "/opt/gradle-${GRADLE_VERSION}" $GRADLE_HOME && \
     rm "/tmp/gradle.zip"
 
-
 # Copy your Gradle scripts and source code into the image
 COPY build.gradle settings.gradle gradlew /app/
 COPY libs /app/libs

@@ -11,6 +11,7 @@ import com.nimblej.core.Mediator;
 import com.nimblej.networking.database.NimbleJQueryProvider;
 import com.nimblej.networking.http.server.HttpServer;
 
+import javax.print.Doc;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -20,32 +21,82 @@ public class Main {
         addManagedClasses();
         addMediatorHandlers();
 
-        var url = "jdbc:postgresql://localhost:5432/IDisDev";
-        var username = "postgres";
-        var password = "Pass4Postgres1!";
+        var url = DeployedDetails.url;
+        var username = DeployedDetails.username;
+        var password = DeployedDetails.password;
 
-        // check if command-line arguments are provided
-        if (args.length == 3) {
-            url = args[0];
-            username = args[1];
-            password = args[2];
-        }
-
-        for (var i = 0; i < maxRetries; i++) {
+        int catchCount = 0;
+        for (int i = 0; i < maxRetries; i++) {
             try {
                 NimbleJQueryProvider.initiate(url, username, password);
-                System.out.println("Connected to database");
+                catchCount = 0;
+
                 break;
             } catch (SQLException e) {
-                System.out.println("Failed to connect to database");
-                System.out.println("Retrying...");
+                System.out.println("Failed to connect to deployed database. Retrying...");
+
                 try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException interruptedException) {
-                    System.out.println("Interrupted exception");
-                    interruptedException.printStackTrace();
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+
+                catchCount += 2;
+            }
+        }
+
+        if (catchCount > maxRetries) {
+            catchCount = 0;
+            url = DockerDetails.url;
+            username = DockerDetails.username;
+            password = DockerDetails.password;
+
+            for (int i = 0; i < maxRetries; i++) {
+                try {
+                    NimbleJQueryProvider.initiate(url, username, password);
+                    catchCount = 0;
+
+                    break;
+                } catch (SQLException e) {
+                    System.out.println("Failed to connect to docker database. Retrying...");
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    catchCount += 2;
                 }
             }
+        }
+
+        if (catchCount > maxRetries) {
+            url = LocalDetails.url;
+            username = LocalDetails.username;
+            password = LocalDetails.password;
+
+            for (int i = 0; i < maxRetries; i++) {
+                try {
+                    NimbleJQueryProvider.initiate(url, username, password);
+                    catchCount = 0;
+
+                    break;
+                } catch (SQLException e) {
+                    System.out.println("Failed to connect to local database. Retrying...");
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        }
+
+        if (catchCount > maxRetries) {
+            System.out.println("Failed to connect to database. Exiting...");
+            System.exit(1);
         }
 
         var server = HttpServer
@@ -79,5 +130,23 @@ public class Main {
         mediator.registerHandler(DeleteUserSessionCommand.class, new DeleteUserSessionCommandHandler());
 
         mediator.registerHandler(CreateCategoryCommand.class, new CreateCategoryCommandHandler());
+    }
+
+    private static class DeployedDetails {
+        private static final String url = "jdbc:postgresql://primary.idis-db--ylsyc29qft6l.addon.code.run:5432/IDisDev?user=_25d8fefac5e75b16&password=_80da9f9ce932c87ecbb8b11793110f&sslmode=require";
+        private static final String username = "_25d8fefac5e75b16";
+        private static final String password = "_80da9f9ce932c87ecbb8b11793110f";
+    }
+
+    private static class DockerDetails {
+        private static final String url = "jdbc:postgresql://db:5432/IDisDev";
+        private static final String username = "postgres";
+        private static final String password = "Pass4Postgres1!";
+    }
+
+    private static class LocalDetails {
+        private static final String url = "jdbc:postgresql://localhost:5432/IDisDev";
+        private static final String username = "postgres";
+        private static final String password = "Pass4Postgres1!";
     }
 }

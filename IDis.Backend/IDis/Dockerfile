@@ -40,9 +40,5 @@ WORKDIR /app
 
 RUN gradle wrapper clean build
 
-# Copy the JAR from the build stage
-COPY ./entrypoint.sh /app
-
-RUN chmod +x /app/entrypoint.sh
-
-CMD ["/app/entrypoint.sh"]
+# Run the JAR file when a container is started
+CMD ["java", "-jar", "/app/build/libs/IDis.jar"]

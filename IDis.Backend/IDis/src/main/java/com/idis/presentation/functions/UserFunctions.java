@@ -1,6 +1,7 @@
 package com.idis.presentation.functions;
 
-import com.idis.core.business.commands.user.*;
+import com.idis.core.business.user.commands.CreateUserCommand;
+import com.idis.core.business.usersession.commands.*;
 import com.nimblej.core.Function;
 import com.nimblej.core.IUserController;
 import com.nimblej.core.Mediator;

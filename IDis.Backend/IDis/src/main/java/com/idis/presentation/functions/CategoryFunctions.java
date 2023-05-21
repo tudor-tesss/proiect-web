@@ -1,6 +1,6 @@
 package com.idis.presentation.functions;
 
-import com.idis.core.business.commands.category.CreateCategoryCommand;
+import com.idis.core.business.category.commands.CreateCategoryCommand;
 import com.nimblej.core.Function;
 import com.nimblej.core.IUserController;
 import com.nimblej.core.Mediator;
@@ -9,7 +9,6 @@ import com.nimblej.networking.http.communication.HttpResponse;
 import com.nimblej.networking.http.communication.HttpVerbs;
 import com.nimblej.networking.http.routing.Route;
 
-import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 public class CategoryFunctions implements IUserController {
 

@@ -3,7 +3,7 @@ package com.idis.core.business.usersession.commandhandlers;
 import com.idis.core.business.BusinessErrors;
 import com.idis.core.business.usersession.commands.CreateUserGateCommand;
 import com.idis.core.domain.user.User;
-import com.idis.core.domain.user.UserGate;
+import com.idis.core.domain.usersession.UserGate;
 import com.idis.infrastructure.services.SendGridService;
 import com.idis.infrastructure.services.SendGridTemplates;
 import com.nimblej.core.IRequestHandler;

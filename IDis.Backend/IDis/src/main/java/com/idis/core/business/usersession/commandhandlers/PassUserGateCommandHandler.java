@@ -3,7 +3,7 @@ package com.idis.core.business.usersession.commandhandlers;
 import com.idis.core.business.BusinessErrors;
 import com.idis.core.business.usersession.commandresponses.PassUserGateCommandResponse;
 import com.idis.core.business.usersession.commands.PassUserGateCommand;
-import com.idis.core.domain.user.UserGate;
+import com.idis.core.domain.usersession.UserGate;
 import com.nimblej.core.IRequestHandler;
 import com.nimblej.networking.database.NimbleJQueryProvider;
 

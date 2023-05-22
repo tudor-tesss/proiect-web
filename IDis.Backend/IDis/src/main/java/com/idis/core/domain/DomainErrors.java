@@ -24,4 +24,9 @@ public class DomainErrors {
         public static final String RatingFieldNullOrEmpty = "Category.RatingField.NullOrEmpty";
     }
 
+    public static class Post{
+        public static final String TitleNullOrEmpty = "Post.Title.NullOrEmpty";
+        public static final String BodyNullOrEmpty = "Post.Body.NullOrEmpty";
+        public static final String RatingValueOutOfInterval = "Post.Rating.OutOfInterval";
+    }
 }

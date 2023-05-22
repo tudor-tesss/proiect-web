@@ -11,7 +11,7 @@ import java.util.concurrent.CompletableFuture;
 import static com.nimblej.extensions.functional.FunctionalExtensions.any;
 
 public final class CreateCategoryCommandHandler implements IRequestHandler<CreateCategoryCommand, Category> {
-
+    @Override
     public CompletableFuture<Category> handle (CreateCategoryCommand createCategoryCommand){
         var categories = NimbleJQueryProvider.getAll(Category.class);
 

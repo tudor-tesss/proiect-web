@@ -3,8 +3,7 @@ package com.idis.core.domain.posts.parentpost;
 import com.idis.core.domain.DomainErrors;
 import com.nimblej.core.BaseObject;
 
-
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
@@ -14,7 +13,7 @@ public final class Post extends BaseObject {
     private String title;
     private String body;
     private Map<String, Integer> ratings;
-    private LocalDate createdAt;
+    private Date createdAt;
 
     public Post() {}
 
@@ -25,7 +24,7 @@ public final class Post extends BaseObject {
         this.title = title;
         this.body = body;
         this.ratings = ratings;
-        this.createdAt = LocalDate.now();
+        this.createdAt = new Date();
     }
 
     public static Post create(UUID authorId, UUID categoryId, String title, String body, Map<String, Integer> ratings) throws IllegalArgumentException {
@@ -67,7 +66,7 @@ public final class Post extends BaseObject {
         return ratings;
     }
 
-    public LocalDate getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 }

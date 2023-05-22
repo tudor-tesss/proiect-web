@@ -11,7 +11,7 @@ public final class Category extends BaseObject {
     private String name;
     private UUID creatorId;
     private List<String> ratingFields;
-    private LocalDate createdAt;
+    private Date createdAt;
 
     public Category() { }
 
@@ -20,7 +20,7 @@ public final class Category extends BaseObject {
         this.creatorId=creatorId;
         this.name = name;
         this.ratingFields = ratingFields;
-        this.createdAt = LocalDate.now();
+        this.createdAt = new Date();
     }
 
     public static Category create(String name, List<String> ratingFields, UUID creatorId) throws IllegalArgumentException {
@@ -45,7 +45,15 @@ public final class Category extends BaseObject {
         return name;
     }
 
+    public UUID getCreatorId() {
+        return creatorId;
+    }
+
     public List<String> getRatingFields() {
         return ratingFields;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
     }
 }

@@ -1,6 +1,5 @@
 package com.idis.core.business.posts.parentpost.command;
 
-import com.idis.core.domain.DomainErrors;
 import com.idis.core.domain.posts.parentpost.Post;
 import com.nimblej.core.IRequest;
 

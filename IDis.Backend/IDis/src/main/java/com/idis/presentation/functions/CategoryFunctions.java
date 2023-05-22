@@ -10,8 +10,8 @@ import com.nimblej.networking.http.communication.HttpVerbs;
 import com.nimblej.networking.http.routing.Route;
 
 import java.util.concurrent.CompletableFuture;
-public class CategoryFunctions implements IUserController {
 
+public class CategoryFunctions implements IUserController {
     private static Mediator mediator = Mediator.getInstance();
 
     @Route(path= "/categories", method = HttpVerbs.POST)
@@ -19,7 +19,7 @@ public class CategoryFunctions implements IUserController {
     public static CompletableFuture <HttpResponse> createCategory (String requestBody){
         var command = Serialization.deserialize(requestBody, CreateCategoryCommand.class);
 
-        try{
+        try {
             return mediator
                     .send(command)
                     .thenCompose(category -> {

@@ -2,12 +2,17 @@ package com.idis.presentation;
 
 import com.idis.core.business.category.commandhandlers.CreateCategoryCommandHandler;
 import com.idis.core.business.category.commands.CreateCategoryCommand;
+import com.idis.core.business.posts.parentpost.command.CreatePostCommand;
+import com.idis.core.business.posts.parentpost.commandhandlers.CreatePostCommandHandler;
 import com.idis.core.business.user.commandhandlers.CreateUserCommandHandler;
 import com.idis.core.business.user.commands.CreateUserCommand;
 import com.idis.core.business.usersession.commandhandlers.*;
 import com.idis.core.business.usersession.commands.*;
 import com.idis.core.domain.category.Category;
+import com.idis.core.domain.posts.parentpost.Post;
 import com.idis.core.domain.user.*;
+import com.idis.core.domain.usersession.UserGate;
+import com.idis.core.domain.usersession.UserSession;
 import com.idis.presentation.functions.*;
 import com.nimblej.core.Mediator;
 import com.nimblej.networking.database.NimbleJQueryProvider;
@@ -107,7 +112,8 @@ public class Main {
                 .withControllers(
                         new GenericOptionsController(),
                         new UserFunctions(),
-                        new CategoryFunctions()
+                        new CategoryFunctions(),
+                        new PostFunctions()
                 );
 
         server.start();
@@ -118,6 +124,7 @@ public class Main {
         NimbleJQueryProvider.addManagedClass(UserGate.class);
         NimbleJQueryProvider.addManagedClass(UserSession.class);
         NimbleJQueryProvider.addManagedClass(Category.class);
+        NimbleJQueryProvider.addManagedClass(Post.class);
     }
 
     private static void addMediatorHandlers() {
@@ -133,6 +140,8 @@ public class Main {
         mediator.registerHandler(DeleteUserSessionCommand.class, new DeleteUserSessionCommandHandler());
 
         mediator.registerHandler(CreateCategoryCommand.class, new CreateCategoryCommandHandler());
+
+        mediator.registerHandler(CreatePostCommand.class, new CreatePostCommandHandler());
     }
 
     private static class DeployedDetails {

@@ -31,4 +31,10 @@ public class BusinessErrors {
     public static class Category{
         public static final String CategoryAlreadyExists = "Category.AlreadyExists";
     }
+
+    public static class Post{
+        public static final String UserDoesNotExist = "Post.User.DoesNotExist";
+        public static final String CategoryDoesNotExist = "Post.Category.DoesNotExist";
+        public static final String RatingsDoNotMatch = "Post.Ratings.DoesNotMatch";
+    }
 }

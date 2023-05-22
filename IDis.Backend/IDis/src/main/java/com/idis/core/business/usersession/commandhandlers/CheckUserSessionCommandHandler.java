@@ -3,7 +3,7 @@ package com.idis.core.business.usersession.commandhandlers;
 import com.idis.core.business.BusinessErrors;
 import com.idis.core.business.usersession.commandresponses.CheckUserSessionCommandResponse;
 import com.idis.core.business.usersession.commands.CheckUserSessionCommand;
-import com.idis.core.domain.user.UserSession;
+import com.idis.core.domain.usersession.UserSession;
 import com.nimblej.core.IRequestHandler;
 import com.nimblej.networking.database.NimbleJQueryProvider;
 

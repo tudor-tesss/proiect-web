@@ -1,7 +1,6 @@
 package com.idis.core.domain.category;
 
 import com.idis.core.domain.DomainErrors;
-import com.idis.core.domain.user.User;
 import com.nimblej.core.BaseObject;
 
 import java.time.LocalDate;
@@ -14,7 +13,7 @@ public final class Category extends BaseObject {
     private List<String> ratingFields;
     private LocalDate createdAt;
 
-    public Category() { };
+    public Category() { }
 
     private Category(String name, List<String> ratingFields, UUID creatorId) {
         super();
@@ -27,7 +26,7 @@ public final class Category extends BaseObject {
     public static Category create(String name, List<String> ratingFields, UUID creatorId) throws IllegalArgumentException {
         var nameResult = name != null && !name.isBlank();
 
-        for( String rating: ratingFields){
+        for (var rating: ratingFields){
 
             var ratingResult = rating != null && !rating.isBlank();
 

@@ -4,7 +4,7 @@ import com.idis.core.business.BusinessErrors;
 import com.idis.core.business.usersession.commandresponses.CreateUserSessionCommandResponse;
 import com.idis.core.business.usersession.commands.CreateUserSessionCommand;
 import com.idis.core.domain.user.User;
-import com.idis.core.domain.user.UserSession;
+import com.idis.core.domain.usersession.UserSession;
 import com.nimblej.core.IRequestHandler;
 import com.nimblej.networking.database.NimbleJQueryProvider;
 

@@ -1,4 +1,4 @@
-package com.idis.core.domain.user;
+package com.idis.core.domain.usersession;
 
 import com.idis.core.domain.DomainErrors;
 import com.idis.core.domain.constants.UserGateConstants;

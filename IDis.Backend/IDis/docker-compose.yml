@@ -1,10 +1,10 @@
 version: '3'
 services:
-  postgres:
+  postgresidis:
     image: postgres
     restart: always
     environment:
-      POSTGRES_PASSWORD: Pass4Postgres1
+      POSTGRES_PASSWORD: Pass4Postgres1!
       POSTGRES_USER: postgres
       POSTGRES_DB: IDisDev
     volumes:
@@ -20,6 +20,6 @@ services:
   app:
     build: .
     depends_on:
-      - postgres
+      - postgresidis
     ports:
       - 7101:7101

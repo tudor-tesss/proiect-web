@@ -30,6 +30,7 @@ public class BusinessErrors {
 
     public static class Category{
         public static final String CategoryAlreadyExists = "Category.AlreadyExists";
+        public static final String NoCategoriesInDatabase = "Category.NoCategoriesInDatabase";
     }
 
     public static class Post{

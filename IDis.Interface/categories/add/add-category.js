@@ -39,7 +39,7 @@ async function createCategory() {
         var errorMessage = error.message;
 
         if (errorMessages[errorMessage] == undefined) {
-            errorMessage = "An error occurred while creating your account.";
+            errorMessage = "An error occurred while creating your category.";
         }
         displayError(errorMessages[errorMessage]);
     });

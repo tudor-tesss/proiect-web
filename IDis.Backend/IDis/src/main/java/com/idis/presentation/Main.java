@@ -5,7 +5,9 @@ import com.idis.core.business.category.commands.CreateCategoryCommand;
 import com.idis.core.business.posts.parentpost.command.CreatePostCommand;
 import com.idis.core.business.posts.parentpost.commandhandlers.CreatePostCommandHandler;
 import com.idis.core.business.user.commandhandlers.CreateUserCommandHandler;
+import com.idis.core.business.user.commandhandlers.GetUserByIdCommandHandler;
 import com.idis.core.business.user.commands.CreateUserCommand;
+import com.idis.core.business.user.commands.GetUserByIdCommand;
 import com.idis.core.business.usersession.commandhandlers.*;
 import com.idis.core.business.usersession.commands.*;
 import com.idis.core.domain.category.Category;
@@ -138,6 +140,7 @@ public class Main {
         mediator.registerHandler(CreateUserSessionCommand.class, new CreateUserSessionCommandHandler());
         mediator.registerHandler(CheckUserSessionCommand.class, new CheckUserSessionCommandHandler());
         mediator.registerHandler(DeleteUserSessionCommand.class, new DeleteUserSessionCommandHandler());
+        mediator.registerHandler(GetUserByIdCommand.class,new GetUserByIdCommandHandler());
 
         mediator.registerHandler(CreateCategoryCommand.class, new CreateCategoryCommandHandler());
 

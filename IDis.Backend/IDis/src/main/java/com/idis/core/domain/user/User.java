@@ -38,6 +38,7 @@ public final class User extends BaseObject {
         return new User(name, firstName, emailAddress);
     }
 
+
     public String getName() {
         return name;
     }

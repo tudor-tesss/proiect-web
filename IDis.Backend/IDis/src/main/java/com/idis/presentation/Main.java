@@ -4,6 +4,10 @@ import com.idis.core.business.category.commandhandlers.CreateCategoryCommandHand
 import com.idis.core.business.category.commands.CreateCategoryCommand;
 import com.idis.core.business.posts.parentpost.command.CreatePostCommand;
 import com.idis.core.business.posts.parentpost.commandhandlers.CreatePostCommandHandler;
+import com.idis.core.business.statistics.category.commandhandlers.CreateCategoriesStatisticsCommandHandler;
+import com.idis.core.business.statistics.category.commandhandlers.CreateCategoryStatisticsCommandHandler;
+import com.idis.core.business.statistics.category.commands.CreateCategoriesStatisticsCommand;
+import com.idis.core.business.statistics.category.commands.CreateCategoryStatisticsCommand;
 import com.idis.core.business.user.commandhandlers.CreateUserCommandHandler;
 import com.idis.core.business.user.commands.CreateUserCommand;
 import com.idis.core.business.usersession.commandhandlers.*;
@@ -23,6 +27,8 @@ import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+        System.out.println("Starting server...\n");
+
         var maxRetries = 2;
         var delay = 100;
 
@@ -37,6 +43,7 @@ public class Main {
         for (int i = 0; i < maxRetries; i++) {
             try {
                 NimbleJQueryProvider.initiate(url, username, password);
+                System.out.println("Connected to deployed database.\n");
                 catchCount = 0;
 
                 break;
@@ -62,6 +69,7 @@ public class Main {
             for (int i = 0; i < maxRetries; i++) {
                 try {
                     NimbleJQueryProvider.initiate(url, username, password);
+                    System.out.println("Connected to docker database.\n");
                     catchCount = 0;
 
                     break;
@@ -87,6 +95,7 @@ public class Main {
             for (int i = 0; i < maxRetries; i++) {
                 try {
                     NimbleJQueryProvider.initiate(url, username, password);
+                    System.out.println("Connected to local database.\n");
                     catchCount = 0;
 
                     break;
@@ -103,7 +112,7 @@ public class Main {
         }
 
         if (catchCount > maxRetries) {
-            System.out.println("Failed to connect to database. Exiting...");
+            System.out.println("Failed to connect to database. Exiting...\n");
             System.exit(1);
         }
 
@@ -113,7 +122,8 @@ public class Main {
                         new GenericOptionsController(),
                         new UserFunctions(),
                         new CategoryFunctions(),
-                        new PostFunctions()
+                        new PostFunctions(),
+                        new StatisticsFunctions()
                 );
 
         server.start();
@@ -131,8 +141,8 @@ public class Main {
         var mediator = Mediator.getInstance();
 
         mediator.registerHandler(CreateUserCommand.class, new CreateUserCommandHandler());
-        mediator.registerHandler(CreateUserGateCommand.class, new CreateUserGateCommandHandler());
 
+        mediator.registerHandler(CreateUserGateCommand.class, new CreateUserGateCommandHandler());
         mediator.registerHandler(PassUserGateCommand.class, new PassUserGateCommandHandler());
 
         mediator.registerHandler(CreateUserSessionCommand.class, new CreateUserSessionCommandHandler());
@@ -142,6 +152,9 @@ public class Main {
         mediator.registerHandler(CreateCategoryCommand.class, new CreateCategoryCommandHandler());
 
         mediator.registerHandler(CreatePostCommand.class, new CreatePostCommandHandler());
+
+        mediator.registerHandler(CreateCategoryStatisticsCommand.class, new CreateCategoryStatisticsCommandHandler());
+        mediator.registerHandler(CreateCategoriesStatisticsCommand.class, new CreateCategoriesStatisticsCommandHandler());
     }
 
     private static class DeployedDetails {
@@ -151,7 +164,7 @@ public class Main {
     }
 
     private static class DockerDetails {
-        private static final String url = "jdbc:postgresql://db:5432/IDisDev";
+        private static final String url = "jdbc:postgresql://postgresidis:5432/IDisDev";
         private static final String username = "postgres";
         private static final String password = "Pass4Postgres1!";
     }

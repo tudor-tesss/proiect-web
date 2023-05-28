@@ -1,3 +1,3 @@
 package com.idis.core.business.statistics.category.commandresponses;
 
-public record CreateCategoryStatisticsCommandResponse() { }
+public record CreateCategoryStatisticsCommandResponse(CategoryStatistics statistics) { }

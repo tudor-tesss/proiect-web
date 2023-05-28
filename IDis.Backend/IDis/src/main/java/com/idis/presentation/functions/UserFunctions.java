@@ -21,7 +21,6 @@ public class UserFunctions implements IUserController {
     public static CompletableFuture<HttpResponse> createUser(String requestBody) {
         var command = Serialization.deserialize(requestBody, CreateUserCommand.class);
 
-        //catch exception
         try {
             return mediator
                     .send(command)
@@ -42,7 +41,6 @@ public class UserFunctions implements IUserController {
     public static CompletableFuture<HttpResponse> createUserGate(String requestBody) {
         var command = Serialization.deserialize(requestBody, CreateUserGateCommand.class);
 
-        //catch exception
         try {
             return mediator
                     .send(command)
@@ -73,7 +71,6 @@ public class UserFunctions implements IUserController {
         var command = Serialization.deserialize(requestBody, PassUserGateCommand.class);
         command = new PassUserGateCommand(userId, command.code());
 
-        //catch exception
         try {
             return mediator
                     .send(command)
@@ -104,7 +101,6 @@ public class UserFunctions implements IUserController {
         var command = Serialization.deserialize(requestBody, CreateUserSessionCommand.class);
         command = new CreateUserSessionCommand(userId, command.userIpAddress());
 
-        //catch exception
         try {
             return mediator
                     .send(command)
@@ -138,7 +134,6 @@ public class UserFunctions implements IUserController {
         var command = Serialization.deserialize(requestBody, CheckUserSessionCommand.class);
         command = new CheckUserSessionCommand(userId, command.sessionId(), command.ipAddress());
 
-        //catch exception
         try {
             return mediator
                     .send(command)
@@ -159,7 +154,6 @@ public class UserFunctions implements IUserController {
     public static CompletableFuture<HttpResponse> deleteUserSession(String id, String requestBody) {
         var command = Serialization.deserialize(requestBody, DeleteUserSessionCommand.class);
 
-        //catch exception
         try {
             return mediator
                     .send(command)

@@ -1,4 +1,7 @@
 package com.idis.core.business.statistics.category.commandresponses;
 
-public record CreateCategoriesStatisticsCommandResponse() { }
+import java.util.List;
 
+public record CreateCategoriesStatisticsCommandResponse(
+        List<CategoryStatistics> statistics
+) { }

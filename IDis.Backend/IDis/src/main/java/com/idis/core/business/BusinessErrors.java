@@ -38,6 +38,7 @@ public class BusinessErrors {
         public static final String UserDoesNotExist = "Post.User.DoesNotExist";
         public static final String CategoryDoesNotExist = "Post.Category.DoesNotExist";
         public static final String RatingsDoNotMatch = "Post.Ratings.DoesNotMatch";
+        public static final String CategoryHasNoPosts = "Post.Category.HasNoPosts";
     }
 
     public static class CategoryStatistics {

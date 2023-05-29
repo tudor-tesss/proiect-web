@@ -5,9 +5,8 @@ import com.idis.core.business.category.commandhandlers.GetAllCategoriesCommandHa
 import com.idis.core.business.category.commands.CreateCategoryCommand;
 import com.idis.core.business.category.commands.GetAllCategoriesCommand;
 import com.idis.core.business.posts.parentpost.command.CreatePostCommand;
+import com.idis.core.business.posts.parentpost.command.GetAllPostsInsideOfACategoryCommand;
 import com.idis.core.business.posts.parentpost.commandhandlers.CreatePostCommandHandler;
-import com.idis.core.business.posts.postreply.command.CreatePostReplyCommand;
-import com.idis.core.business.posts.postreply.commandhandlers.CreatePostReplyCommandHandler;
 import com.idis.core.business.statistics.category.commandhandlers.CreateCategoriesStatisticsCommandHandler;
 import com.idis.core.business.statistics.category.commandhandlers.CreateCategoryStatisticsCommandHandler;
 import com.idis.core.business.statistics.category.commands.CreateCategoriesStatisticsCommand;
@@ -162,6 +161,7 @@ public class Main {
         mediator.registerHandler(GetAllCategoriesCommand.class, new GetAllCategoriesCommandHandler());
 
         mediator.registerHandler(CreatePostCommand.class, new CreatePostCommandHandler());
+        mediator.registerHandler(GetAllPostsInsideOfACategoryCommand.class, new GetAllPostsInsideOfACategoryCommandHandler());
 
         mediator.registerHandler(CreateCategoryStatisticsCommand.class, new CreateCategoryStatisticsCommandHandler());
         mediator.registerHandler(CreateCategoriesStatisticsCommand.class, new CreateCategoriesStatisticsCommandHandler());

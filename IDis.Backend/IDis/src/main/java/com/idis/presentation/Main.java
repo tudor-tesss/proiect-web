@@ -1,7 +1,9 @@
 package com.idis.presentation;
 
 import com.idis.core.business.category.commandhandlers.CreateCategoryCommandHandler;
+import com.idis.core.business.category.commandhandlers.GetAllCategoriesCommandHandler;
 import com.idis.core.business.category.commands.CreateCategoryCommand;
+import com.idis.core.business.category.commands.GetAllCategoriesCommand;
 import com.idis.core.business.posts.parentpost.command.CreatePostCommand;
 import com.idis.core.business.posts.parentpost.commandhandlers.CreatePostCommandHandler;
 import com.idis.core.business.posts.postreply.command.CreatePostReplyCommand;
@@ -154,6 +156,7 @@ public class Main {
         mediator.registerHandler(DeleteUserSessionCommand.class, new DeleteUserSessionCommandHandler());
 
         mediator.registerHandler(CreateCategoryCommand.class, new CreateCategoryCommandHandler());
+        mediator.registerHandler(GetAllCategoriesCommand.class, new GetAllCategoriesCommandHandler());
 
         mediator.registerHandler(CreatePostCommand.class, new CreatePostCommandHandler());
 

@@ -6,29 +6,57 @@
 	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="main.css" />
 	<script src="../check-session.js"></script>
-	<script>
+	<!--<script>
 		checkSession();
-	</script>
+	</script>-->
 </head>
 
 <body class="prevent-select">
-	<header>
-		<div class="logo">
-			<a href="main.html">
-				<img src="../resources/Iogopng.png" />
-			</a>
+		<div class="top-gradient">
+			<div class="header">
+				<div class="logo">
+					<a href="main.html">
+						<img src="../resources/logopng.png" alt="Logo">
+					</a>
+				</div>
+				<nav>
+					 <a class ="add-category-button" href="../categories/add/add-category.html">Add Category</a>
+					<button type="button" class="logout-button" onClick="deleteSessionTokenCookie()">Log Out</button>
+				</nav>
+			</div>
+
+			<div class="content-wrapper">
+
+				<div class="description">
+					<div class="description-text">
+						<h1>Choose a category!</h1>
+						<p>
+							Discover a world of opinions at 'I Dislike It!' Unleash your thoughts, rate topics,
+							and engage in lively discussions. From trending controversies to personal peeves, this
+							platform empowers you to express what you dislike. Join our vibrant community today and
+							ignite the conversation!
+						</p>
+					</div>
+
+					<div class="rev-image">
+						<img src="../resources/icons/review.svg" alt="review" width="50%" height="auto">
+					</div>
+
+				</div>
+
+				<div class="buttons-wrapper">
+
+					<div class="buttons-box">
+
+					</div>
+
+				</div>
+
+			</div>
+
 		</div>
-		<nav>
-			<a href="../categories/add/add-category.html" class="nav-link">Add Category</a>
-			<button type="button" class="nav-link logout" onClick="deleteSessionTokenCookie()">Log Out</button>
-		</nav>
-	</header>
-	<div class="container">
-		<a href="categories/people/people.html" class="category">People</a>
-		<a href="categories/food/food.html" class="category">Food</a>
-		<a href="categories/locations/locations.html" class="category">Locations</a>
-		<a href="categories/holidays/holidays.html" class="category">Holidays</a>
-	</div>
+
+		<script src="main.js"></script>
 </body>
 
 </html>

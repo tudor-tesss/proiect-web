@@ -1,122 +1,201 @@
 .prevent-select {
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
 }
 
 body {
-    background-color: #EDF1D6;
-    font-family: 'Poppins', Arial, sans-serif;
+    font-family: "Poppins", Arial, sans-serif;
     color: #333;
     line-height: 1.6;
     margin: 0;
     padding: 0;
+    background-color: #f1f5fd;
 }
 
-header {
-    background-color: #9DC08B;
-    color: #fff;
+.top-gradient {
+    position: relative;
+    overflow: visible;
+    width: 100%;
+    min-height: 75vh;
+    background-image: linear-gradient(to top right, #6563ed, #26c3de);
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+    z-index: 1;
+}
+
+body::-webkit-scrollbar {
+    width: 10px; /* width of the scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+    background: #f1f1f1; /* color of the track */
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #4868fd; /* color of the thumb */
+    border-radius: 5px; /* rounded corners */
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #002dff; /* color of the thumb on hover */
+}
+
+.header {
+
+    margin-top: 20px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 90%; /* You can adjust this value based on your preference */
     padding: 20px;
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 60px;
-    margin: 50px 20px 20px 20px;
-    border-radius: 7px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.6);
-    position: relative;
-    padding-top: 20px;
+    align-items: center;
+    background-color: transparent;
+    z-index: 1000;
+    transform: translateX(-50%);
 }
 
-.logo img {
-    max-width: 200px;
-    max-height: 200px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    overflow: hidden;
+.logo img  {
+    height: 100px;
 }
 
-.title {
-    margin: 0;
-    font-weight: bold;
+.add-category-button, .logout-button {
+    background: none;
+    border: none;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    margin-left: 20px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s;
+}
+
+.add-category-button:hover, .logout-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 nav {
     display: flex;
-    gap: 20px;
-}
-
-.nav-link {
-    padding: 10px 10px 10px 10px;
-    display: inline-block;
-    background-color: #6D8B74;
-    color: #fff;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.6);
-    border: none; /* Add this to remove the default border from the button */
-    font-size: 16px;
-    font-family: 'Poppins', Arial, sans-serif;
-}
-
-nav button {
-    min-height: 50px;
-}
-
-.nav-link:hover {
-    background-color: #f5f5f5;
-    color: #364f6b;
-    transform: translateY(-5px);
-}
-
-/* Add this rule to remove the default outline on button focus */
-.nav-link:focus {
-    outline: none;
-}
-
-
-.container {
-    max-width: 1000px;
-    margin: 50px auto 0;
-    margin-top: 100px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
     align-items: center;
+}
+
+nav a {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    margin-left: 20px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.content-wrapper {
+    display: flex;
     justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 1000px); /* Change this to min-height */
+    padding: 20px; /* Add some padding around the content */
+    padding-top: 250px;
+    z-index: 1000;
+}
+
+.description {
+    position: sticky;
+    top: 0;
     padding: 20px;
-    background-color: #9DC08B;
+    justify-content: end;
+    font-size: 18px;
+    color: #fff;
+    text-align: justify;
+    margin-left: 50px;
+    margin-right: 25px;
+    margin-top: 0; /* Update this line */
+    margin-bottom: auto; /* Add this line */
+}
+
+.rev-image  {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+
+.buttons-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    margin-bottom: 100px;
+}
+
+.buttons-box {
+    width: 400px;
+    padding: 40px;
+    background: rgba(0, 0, 0, .5);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.6);
-}
-
-.category {
-    flex: 1 1 150px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    background-color: #6D8B74;
-    color: #fff;
-    font-size: 24px;
-    border-radius: 5px;
-    text-align: center;
-    text-decoration: none;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.6);
-    padding: 20px;
-    max-height: 30px;
+    margin-right: 50px;
+    margin-left: 25px;
+    z-index: 1000;
+
 }
 
-.category:hover {
-    background-color: #f5f5f5;
-    color: #364f6b;
-    transform: translateY(-5px);
+.error-container {
+    color: #ffffff;
+    text-align: center;
+    display: block;
 }
+
+.category-button{
+    position: relative;
+    padding: 10px 20px;
+    color: #b79726;
+    font-size: 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: 0.5s;
+    margin-top: 40px;
+    letter-spacing: 4px;
+    background: transparent; /* Add this */
+    border: none; /* Add this */
+    z-index: 1000;
+}
+
+.category-button:hover {
+    background: #f49803;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #f4c803, 0 0 25px #bd9d0b, 0 0 50px #f4e403,
+    0 0 100px #d5cf1e;
+    transform: translateY(-10px);
+    z-index: 1000;
+}
+
+.loading-container {
+
+    /* Add your desired CSS styling for the loading container */
+}
+
 
 /* make logo disappear when it overlaps nav */
 @media screen and (max-width: 800px) {
@@ -131,6 +210,9 @@ nav button {
 
 /* make header fit screen when zooming much */
 @media screen and (max-width: 600px) {
+    .description {
+        display: none;
+    }
     header {
         margin: 0;
         justify-content: center;
@@ -139,6 +221,9 @@ nav button {
 
 /* make nav taller when zooming in order to fit the text */
 @media screen and (max-width: 400px) {
+    .description {
+        display: none;
+    }
     nav {
         flex-direction: column;
     }

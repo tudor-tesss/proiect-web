@@ -11,6 +11,7 @@ import com.nimblej.networking.http.communication.HttpVerbs;
 import com.nimblej.networking.http.routing.Route;
 
 import javax.print.attribute.standard.Media;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 public class PostFunctions implements IUserController {
@@ -36,10 +37,21 @@ public class PostFunctions implements IUserController {
         }
     }
 
-    @Route(path = "category/{id}/posts", method = HttpVerbs.GET)
+    @Route(path = "/category/{id}/posts", method = HttpVerbs.GET)
     @Function(name = "getAllPostsInsideACategory")
-    public static CompletableFuture <HttpResponse> getAllPostsInsideACategory (String requestBody) {
-        var command = Serialization.deserialize(requestBody, GetAllPostsInsideOfACategoryCommand.class);
+    public static CompletableFuture <HttpResponse> getAllPostsInsideACategory (String id, String requestBody) {
+
+        UUID categoryId;
+        try {
+            categoryId = UUID.fromString(id);
+        } catch (Exception e) {
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400, responseContent);
+        }
+
+        var command = new GetAllPostsInsideOfACategoryCommand(categoryId);
+
 
         try {
             return mediator

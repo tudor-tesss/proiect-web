@@ -140,6 +140,7 @@ nav a:hover {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    margin-bottom: 100px;
 }
 
 .buttons-box {

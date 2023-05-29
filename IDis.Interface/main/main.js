@@ -104,7 +104,7 @@ async function displayCategories() {
             button.addEventListener("click", () => {
                 // Handle button click event
                 console.log(`Button "${name}" clicked`);
-                window.location.href = `categories/category.html/${categoryId}`;
+                window.location.href = `categories/category.html?categoryId=${categoryId}`;
             });
 
             buttonsBox.appendChild(button);

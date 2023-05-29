@@ -1,6 +1,7 @@
 package com.idis.presentation.functions;
 
 import com.idis.core.business.posts.parentpost.command.CreatePostCommand;
+import com.idis.core.business.posts.postreply.command.CreatePostReplyCommand;
 import com.idis.core.business.posts.parentpost.command.GetAllPostsInsideOfACategoryCommand;
 import com.nimblej.core.Function;
 import com.nimblej.core.IUserController;
@@ -60,6 +61,38 @@ public class PostFunctions implements IUserController {
                         var responseContent = Serialization.serialize(posts);
 
                         return HttpResponse.create(200, responseContent);
+                    });
+        } catch (Exception e) {
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400, responseContent);
+        }
+    }
+
+    @Route(path = "/posts/{id}/replies", method = HttpVerbs.POST)
+    @Function(name = "createPostReply")
+    public static CompletableFuture <HttpResponse> createPostReply (String id, String requestBody) {
+        UUID postId;
+        try {
+            postId = UUID.fromString(id);
+        }
+        catch (Exception e) {
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400, responseContent);
+        }
+
+        var command = Serialization.deserialize(requestBody, CreatePostReplyCommand.class);
+
+        command = new CreatePostReplyCommand(command.authorId(), postId, command.title(), command.body(), command.ratings());
+
+        try {
+            return mediator
+                    .send(command)
+                    .thenCompose(r -> {
+                        HttpResponse res = HttpResponse.create(200, Serialization.serialize(r)).join();
+
+                        return CompletableFuture.completedFuture(res);
                     });
         } catch (Exception e) {
             var responseContent = Serialization.serialize(e.getMessage());

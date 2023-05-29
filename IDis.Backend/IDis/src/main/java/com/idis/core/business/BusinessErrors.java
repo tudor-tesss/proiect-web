@@ -42,4 +42,10 @@ public class BusinessErrors {
     public static class CategoryStatistics {
         public static final String CategoryDoesNotExist = "CategoryStatistics.Category.DoesNotExist";
     }
+
+    public static class PostReply {
+        public static final String UserDoesNotExist = "PostReply.User.DoesNotExist";
+        public static final String PostDoesNotExist = "PostReply.Post.DoesNotExist";
+        public static final String RatingsDoNotMatch = "PostReply.Ratings.DoNotMatch";
+    }
 }

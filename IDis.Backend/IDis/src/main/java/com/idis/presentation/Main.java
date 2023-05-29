@@ -3,7 +3,9 @@ package com.idis.presentation;
 import com.idis.core.business.category.commandhandlers.CreateCategoryCommandHandler;
 import com.idis.core.business.category.commands.CreateCategoryCommand;
 import com.idis.core.business.posts.parentpost.command.CreatePostCommand;
+import com.idis.core.business.posts.parentpost.command.GetAllPostsInsideOfACategoryCommand;
 import com.idis.core.business.posts.parentpost.commandhandlers.CreatePostCommandHandler;
+import com.idis.core.business.posts.parentpost.commandhandlers.GetAllPostsInsideOfACategoryCommandHandler;
 import com.idis.core.business.statistics.category.commandhandlers.CreateCategoriesStatisticsCommandHandler;
 import com.idis.core.business.statistics.category.commandhandlers.CreateCategoryStatisticsCommandHandler;
 import com.idis.core.business.statistics.category.commands.CreateCategoriesStatisticsCommand;
@@ -152,6 +154,7 @@ public class Main {
         mediator.registerHandler(CreateCategoryCommand.class, new CreateCategoryCommandHandler());
 
         mediator.registerHandler(CreatePostCommand.class, new CreatePostCommandHandler());
+        mediator.registerHandler(GetAllPostsInsideOfACategoryCommand.class, new GetAllPostsInsideOfACategoryCommandHandler());
 
         mediator.registerHandler(CreateCategoryStatisticsCommand.class, new CreateCategoryStatisticsCommandHandler());
         mediator.registerHandler(CreateCategoriesStatisticsCommand.class, new CreateCategoriesStatisticsCommandHandler());

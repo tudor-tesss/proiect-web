@@ -1,6 +1,7 @@
 package com.idis.presentation.functions;
 
 import com.idis.core.business.posts.parentpost.command.CreatePostCommand;
+import com.idis.core.business.posts.parentpost.command.GetAllPostsInsideOfACategoryCommand;
 import com.nimblej.core.Function;
 import com.nimblej.core.IUserController;
 import com.nimblej.core.Mediator;
@@ -25,6 +26,26 @@ public class PostFunctions implements IUserController {
                     .send(command)
                     .thenCompose(post -> {
                         var responseContent = Serialization.serialize(post);
+
+                        return HttpResponse.create(200, responseContent);
+                    });
+        } catch (Exception e) {
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400, responseContent);
+        }
+    }
+
+    @Route(path = "category/{id}/posts", method = HttpVerbs.GET)
+    @Function(name = "getAllPostsInsideACategory")
+    public static CompletableFuture <HttpResponse> getAllPostsInsideACategory (String requestBody) {
+        var command = Serialization.deserialize(requestBody, GetAllPostsInsideOfACategoryCommand.class);
+
+        try {
+            return mediator
+                    .send(command)
+                    .thenCompose(posts -> {
+                        var responseContent = Serialization.serialize(posts);
 
                         return HttpResponse.create(200, responseContent);
                     });

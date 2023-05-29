@@ -4,6 +4,8 @@ import com.idis.core.business.category.commandhandlers.CreateCategoryCommandHand
 import com.idis.core.business.category.commands.CreateCategoryCommand;
 import com.idis.core.business.posts.parentpost.command.CreatePostCommand;
 import com.idis.core.business.posts.parentpost.commandhandlers.CreatePostCommandHandler;
+import com.idis.core.business.posts.postreply.command.CreatePostReplyCommand;
+import com.idis.core.business.posts.postreply.commandhandlers.CreatePostReplyCommandHandler;
 import com.idis.core.business.statistics.category.commandhandlers.CreateCategoriesStatisticsCommandHandler;
 import com.idis.core.business.statistics.category.commandhandlers.CreateCategoryStatisticsCommandHandler;
 import com.idis.core.business.statistics.category.commands.CreateCategoriesStatisticsCommand;
@@ -14,6 +16,7 @@ import com.idis.core.business.usersession.commandhandlers.*;
 import com.idis.core.business.usersession.commands.*;
 import com.idis.core.domain.category.Category;
 import com.idis.core.domain.posts.parentpost.Post;
+import com.idis.core.domain.posts.postreply.PostReply;
 import com.idis.core.domain.user.*;
 import com.idis.core.domain.usersession.UserGate;
 import com.idis.core.domain.usersession.UserSession;
@@ -135,6 +138,7 @@ public class Main {
         NimbleJQueryProvider.addManagedClass(UserSession.class);
         NimbleJQueryProvider.addManagedClass(Category.class);
         NimbleJQueryProvider.addManagedClass(Post.class);
+        NimbleJQueryProvider.addManagedClass(PostReply.class);
     }
 
     private static void addMediatorHandlers() {
@@ -155,6 +159,8 @@ public class Main {
 
         mediator.registerHandler(CreateCategoryStatisticsCommand.class, new CreateCategoryStatisticsCommandHandler());
         mediator.registerHandler(CreateCategoriesStatisticsCommand.class, new CreateCategoriesStatisticsCommandHandler());
+
+        mediator.registerHandler(CreatePostReplyCommand.class, new CreatePostReplyCommandHandler());
     }
 
     private static class DeployedDetails {

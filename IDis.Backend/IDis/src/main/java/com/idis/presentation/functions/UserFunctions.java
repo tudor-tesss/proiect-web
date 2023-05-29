@@ -1,6 +1,7 @@
 package com.idis.presentation.functions;
 
 import com.idis.core.business.user.commands.CreateUserCommand;
+import com.idis.core.business.user.commands.GetUserByIdCommand;
 import com.idis.core.business.usersession.commands.*;
 import com.nimblej.core.Function;
 import com.nimblej.core.IUserController;
@@ -168,4 +169,36 @@ public class UserFunctions implements IUserController {
             return HttpResponse.create(400, responseContent);
         }
     }
+
+    @Route(path = "/users/{id}", method = HttpVerbs.GET)
+    @Function(name = "getUserById")
+    public static CompletableFuture<HttpResponse> getUserById(String id, String requestBody){
+
+        UUID userId;
+        try {
+            userId = UUID.fromString(id);
+        } catch (Exception e) {
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400, responseContent);
+        }
+
+        var command = new GetUserByIdCommand(userId);
+
+        try{
+            return mediator
+                    .send(command)
+                    .thenCompose(user -> {
+                        var responseContent = Serialization.serialize(user);
+
+                        return HttpResponse.create(200, responseContent);
+                    });
+        } catch (Exception e){
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400,responseContent);
+        }
+    }
+
 }
+

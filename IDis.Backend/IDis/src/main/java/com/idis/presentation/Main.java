@@ -13,7 +13,9 @@ import com.idis.core.business.statistics.category.commandhandlers.CreateCategory
 import com.idis.core.business.statistics.category.commands.CreateCategoriesStatisticsCommand;
 import com.idis.core.business.statistics.category.commands.CreateCategoryStatisticsCommand;
 import com.idis.core.business.user.commandhandlers.CreateUserCommandHandler;
+import com.idis.core.business.user.commandhandlers.GetUserByIdCommandHandler;
 import com.idis.core.business.user.commands.CreateUserCommand;
+import com.idis.core.business.user.commands.GetUserByIdCommand;
 import com.idis.core.business.usersession.commandhandlers.*;
 import com.idis.core.business.usersession.commands.*;
 import com.idis.core.domain.category.Category;
@@ -154,6 +156,7 @@ public class Main {
         mediator.registerHandler(CreateUserSessionCommand.class, new CreateUserSessionCommandHandler());
         mediator.registerHandler(CheckUserSessionCommand.class, new CheckUserSessionCommandHandler());
         mediator.registerHandler(DeleteUserSessionCommand.class, new DeleteUserSessionCommandHandler());
+        mediator.registerHandler(GetUserByIdCommand.class,new GetUserByIdCommandHandler());
 
         mediator.registerHandler(CreateCategoryCommand.class, new CreateCategoryCommandHandler());
         mediator.registerHandler(GetAllCategoriesCommand.class, new GetAllCategoriesCommandHandler());

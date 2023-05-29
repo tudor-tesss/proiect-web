@@ -56,17 +56,17 @@ public final class CategoryStatisticsCalculator {
             averageScorePerRating.put(rating, sum / postCount);
         }
 
-        var postsByAverageScore = new HashMap<String, Double>();
+        var postsByAverageScore = new HashMap<Double, Post>();
         for (var post : postsInCategory) {
             var sum = 0.0;
             for (var rating : category.getRatingFields()) {
                 sum += post.getRatings().get(rating);
             }
 
-            postsByAverageScore.put(post.getTitle(), sum / category.getRatingFields().size());
+            postsByAverageScore.put(sum / category.getRatingFields().size(), post);
         }
         postsByAverageScore = postsByAverageScore.entrySet().stream()
-                .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
+                .sorted(Map.Entry.<Double, Post>comparingByKey().reversed())
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
                         Map.Entry::getValue,

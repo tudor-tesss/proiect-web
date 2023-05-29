@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>I Dislike It!</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="statistics.css" />
+    <script src="../check-session.js"></script>
+    <script>
+        checkSession();
+    </script>
+</head>
+
+<body class="prevent-select">
+    <div class="top-gradient"></div>
+
+    <div class="content">
+        <div class = "header">
+            <div class="logo">
+                <a href="../main/main.html">
+                    <img src="../resources/logopng.png" alt="Logo">
+                </a>
+            </div>
+            <nav>
+               <button class="help-button" onClick="displayLoginForm()">Help</button>
+            </nav>
+        </div>
+
+        <div class="statistics-container"></div>
+
+        <script src="statistics.js"></script>
+        <script>displayStatistics()</script>
+    </div>
+</body>
+
+</html>

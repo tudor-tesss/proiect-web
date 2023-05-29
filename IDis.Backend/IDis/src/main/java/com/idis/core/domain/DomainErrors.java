@@ -29,4 +29,11 @@ public class DomainErrors {
         public static final String BodyNullOrEmpty = "Post.Body.NullOrEmpty";
         public static final String RatingValueOutOfInterval = "Post.Rating.OutOfInterval";
     }
+
+    public static class PostReply {
+        public static final String TitleNullOrEmpty = "PostReply.Title.NullOrEmpty";
+        public static final String BodyNullOrEmpty = "PostReply.Body.NullOrEmpty";
+        public static final String RatingValueOutOfInterval = "PostReply.Rating.OutOfInterval";
+
+    }
 }

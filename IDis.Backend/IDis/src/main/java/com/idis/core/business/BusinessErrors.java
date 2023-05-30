@@ -41,6 +41,7 @@ public class BusinessErrors {
         public static final String RatingsDoNotMatch = "Post.Ratings.DoesNotMatch";
         public static final String CategoryHasNoPosts = "Post.Category.HasNoPosts";
         public static final String PostNotFound = "Post.NotFound";
+        public static final String CreatorHasNoPosts = "Post.CreatorHasNoPosts";
     }
 
     public static class CategoryStatistics {
@@ -51,5 +52,6 @@ public class BusinessErrors {
         public static final String UserDoesNotExist = "PostReply.User.DoesNotExist";
         public static final String PostDoesNotExist = "PostReply.Post.DoesNotExist";
         public static final String RatingsDoNotMatch = "PostReply.Ratings.DoNotMatch";
+        public static final String NoRepliesFound = "PostReply.NoRepliesFound";
     }
 }

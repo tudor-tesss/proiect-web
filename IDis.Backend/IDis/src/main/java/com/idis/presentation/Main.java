@@ -9,11 +9,15 @@ import com.idis.core.business.category.commands.GetCategoriesByCreatorIdCommand;
 import com.idis.core.business.posts.parentpost.command.CreatePostCommand;
 import com.idis.core.business.posts.parentpost.command.GetAllPostsInsideOfACategoryCommand;
 import com.idis.core.business.posts.parentpost.command.GetPostByIdCommand;
+import com.idis.core.business.posts.parentpost.command.GetPostsByCreatorIdCommand;
 import com.idis.core.business.posts.parentpost.commandhandlers.CreatePostCommandHandler;
 import com.idis.core.business.posts.parentpost.commandhandlers.GetAllPostsInsideOfACategoryCommandHandler;
 import com.idis.core.business.posts.parentpost.commandhandlers.GetPostByIdCommandHandler;
+import com.idis.core.business.posts.parentpost.commandhandlers.GetPostsByCreatorIdCommandHandler;
 import com.idis.core.business.posts.postreply.command.CreatePostReplyCommand;
+import com.idis.core.business.posts.postreply.command.GetAllPostRepliesCommand;
 import com.idis.core.business.posts.postreply.commandhandlers.CreatePostReplyCommandHandler;
+import com.idis.core.business.posts.postreply.commandhandlers.GetAllPostRepliesCommandHandler;
 import com.idis.core.business.statistics.category.commandhandlers.CreateCategoriesStatisticsCommandHandler;
 import com.idis.core.business.statistics.category.commandhandlers.CreateCategoryStatisticsCommandHandler;
 import com.idis.core.business.statistics.category.commands.CreateCategoriesStatisticsCommand;
@@ -170,6 +174,8 @@ public class Main {
         mediator.registerHandler(CreatePostCommand.class, new CreatePostCommandHandler());
         mediator.registerHandler(GetAllPostsInsideOfACategoryCommand.class, new GetAllPostsInsideOfACategoryCommandHandler());
         mediator.registerHandler(GetPostByIdCommand.class, new GetPostByIdCommandHandler());
+        mediator.registerHandler(GetAllPostRepliesCommand.class, new GetAllPostRepliesCommandHandler());
+        mediator.registerHandler(GetPostsByCreatorIdCommand.class, new GetPostsByCreatorIdCommandHandler());
 
         mediator.registerHandler(CreateCategoryStatisticsCommand.class, new CreateCategoryStatisticsCommandHandler());
         mediator.registerHandler(CreateCategoriesStatisticsCommand.class, new CreateCategoriesStatisticsCommandHandler());

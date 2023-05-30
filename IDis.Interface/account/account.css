@@ -1,0 +1,158 @@
+.prevent-select {
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
+}
+
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f5fd;
+}
+
+.top-gradient {
+    position: relative;
+    overflow: visible;
+    width: 100%;
+    min-height: 75vh;
+    background-image: linear-gradient(to top right, #6563ed, #26c3de);
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+    z-index: 1;
+}
+
+body::-webkit-scrollbar {
+    width: 10px; /* width of the scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+    background: #f1f1f1; /* color of the track */
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #4868fd; /* color of the thumb */
+    border-radius: 5px; /* rounded corners */
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #002dff; /* color of the thumb on hover */
+}
+
+.header {
+
+    margin-top: 20px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 90%; /* You can adjust this value based on your preference */
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    z-index: 1000;
+    transform: translateX(-50%);
+}
+
+.logo img  {
+    height: 100px;
+}
+
+.add-category-button, .logout-button {
+    background: none;
+    border: none;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    margin-left: 20px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s;
+}
+
+.add-category-button:hover, .logout-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    margin-left: 20px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: calc(100vh - 1000px); /* Change this to min-height */
+    padding: 20px; /* Add some padding around the content */
+    padding-top: 250px;
+    z-index: 1000;
+}
+
+.acc-image {
+    position: sticky;
+    top: 10px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.info-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    margin-bottom: 100px;
+}
+
+.user-categories-box, .user-info-box, .user-posts-box {
+    width: 700px;
+    padding: 40px;
+    background: rgba(0, 0, 0, .5);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 50px;
+    margin-left: 25px;margin-bottom: 50px;
+    z-index: 1000;
+
+}
+.user-categories-box h2, .user-info-box h2, .user-posts-box h2{
+    margin: 0 0 30px;
+    padding: 0;
+    color: #fff;
+    text-align: left;
+}
+
+.error-container {
+    color: #ffffff;
+    text-align: center;
+}

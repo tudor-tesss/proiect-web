@@ -103,6 +103,7 @@ nav a:hover {
 }
 
 .content-wrapper {
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -122,7 +123,9 @@ nav a:hover {
 }
 
 .info-wrapper {
+    height: 100%;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -131,7 +134,10 @@ nav a:hover {
 }
 
 .user-categories-box, .user-info-box, .user-posts-box {
+    flex: 1 1 100%; /* Make flex items occupy full width */
+    overflow: auto; /* Enable scrolling for overflowed content */
     width: 700px;
+    height: auto;
     padding: 40px;
     background: rgba(0, 0, 0, .5);
     box-sizing: border-box;
@@ -139,20 +145,80 @@ nav a:hover {
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     margin-right: 50px;
     margin-left: 25px;margin-bottom: 50px;
     z-index: 1000;
 
 }
-.user-categories-box h2, .user-info-box h2, .user-posts-box h2{
-    margin: 0 0 30px;
+
+.user-categories-box h2,
+.user-info-box h2,
+.user-posts-box h2 {
+    margin: 0;
     padding: 0;
-    color: #fff;
-    text-align: left;
+    color: #f49803;
+    text-align: center;
+    align-self: center;
 }
 
 .error-container {
+    width: 100%;
     color: #ffffff;
     text-align: center;
+}
+
+.info-text, .info-text-user{
+    padding: 10px;
+    justify-content: start;
+    font-size: 18px;
+    color: #fff;
+    text-align:justify;
+    margin-left: 50px;
+    margin-right: 25px;
+}
+
+.info-text:hover{
+    padding: 20px;
+    justify-content: start;
+    font-size: 18px;
+    color: #f4e403;
+    font-style: italic;
+    text-align:justify;
+    margin-left: 50px;
+    margin-right: 25px;
+}
+
+/* make logo disappear when it overlaps nav */
+@media screen and (max-width: 800px) {
+    .logo {
+        display: none;
+    }
+
+    header {
+        justify-content: center;
+    }
+}
+
+/* make header fit screen when zooming much */
+@media screen and (max-width: 600px) {
+    .description {
+        display: none;
+    }
+    header {
+        margin: 0;
+        justify-content: center;
+    }
+
+}
+
+/* make nav taller when zooming in order to fit the text */
+@media screen and (max-width: 400px) {
+    .description {
+        display: none;
+    }
+    nav {
+        flex-direction: column;
+    }
+
 }

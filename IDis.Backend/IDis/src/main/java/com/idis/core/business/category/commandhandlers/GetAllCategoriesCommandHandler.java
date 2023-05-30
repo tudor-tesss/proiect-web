@@ -1,7 +1,6 @@
 package com.idis.core.business.category.commandhandlers;
 
 import com.idis.core.business.BusinessErrors;
-import com.idis.core.business.category.commands.CreateCategoryCommand;
 import com.idis.core.business.category.commands.GetAllCategoriesCommand;
 import com.idis.core.domain.category.Category;
 import com.nimblej.core.IRequestHandler;

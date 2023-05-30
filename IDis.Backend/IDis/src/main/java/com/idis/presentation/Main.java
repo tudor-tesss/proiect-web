@@ -2,8 +2,10 @@ package com.idis.presentation;
 
 import com.idis.core.business.category.commandhandlers.CreateCategoryCommandHandler;
 import com.idis.core.business.category.commandhandlers.GetAllCategoriesCommandHandler;
+import com.idis.core.business.category.commandhandlers.GetCategoriesByCreatorIdCommandHandler;
 import com.idis.core.business.category.commands.CreateCategoryCommand;
 import com.idis.core.business.category.commands.GetAllCategoriesCommand;
+import com.idis.core.business.category.commands.GetCategoriesByCreatorIdCommand;
 import com.idis.core.business.posts.parentpost.command.CreatePostCommand;
 import com.idis.core.business.posts.parentpost.command.GetAllPostsInsideOfACategoryCommand;
 import com.idis.core.business.posts.parentpost.command.GetPostByIdCommand;
@@ -171,6 +173,7 @@ public class Main {
 
         mediator.registerHandler(CreateCategoryStatisticsCommand.class, new CreateCategoryStatisticsCommandHandler());
         mediator.registerHandler(CreateCategoriesStatisticsCommand.class, new CreateCategoriesStatisticsCommandHandler());
+        mediator.registerHandler(GetCategoriesByCreatorIdCommand.class, new GetCategoriesByCreatorIdCommandHandler());
 
         mediator.registerHandler(CreatePostReplyCommand.class, new CreatePostReplyCommandHandler());
 

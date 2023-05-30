@@ -50,5 +50,6 @@ public class BusinessErrors {
         public static final String UserDoesNotExist = "PostReply.User.DoesNotExist";
         public static final String PostDoesNotExist = "PostReply.Post.DoesNotExist";
         public static final String RatingsDoNotMatch = "PostReply.Ratings.DoNotMatch";
+        public static final String NoRepliesFound = "PostReply.NoRepliesFound";
     }
 }

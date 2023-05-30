@@ -48,7 +48,7 @@ public final class PostReply extends BaseObject {
 
     public UUID getAuthorID() { return authorID; }
 
-    public UUID parentPostId() { return parentPostId; }
+    public UUID getParentPostId() { return parentPostId; }
 
     public String getTitle() { return title; }
 

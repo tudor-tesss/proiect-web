@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public final class CategoryStatisticsCalculator {
@@ -27,15 +28,15 @@ public final class CategoryStatisticsCalculator {
 
         var postCount = postsInCategory.size();
 
-        var postsByRatings = new HashMap<String, Map<String, Integer>>();
+        var postsByRatings = new HashMap<String, Map<UUID, Integer>>();
         for (var rating : category.getRatingFields()) {
-            var postsAndRatings = new HashMap<String, Integer>();
+            var postsAndRatings = new HashMap<UUID, Integer>();
             for (var post : postsInCategory) {
-                postsAndRatings.put(post.getTitle(), post.getRatings().get(rating));
+                postsAndRatings.put(post.getId(), post.getRatings().get(rating));
             }
 
             postsAndRatings = postsAndRatings.entrySet().stream()
-                    .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                    .sorted(Map.Entry.<UUID, Integer>comparingByValue().reversed())
                     .collect(Collectors.toMap(
                             Map.Entry::getKey,
                             Map.Entry::getValue,
@@ -56,17 +57,17 @@ public final class CategoryStatisticsCalculator {
             averageScorePerRating.put(rating, sum / postCount);
         }
 
-        var postsByAverageScore = new HashMap<Double, Post>();
+        var postsByAverageScore = new HashMap<UUID, Double>();
         for (var post : postsInCategory) {
             var sum = 0.0;
             for (var rating : category.getRatingFields()) {
                 sum += post.getRatings().get(rating);
             }
 
-            postsByAverageScore.put(sum / category.getRatingFields().size(), post);
+            postsByAverageScore.put(post.getId(), sum / category.getRatingFields().size());
         }
         postsByAverageScore = postsByAverageScore.entrySet().stream()
-                .sorted(Map.Entry.<Double, Post>comparingByKey().reversed())
+                .sorted(Map.Entry.<UUID, Double>comparingByKey().reversed())
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
                         Map.Entry::getValue,

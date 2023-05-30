@@ -111,6 +111,11 @@ nav a:hover {
     z-index: 1000;
 }
 
+.statistics-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .statistics-wrapper {
     min-width: 70vw;
     max-width: 90vw;
@@ -123,8 +128,8 @@ nav a:hover {
     flex-wrap: wrap;
     margin-right: 50px;
     margin-left: 50px;
-    z-index: 1000;
     gap: 30px;
+    margin-bottom: 5rem;
 }
 
 .info-box {
@@ -156,9 +161,11 @@ nav a:hover {
 }
 
 .link {
-    display: flex;
     background: rgba(63, 62, 62, 0.2);
-    align-self: flex-start;
+}
+
+.info-box p {
+    max-height: fit-content;
 }
 
 .with-button {
@@ -256,6 +263,18 @@ nav a:hover {
     .body {
         display: flex;
         flex-direction: column;
+    }
+}
+
+@media (min-width: 1600px) {
+    .statistics-wrapper {
+        max-width: 40vw;
+        min-width: 15vw;
+    }
+
+    .info-box {
+        max-width: 40vw;
+        min-width: 15vw;
     }
 }
 

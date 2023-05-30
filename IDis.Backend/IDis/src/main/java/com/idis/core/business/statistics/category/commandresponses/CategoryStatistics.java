@@ -10,9 +10,9 @@ public record CategoryStatistics(
         String categoryName,
         int postCount,
         double averageScore,
-        Map<String, Map<String, Integer>> postsByRatings,
+        Map<String, Map<UUID, Integer>> postsByRatings,
         Map<String, Double> averageScorePerRating,
-        Map<Double, Post> postsByAverageScore,
+        Map<UUID, Double> postsByAverageScore,
         Map<String, String> postsAndDays,
         Map<String, Integer> postCountByDay
 ) { }

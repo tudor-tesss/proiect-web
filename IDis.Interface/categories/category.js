@@ -66,7 +66,7 @@ function addButton() {
     var div = document.querySelector(".add-wrapper");
     div.innerHTML = `
 		<nav>
-            <a class="add-post-button" href="../posts/add/add-post.html?categoryId=${categoryId}">Add Category</a>
+            <a class="add-post-button" href="../posts/add/add-post.html?categoryId=${categoryId}">Add Post</a>
             <button class="help-button" onClick="displayLoginForm()">Help</button>
         </nav>
     `;

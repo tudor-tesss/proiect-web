@@ -58,6 +58,10 @@ async function displayCategoryStatistics(categoryId) {
         var innerHtml = ``;
 
         for (const s of d.statistics) {
+            if (s.postCount == 0) {
+                continue;
+            }
+            
             innerHtml += `<div class="statistics-wrapper">`;
             if (s == null || s == undefined || s.length == 0 || s == "" || s == [] || s == {} || s.categoryName == null || s.categoryName == undefined || s.categoryName == "") {
                 statisticsBox.innerHTML = "No statistics available.";
@@ -65,8 +69,7 @@ async function displayCategoryStatistics(categoryId) {
 
                 return;
             }
-        
-        
+
             innerHtml += `
                 <a class="info-box title animated" href="../categories/category.html?categoryId=${s.categoryId}">
                     <h2>${s.categoryName} - ${s.postCount} posts</h2>
@@ -243,7 +246,7 @@ async function viewPostsByAverageScore(originalCategoryId, categoryId) {
 
         innerHtml += `</div>`;
         statisticsBox.innerHTML = innerHtml;
-    })
+    });
 }
 
 async function getPost(postId) {
@@ -260,5 +263,8 @@ async function getPost(postId) {
         }
 
         return await response.json();
-    });
+    })
+    .catch((error) => {
+        return "";
+    })
 }

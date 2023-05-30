@@ -24,7 +24,6 @@ async function getAllCategories() {
         .then((data) => {
             names = data.map((item) => item.name);
             categoryIds = data.map((item) => item.id);
-            console.log(data);
         })
         .catch((error) => {
             console.error("Error:", error);

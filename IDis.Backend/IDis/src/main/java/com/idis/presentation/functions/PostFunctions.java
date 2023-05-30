@@ -42,7 +42,7 @@ public class PostFunctions implements IUserController {
         }
     }
 
-    @Route(path = "/category/{id}/posts", method = HttpVerbs.GET)
+    @Route(path = "/categories/{id}/posts", method = HttpVerbs.GET)
     @Function(name = "getAllPostsInsideACategory")
     public static CompletableFuture<HttpResponse> getAllPostsInsideACategory(String id, String requestBody) {
 

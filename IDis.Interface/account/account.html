@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>I Dislike It!</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+    <link href="main.css" rel="stylesheet" type="text/css"/>
+    <script src="../check-session.js"></script>
+    <script>
+        checkSession();
+    </script>
+</head>
+
+<body class="prevent-select">
+    <div class="top-gradient">
+        <div class="header">
+            <div class="logo">
+                <a href="main.html">
+                    <img alt="Logo" src="../resources/logopng.png">
+                </a>
+            </div>
+            <nav>
+                <a class="add-category-button" href="../categories/add/add-category.html">Add Category</a>
+                <button class="logout-button" onClick="deleteSessionTokenCookie()" type="button">Log Out</button>
+            </nav>
+        </div>
+    </div>
+
+</body>
+</html>

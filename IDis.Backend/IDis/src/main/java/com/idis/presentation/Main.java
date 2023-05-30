@@ -22,6 +22,8 @@ import com.idis.core.business.statistics.category.commandhandlers.CreateCategori
 import com.idis.core.business.statistics.category.commandhandlers.CreateCategoryStatisticsCommandHandler;
 import com.idis.core.business.statistics.category.commands.CreateCategoriesStatisticsCommand;
 import com.idis.core.business.statistics.category.commands.CreateCategoryStatisticsCommand;
+import com.idis.core.business.statistics.posts.command.CreatePostStatisticsCommand;
+import com.idis.core.business.statistics.posts.commandhandlers.CreatePostStatisticsCommandHandler;
 import com.idis.core.business.user.commandhandlers.CreateUserCommandHandler;
 import com.idis.core.business.user.commandhandlers.GetUserByIdCommandHandler;
 import com.idis.core.business.user.commands.CreateUserCommand;
@@ -159,7 +161,6 @@ public class Main {
         var mediator = Mediator.getInstance();
 
         mediator.registerHandler(CreateUserCommand.class, new CreateUserCommandHandler());
-
         mediator.registerHandler(CreateUserGateCommand.class, new CreateUserGateCommandHandler());
         mediator.registerHandler(PassUserGateCommand.class, new PassUserGateCommandHandler());
 
@@ -176,13 +177,12 @@ public class Main {
         mediator.registerHandler(GetPostByIdCommand.class, new GetPostByIdCommandHandler());
         mediator.registerHandler(GetAllPostRepliesCommand.class, new GetAllPostRepliesCommandHandler());
         mediator.registerHandler(GetPostsByCreatorIdCommand.class, new GetPostsByCreatorIdCommandHandler());
+        mediator.registerHandler(CreatePostReplyCommand.class, new CreatePostReplyCommandHandler());
 
         mediator.registerHandler(CreateCategoryStatisticsCommand.class, new CreateCategoryStatisticsCommandHandler());
         mediator.registerHandler(CreateCategoriesStatisticsCommand.class, new CreateCategoriesStatisticsCommandHandler());
         mediator.registerHandler(GetCategoriesByCreatorIdCommand.class, new GetCategoriesByCreatorIdCommandHandler());
-
-        mediator.registerHandler(CreatePostReplyCommand.class, new CreatePostReplyCommandHandler());
-
+        mediator.registerHandler(CreatePostStatisticsCommand.class, new CreatePostStatisticsCommandHandler());
     }
 
     private static class DeployedDetails {

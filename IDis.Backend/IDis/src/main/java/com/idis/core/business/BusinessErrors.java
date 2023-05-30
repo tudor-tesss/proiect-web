@@ -48,6 +48,10 @@ public class BusinessErrors {
         public static final String CategoryDoesNotExist = "CategoryStatistics.Category.DoesNotExist";
     }
 
+    public static class PostStatistics {
+        public static final String PostDoesNotExist = "PostStatistics.Post.DoesNotExist";
+    }
+
     public static class PostReply {
         public static final String UserDoesNotExist = "PostReply.User.DoesNotExist";
         public static final String PostDoesNotExist = "PostReply.Post.DoesNotExist";

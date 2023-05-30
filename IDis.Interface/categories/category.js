@@ -67,6 +67,7 @@ function addButton() {
     div.innerHTML = `
 		<nav>
             <a class="add-post-button" href="../posts/add/add-post.html?categoryId=${categoryId}">Add Post</a>
+            <a class="add-post-button" href="../statistics/statistics.html?isPost=false&targetId=${categoryId}">View Statistics</a>
             <button class="help-button" onClick="displayLoginForm()">Help</button>
         </nav>
     `;

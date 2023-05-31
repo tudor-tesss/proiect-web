@@ -1,3 +1,5 @@
+import { User } from "../models/index.js";
+
 export class UsersService {
     static async getUserById(userId) {
         const endpoint = `http://localhost:7101/users/${userId}`;
@@ -14,7 +16,8 @@ export class UsersService {
                 throw new Error(error);
             }
 
-            return await response.json();
+            const result = await response.json();
+            return new User(result.id, result.name, result.firstName, result.emailAddress);
         });
     }
 }

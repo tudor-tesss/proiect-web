@@ -9,7 +9,8 @@ export class AccountOverviewComponent {
         let names = [];
         let categoryIds = [];
         const userUuid = localStorage.getItem('userUuid');
-        await CategoriesService.getCategoriesByCreatorId(userUuid)
+        await CategoriesService
+            .getCategoriesByCreatorId(userUuid)
             .then((data) => {
                 names = data.map((item) => item.name);
                 categoryIds = data.map((item) => item.id);
@@ -32,7 +33,8 @@ export class AccountOverviewComponent {
         let names = [];
         let postsIds = [];
         const userUuid = localStorage.getItem('userUuid');
-        await PostsService.getPostsByCreatorId(userUuid)
+        await PostsService
+            .getPostsByCreatorId(userUuid)
             .then((data) => {
                 names = data.map((item) => item.title);
                 postsIds = data.map((item) => item.id);
@@ -56,22 +58,18 @@ export class AccountOverviewComponent {
         let firstName;
         let email;
         const userUuid = localStorage.getItem('userUuid');
-        await UsersService.getUserById(userUuid)
-            .then((data) => {
 
-                console.log(data);
+        await UsersService
+            .getUserById(userUuid)
+            .then((data) => {
                 name = data.name || "N/A";
                 firstName = data.firstName || "N/A";
                 email = data.emailAddress || "N/A";
-
             })
             .catch((error) => {
-                console.error("Error:", error);
-
                 const userPostsBox = document.querySelector(".user-info-box");
 
                 throw error;
-
             });
 
         return [name, firstName, email];

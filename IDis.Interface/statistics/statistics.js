@@ -3,10 +3,13 @@ import { AuthenticationService, PostsService, CategoriesService, StatisticsServi
 window.AuthenticationService = AuthenticationService;
 await AuthenticationService.checkSession();
 
-const allPosts = await PostsService.getAllPosts();
-
 export class StatisticsOverviewComponent {
+    static allPosts;
+    static allStatistics;
+
     static async displayStatistics() {
+        this.allPosts = await PostsService.getAllPosts();
+
         const urlParams = new URLSearchParams(window.location.search);
         const targetId = urlParams.get('targetId');
         const isPost = urlParams.get('isPost');
@@ -17,6 +20,13 @@ export class StatisticsOverviewComponent {
         if (isPost === "true") {
             await this.displayPostStatistics(targetId);
         } else {
+            if (targetId != null && targetId !== "" && targetId !== undefined && targetId !== "null") {
+                this.allStatistics = await StatisticsService.getCategoryStatistics(targetId);
+            }
+            else {
+                this.allStatistics = await StatisticsService.getCategoriesStatistics();
+            }
+
             await this.displayCategoryStatistics(targetId);
         }
     }
@@ -33,22 +43,16 @@ export class StatisticsOverviewComponent {
     }
 
     static async displayCategoryStatistics(categoryId) {
-        let d = null;
-        if (categoryId != null && categoryId !== "" && categoryId !== undefined && categoryId !== "null") {
-            d = await StatisticsService.getCategoryStatistics(categoryId);
-        }
-        else {
-            d = await StatisticsService.getCategoriesStatistics();
-        }
+        console.log(this.allStatistics);
 
-        if (!Array.isArray(d.statistics)) {
-            d.statistics = [d.statistics];
+        if (!Array.isArray(this.allStatistics.statistics)) {
+            this.allStatistics.statistics = [this.allStatistics.statistics];
         }
 
         let statisticsBox = document.querySelector(".statistics-container");
         let innerHtml = ``;
 
-        for (const s of d.statistics) {
+        for (const s of this.allStatistics.statistics) {
             if (s.postCount === 0) {
                 continue;
             }
@@ -63,7 +67,7 @@ export class StatisticsOverviewComponent {
 
             innerHtml += `
                 <a class="info-box title animated" href="../categories/category.html?categoryId=${s.categoryId}">
-                            <h2>${s.categoryName} - ${s.postCount} posts</h2>
+                    <h2>${s.categoryName} - ${s.postCount} posts</h2>
                 </a>
             `;
 
@@ -79,7 +83,7 @@ export class StatisticsOverviewComponent {
             `;
 
             const bestRatedPost = Object.keys(s.postsByAverageScore)[0];
-            let p = allPosts.find(p => p.id === bestRatedPost);
+            let p = this.allPosts.find(p => p.id === bestRatedPost);
             innerHtml += `
                 <div class="info-box with-button">
                     <a class="info-box link animated" href="../posts/post.html?postId=${bestRatedPost}">
@@ -95,7 +99,7 @@ export class StatisticsOverviewComponent {
             let count = 0;
             const keys = Object.keys(s.postsByRatings);
             for (const key of keys) {
-                const first = allPosts.find(p => p.id === Object.keys(s.postsByRatings[key])[0]);
+                const first = this.allPosts.find(p => p.id === Object.keys(s.postsByRatings[key])[0]);
                 innerHtml += `
                     <div class="info-box with-button">
                         <a class="info-box link animated" href="../posts/post.html?postId=${first.id}">Best in ${key}: ${first.title}</a>
@@ -116,14 +120,9 @@ export class StatisticsOverviewComponent {
     }
 
     static async viewPostsByRatings(originalCategoryId, id, index) {
-        const url = "http://localhost:7101/categories/statistics";
-
-        await StatisticsService.getCategoryStatistics(id)
-            .then(async d => {
-                const category = d.statistics;
-
                 let statisticsBox = document.querySelector(".statistics-container");
 
+                const category = this.allStatistics.statistics.find(c => c.categoryId === id);
                 if (category == null || category.length === 0 || category === "" || category === [] || category === {} || category.categoryName == null || category.categoryName === "") {
                     statisticsBox.innerHTML = "No statistics available.";
 
@@ -149,7 +148,7 @@ export class StatisticsOverviewComponent {
                 let count = 0;
                 for (const p of posts) {
                     const postKey = Object.keys(category.postsByRatings[key])[count];
-                    const post = allPosts.find(p => p.id === postKey);
+                    const post = this.allPosts.find(p => p.id === postKey);
                     innerHtml += `
                         <div class="info-box">
                             <a class="info-box link animated" href="../posts/post.html?postId=post.id">
@@ -163,52 +162,45 @@ export class StatisticsOverviewComponent {
 
                 innerHtml += `</div>`;
                 statisticsBox.innerHTML = innerHtml;
-            });
     }
 
     static async viewPostsByAverageScore(originalCategoryId, categoryId) {
         let statisticsBox = document.querySelector(".statistics-container");
 
-        await StatisticsService.getCategoryStatistics(categoryId)
-            .then(async d => {
-                const posts = d.statistics;
-                const allPosts = await PostsService.getAllPosts();
+        const posts = this.allStatistics.statistics.find(c => c.categoryId === categoryId);
 
-                if (posts == null || posts.length === 0 || posts === "" || posts === [] || posts === {} || posts.categoryName == null || posts.categoryName === "") {
-                    statisticsBox.innerHTML = "No statistics available.";
-                    return;
-                }
+        if (posts == null || posts.length === 0 || posts === "" || posts === [] || posts === {} || posts.categoryName == null || posts.categoryName === "") {
+            statisticsBox.innerHTML = "No statistics available.";
+            return;
+        }
 
-                let innerHtml = `
-                    <div class="statistics-wrapper">
-                `;
+        let innerHtml = `<div class="statistics-wrapper">`;
 
-                innerHtml += `
-                    <button type="button" class="submit-b small" onClick="StatisticsOverviewComponent.displayCategoryStatistics('${originalCategoryId}')">
-                        Back
-                    </button>
-                `;
+        innerHtml += `
+            <button type="button" class="submit-b small" onClick="StatisticsOverviewComponent.displayCategoryStatistics('${originalCategoryId}')">
+                Back
+            </button>
+        `;
 
-                innerHtml += `
-                    <h2 class="info-box title">Posts by average score</h2>
-                `;
+        innerHtml += `
+            <h2 class="info-box title">Posts by average score</h2>
+        `;
 
-                const averageKeys = Object.keys(posts.postsByAverageScore);
-                for (const key of averageKeys) {
-                    const post = allPosts.find(p => p.id === key);
-                    const score = String(posts.postsByAverageScore[key]).substring(0, 4);
-                    innerHtml += `
-                        <div class="info-box">
-                            <a class="info-box link animated" href="../posts/post.html?postId=${post.id}">
-                                ${post.title} - ${score}
-                            </a>
-                        </div>
-                    `;
-                }
+        const averageKeys = Object.keys(posts.postsByAverageScore);
+        for (const key of averageKeys) {
+            const post = this.allPosts.find(p => p.id === key);
+            const score = String(posts.postsByAverageScore[key]).substring(0, 4);
+            innerHtml += `
+                <div class="info-box">
+                    <a class="info-box link animated" href="../posts/post.html?postId=${post.id}">
+                        ${post.title} - ${score}
+                    </a>
+                </div>
+            `;
+        }
 
-                innerHtml += `</div>`;
-                statisticsBox.innerHTML = innerHtml;
-            });
+        innerHtml += `</div>`;
+        statisticsBox.innerHTML = innerHtml;
     }
 }
 

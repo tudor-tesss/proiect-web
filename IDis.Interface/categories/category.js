@@ -76,6 +76,6 @@ export class CategoryOverviewComponent {
     }
 }
 
-window.CategoriesOverviewComponent = CategoryOverviewComponent;
+window.CategoryOverviewComponent = CategoryOverviewComponent;
 await CategoryOverviewComponent.displayPosts();
 CategoryOverviewComponent.addButton();

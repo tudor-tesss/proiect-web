@@ -3,6 +3,8 @@ import { AuthenticationService, PostsService, CategoriesService, StatisticsServi
 window.AuthenticationService = AuthenticationService;
 await AuthenticationService.checkSession();
 
+const allPosts = await PostsService.getAllPosts();
+
 export class StatisticsOverviewComponent {
     static async displayStatistics() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -42,8 +44,6 @@ export class StatisticsOverviewComponent {
         if (!Array.isArray(d.statistics)) {
             d.statistics = [d.statistics];
         }
-
-        const allPosts = await PostsService.getAllPosts();
 
         let statisticsBox = document.querySelector(".statistics-container");
         let innerHtml = ``;
@@ -121,7 +121,6 @@ export class StatisticsOverviewComponent {
         await StatisticsService.getCategoryStatistics(id)
             .then(async d => {
                 const category = d.statistics;
-                const allPosts = await PostsService.getAllPosts();
 
                 let statisticsBox = document.querySelector(".statistics-container");
 

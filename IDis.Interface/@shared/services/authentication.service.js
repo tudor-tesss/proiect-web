@@ -9,6 +9,16 @@ export class AuthenticationService {
         return cookies[name];
     }
 
+    static setCookie(name, value, days) {
+        let expires = '';
+        if (days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = '; expires=' + date.toUTCString();
+        }
+        document.cookie = name + '=' + (value || '') + expires + '; path=/';
+    }
+
     static async checkSession() {
         const userIp = await this.getUserIP();
         const userId = localStorage.getItem('userUuid');
@@ -106,16 +116,6 @@ export class AuthenticationService {
         } catch (error) {
           console.error('Error fetching IP address:', error);
         }
-    } 
-    
-    static setCookie(name, value, days) {
-        let expires = '';
-        if (days) {
-            const date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = '; expires=' + date.toUTCString();
-        }
-        document.cookie = name + '=' + (value || '') + expires + '; path=/';
     }
     
     static async deleteSessionTokenCookie() {
@@ -164,12 +164,8 @@ export class AuthenticationService {
         window.location.href = '/start/start.html';
     }
 
-    static async createUser() {
+    static async createUser(name, firstName, email) {
         const endpoint = 'http://localhost:7101/users';
-
-        const name = document.getElementById('name').value;
-        const firstName = document.getElementById('first-name').value;
-        const email = document.getElementById('email').value;
 
         const createUserCommand = {
             name: name,
@@ -177,34 +173,97 @@ export class AuthenticationService {
             emailAddress: email
         };
 
-        await fetch(endpoint, {
+        return await fetch(endpoint, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(createUserCommand)
         })
-            .then(async response => {
-                if (!response.ok) {
-                    const error = await response.json();
-                    throw new Error(error);
-                }
+        .then(async response => {
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error);
+            }
 
-                return response.json();
-            })
-            .then(() => {
-                displayLoginForm();
-            })
-            .catch(error => {
-                console.error('Error:', error);
+            return response.json();
+        });
+    }
 
-                var errorMessage = error.message;
+    static async createUserGate(emailAddress) {
+        const endpoint = 'http://localhost:7101/users/gates';
 
-                if (errorMessages[errorMessage] === undefined) {
-                    errorMessage = "An error occurred while creating your account.";
-                }
+        const createUserGateCommand = {
+            emailAddress: emailAddress
+        };
 
-                displayError(errorMessages[errorMessage]);
-            });
+        return await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(createUserGateCommand)
+        })
+        .then(async response => {
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error);
+            }
+
+            return response.json();
+        });
+    }
+
+    static async passUserGate(userUuid, code) {
+        const endpoint = 'http://localhost:7101/users/' + userUuid + '/gates';
+
+        const passUserGateCommand = {
+            code: code
+        };
+
+        return await fetch(endpoint, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(passUserGateCommand)
+        })
+        .then(async response => {
+            if (!response.ok) {
+                const error = await response.json();
+
+                throw new Error(error);
+            }
+
+            return response.json();
+        })
+        .then(async data => {
+            return await this.createSession(data.userId);
+        });
+    }
+
+    static async createSession(userId) {
+        const endpoint = 'http://localhost:7101/users/' + userId + '/sessions';
+
+        const createSessionCommand = {
+            userId: userId,
+            userIpAddress: await this.getUserIP()
+        };
+
+        return await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(createSessionCommand)
+        })
+        .then(async response => {
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error);
+            }
+
+            return response.json();
+        });
     }
 }

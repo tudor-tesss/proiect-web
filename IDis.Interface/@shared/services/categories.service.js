@@ -60,20 +60,4 @@ export class CategoriesService {
             return response.json();
         });
     }
-
-    static async getCategory(categoryId) {
-        const url = "http://localhost:7101/categories";
-
-        const categories = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-            .then(async response => {
-                return await response.json();
-            });
-
-        return categories.find(c => c.id === categoryId);
-    }
 }

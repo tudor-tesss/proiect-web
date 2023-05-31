@@ -6,14 +6,8 @@ import com.idis.core.business.category.commandhandlers.GetCategoriesByCreatorIdC
 import com.idis.core.business.category.commands.CreateCategoryCommand;
 import com.idis.core.business.category.commands.GetAllCategoriesCommand;
 import com.idis.core.business.category.commands.GetCategoriesByCreatorIdCommand;
-import com.idis.core.business.posts.parentpost.command.CreatePostCommand;
-import com.idis.core.business.posts.parentpost.command.GetAllPostsInsideOfACategoryCommand;
-import com.idis.core.business.posts.parentpost.command.GetPostByIdCommand;
-import com.idis.core.business.posts.parentpost.command.GetPostsByCreatorIdCommand;
-import com.idis.core.business.posts.parentpost.commandhandlers.CreatePostCommandHandler;
-import com.idis.core.business.posts.parentpost.commandhandlers.GetAllPostsInsideOfACategoryCommandHandler;
-import com.idis.core.business.posts.parentpost.commandhandlers.GetPostByIdCommandHandler;
-import com.idis.core.business.posts.parentpost.commandhandlers.GetPostsByCreatorIdCommandHandler;
+import com.idis.core.business.posts.parentpost.command.*;
+import com.idis.core.business.posts.parentpost.commandhandlers.*;
 import com.idis.core.business.posts.postreply.command.CreatePostReplyCommand;
 import com.idis.core.business.posts.postreply.command.GetAllPostRepliesCommand;
 import com.idis.core.business.posts.postreply.commandhandlers.CreatePostReplyCommandHandler;
@@ -178,6 +172,7 @@ public class Main {
         mediator.registerHandler(GetAllPostRepliesCommand.class, new GetAllPostRepliesCommandHandler());
         mediator.registerHandler(GetPostsByCreatorIdCommand.class, new GetPostsByCreatorIdCommandHandler());
         mediator.registerHandler(CreatePostReplyCommand.class, new CreatePostReplyCommandHandler());
+        mediator.registerHandler(GetAllPostsCommand.class, new GetAllPostsCommandHandler());
 
         mediator.registerHandler(CreateCategoryStatisticsCommand.class, new CreateCategoryStatisticsCommandHandler());
         mediator.registerHandler(CreateCategoriesStatisticsCommand.class, new CreateCategoriesStatisticsCommandHandler());

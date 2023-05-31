@@ -4,7 +4,11 @@
 <head>
     <title>I Dislike It!</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="add-category.css"/>
+    <link rel="stylesheet" type="text/css" href="add-category.css" />
+    <script src="../check-session.js"></script>
+    <script>
+        checkSession();
+    </script>
 </head>
 
 <body class="prevent-select">
@@ -12,23 +16,26 @@
 
     <div class = "header">
         <div class="logo">
-            <a href="../../main/main.html">
-                <img src="../../resources/logopng.png" alt="Logo">
+            <a href="../main/main.html">
+                <img src="../../../resources/logopng.png" alt="Logo">
             </a>
         </div>
         <nav>
-           <button class="help-button">Help</button>
+           <button class="help-button" onClick="displayLoginForm()">Help</button>
         </nav>
     </div>
 
     <div class="content">
         <div class="category-form">
-            <div class="category-box"></div>
+            <div class="category-box">
+                <script src="add-category.js"></script>
+                <script>displayCategoryForm()</script>
+            </div>
         </div>
     </div>
 
-    <script type="module" src="../../@shared/index.js"></script>
-    <script type="module" src="add-category.js"></script>
+    <script src="add-category.js"></script>
+
 </body>
 
 </html>

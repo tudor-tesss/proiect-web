@@ -1,4 +1,46 @@
+async function createUser() {
+    const endpoint = 'http://localhost:7101/users';
 
+    const name = document.getElementById('name').value;
+    const firstName = document.getElementById('first-name').value;
+    const email = document.getElementById('email').value;
+
+    const createUserCommand = {
+        name: name,
+        firstName: firstName,
+        emailAddress: email
+    };
+
+    await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(createUserCommand)
+    })
+    .then(async response => {
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error);
+        }
+
+        return response.json();
+    })
+    .then(() => {
+        displayLoginForm();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+
+        var errorMessage = error.message;
+
+        if (errorMessages[errorMessage] == undefined) {
+            errorMessage = "An error occurred while creating your account.";
+        }
+
+        displayError(errorMessages[errorMessage]);
+    });
+}
 
 function displayLoginForm() {
     const formWrapper = document.querySelector('.form-wrapper');
@@ -236,7 +278,7 @@ function displaySignUpForm() {
                 </div>
                 <div id="error-container" class="error-container"></div>
                 <div class="submit-wrapper">
-                    <button type="button" class="submit-b" onClick="AuthenticationService.createUser()">Submit</button>
+                    <button type="button" class="submit-b" onClick="createUser()">Submit</button>
                 </div>
             </form>
         </div>

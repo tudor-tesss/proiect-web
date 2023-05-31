@@ -5,11 +5,10 @@
     <title>I Dislike It!</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="category.css" />
+    <script src="../check-session.js"></script>
     <script src="category.js"></script>
-    <script type="module">
-        import { AuthenticationService } from "../@shared/index.js";
-        window.AuthenticationService = AuthenticationService;
-        AuthenticationService.checkSession();
+    <script>
+        checkSession();
     </script>
 </head>
 

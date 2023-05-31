@@ -44,8 +44,6 @@ export class AuthenticationService {
     
             return response.json();
         })
-        .then(d => {
-        })
         .catch(error => {
             console.error('Error:', error);
             this.deleteSessionTokenCookie();

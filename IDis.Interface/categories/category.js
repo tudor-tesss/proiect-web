@@ -3,7 +3,7 @@ import { AuthenticationService, PostsService } from "../../@shared/index.js";
 window.AuthenticationService = AuthenticationService;
 await AuthenticationService.checkSession();
 
-export class CategoriesOverviewComponent {
+export class CategoryOverviewComponent {
     static async displayPosts() {
         const urlParams = new URLSearchParams(window.location.search);
         const categoryId = urlParams.get('categoryId');
@@ -76,6 +76,6 @@ export class CategoriesOverviewComponent {
     }
 }
 
-window.CategoriesOverviewComponent = CategoriesOverviewComponent;
-await CategoriesOverviewComponent.displayPosts();
-CategoriesOverviewComponent.addButton();
+window.CategoriesOverviewComponent = CategoryOverviewComponent;
+await CategoryOverviewComponent.displayPosts();
+CategoryOverviewComponent.addButton();

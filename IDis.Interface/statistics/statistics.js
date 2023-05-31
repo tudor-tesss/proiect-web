@@ -1,69 +1,60 @@
-async function displayStatistics() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const targetId = urlParams.get('targetId');
-    const isPost = urlParams.get('isPost');
+import { AuthenticationService, PostsService, CategoriesService, StatisticsService } from "../../@shared/index.js";
 
-    console.log("Target ID: " + targetId);
-    console.log("Is Post: " + isPost);
+window.AuthenticationService = AuthenticationService;
+await AuthenticationService.checkSession();
 
-    if (isPost == "true") {
-        await displayPostStatistics(targetId);
-    }
-    else {
-        await displayCategoryStatistics(targetId);
-    }
-}
+export class StatisticsOverviewComponent {
+    static async displayStatistics() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const targetId = urlParams.get('targetId');
+        const isPost = urlParams.get('isPost');
 
-async function displayPostStatistics(postId) {
-    var url = "http://localhost:7101/posts";
-    if (postId != null && postId != "" && postId != undefined) {
-        url = url + "/" + postId + "/statistics";
-    }
-    else {
-        url = url + "/statistics";
+        console.log("Target ID: " + targetId);
+        console.log("Is Post: " + isPost);
+
+        if (isPost === "true") {
+            await this.displayPostStatistics(targetId);
+        } else {
+            await this.displayCategoryStatistics(targetId);
+        }
     }
 
-    console.log("URL: " + url);
-}
-
-async function displayCategoryStatistics(categoryId) {
-    var url = "http://localhost:7101/categories";
-    if (categoryId != null && categoryId != "" && categoryId != undefined && categoryId != "null") {
-        url = url + "/" + categoryId;
-    }
-    url = url + "/statistics";
-
-    console.log("URL: " + url);
-
-    await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    })
-    .then(async response => {
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error);
+    static async displayPostStatistics(postId) {
+        let url = "http://localhost:7101/posts";
+        if (postId != null && postId !== "" && postId !== undefined) {
+            url = url + "/" + postId + "/statistics";
+        } else {
+            url = url + "/statistics";
         }
 
-        return await response.json();
-    })
-    .then(async d => {
+        console.log("URL: " + url);
+    }
+
+    static async displayCategoryStatistics(categoryId) {
+        let d = null;
+        if (categoryId != null && categoryId !== "" && categoryId !== undefined && categoryId !== "null") {
+            d = await StatisticsService.getCategoryStatistics(categoryId);
+        }
+        else {
+            d = await StatisticsService.getCategoriesStatistics();
+        }
+
         if (!Array.isArray(d.statistics)) {
             d.statistics = [d.statistics];
         }
 
-        var statisticsBox = document.querySelector(".statistics-container");
-        var innerHtml = ``;
+        const allPosts = await PostsService.getAllPosts();
+
+        let statisticsBox = document.querySelector(".statistics-container");
+        let innerHtml = ``;
 
         for (const s of d.statistics) {
-            if (s.postCount == 0) {
+            if (s.postCount === 0) {
                 continue;
             }
-            
+
             innerHtml += `<div class="statistics-wrapper">`;
-            if (s == null || s == undefined || s.length == 0 || s == "" || s == [] || s == {} || s.categoryName == null || s.categoryName == undefined || s.categoryName == "") {
+            if (s.length === 0 || s === "" || s === [] || s === {} || s.categoryName == null || s.categoryName === "") {
                 statisticsBox.innerHTML = "No statistics available.";
                 innerHtml += '</div>';
 
@@ -72,7 +63,7 @@ async function displayCategoryStatistics(categoryId) {
 
             innerHtml += `
                 <a class="info-box title animated" href="../categories/category.html?categoryId=${s.categoryId}">
-                    <h2>${s.categoryName} - ${s.postCount} posts</h2>
+                            <h2>${s.categoryName} - ${s.postCount} posts</h2>
                 </a>
             `;
 
@@ -80,39 +71,37 @@ async function displayCategoryStatistics(categoryId) {
             innerHtml += `
                 <div class="info-box with-button">
                     <p class="info-box link">Average rating: ${score}</p>
-
+        
                     <div class="submit-wrapper">
-                        <button type="button" class="submit-b" onClick="viewPostsByAverageScore('${categoryId}', '${s.categoryId}')">View all</button>
+                        <button type="button" class="submit-b" onClick="StatisticsOverviewComponent.viewPostsByAverageScore('${categoryId}', '${s.categoryId}')">View all</button>
                     </div>
                 </div>
             `;
 
             const bestRatedPost = Object.keys(s.postsByAverageScore)[0];
-            await getPost(bestRatedPost)
-                .then(p => {
-                    innerHtml += `
-                        <div class="info-box with-button">
-                            <a class="info-box link animated" href="../posts/post.html?postId=${bestRatedPost}">
-                                Top rated post: ${p.title}
-                            </a>
+            let p = allPosts.find(p => p.id === bestRatedPost);
+            innerHtml += `
+                <div class="info-box with-button">
+                    <a class="info-box link animated" href="../posts/post.html?postId=${bestRatedPost}">
+                        Top rated post: ${p.title}
+                    </a>
+        
+                    <div class="submit-wrapper">
+                        <button type="button" class="submit-b" onClick="StatisticsOverviewComponent.viewPostsByAverageScore('${categoryId}', '${s.categoryId}')">View all</button>
+                    </div>
+                </div>
+            `;
 
-                            <div class="submit-wrapper">
-                                <button type="button" class="submit-b" onClick="viewPostsByAverageScore('${categoryId}', '${s.categoryId}')">View all</button>
-                            </div>
-                        </div>
-                    `;
-                });
-            
             let count = 0;
             const keys = Object.keys(s.postsByRatings);
             for (const key of keys) {
-                const first = await getPost(Object.keys(s.postsByRatings[key])[0]);
+                const first = allPosts.find(p => p.id === Object.keys(s.postsByRatings[key])[0]);
                 innerHtml += `
                     <div class="info-box with-button">
                         <a class="info-box link animated" href="../posts/post.html?postId=${first.id}">Best in ${key}: ${first.title}</a>
-
+        
                         <div class="submit-wrapper">
-                            <button type="button" class="submit-b" onClick="viewPostsByRatings('${categoryId}', '${s.categoryId}', ${count})">View all</button>
+                            <button type="button" class="submit-b" onClick="StatisticsOverviewComponent.viewPostsByRatings('${categoryId}', '${s.categoryId}', ${count})">View all</button>
                         </div>
                     </div>
                 `;
@@ -124,147 +113,105 @@ async function displayCategoryStatistics(categoryId) {
         }
 
         statisticsBox.innerHTML = innerHtml;
-    });    
+    }
+
+    static async viewPostsByRatings(originalCategoryId, id, index) {
+        const url = "http://localhost:7101/categories/statistics";
+
+        await StatisticsService.getCategoryStatistics(id)
+            .then(async d => {
+                const category = d.statistics;
+                const allPosts = await PostsService.getAllPosts();
+
+                let statisticsBox = document.querySelector(".statistics-container");
+
+                if (category == null || category.length === 0 || category === "" || category === [] || category === {} || category.categoryName == null || category.categoryName === "") {
+                    statisticsBox.innerHTML = "No statistics available.";
+
+                    return;
+                }
+
+                let innerHtml = `
+                    <div class="statistics-wrapper">
+                `;
+
+                innerHtml += `
+                    <button type="button" class="submit-b small" onClick="StatisticsOverviewComponent.displayCategoryStatistics('${originalCategoryId}')">
+                        Back
+                    </button>
+                `;
+
+                const key = Object.keys(category.postsByRatings)[index];
+                innerHtml += `
+                    <h2 class="info-box title">${key}</h2>
+                `;
+
+                const posts = Object.keys(category.postsByRatings[key]);
+                let count = 0;
+                for (const p of posts) {
+                    const postKey = Object.keys(category.postsByRatings[key])[count];
+                    const post = allPosts.find(p => p.id === postKey);
+                    innerHtml += `
+                        <div class="info-box">
+                            <a class="info-box link animated" href="../posts/post.html?postId=post.id">
+                                ${post.title} - ${category.postsByRatings[key][p]}
+                            </a>
+                        </div>
+                    `;
+
+                    count++;
+                }
+
+                innerHtml += `</div>`;
+                statisticsBox.innerHTML = innerHtml;
+            });
+    }
+
+    static async viewPostsByAverageScore(originalCategoryId, categoryId) {
+        let statisticsBox = document.querySelector(".statistics-container");
+
+        await StatisticsService.getCategoryStatistics(categoryId)
+            .then(async d => {
+                const posts = d.statistics;
+                const allPosts = await PostsService.getAllPosts();
+
+                if (posts == null || posts.length === 0 || posts === "" || posts === [] || posts === {} || posts.categoryName == null || posts.categoryName === "") {
+                    statisticsBox.innerHTML = "No statistics available.";
+                    return;
+                }
+
+                let innerHtml = `
+                    <div class="statistics-wrapper">
+                `;
+
+                innerHtml += `
+                    <button type="button" class="submit-b small" onClick="StatisticsOverviewComponent.displayCategoryStatistics('${originalCategoryId}')">
+                        Back
+                    </button>
+                `;
+
+                innerHtml += `
+                    <h2 class="info-box title">Posts by average score</h2>
+                `;
+
+                const averageKeys = Object.keys(posts.postsByAverageScore);
+                for (const key of averageKeys) {
+                    const post = allPosts.find(p => p.id === key);
+                    const score = String(posts.postsByAverageScore[key]).substring(0, 4);
+                    innerHtml += `
+                        <div class="info-box">
+                            <a class="info-box link animated" href="../posts/post.html?postId=${post.id}">
+                                ${post.title} - ${score}
+                            </a>
+                        </div>
+                    `;
+                }
+
+                innerHtml += `</div>`;
+                statisticsBox.innerHTML = innerHtml;
+            });
+    }
 }
 
-async function viewPostsByRatings(originalCategoryId, id, index) {
-    const url = "http://localhost:7101/categories/statistics";
-
-    await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    })
-    .then(async response => {
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error);
-        }
-
-        return await response.json();
-    })
-    .then(async d => {
-        const category = d.statistics.find(s => s.categoryId == id);
-
-        var statisticsBox = document.querySelector(".statistics-container");
-
-        if (category == null || category == undefined || category.length == 0 || category == "" || category == [] || category == {} || category.categoryName == null || category.categoryName == undefined || category.categoryName == "") {
-            statisticsBox.innerHTML = "No statistics available.";
-            
-            return;
-        }
-
-        var innerHtml = `
-            <div class="statistics-wrapper">
-        `;
-
-        innerHtml += `
-            <button type="button" class="submit-b small" onClick="displayCategoryStatistics('${originalCategoryId}')">
-                Back
-            </button>
-        `;
-
-        const key = Object.keys(category.postsByRatings)[index];
-        innerHtml += `
-            <h2 class="info-box title">${key}</h2>
-        `;
-
-        const posts = Object.keys(category.postsByRatings[key]);
-        var count = 0;
-        for (const p of posts) {
-            const postKey = Object.keys(category.postsByRatings[key])[count];
-            const post = await getPost(postKey);
-            innerHtml += `
-                <div class="info-box">
-                    <a class="info-box link animated" href="../posts/post.html?postId=post.id">
-                        ${post.title} - ${category.postsByRatings[key][p]}
-                    </a>
-                </div>
-            `;
-
-            count++;
-        }
-
-        innerHtml += `</div>`;
-        statisticsBox.innerHTML = innerHtml;
-    });
-}
-
-async function viewPostsByAverageScore(originalCategoryId, categoryId) {
-    const url = "http://localhost:7101/categories/statistics";
-
-    await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    })
-    .then(async response => {
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error);
-        }
-
-        return await response.json();
-    })
-    .then(async d => {
-        const posts = d.statistics.find(s => s.categoryId == categoryId);
-
-        if (posts == null || posts == undefined || posts.length == 0 || posts == "" || posts == [] || posts == {} || posts.categoryName == null || posts.categoryName == undefined || posts.categoryName == "") {
-            statisticsBox.innerHTML = "No statistics available.";
-            return;
-        }
-
-        var statisticsBox = document.querySelector(".statistics-container");
-        var innerHtml = `
-            <div class="statistics-wrapper">
-        `;
-
-        innerHtml += `
-            <button type="button" class="submit-b small" onClick="displayCategoryStatistics('${originalCategoryId}')">
-                Back
-            </button>
-        `;
-
-        innerHtml += `
-            <h2 class="info-box title">Posts by average score</h2>
-        `;
-
-        const averageKeys = Object.keys(posts.postsByAverageScore);
-        for (const key of averageKeys) {
-            const post = await getPost(key);
-            const score = String(posts.postsByAverageScore[key]).substring(0, 4);
-            innerHtml += `
-                <div class="info-box">
-                    <a class="info-box link animated" href="../posts/post.html?postId=${post.id}">
-                        ${post.title} - ${score}
-                    </a>
-                </div>
-            `;
-        }
-
-        innerHtml += `</div>`;
-        statisticsBox.innerHTML = innerHtml;
-    });
-}
-
-async function getPost(postId) {
-    return await fetch(`http://localhost:7101/posts/${postId}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    })
-    .then(async response => {
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error);
-        }
-
-        return await response.json();
-    })
-    .catch((error) => {
-        return "";
-    })
-}
+window.StatisticsOverviewComponent = StatisticsOverviewComponent;
+await StatisticsOverviewComponent.displayStatistics();

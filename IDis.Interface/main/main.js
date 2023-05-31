@@ -1,11 +1,7 @@
-
 async function getAllCategories() {
     let names = [];
     let categoryIds = [];
     const endpoint = "http://localhost:7101/categories";
-
-    const getAllCategoriesCommand={}
-
 
     await fetch(endpoint, {
         method: "GET",

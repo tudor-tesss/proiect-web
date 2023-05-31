@@ -5,11 +5,6 @@
     <title>I Dislike It!</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
     <link href="account.css" rel="stylesheet" type="text/css"/>
-    <script type="module">
-        import { AuthenticationService } from "../@shared/index.js";
-        window.AuthenticationService = AuthenticationService;
-        AuthenticationService.checkSession();
-    </script>
 </head>
 
 <body class="prevent-select">
@@ -22,15 +17,13 @@
             </div>
             <nav>
                 <a class="add-category-button" href="../categories/add/add-category.html">Add Category</a>
-                <button class="logout-button" onClick="deleteSessionTokenCookie()" type="button">Log Out</button>
+                <button class="logout-button" onClick="AuthenticationService.deleteSessionTokenCookie()" type="button">Log Out</button>
             </nav>
         </div>
 
         <div class="content-wrapper">
-
             <div class="acc-image">
                 <img src="../resources/icons/user.svg" alt="user" width="90%" height="auto">
-
             </div>
 
             <div class="info-wrapper">
@@ -45,12 +38,11 @@
                 <div class="user-posts-box">
                     <h2>Your Posts</h2>
                 </div>
-
             </div>
         </div>
     </div>
-    <script src="account.js"></script>
 
+    <script type="module" src="../@shared/index.js"></script>
+    <script type="module" src="account.js"></script>
 </body>
-
 </html>

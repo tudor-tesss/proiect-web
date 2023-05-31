@@ -16,14 +16,101 @@ async function displayStatistics() {
 
 async function displayPostStatistics(postId) {
     var url = "http://localhost:7101/posts";
-    if (postId != null && postId != "" && postId != undefined) {
-        url = url + "/" + postId + "/statistics";
-    }
-    else {
-        url = url + "/statistics";
+    if (postId != null && postId != "" && postId != undefined && postId != "null") {
+        url = url + "/" + postId;
     }
 
+    url = url + "/statistics";
+
     console.log("URL: " + url);
+
+    await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    .then(async response => {
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error);
+        }
+
+        return await response.json();
+    })
+    .then(async d => {
+        if (!Array.isArray(d.statistics)) {
+            d.statistics = [d.statistics];
+        }
+
+        var statisticsBox = document.querySelector(".statistics-container");
+        var innerHtml = ``;
+
+        for (const s of d.statistics) {
+            innerHtml += `<div class="statistics-wrapper">`;
+            if (s == null || s == undefined || s.length == 0 || s == "" || s == [] || s == {} || s.categoryName == null || s.categoryName == undefined || s.categoryName == "") {
+                statisticsBox.innerHTML = "No statistics available.";
+                innerHtml += '</div>';
+
+                return;
+            }
+        
+        
+            innerHtml += `
+                <a class="info-box title animated" href="../categories/category.html?categoryId=${s.categoryId}">
+                    <h2>${s.categoryName} - ${s.postCount} posts</h2>
+                </a>
+            `;
+
+            const score = String(s.averageScore).substring(0, 4);
+            innerHtml += `
+                <div class="info-box with-button">
+                    <p class="info-box link">Average rating: ${score}</p>
+
+                    <div class="submit-wrapper">
+                        <button type="button" class="submit-b" onClick="viewPostsByAverageScore('${categoryId}', '${s.categoryId}')">View all</button>
+                    </div>
+                </div>
+            `;
+
+            const bestRatedPost = Object.keys(s.postsByAverageScore)[0];
+            await getPost(bestRatedPost)
+                .then(p => {
+                    innerHtml += `
+                        <div class="info-box with-button">
+                            <a class="info-box link animated" href="../posts/post.html?postId=${bestRatedPost}">
+                                Top rated post: ${p.title}
+                            </a>
+
+                            <div class="submit-wrapper">
+                                <button type="button" class="submit-b" onClick="viewPostsByAverageScore('${categoryId}', '${s.categoryId}')">View all</button>
+                            </div>
+                        </div>
+                    `;
+                });
+            
+            let count = 0;
+            const keys = Object.keys(s.postsByRatings);
+            for (const key of keys) {
+                const first = await getPost(Object.keys(s.postsByRatings[key])[0]);
+                innerHtml += `
+                    <div class="info-box with-button">
+                        <a class="info-box link animated" href="../posts/post.html?postId=${first.id}">Best in ${key}: ${first.title}</a>
+
+                        <div class="submit-wrapper">
+                            <button type="button" class="submit-b" onClick="viewPostsByRatings('${categoryId}', '${s.categoryId}', ${count})">View all</button>
+                        </div>
+                    </div>
+                `;
+
+                count++;
+            }
+
+            innerHtml += '</div>';
+        }
+
+        statisticsBox.innerHTML = innerHtml;
+    });    
 }
 
 async function displayCategoryStatistics(categoryId) {
@@ -58,10 +145,6 @@ async function displayCategoryStatistics(categoryId) {
         var innerHtml = ``;
 
         for (const s of d.statistics) {
-            if (s.postCount == 0) {
-                continue;
-            }
-            
             innerHtml += `<div class="statistics-wrapper">`;
             if (s == null || s == undefined || s.length == 0 || s == "" || s == [] || s == {} || s.categoryName == null || s.categoryName == undefined || s.categoryName == "") {
                 statisticsBox.innerHTML = "No statistics available.";
@@ -69,7 +152,8 @@ async function displayCategoryStatistics(categoryId) {
 
                 return;
             }
-
+        
+        
             innerHtml += `
                 <a class="info-box title animated" href="../categories/category.html?categoryId=${s.categoryId}">
                     <h2>${s.categoryName} - ${s.postCount} posts</h2>
@@ -246,7 +330,7 @@ async function viewPostsByAverageScore(originalCategoryId, categoryId) {
 
         innerHtml += `</div>`;
         statisticsBox.innerHTML = innerHtml;
-    });
+    })
 }
 
 async function getPost(postId) {
@@ -263,8 +347,5 @@ async function getPost(postId) {
         }
 
         return await response.json();
-    })
-    .catch((error) => {
-        return "";
-    })
+    });
 }

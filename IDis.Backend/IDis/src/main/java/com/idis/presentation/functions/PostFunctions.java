@@ -1,10 +1,7 @@
 package com.idis.presentation.functions;
 
-import com.idis.core.business.posts.parentpost.command.CreatePostCommand;
-import com.idis.core.business.posts.parentpost.command.GetPostByIdCommand;
-import com.idis.core.business.posts.parentpost.command.GetPostsByCreatorIdCommand;
+import com.idis.core.business.posts.parentpost.command.*;
 import com.idis.core.business.posts.postreply.command.CreatePostReplyCommand;
-import com.idis.core.business.posts.parentpost.command.GetAllPostsInsideOfACategoryCommand;
 import com.idis.core.business.posts.postreply.command.GetAllPostRepliesCommand;
 import com.nimblej.core.Function;
 import com.nimblej.core.IUserController;
@@ -182,6 +179,27 @@ public class PostFunctions implements IUserController {
                 return HttpResponse.create(200, responseContent);
             });
         } catch (Exception e){
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400, responseContent);
+        }
+    }
+
+    @Route(path = "/posts", method = HttpVerbs.GET)
+    @Function(name = "getAllPosts")
+    public static CompletableFuture <HttpResponse> getAllPosts (String requestBody) {
+
+        var command = new GetAllPostsCommand();
+
+        try {
+            return mediator
+                    .send(command)
+                    .thenCompose(p -> {
+                        var responseContent = Serialization.serialize(p);
+
+                        return HttpResponse.create(200, responseContent);
+                    });
+        } catch (Exception e) {
             var responseContent = Serialization.serialize(e.getMessage());
 
             return HttpResponse.create(400, responseContent);

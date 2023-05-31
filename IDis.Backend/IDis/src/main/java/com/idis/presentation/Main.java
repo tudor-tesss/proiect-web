@@ -178,6 +178,7 @@ public class Main {
         mediator.registerHandler(GetAllPostRepliesCommand.class, new GetAllPostRepliesCommandHandler());
         mediator.registerHandler(GetPostsByCreatorIdCommand.class, new GetPostsByCreatorIdCommandHandler());
         mediator.registerHandler(CreatePostReplyCommand.class, new CreatePostReplyCommandHandler());
+        mediator.registerHandler(GetAllCategoriesCommand.class, new GetAllCategoriesCommandHandler());
 
         mediator.registerHandler(CreateCategoryStatisticsCommand.class, new CreateCategoryStatisticsCommandHandler());
         mediator.registerHandler(CreateCategoriesStatisticsCommand.class, new CreateCategoriesStatisticsCommandHandler());

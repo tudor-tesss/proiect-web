@@ -42,6 +42,7 @@ public class BusinessErrors {
         public static final String CategoryHasNoPosts = "Post.Category.HasNoPosts";
         public static final String PostNotFound = "Post.NotFound";
         public static final String CreatorHasNoPosts = "Post.CreatorHasNoPosts";
+        public static final String NoPostsAvailable = "Post.NoPostsAvailable";
     }
 
     public static class CategoryStatistics {

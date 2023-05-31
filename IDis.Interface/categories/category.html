@@ -5,12 +5,6 @@
     <title>I Dislike It!</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="category.css" />
-    <script src="category.js"></script>
-    <script type="module">
-        import { AuthenticationService } from "../@shared/index.js";
-        window.AuthenticationService = AuthenticationService;
-        AuthenticationService.checkSession();
-    </script>
 </head>
 
 <body class="prevent-select">
@@ -23,14 +17,13 @@
                     <img src="../resources/logopng.png" alt="Logo">
                 </a>
             </div>
-            <div class="add-wrapper">
-                <script>addButton()</script>
-            </div>
+            <div class="add-wrapper"></div>
         </div>
 
         <div class="category-container"></div>
-
-        <script>displayPosts()</script>
     </div>
+
+    <script type="module" src="../@shared/index.js"></script>
+    <script type="module" src="category.js"></script>
 </body>
 </html>

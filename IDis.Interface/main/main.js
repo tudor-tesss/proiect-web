@@ -7,16 +7,14 @@ export class CategoriesOverviewComponent {
     static async getAllCategories() {
         let names = [];
         let categoryIds = [];
-        const endpoint = "http://localhost:7101/categories";
 
-        await CategoriesService.getAll()
+        await CategoriesService
+            .getAll()
             .then((data) => {
                 names = data.map((item) => item.name);
                 categoryIds = data.map((item) => item.id);
             })
             .catch((error) => {
-                console.error("Error:", error);
-
                 const buttonsWrapper = document.querySelector(".buttons-wrapper");
 
                 buttonsWrapper.innerHTML = `

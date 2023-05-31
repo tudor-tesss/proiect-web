@@ -67,9 +67,9 @@ export class CategoryOverviewComponent {
         let div = document.querySelector(".add-wrapper");
         div.innerHTML = `
 		<nav>
-            <a class="add-post-button" href="../posts/add/add-post.html?categoryId=${categoryId}">Add Post</a>
-            <a class="add-post-button" href="../statistics/statistics.html?isPost=false&targetId=${categoryId}">View Statistics</a>
-			<a class ="add-category-button" href="../account/account.html">Account</a>
+            <a class="add-post-button" href="/posts/add/add-post.html?categoryId=${categoryId}">Add Post</a>
+            <a class="add-post-button" href="/statistics/statistics.html?isPost=false&targetId=${categoryId}">View Statistics</a>
+			<a class="add-category-button" href="/account/account.html">Account</a>
             <button class="help-button">Help</button>
         </nav>
     `;

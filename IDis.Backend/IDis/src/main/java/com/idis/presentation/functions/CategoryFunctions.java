@@ -37,9 +37,10 @@ public class CategoryFunctions implements IUserController {
         }
     }
 
-    @Route(path = "/categories", method = HttpVerbs.GET)
+    @Route(path = "/categories",method = HttpVerbs.GET)
     @Function(name = "getAllCategories")
     public static CompletableFuture <HttpResponse> getAllCategories (String requestBody){
+
         var command = new GetAllCategoriesCommand();
 
         try{
@@ -57,7 +58,7 @@ public class CategoryFunctions implements IUserController {
         }
     }
 
-    @Route(path = "/users/{id}/categories", method = HttpVerbs.GET)
+    @Route(path = "/users/{id}/categories",method = HttpVerbs.GET)
     @Function(name = "getCategoriesByCreatorId")
     public static CompletableFuture <HttpResponse> getCategoriesByCreatorId (String id, String requestBody){
 

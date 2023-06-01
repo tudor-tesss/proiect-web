@@ -20,4 +20,24 @@ export class UsersService {
             return new User(result.id, result.name, result.firstName, result.emailAddress);
         });
     }
+
+    static async createUser(name, firstName, email) {
+        const endpoint = 'http://localhost:7101/users';
+
+        return await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(new User(null, name, firstName, email))
+        })
+            .then(async response => {
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error);
+                }
+
+                return response.json();
+            });
+    }
 }

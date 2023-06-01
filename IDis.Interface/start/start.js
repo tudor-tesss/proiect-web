@@ -1,4 +1,4 @@
-import { AuthenticationService } from "../../@shared/index.js";
+import { AuthenticationService, UsersService } from "../../@shared/index.js";
 
 window.AuthenticationService = AuthenticationService;
 await AuthenticationService.resumeSession();
@@ -115,7 +115,7 @@ export class StartComponent {
         const firstName = document.getElementById('first-name').value;
         const email = document.getElementById('email').value;
 
-        return await AuthenticationService
+        return await UsersService
             .createUser(name, firstName, email)
             .then(() => {
                 this.displayLoginForm();

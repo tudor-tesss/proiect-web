@@ -164,32 +164,6 @@ export class AuthenticationService {
         window.location.href = '/start/start.html';
     }
 
-    static async createUser(name, firstName, email) {
-        const endpoint = 'http://localhost:7101/users';
-
-        const createUserCommand = {
-            name: name,
-            firstName: firstName,
-            emailAddress: email
-        };
-
-        return await fetch(endpoint, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(createUserCommand)
-        })
-        .then(async response => {
-            if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error);
-            }
-
-            return response.json();
-        });
-    }
-
     static async createUserGate(emailAddress) {
         const endpoint = 'http://localhost:7101/users/gates';
 

@@ -14,9 +14,6 @@ export class StatisticsOverviewComponent {
         const targetId = urlParams.get('targetId');
         const isPost = urlParams.get('isPost');
 
-        console.log("Target ID: " + targetId);
-        console.log("Is Post: " + isPost);
-
         if (isPost === "true") {
             await this.displayPostStatistics(targetId);
         } else {
@@ -38,13 +35,9 @@ export class StatisticsOverviewComponent {
         } else {
             url = url + "/statistics";
         }
-
-        console.log("URL: " + url);
     }
 
     static async displayCategoryStatistics(categoryId) {
-        console.log(this.allStatistics);
-
         if (!Array.isArray(this.allStatistics.statistics)) {
             this.allStatistics.statistics = [this.allStatistics.statistics];
         }

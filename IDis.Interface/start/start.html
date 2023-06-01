@@ -5,10 +5,6 @@
     <title>I Dislike It!</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="start.css" />
-    <script src="../check-session.js"></script>
-    <script>
-        resumeSession();
-    </script>
 </head>
 
 <body class="prevent-select">
@@ -19,8 +15,8 @@
             </div>
             <nav>
                 <a href="#" class="about-us-button">About Us</a>
-                <button class="login-button" onClick="displayLoginForm()">Log In</button>
-                <button class="get-started" onClick="displaySignUpForm()">Get Started</button>
+                <button class="login-button" onClick="StartComponent.displayLoginForm()">Log In</button>
+                <button class="get-started" onClick="StartComponent.displaySignUpForm()">Get Started</button>
             </nav>
         </div>
 
@@ -35,13 +31,13 @@
                 </p>
             </div>
             <div class="form-wrapper">
-                <div class="login-box">
-                    <script src="sign-up.js"></script>
-                    <script>displaySignUpForm()</script>
-                </div>
+                <div class="login-box"></div>
             </div>
         </div>
     </div>
+
+    <script type="module" src="../@shared/index.js"></script>
+    <script type="module" src="start.js"></script>
 </body>
 
 </html>

@@ -1,8 +1,5 @@
 package com.idis.presentation.functions;
 
-import com.idis.core.business.category.commands.CreateCategoryCommand;
-import com.idis.core.business.category.commands.GetAllCategoriesCommand;
-import com.idis.core.business.category.commands.GetCategoriesByCreatorIdCommand;
 import com.idis.core.business.rssfeed.commands.GetRSSFeedCommand;
 import com.nimblej.core.Function;
 import com.nimblej.core.IUserController;
@@ -14,17 +11,15 @@ import com.nimblej.networking.http.routing.Route;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
-public class RSSFeedFunctions implements IUserController {
+public class RssFeedFunctions implements IUserController {
 
     private static Mediator mediator = Mediator.getInstance();
 
     @Route(path="/rss", method = HttpVerbs.GET)
     @Function(name = "getRSSFeed")
     public static CompletableFuture <HttpResponse> getRSSFeed(String body){
-
         var command = new GetRSSFeedCommand();
 
         Map<String,String> headers =new HashMap<>();
@@ -40,7 +35,6 @@ public class RSSFeedFunctions implements IUserController {
                     .thenCompose(rss ->{
                 return HttpResponse.create(200,rss,headers);
             });
-
         }catch (Exception e){
             var responseContent = Serialization.serialize(e.getMessage());
 

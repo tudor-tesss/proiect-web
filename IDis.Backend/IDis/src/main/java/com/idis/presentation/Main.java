@@ -12,7 +12,7 @@ import com.idis.core.business.posts.postreply.command.CreatePostReplyCommand;
 import com.idis.core.business.posts.postreply.command.GetAllPostRepliesCommand;
 import com.idis.core.business.posts.postreply.commandhandlers.CreatePostReplyCommandHandler;
 import com.idis.core.business.posts.postreply.commandhandlers.GetAllPostRepliesCommandHandler;
-import com.idis.core.business.rssfeed.commandhandlers.GetRSSFeedCommandHandler;
+import com.idis.core.business.rssfeed.commandhandlers.GetRssFeedCommandHandler;
 import com.idis.core.business.rssfeed.commands.GetRSSFeedCommand;
 import com.idis.core.business.statistics.category.commandhandlers.CreateCategoriesStatisticsCommandHandler;
 import com.idis.core.business.statistics.category.commandhandlers.CreateCategoryStatisticsCommandHandler;
@@ -139,7 +139,7 @@ public class Main {
                         new CategoryFunctions(),
                         new PostFunctions(),
                         new StatisticsFunctions(),
-                        new RSSFeedFunctions()
+                        new RssFeedFunctions()
                 );
 
         server.start();
@@ -152,7 +152,6 @@ public class Main {
         NimbleJQueryProvider.addManagedClass(Category.class);
         NimbleJQueryProvider.addManagedClass(Post.class);
         NimbleJQueryProvider.addManagedClass(PostReply.class);
-
     }
 
     private static void addMediatorHandlers() {
@@ -183,7 +182,7 @@ public class Main {
         mediator.registerHandler(GetCategoriesByCreatorIdCommand.class, new GetCategoriesByCreatorIdCommandHandler());
         mediator.registerHandler(CreatePostStatisticsCommand.class, new CreatePostStatisticsCommandHandler());
 
-        mediator.registerHandler(GetRSSFeedCommand.class, new GetRSSFeedCommandHandler());
+        mediator.registerHandler(GetRSSFeedCommand.class, new GetRssFeedCommandHandler());
     }
 
     private static class DeployedDetails {

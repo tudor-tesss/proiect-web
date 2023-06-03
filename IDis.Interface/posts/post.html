@@ -6,16 +6,17 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="post.css" />
     <script type="module">
-        import { AuthenticationService } from "../@shared/index.js";
+        /*import { AuthenticationService } from "../@shared/index.js";
         window.AuthenticationService = AuthenticationService;
-        AuthenticationService.checkSession();
+        AuthenticationService.checkSession();*/
     </script>
 </head>
 
 <body class="prevent-select">
     <div class="post-wraper"></div>
-    <script src="post.js"></script>
-    <script>displayPosts()</script>
+    <script type="module" src="../@shared/services/pdf.service.js"></script>
+    <script type="module" src="post.js"></script>
+    <script></script>
 </body>
 
 </html>

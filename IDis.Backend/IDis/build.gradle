@@ -17,6 +17,8 @@ dependencies {
     implementation('com.sendgrid:sendgrid-java:4.9.3')
 
     implementation 'com.rometools:rome:1.15.0'
+
+    implementation 'com.itextpdf:itextpdf:5.5.13'
 }
 
 java {

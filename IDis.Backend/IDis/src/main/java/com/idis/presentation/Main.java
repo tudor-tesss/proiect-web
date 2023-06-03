@@ -186,6 +186,7 @@ public class Main {
         mediator.registerHandler(CreatePostStatisticsCommand.class, new CreatePostStatisticsCommandHandler());
 
         mediator.registerHandler(GetRSSFeedCommand.class, new GetRssFeedCommandHandler());
+
         mediator.registerHandler(GetPdfForPostStatsCommand.class, new GetPdfForStatsCommandHandler());
     }
 

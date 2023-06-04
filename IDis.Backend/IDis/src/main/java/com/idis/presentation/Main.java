@@ -1,35 +1,25 @@
 package com.idis.presentation;
 
-import com.idis.core.business.category.commandhandlers.CreateCategoryCommandHandler;
-import com.idis.core.business.category.commandhandlers.GetAllCategoriesCommandHandler;
-import com.idis.core.business.category.commandhandlers.GetCategoriesByCreatorIdCommandHandler;
-import com.idis.core.business.category.commands.CreateCategoryCommand;
-import com.idis.core.business.category.commands.GetAllCategoriesCommand;
-import com.idis.core.business.category.commands.GetCategoriesByCreatorIdCommand;
+import com.idis.core.business.category.commandhandlers.*;
+import com.idis.core.business.category.commands.*;
 import com.idis.core.business.posts.parentpost.command.*;
 import com.idis.core.business.posts.parentpost.commandhandlers.*;
-import com.idis.core.business.posts.postreply.command.CreatePostReplyCommand;
-import com.idis.core.business.posts.postreply.command.GetAllPostRepliesCommand;
-import com.idis.core.business.posts.postreply.commandhandlers.CreatePostReplyCommandHandler;
-import com.idis.core.business.posts.postreply.commandhandlers.GetAllPostRepliesCommandHandler;
-import com.idis.core.business.rssfeed.commandhandlers.GetRssFeedCommandHandler;
-import com.idis.core.business.rssfeed.commands.GetRSSFeedCommand;
-import com.idis.core.business.statistics.category.commandhandlers.CreateCategoriesStatisticsCommandHandler;
-import com.idis.core.business.statistics.category.commandhandlers.CreateCategoryStatisticsCommandHandler;
-import com.idis.core.business.statistics.category.commands.CreateCategoriesStatisticsCommand;
-import com.idis.core.business.statistics.category.commands.CreateCategoryStatisticsCommand;
-import com.idis.core.business.statistics.posts.command.CreatePostStatisticsCommand;
-import com.idis.core.business.statistics.posts.commandhandlers.CreatePostStatisticsCommandHandler;
-import com.idis.core.business.user.commandhandlers.CreateUserCommandHandler;
-import com.idis.core.business.user.commandhandlers.GetUserByIdCommandHandler;
-import com.idis.core.business.user.commands.CreateUserCommand;
-import com.idis.core.business.user.commands.GetUserByIdCommand;
+import com.idis.core.business.posts.postreply.command.*;
+import com.idis.core.business.posts.postreply.commandhandlers.*;
+import com.idis.core.business.rssfeed.commandhandlers.*;
+import com.idis.core.business.rssfeed.commands.GetRssFeedCommand;
+import com.idis.core.business.statistics.category.commandhandlers.*;
+import com.idis.core.business.statistics.category.commands.*;
+import com.idis.core.business.statistics.posts.commands.*;
+import com.idis.core.business.statistics.posts.commandhandlers.*;
+import com.idis.core.business.user.commandhandlers.*;
+import com.idis.core.business.user.commands.*;
 import com.idis.core.business.usersession.commandhandlers.*;
 import com.idis.core.business.usersession.commands.*;
 import com.idis.core.domain.category.Category;
 import com.idis.core.domain.posts.parentpost.Post;
 import com.idis.core.domain.posts.postreply.PostReply;
-import com.idis.core.domain.user.*;
+import com.idis.core.domain.user.User;
 import com.idis.core.domain.usersession.UserGate;
 import com.idis.core.domain.usersession.UserSession;
 import com.idis.presentation.functions.*;
@@ -182,7 +172,7 @@ public class Main {
         mediator.registerHandler(GetCategoriesByCreatorIdCommand.class, new GetCategoriesByCreatorIdCommandHandler());
         mediator.registerHandler(CreatePostStatisticsCommand.class, new CreatePostStatisticsCommandHandler());
 
-        mediator.registerHandler(GetRSSFeedCommand.class, new GetRssFeedCommandHandler());
+        mediator.registerHandler(GetRssFeedCommand.class, new GetRssFeedCommandHandler());
     }
 
     private static class DeployedDetails {

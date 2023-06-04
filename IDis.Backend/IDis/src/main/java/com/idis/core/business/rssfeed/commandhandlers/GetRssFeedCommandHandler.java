@@ -1,7 +1,7 @@
 package com.idis.core.business.rssfeed.commandhandlers;
 
 import com.idis.core.business.BusinessErrors;
-import com.idis.core.business.rssfeed.commands.GetRSSFeedCommand;
+import com.idis.core.business.rssfeed.commands.GetRssFeedCommand;
 import com.idis.core.business.rssfeed.extensions.RssFeedGenerator;
 import com.idis.core.domain.posts.parentpost.Post;
 import com.idis.core.domain.posts.postreply.PostReply;
@@ -11,8 +11,8 @@ import com.nimblej.networking.database.NimbleJQueryProvider;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
-public final class GetRssFeedCommandHandler implements IRequestHandler<GetRSSFeedCommand, String >{
-    public CompletableFuture<String> handle (GetRSSFeedCommand getRSSFeedCommand){
+public final class GetRssFeedCommandHandler implements IRequestHandler<GetRssFeedCommand, String >{
+    public CompletableFuture<String> handle (GetRssFeedCommand getRSSFeedCommand){
         String rssResult = new String();
         var posts = sortAfterDate(NimbleJQueryProvider.getAll(Post.class));
         if(posts.isEmpty()){

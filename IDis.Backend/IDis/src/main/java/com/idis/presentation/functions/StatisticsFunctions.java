@@ -2,7 +2,7 @@ package com.idis.presentation.functions;
 
 import com.idis.core.business.statistics.category.commands.CreateCategoriesStatisticsCommand;
 import com.idis.core.business.statistics.category.commands.CreateCategoryStatisticsCommand;
-import com.idis.core.business.statistics.posts.command.CreatePostStatisticsCommand;
+import com.idis.core.business.statistics.posts.commands.CreatePostStatisticsCommand;
 import com.nimblej.core.Function;
 import com.nimblej.core.IUserController;
 import com.nimblej.core.Mediator;

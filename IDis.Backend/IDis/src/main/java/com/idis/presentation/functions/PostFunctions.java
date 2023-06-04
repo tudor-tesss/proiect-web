@@ -42,7 +42,6 @@ public class PostFunctions implements IUserController {
     @Route(path = "/categories/{id}/posts", method = HttpVerbs.GET)
     @Function(name = "getAllPostsInsideACategory")
     public static CompletableFuture<HttpResponse> getAllPostsInsideACategory(String id, String requestBody) {
-
         UUID categoryId;
         try {
             categoryId = UUID.fromString(id);
@@ -53,8 +52,6 @@ public class PostFunctions implements IUserController {
         }
 
         var command = new GetAllPostsInsideOfACategoryCommand(categoryId);
-
-
         try {
             return mediator
                     .send(command)
@@ -83,9 +80,7 @@ public class PostFunctions implements IUserController {
         }
 
         var command = Serialization.deserialize(requestBody, CreatePostReplyCommand.class);
-
         command = new CreatePostReplyCommand(command.authorId(), postId, command.title(), command.body(), command.ratings());
-
         try {
             return mediator
                     .send(command)
@@ -114,7 +109,6 @@ public class PostFunctions implements IUserController {
         }
 
         var command = new GetPostByIdCommand(postId);
-
         try {
             return mediator
                     .send(command)
@@ -144,7 +138,6 @@ public class PostFunctions implements IUserController {
         }
 
         var command = new GetAllPostRepliesCommand(postId);
-
         try {
             return mediator.send(command).thenCompose(r -> {
                 var responseContent = Serialization.serialize(r);
@@ -171,7 +164,6 @@ public class PostFunctions implements IUserController {
         }
 
         var command = new GetPostsByCreatorIdCommand(creatorId);
-
         try {
             return mediator.send(command).thenCompose(p -> {
                 var responseContent = Serialization.serialize(p);
@@ -188,9 +180,7 @@ public class PostFunctions implements IUserController {
     @Route(path = "/posts", method = HttpVerbs.GET)
     @Function(name = "getAllPosts")
     public static CompletableFuture <HttpResponse> getAllPosts (String requestBody) {
-
         var command = new GetAllPostsCommand();
-
         try {
             return mediator
                     .send(command)

@@ -1,4 +1,4 @@
-import {PdfService} from "../@shared/services/pdf.service.js";
+import {StatisticsService} from "../@shared/services/statistics.service.js";
 
 async function getPost(postId) {
     return await fetch(`http://localhost:7101/posts/${postId}`, {
@@ -21,7 +21,7 @@ async function savePdf() {
     const urlParams = new URLSearchParams(window.location.search);
     const postId = urlParams.get('postId');
 
-    const base64String = await PdfService
+    const base64String = await StatisticsService
         .getPdfForPostStats(postId)
         .catch((error) => {
             console.log(error);

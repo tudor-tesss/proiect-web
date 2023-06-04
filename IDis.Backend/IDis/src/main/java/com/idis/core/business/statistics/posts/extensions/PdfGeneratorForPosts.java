@@ -1,4 +1,4 @@
-package com.idis.core.business.pdf.post.extensions;
+package com.idis.core.business.statistics.posts.extensions;
 
 import com.idis.core.business.statistics.posts.commandresponses.PostStatistics;
 import com.idis.core.business.statistics.posts.extensions.PostStatisticsCalculator;

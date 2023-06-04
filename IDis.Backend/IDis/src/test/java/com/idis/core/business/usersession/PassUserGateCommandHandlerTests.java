@@ -26,13 +26,11 @@ public class PassUserGateCommandHandlerTests {
         var command = new PassUserGateCommand(UUID.randomUUID(), "code");
 
         try (MockedStatic<NimbleJQueryProvider> mock = Mockito.mockStatic(NimbleJQueryProvider.class)) {
-            mock.when(() -> NimbleJQueryProvider.getAll(UserGate.class)).thenReturn(List.of());
+            mock.when(() -> NimbleJQueryProvider.getAll(UserGate.class)).thenReturn(new ArrayList<>());
             mock.when(() -> NimbleJQueryProvider.insert(any(UserGate.class))).thenAnswer(invocation -> null);
 
             // Act
-            var exception = assertThrows(IllegalArgumentException.class, () -> {
-                sut().handle(command);
-            });
+            var exception = assertThrows(IllegalArgumentException.class, () -> sut().handle(command));
 
             // Assert
             var actualMessage = exception.getMessage();

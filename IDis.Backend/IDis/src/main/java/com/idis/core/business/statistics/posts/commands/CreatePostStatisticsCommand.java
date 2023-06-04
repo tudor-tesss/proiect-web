@@ -1,4 +1,4 @@
-package com.idis.core.business.statistics.posts.command;
+package com.idis.core.business.statistics.posts.commands;
 
 import com.idis.core.business.statistics.posts.commandresponses.CreatePostStatisticsCommandResponse;
 import com.nimblej.core.IRequest;

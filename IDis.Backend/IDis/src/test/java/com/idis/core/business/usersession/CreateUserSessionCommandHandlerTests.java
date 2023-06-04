@@ -3,6 +3,7 @@ package com.idis.core.business.usersession;
 import com.idis.core.business.BusinessErrors;
 import com.idis.core.business.usersession.commandhandlers.CreateUserSessionCommandHandler;
 import com.idis.core.business.usersession.commands.CreateUserSessionCommand;
+import com.idis.core.domain.DomainErrors;
 import com.idis.core.domain.user.User;
 import com.idis.core.domain.usersession.UserSession;
 import com.nimblej.networking.database.NimbleJQueryProvider;
@@ -27,9 +28,7 @@ public class CreateUserSessionCommandHandlerTests {
             mock.when(() -> NimbleJQueryProvider.getAll(User.class)).thenReturn(List.of());
 
             // Act
-            var exception = assertThrows(IllegalArgumentException.class, () -> {
-                sut().handle(command);
-            });
+            var exception = assertThrows(IllegalArgumentException.class, () -> sut().handle(command));
 
             // Assert
             var actualMessage = exception.getMessage();
@@ -39,7 +38,27 @@ public class CreateUserSessionCommandHandlerTests {
     }
 
     @Test
-    public void when_notViolatingConstraints_then_shouldSucceed() throws ExecutionException, InterruptedException {
+    public void when_domainFails_then_shouldFail() {
+        // Arrange
+        var user = User.create("test", "test", "test_mail");
+        var command = new CreateUserSessionCommand(user.getId(), null);
+
+        try (var mock = Mockito.mockStatic(NimbleJQueryProvider.class)) {
+            mock.when(() -> NimbleJQueryProvider.getAll(User.class)).thenReturn(List.of(user));
+            mock.when(() -> NimbleJQueryProvider.insert(any(UserSession.class))).thenAnswer(invocation -> null);
+
+            // Act
+            var exception = assertThrows(IllegalArgumentException.class, () -> sut().handle(command));
+
+            // Assert
+            var actualMessage = exception.getMessage();
+
+            assertTrue(actualMessage.contains(DomainErrors.UserSession.IpAddressNullOrEmpty));
+        }
+    }
+
+    @Test
+    public void when_domainSucceeds_then_shouldSucceed() throws ExecutionException, InterruptedException {
         // Arrange
         var user = User.create("test", "test", "test_mail");
         var command = new CreateUserSessionCommand(user.getId(), "127.0.0.1");

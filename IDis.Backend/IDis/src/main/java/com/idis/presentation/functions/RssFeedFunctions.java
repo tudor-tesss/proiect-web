@@ -34,7 +34,7 @@ public class RssFeedFunctions implements IUserController {
         } catch (Exception e) {
             var responseContent = Serialization.serialize(e.getMessage());
 
-            return HttpResponse.create(400,responseContent);
+            return HttpResponse.create(400, responseContent);
         }
     }
 }

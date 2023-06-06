@@ -50,8 +50,6 @@ public final class Router implements HttpHandler {
             this.method = method;
             this.path = path;
         }
-
-        // Implement equals and hashCode for proper Map key functionality
     }
 
     private Map<RouteKey, Method> routeMap = new HashMap<>();
@@ -102,6 +100,10 @@ public final class Router implements HttpHandler {
                         httpExchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
                         httpExchange.getResponseHeaders().set("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
+                        if (response.getHeaders().containsKey("Content-Type")) {
+                            httpExchange.getResponseHeaders().set("Content-Type", response.getHeaders().get("Content-Type"));
+                        }
+
                         httpExchange.sendResponseHeaders(response.getStatus(), response.getContent().length());
                         var outputStream = httpExchange.getResponseBody();
                         outputStream.write(response.getContent().getBytes());
@@ -125,7 +127,7 @@ public final class Router implements HttpHandler {
      * matching route is found.
      */
     private CompletableFuture<HttpResponse> routeRequest(String requestMethod, String requestPath, String requestBody) {
-        for (Map.Entry<RouteKey, Method> entry : routeMap.entrySet()) {
+        for (var entry : routeMap.entrySet()) {
             var routeKey = entry.getKey();
             if (!requestMethod.equalsIgnoreCase(routeKey.method)) {
                 continue;
@@ -195,7 +197,7 @@ public final class Router implements HttpHandler {
      */
     private void displayRoutes() {
         System.out.println("Registered routes:");
-        for (Map.Entry<RouteKey, Method> entry : routeMap.entrySet()) {
+        for (var entry : routeMap.entrySet()) {
             var routeKey = entry.getKey();
             var controllerClass = entry.getValue().getDeclaringClass().getSimpleName();
 
@@ -210,7 +212,7 @@ public final class Router implements HttpHandler {
      * @param controller The controller object containing the route methods.
      */
     private void registerRoutesForController(Object controller) {
-        for (Method method : controller.getClass().getDeclaredMethods()) {
+        for (var method : controller.getClass().getDeclaredMethods()) {
             var route = method.getAnnotation(Route.class);
             var function = method.getAnnotation(Function.class);
 

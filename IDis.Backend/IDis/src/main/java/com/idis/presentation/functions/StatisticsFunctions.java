@@ -1,5 +1,6 @@
 package com.idis.presentation.functions;
 
+import com.idis.core.business.statistics.posts.commands.ExportPostStatisticsAsPdfCommand;
 import com.idis.core.business.statistics.category.commands.CreateCategoriesStatisticsCommand;
 import com.idis.core.business.statistics.category.commands.CreateCategoryStatisticsCommand;
 import com.idis.core.business.statistics.posts.commands.CreatePostStatisticsCommand;
@@ -11,6 +12,9 @@ import com.idis.shared.web.communication.HttpVerbs;
 import com.idis.shared.web.communication.IUserController;
 import com.idis.shared.web.routing.Route;
 
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
@@ -91,6 +95,41 @@ public final class StatisticsFunctions implements IUserController {
             var responseContent = Serialization.serialize(e.getMessage());
 
             return HttpResponse.create(400, responseContent);
+        }
+    }
+
+    @Route(path="/posts/{id}/statistics/pdf",method = HttpVerbs.POST)
+    @Function(name = "exportPostStatisticsAsPdf")
+    public static CompletableFuture <HttpResponse> exportPostStatisticsAsPdf (String id, String body){
+        UUID postId;
+        try {
+            postId = UUID.fromString(id);
+        } catch (Exception e) {
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400, responseContent);
+        }
+
+        var command = new ExportPostStatisticsAsPdfCommand(postId);
+        Map<String,String> headers =new HashMap<>();
+
+        headers.put("Access-Control-Allow-Origin", "*");
+        headers.put("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
+        headers.put("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        headers.put("Content-Type", "application/pdf");
+
+        try{
+            return mediator
+                    .send(command)
+                    .thenCompose(pdf ->{
+
+                        String pdfEncode = Base64.getEncoder().encodeToString(pdf);
+                        return HttpResponse.create(200,pdfEncode,headers);
+                    });
+        }catch (Exception e){
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400,responseContent);
         }
     }
 }

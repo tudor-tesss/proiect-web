@@ -31,7 +31,6 @@ public final class StatisticsFunctions implements IUserController {
         }
 
         var command = new CreateCategoryStatisticsCommand(categoryId);
-
         try {
             return mediator
                     .send(command)
@@ -51,7 +50,6 @@ public final class StatisticsFunctions implements IUserController {
     @Function(name = "createCategoriesStatistics")
     public static CompletableFuture<HttpResponse> createCategoriesStatistics(String requestBody) {
         var command = new CreateCategoriesStatisticsCommand();
-
         try {
             return mediator
                     .send(command)
@@ -81,7 +79,6 @@ public final class StatisticsFunctions implements IUserController {
         }
 
         var command = new CreatePostStatisticsCommand(postId);
-
         try {
             return mediator
                     .send(command)

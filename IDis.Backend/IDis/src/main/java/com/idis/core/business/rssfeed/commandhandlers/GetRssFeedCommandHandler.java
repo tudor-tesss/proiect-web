@@ -12,15 +12,14 @@ import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 public final class GetRssFeedCommandHandler implements IRequestHandler<GetRssFeedCommand, String > {
-    public CompletableFuture<String> handle (GetRssFeedCommand getRSSFeedCommand){
+    public CompletableFuture<String> handle(GetRssFeedCommand getRSSFeedCommand){
         String rssResult = new String();
         var posts = sortAfterDate(QueryProvider.getAll(Post.class));
         if(posts.isEmpty()){
             throw new IllegalArgumentException(BusinessErrors.Post.NoPostsAvailable);
         }
 
-        Map<UUID,Integer> numOfReplies = getRepliesNum(posts);
-
+        var numOfReplies = getRepliesNum(posts);
         RssFeedGenerator rssFeedGenerator = new RssFeedGenerator(posts,numOfReplies);
 
         try {

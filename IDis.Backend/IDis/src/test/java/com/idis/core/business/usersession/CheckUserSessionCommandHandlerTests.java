@@ -23,7 +23,7 @@ public class CheckUserSessionCommandHandlerTests {
         // Arrange
         var command = command();
 
-        try (MockedStatic<QueryProvider> mock = Mockito.mockStatic(QueryProvider.class)) {
+        try (var mock = Mockito.mockStatic(QueryProvider.class)) {
             mock.when(() -> QueryProvider.getAll(UserSession.class)).thenReturn(List.of());
 
             // Act
@@ -44,7 +44,7 @@ public class CheckUserSessionCommandHandlerTests {
         var userSession = UserSession.create(UUID.randomUUID(), "some other ip");
         var command = new CheckUserSessionCommand(userSession.getUserId(), userSession.getId(), "some ip");
 
-        try (MockedStatic<QueryProvider> mock = Mockito.mockStatic(QueryProvider.class)) {
+        try (var mock = Mockito.mockStatic(QueryProvider.class)) {
             mock.when(() -> QueryProvider.getAll(UserSession.class)).thenReturn(List.of(userSession));
 
             // Act
@@ -66,7 +66,7 @@ public class CheckUserSessionCommandHandlerTests {
 
         TimeProviderContext.advanceTimeTo(new Date(userSession.getCreatedAt().getTime() + 1000 * 60 * 60 * 24 + 1));
 
-        try (MockedStatic<QueryProvider> mock = Mockito.mockStatic(QueryProvider.class)) {
+        try (var mock = Mockito.mockStatic(QueryProvider.class)) {
             mock.when(() -> QueryProvider.getAll(UserSession.class)).thenReturn(List.of(userSession));
 
             // Act
@@ -86,7 +86,7 @@ public class CheckUserSessionCommandHandlerTests {
         var userSession = UserSession.create(UUID.randomUUID(), "some ip");
         var command = new CheckUserSessionCommand(UUID.randomUUID(), userSession.getId(), "some ip");
 
-        try (MockedStatic<QueryProvider> mock = Mockito.mockStatic(QueryProvider.class)) {
+        try (var mock = Mockito.mockStatic(QueryProvider.class)) {
             mock.when(() -> QueryProvider.getAll(UserSession.class)).thenReturn(List.of(userSession));
 
             // Act

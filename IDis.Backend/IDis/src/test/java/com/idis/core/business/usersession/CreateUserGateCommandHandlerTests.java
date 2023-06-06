@@ -24,7 +24,7 @@ public class CreateUserGateCommandHandlerTests {
         // Arrange
         var command = new CreateUserGateCommand("test_mail");
 
-        try (MockedStatic<QueryProvider> mock = Mockito.mockStatic(QueryProvider.class)) {
+        try (var mock = Mockito.mockStatic(QueryProvider.class)) {
             mock.when(() -> QueryProvider.getAll(User.class)).thenReturn(List.of());
             mock.when(() -> QueryProvider.insert(any(UserGate.class))).thenAnswer(invocation -> null);
 

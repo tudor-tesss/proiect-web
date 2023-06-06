@@ -7,7 +7,6 @@ import com.idis.core.domain.DomainErrors;
 import com.idis.core.domain.user.User;
 import com.idis.shared.database.QueryProvider;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
 import java.util.List;
@@ -24,7 +23,7 @@ public class CreateUserCommandHandlerTests {
         var command = command();
         var user = User.create(command.name(), command.firstName(), command.emailAddress());
 
-        try (MockedStatic<QueryProvider> mock = Mockito.mockStatic(QueryProvider.class)) {
+        try (var mock = Mockito.mockStatic(QueryProvider.class)) {
             mock.when(() -> QueryProvider.getAll(User.class)).thenReturn(List.of(user));
             mock.when(() -> QueryProvider.insert(any(User.class))).thenAnswer(invocation -> null);
 
@@ -45,7 +44,7 @@ public class CreateUserCommandHandlerTests {
         // Arrange
         var command = new CreateUserCommand(null, "test", "test");
 
-        try (MockedStatic<QueryProvider> mock = Mockito.mockStatic(QueryProvider.class)) {
+        try (var mock = Mockito.mockStatic(QueryProvider.class)) {
             mock.when(() -> QueryProvider.getAll(User.class)).thenReturn(List.of());
             mock.when(() -> QueryProvider.insert(any(User.class))).thenAnswer(invocation -> null);
 
@@ -66,7 +65,7 @@ public class CreateUserCommandHandlerTests {
         // Arrange
         var command = command();
 
-        try (MockedStatic<QueryProvider> mock = Mockito.mockStatic(QueryProvider.class)) {
+        try (var mock = Mockito.mockStatic(QueryProvider.class)) {
             mock.when(() -> QueryProvider.getAll(User.class)).thenReturn(List.of());
             mock.when(() -> QueryProvider.insert(any(User.class))).thenAnswer(invocation -> null);
 

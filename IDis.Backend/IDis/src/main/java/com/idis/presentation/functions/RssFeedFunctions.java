@@ -21,7 +21,7 @@ public class RssFeedFunctions implements IUserController {
     public static CompletableFuture <HttpResponse> getRSSFeed(String body){
         var command = new GetRssFeedCommand();
 
-        Map<String, String> headers = new HashMap<>();
+        var headers = new HashMap<String, String>();
         headers.put("Access-Control-Allow-Origin", "*");
         headers.put("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
         headers.put("Access-Control-Allow-Headers", "Content-Type, Authorization");

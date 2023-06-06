@@ -7,7 +7,6 @@ import com.idis.core.domain.user.User;
 import com.idis.core.domain.usersession.UserGate;
 import com.idis.shared.database.QueryProvider;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public class PassUserGateCommandHandlerTests {
         // Arrange
         var command = new PassUserGateCommand(UUID.randomUUID(), "code");
 
-        try (MockedStatic<QueryProvider> mock = Mockito.mockStatic(QueryProvider.class)) {
+        try (var mock = Mockito.mockStatic(QueryProvider.class)) {
             mock.when(() -> QueryProvider.getAll(UserGate.class)).thenReturn(new ArrayList<>());
             mock.when(() -> QueryProvider.insert(any(UserGate.class))).thenAnswer(invocation -> null);
 

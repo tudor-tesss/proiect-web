@@ -8,7 +8,6 @@ import com.idis.core.domain.user.User;
 import com.idis.core.domain.usersession.UserSession;
 import com.idis.shared.database.QueryProvider;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
 import java.util.List;
@@ -24,7 +23,7 @@ public class CreateUserSessionCommandHandlerTests {
         // Arrange
         var command = new CreateUserSessionCommand(UUID.randomUUID(), "127.0.0.1");
 
-        try (MockedStatic<QueryProvider> mock = Mockito.mockStatic(QueryProvider.class)) {
+        try (var mock = Mockito.mockStatic(QueryProvider.class)) {
             mock.when(() -> QueryProvider.getAll(User.class)).thenReturn(List.of());
 
             // Act

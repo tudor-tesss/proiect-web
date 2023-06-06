@@ -7,7 +7,7 @@ import com.idis.core.business.category.commands.CreateCategoryCommand;
 import com.idis.core.business.category.commands.GetAllCategoriesCommand;
 import com.idis.core.business.category.commands.GetCategoriesByCreatorIdCommand;
 import com.idis.core.business.statistics.posts.commandhandlers.ExportPostStatisticsAsPdfCommandHandler;
-import com.idis.core.business.statistics.posts.command.ExportPostStatisticsAsPdfCommand;
+import com.idis.core.business.statistics.posts.commands.ExportPostStatisticsAsPdfCommand;
 import com.idis.core.business.posts.parentpost.command.*;
 import com.idis.core.business.posts.parentpost.commandhandlers.*;
 import com.idis.core.business.posts.postreply.command.CreatePostReplyCommand;
@@ -15,12 +15,12 @@ import com.idis.core.business.posts.postreply.command.GetAllPostRepliesCommand;
 import com.idis.core.business.posts.postreply.commandhandlers.CreatePostReplyCommandHandler;
 import com.idis.core.business.posts.postreply.commandhandlers.GetAllPostRepliesCommandHandler;
 import com.idis.core.business.rssfeed.commandhandlers.GetRssFeedCommandHandler;
-import com.idis.core.business.rssfeed.commands.GetRSSFeedCommand;
+import com.idis.core.business.rssfeed.commands.GetRssFeedCommand;
 import com.idis.core.business.statistics.category.commandhandlers.CreateCategoriesStatisticsCommandHandler;
 import com.idis.core.business.statistics.category.commandhandlers.CreateCategoryStatisticsCommandHandler;
 import com.idis.core.business.statistics.category.commands.CreateCategoriesStatisticsCommand;
 import com.idis.core.business.statistics.category.commands.CreateCategoryStatisticsCommand;
-import com.idis.core.business.statistics.posts.command.CreatePostStatisticsCommand;
+import com.idis.core.business.statistics.posts.commands.CreatePostStatisticsCommand;
 import com.idis.core.business.statistics.posts.commandhandlers.CreatePostStatisticsCommandHandler;
 import com.idis.core.business.user.commandhandlers.CreateUserCommandHandler;
 import com.idis.core.business.user.commandhandlers.GetUserByIdCommandHandler;
@@ -184,7 +184,7 @@ public class Main {
         mediator.registerHandler(GetCategoriesByCreatorIdCommand.class, new GetCategoriesByCreatorIdCommandHandler());
         mediator.registerHandler(CreatePostStatisticsCommand.class, new CreatePostStatisticsCommandHandler());
 
-        mediator.registerHandler(GetRSSFeedCommand.class, new GetRssFeedCommandHandler());
+        mediator.registerHandler(GetRssFeedCommand.class, new GetRssFeedCommandHandler());
         mediator.registerHandler(ExportPostStatisticsAsPdfCommand.class, new ExportPostStatisticsAsPdfCommandHandler());
     }
 

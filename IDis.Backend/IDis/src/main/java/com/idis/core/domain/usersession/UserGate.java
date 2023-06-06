@@ -58,6 +58,7 @@ public final class UserGate extends AggregateRoot {
         return createdAt;
     }
 
+    @Nullable
     public Date getPassedAt() {
         return passedAt;
     }

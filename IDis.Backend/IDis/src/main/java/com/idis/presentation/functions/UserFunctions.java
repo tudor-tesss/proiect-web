@@ -108,7 +108,7 @@ public class UserFunctions implements IUserController {
                     .thenCompose(r -> {
                         HttpResponse res = HttpResponse.create(200, Serialization.serialize(r)).join();
 
-                        var sessionId = r.sessionId(); // Replace this with the appropriate session ID.
+                        var sessionId = r.sessionId();
                         res.setCookie("userId", sessionId.toString(), 3600 * 24); // 1 day
 
                         return CompletableFuture.completedFuture(res);

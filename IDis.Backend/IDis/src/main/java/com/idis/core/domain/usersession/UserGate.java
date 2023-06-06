@@ -13,7 +13,8 @@ public final class UserGate extends AggregateRoot {
     private UUID userId;
     private String code;
     private Date createdAt;
-    @Nullable private Date passedAt;
+    @Nullable
+    private Date passedAt;
 
     public UserGate() { }
 

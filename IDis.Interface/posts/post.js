@@ -17,7 +17,6 @@ async function getPost(postId) {
     });
 }
 async function savePdf() {
-
     const urlParams = new URLSearchParams(window.location.search);
     const postId = urlParams.get('postId');
 

@@ -52,7 +52,6 @@ export class StatisticsService {
     }
 
     static async getPdfForPostStats(postId) {
-
         const endpoint = `http://localhost:7101/posts/${postId}/statistics/pdf`;
 
         return await fetch(endpoint, {
@@ -61,13 +60,13 @@ export class StatisticsService {
                 "Content-Type": "application/pdf",
             }
         })
-            .then(async (response) => {
-                if (!response.ok) {
-                    const error = await response.json();
-                    throw new Error(error);
-                }
+        .then(async (response) => {
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error);
+            }
 
-                return response.text()
-            });
+            return response.text()
+        });
     }
 }

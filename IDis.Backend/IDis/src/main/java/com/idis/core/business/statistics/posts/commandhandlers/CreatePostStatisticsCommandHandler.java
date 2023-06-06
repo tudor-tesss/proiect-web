@@ -1,7 +1,7 @@
 package com.idis.core.business.statistics.posts.commandhandlers;
 
 import com.idis.core.business.BusinessErrors;
-import com.idis.core.business.statistics.posts.command.CreatePostStatisticsCommand;
+import com.idis.core.business.statistics.posts.commands.CreatePostStatisticsCommand;
 import com.idis.core.business.statistics.posts.commandresponses.CreatePostStatisticsCommandResponse;
 import com.idis.core.business.statistics.posts.extensions.PostStatisticsCalculator;
 import com.idis.core.domain.posts.parentpost.Post;

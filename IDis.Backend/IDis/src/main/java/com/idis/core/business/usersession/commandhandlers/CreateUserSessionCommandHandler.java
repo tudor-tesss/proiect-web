@@ -33,7 +33,7 @@ public final class CreateUserSessionCommandHandler implements IRequestHandler<Cr
             return CompletableFuture.completedFuture(response);
         }
         catch (Exception e) {
-            throw new RuntimeException(e);
+            throw e;
         }
     }
 }

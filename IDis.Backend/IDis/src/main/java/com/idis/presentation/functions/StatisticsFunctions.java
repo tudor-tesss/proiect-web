@@ -124,9 +124,9 @@ public final class StatisticsFunctions implements IUserController {
                     .thenCompose(pdf ->{
 
                         String pdfEncode = Base64.getEncoder().encodeToString(pdf);
-                        return HttpResponse.create(200,pdfEncode,headers);
+                        return HttpResponse.create(200, pdfEncode,headers);
                     });
-        }catch (Exception e){
+        } catch (Exception e){
             var responseContent = Serialization.serialize(e.getMessage());
 
             return HttpResponse.create(400,responseContent);

@@ -1,7 +1,5 @@
 package com.idis.core.business.statistics.posts.extensions;
 
-import com.idis.core.business.statistics.posts.commandresponses.PostStatistics;
-import com.idis.core.business.statistics.posts.extensions.PostStatisticsCalculator;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -18,12 +16,11 @@ public class PdfGeneratorForPosts {
     }
 
     public byte[] generatePdfForPostStats(){
-        PostStatistics postStatistics = postStatisticsCalculator.calculate();
+        var postStatistics = postStatisticsCalculator.calculate();
 
-        try{
+        try {
             Document document = new Document(PageSize.A4);
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            //PdfWriter.getInstance(document, new FileOutputStream("poststats.pdf"));
             PdfWriter writer = PdfWriter.getInstance(document, outputStream);
 
             document.open();
@@ -50,18 +47,18 @@ public class PdfGeneratorForPosts {
             writer.close();
 
             return outputStream.toByteArray();
-        }catch (DocumentException e) {
+        } catch (DocumentException e) {
             throw new IllegalArgumentException("Error exporting PDF",e);
         }
     }
 
     private static PdfPTable createTableFromMap(Map<?, ?> map, Font font) {
-        PdfPTable table = new PdfPTable(2);
-        Font cellFont = new Font(font.getFamily(), font.getSize(), font.getStyle(), font.getColor());
+        var table = new PdfPTable(2);
+        var cellFont = new Font(font.getFamily(), font.getSize(), font.getStyle(), font.getColor());
 
         for (Map.Entry<?, ?> entry : map.entrySet()) {
-            PdfPCell keyCell = new PdfPCell(new Paragraph(entry.getKey().toString(),cellFont));
-            PdfPCell valueCell = new PdfPCell(new Paragraph(entry.getValue().toString(),cellFont));
+            var keyCell = new PdfPCell(new Paragraph(entry.getKey().toString(),cellFont));
+            var valueCell = new PdfPCell(new Paragraph(entry.getValue().toString(),cellFont));
 
             table.addCell(keyCell);
             table.addCell(valueCell);

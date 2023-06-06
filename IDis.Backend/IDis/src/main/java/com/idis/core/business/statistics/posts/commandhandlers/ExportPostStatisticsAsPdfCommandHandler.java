@@ -5,26 +5,26 @@ import com.idis.core.business.statistics.posts.commands.ExportPostStatisticsAsPd
 import com.idis.core.business.statistics.posts.extensions.PdfGeneratorForPosts;
 import com.idis.core.business.statistics.posts.extensions.PostStatisticsCalculator;
 import com.idis.core.domain.posts.parentpost.Post;
-import com.nimblej.core.IRequestHandler;
-import com.nimblej.networking.database.NimbleJQueryProvider;
+import com.idis.shared.database.QueryProvider;
+import com.idis.shared.infrastructure.IRequestHandler;
 
 import java.util.concurrent.CompletableFuture;
 
 public final class ExportPostStatisticsAsPdfCommandHandler implements IRequestHandler<ExportPostStatisticsAsPdfCommand, byte[]> {
     public CompletableFuture<byte[]> handle (ExportPostStatisticsAsPdfCommand exportPostStatisticsAsPdfCommand){
-        byte[] pdfResult={};
-        var posts = NimbleJQueryProvider.getAll(Post.class);
+        byte[] pdfResult = {};
+        var posts = QueryProvider.getAll(Post.class);
         var postResult = posts.stream().filter(p -> p.getId().equals(exportPostStatisticsAsPdfCommand.postId())).findFirst();
 
-        if(postResult.isEmpty()) {
+        if (postResult.isEmpty()) {
             throw new IllegalArgumentException(BusinessErrors.Post.PostNotFound);
         }
-        PostStatisticsCalculator postStatisticsCalculator = new PostStatisticsCalculator(postResult.get());
-        PdfGeneratorForPosts pdfGeneratorForPosts = new PdfGeneratorForPosts(postStatisticsCalculator);
+        var postStatisticsCalculator = new PostStatisticsCalculator(postResult.get());
+        var pdfGeneratorForPosts = new PdfGeneratorForPosts(postStatisticsCalculator);
 
         try {
             pdfResult = pdfGeneratorForPosts.generatePdfForPostStats();
-        }catch (Exception e){
+        } catch (Exception e){
             e.printStackTrace();
         }
 

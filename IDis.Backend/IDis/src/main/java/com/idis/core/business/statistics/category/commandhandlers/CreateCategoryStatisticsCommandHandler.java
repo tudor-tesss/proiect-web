@@ -5,15 +5,15 @@ import com.idis.core.business.statistics.category.commandresponses.CreateCategor
 import com.idis.core.business.statistics.category.commands.CreateCategoryStatisticsCommand;
 import com.idis.core.business.statistics.category.extensions.CategoryStatisticsCalculator;
 import com.idis.core.domain.category.Category;
-import com.nimblej.core.IRequestHandler;
-import com.nimblej.networking.database.NimbleJQueryProvider;
+import com.idis.shared.database.QueryProvider;
+import com.idis.shared.infrastructure.IRequestHandler;
 
 import java.util.concurrent.CompletableFuture;
 
 public final class CreateCategoryStatisticsCommandHandler implements IRequestHandler<CreateCategoryStatisticsCommand, CreateCategoryStatisticsCommandResponse> {
     @Override
     public CompletableFuture<CreateCategoryStatisticsCommandResponse> handle(CreateCategoryStatisticsCommand createCategoryStatisticsCommand) {
-        var categoryResult = NimbleJQueryProvider
+        var categoryResult = QueryProvider
                 .getAll(Category.class)
                 .stream()
                 .filter(category -> category.getId().equals(createCategoryStatisticsCommand.categoryId()))

@@ -1,7 +1,7 @@
 package com.idis.core.business.statistics.posts.commands;
 
 import com.idis.core.business.statistics.posts.commandresponses.CreatePostStatisticsCommandResponse;
-import com.nimblej.core.IRequest;
+import com.idis.shared.infrastructure.IRequest;
 
 import java.util.UUID;
 

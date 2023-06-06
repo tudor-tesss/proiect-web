@@ -5,15 +5,15 @@ import com.idis.core.business.statistics.posts.commands.CreatePostStatisticsComm
 import com.idis.core.business.statistics.posts.commandresponses.CreatePostStatisticsCommandResponse;
 import com.idis.core.business.statistics.posts.extensions.PostStatisticsCalculator;
 import com.idis.core.domain.posts.parentpost.Post;
-import com.nimblej.core.IRequestHandler;
-import com.nimblej.networking.database.NimbleJQueryProvider;
+import com.idis.shared.database.QueryProvider;
+import com.idis.shared.infrastructure.IRequestHandler;
 
 import java.util.concurrent.CompletableFuture;
 
 public final class CreatePostStatisticsCommandHandler implements IRequestHandler<CreatePostStatisticsCommand, CreatePostStatisticsCommandResponse> {
     @Override
     public CompletableFuture<CreatePostStatisticsCommandResponse> handle(CreatePostStatisticsCommand createPostStatisticsCommand) {
-        var postResult = NimbleJQueryProvider
+        var postResult = QueryProvider
                 .getAll(Post.class)
                 .stream().filter(p -> p.getId().equals(createPostStatisticsCommand.postId()))
                 .findFirst();

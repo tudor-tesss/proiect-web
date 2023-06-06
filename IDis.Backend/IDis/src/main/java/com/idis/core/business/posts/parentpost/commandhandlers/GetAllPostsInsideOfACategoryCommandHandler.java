@@ -3,24 +3,20 @@ package com.idis.core.business.posts.parentpost.commandhandlers;
 import com.idis.core.business.BusinessErrors;
 import com.idis.core.business.posts.parentpost.command.GetAllPostsInsideOfACategoryCommand;
 import com.idis.core.domain.posts.parentpost.Post;
-import com.nimblej.core.IRequestHandler;
-import com.nimblej.networking.database.NimbleJQueryProvider;
+import com.idis.shared.database.QueryProvider;
+import com.idis.shared.infrastructure.IRequestHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public final class GetAllPostsInsideOfACategoryCommandHandler  implements IRequestHandler<GetAllPostsInsideOfACategoryCommand, List<Post>> {
-
+public final class GetAllPostsInsideOfACategoryCommandHandler implements IRequestHandler<GetAllPostsInsideOfACategoryCommand, List<Post>> {
     public CompletableFuture<List<Post>> handle(GetAllPostsInsideOfACategoryCommand getAllCategoriesCommand) {
+        var allPosts = QueryProvider.getAll(Post.class);
+        var posts = new ArrayList<Post>();
 
-        var categoryId = getAllCategoriesCommand.categoryId();
-        var allPosts = NimbleJQueryProvider
-                .getAll(Post.class);
-        List<Post> posts = new ArrayList<>();
-
-        for (Post post: allPosts) {
-            if(post.getCategoryId().equals(categoryId)){
+        for (var post : allPosts) {
+            if(post.getCategoryId().equals(getAllCategoriesCommand.categoryId())){
                 posts.add(post);
             }
         }

@@ -3,16 +3,14 @@ package com.idis.presentation.functions;
 import com.idis.core.business.posts.parentpost.command.*;
 import com.idis.core.business.posts.postreply.command.CreatePostReplyCommand;
 import com.idis.core.business.posts.postreply.command.GetAllPostRepliesCommand;
-import com.nimblej.core.Function;
-import com.nimblej.core.IUserController;
-import com.nimblej.core.Mediator;
-import com.nimblej.extensions.json.Serialization;
-import com.nimblej.networking.http.communication.HttpResponse;
-import com.nimblej.networking.http.communication.HttpVerbs;
-import com.nimblej.networking.http.routing.Route;
-import org.apache.http.impl.client.HttpRequestFutureTask;
+import com.idis.shared.infrastructure.Mediator;
+import com.idis.shared.serialization.Serialization;
+import com.idis.shared.web.communication.Function;
+import com.idis.shared.web.communication.HttpResponse;
+import com.idis.shared.web.communication.HttpVerbs;
+import com.idis.shared.web.communication.IUserController;
+import com.idis.shared.web.routing.Route;
 
-import javax.print.attribute.standard.Media;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 

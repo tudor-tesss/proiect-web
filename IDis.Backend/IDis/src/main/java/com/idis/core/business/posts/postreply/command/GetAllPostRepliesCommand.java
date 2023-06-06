@@ -1,7 +1,7 @@
 package com.idis.core.business.posts.postreply.command;
 
 import com.idis.core.domain.posts.postreply.PostReply;
-import com.nimblej.core.IRequest;
+import com.idis.shared.infrastructure.IRequest;
 
 import java.util.List;
 import java.util.UUID;

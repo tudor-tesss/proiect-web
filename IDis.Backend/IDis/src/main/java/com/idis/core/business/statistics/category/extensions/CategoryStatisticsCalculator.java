@@ -3,7 +3,7 @@ package com.idis.core.business.statistics.category.extensions;
 import com.idis.core.business.statistics.category.commandresponses.CategoryStatistics;
 import com.idis.core.domain.category.Category;
 import com.idis.core.domain.posts.parentpost.Post;
-import com.nimblej.networking.database.NimbleJQueryProvider;
+import com.idis.shared.database.QueryProvider;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -20,7 +20,7 @@ public final class CategoryStatisticsCalculator {
     }
 
     public CategoryStatistics calculate() {
-        var postsInCategory = NimbleJQueryProvider
+        var postsInCategory = QueryProvider
                 .getAll(Post.class)
                 .stream()
                 .filter(p -> p.getCategoryId().equals(category.getId()))

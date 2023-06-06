@@ -5,18 +5,18 @@ import com.idis.core.business.usersession.commandresponses.CreateUserSessionComm
 import com.idis.core.business.usersession.commands.CreateUserSessionCommand;
 import com.idis.core.domain.user.User;
 import com.idis.core.domain.usersession.UserSession;
-import com.nimblej.core.IRequestHandler;
-import com.nimblej.networking.database.NimbleJQueryProvider;
+import com.idis.shared.database.QueryProvider;
+import com.idis.shared.infrastructure.IRequestHandler;
 
 import java.util.concurrent.CompletableFuture;
 
-import static com.nimblej.extensions.functional.FunctionalExtensions.*;
+import static com.idis.shared.functional.FunctionalExtensions.filter;
 
 public final class CreateUserSessionCommandHandler implements IRequestHandler<CreateUserSessionCommand, CreateUserSessionCommandResponse> {
     @Override
     public CompletableFuture<CreateUserSessionCommandResponse> handle(CreateUserSessionCommand request) {
         var user = filter(
-                        NimbleJQueryProvider.getAll(User.class),
+                        QueryProvider.getAll(User.class),
                         u -> u.getId().equals(request.userId()))
                 .stream().findFirst();
 
@@ -26,7 +26,7 @@ public final class CreateUserSessionCommandHandler implements IRequestHandler<Cr
 
         try {
             var userSession = UserSession.create(user.get().getId(), request.userIpAddress());
-            NimbleJQueryProvider.insert(userSession);
+            QueryProvider.insert(userSession);
 
             var response = new CreateUserSessionCommandResponse(userSession.getId());
 

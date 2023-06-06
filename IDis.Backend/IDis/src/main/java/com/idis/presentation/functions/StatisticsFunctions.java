@@ -4,13 +4,13 @@ import com.idis.core.business.statistics.posts.commands.ExportPostStatisticsAsPd
 import com.idis.core.business.statistics.category.commands.CreateCategoriesStatisticsCommand;
 import com.idis.core.business.statistics.category.commands.CreateCategoryStatisticsCommand;
 import com.idis.core.business.statistics.posts.commands.CreatePostStatisticsCommand;
-import com.nimblej.core.Function;
-import com.nimblej.core.IUserController;
-import com.nimblej.core.Mediator;
-import com.nimblej.extensions.json.Serialization;
-import com.nimblej.networking.http.communication.HttpResponse;
-import com.nimblej.networking.http.communication.HttpVerbs;
-import com.nimblej.networking.http.routing.Route;
+import com.idis.shared.infrastructure.Mediator;
+import com.idis.shared.serialization.Serialization;
+import com.idis.shared.web.communication.Function;
+import com.idis.shared.web.communication.HttpResponse;
+import com.idis.shared.web.communication.HttpVerbs;
+import com.idis.shared.web.communication.IUserController;
+import com.idis.shared.web.routing.Route;
 
 import java.util.Base64;
 import java.util.HashMap;
@@ -35,7 +35,6 @@ public final class StatisticsFunctions implements IUserController {
         }
 
         var command = new CreateCategoryStatisticsCommand(categoryId);
-
         try {
             return mediator
                     .send(command)
@@ -55,7 +54,6 @@ public final class StatisticsFunctions implements IUserController {
     @Function(name = "createCategoriesStatistics")
     public static CompletableFuture<HttpResponse> createCategoriesStatistics(String requestBody) {
         var command = new CreateCategoriesStatisticsCommand();
-
         try {
             return mediator
                     .send(command)
@@ -85,7 +83,6 @@ public final class StatisticsFunctions implements IUserController {
         }
 
         var command = new CreatePostStatisticsCommand(postId);
-
         try {
             return mediator
                     .send(command)
@@ -127,9 +124,9 @@ public final class StatisticsFunctions implements IUserController {
                     .thenCompose(pdf ->{
 
                         String pdfEncode = Base64.getEncoder().encodeToString(pdf);
-                        return HttpResponse.create(200,pdfEncode,headers);
+                        return HttpResponse.create(200, pdfEncode,headers);
                     });
-        }catch (Exception e){
+        } catch (Exception e){
             var responseContent = Serialization.serialize(e.getMessage());
 
             return HttpResponse.create(400,responseContent);

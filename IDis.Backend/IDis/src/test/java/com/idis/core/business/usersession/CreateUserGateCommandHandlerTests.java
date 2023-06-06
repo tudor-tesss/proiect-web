@@ -6,7 +6,7 @@ import com.idis.core.business.usersession.commands.CreateUserGateCommand;
 import com.idis.core.domain.user.User;
 import com.idis.core.domain.usersession.UserGate;
 import com.idis.infrastructure.services.SendGridService;
-import com.nimblej.networking.database.NimbleJQueryProvider;
+import com.idis.shared.database.QueryProvider;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
@@ -24,9 +24,9 @@ public class CreateUserGateCommandHandlerTests {
         // Arrange
         var command = new CreateUserGateCommand("test_mail");
 
-        try (MockedStatic<NimbleJQueryProvider> mock = Mockito.mockStatic(NimbleJQueryProvider.class)) {
-            mock.when(() -> NimbleJQueryProvider.getAll(User.class)).thenReturn(List.of());
-            mock.when(() -> NimbleJQueryProvider.insert(any(UserGate.class))).thenAnswer(invocation -> null);
+        try (var mock = Mockito.mockStatic(QueryProvider.class)) {
+            mock.when(() -> QueryProvider.getAll(User.class)).thenReturn(List.of());
+            mock.when(() -> QueryProvider.insert(any(UserGate.class))).thenAnswer(invocation -> null);
 
             // Act
             var exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -46,9 +46,9 @@ public class CreateUserGateCommandHandlerTests {
         var command = new CreateUserGateCommand("test_mail");
         var user = User.create("test", "test", "test_mail");
 
-        try (var mock = Mockito.mockStatic(NimbleJQueryProvider.class); var sendGridMock = Mockito.mockStatic(SendGridService.class)) {
-            mock.when(() -> NimbleJQueryProvider.getAll(User.class)).thenReturn(List.of(user));
-            mock.when(() -> NimbleJQueryProvider.insert(any(UserGate.class))).thenAnswer(invocation -> null);
+        try (var mock = Mockito.mockStatic(QueryProvider.class); var sendGridMock = Mockito.mockStatic(SendGridService.class)) {
+            mock.when(() -> QueryProvider.getAll(User.class)).thenReturn(List.of(user));
+            mock.when(() -> QueryProvider.insert(any(UserGate.class))).thenAnswer(invocation -> null);
             mock.when(() -> SendGridService.sendEmail(any(String.class), any(String.class), any(String.class))).thenAnswer(invocation -> null);
 
             // Act

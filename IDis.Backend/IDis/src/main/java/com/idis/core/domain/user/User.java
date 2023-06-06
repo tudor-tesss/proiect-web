@@ -1,9 +1,9 @@
 package com.idis.core.domain.user;
 
 import com.idis.core.domain.DomainErrors;
-import com.nimblej.core.BaseObject;
+import com.idis.shared.core.AggregateRoot;
 
-public final class User extends BaseObject {
+public final class User extends AggregateRoot {
     private String name;
     private String firstName;
     private String emailAddress;

@@ -3,7 +3,7 @@ package com.idis.core.business.statistics.posts.extensions;
 import com.idis.core.business.statistics.posts.commandresponses.PostStatistics;
 import com.idis.core.domain.posts.parentpost.Post;
 import com.idis.core.domain.posts.postreply.PostReply;
-import com.nimblej.networking.database.NimbleJQueryProvider;
+import com.idis.shared.database.QueryProvider;
 
 import java.util.HashMap;
 
@@ -12,7 +12,7 @@ public final class PostStatisticsCalculator {
 
     public PostStatisticsCalculator(Post post) {this.post = post;}
     public PostStatistics calculate() {
-        var repliesInPost = NimbleJQueryProvider
+        var repliesInPost = QueryProvider
                 .getAll(PostReply.class)
                 .stream()
                 .filter(r -> r.getParentPostId().equals(post.getId()))

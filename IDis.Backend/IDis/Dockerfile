@@ -32,7 +32,6 @@ RUN curl -L -o /tmp/gradle.zip "https://services.gradle.org/distributions/gradle
 
 # Copy your Gradle scripts and source code into the image
 COPY build.gradle settings.gradle gradlew /app/
-COPY libs /app/libs
 COPY src /app/src
 
 # Execute the Gradle build

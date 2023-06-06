@@ -2,18 +2,19 @@ package com.idis.core.domain.usersession;
 
 import com.idis.core.domain.DomainErrors;
 import com.idis.core.domain.constants.UserGateConstants;
+import com.idis.shared.core.AggregateRoot;
 import com.idis.shared.time.TimeProviderContext;
-import com.nimblej.core.BaseObject;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Date;
 import java.util.UUID;
 
-public final class UserGate extends BaseObject {
+public final class UserGate extends AggregateRoot {
     private UUID userId;
     private String code;
     private Date createdAt;
-    @Nullable private Date passedAt;
+    @Nullable
+    private Date passedAt;
 
     public UserGate() { }
 
@@ -57,6 +58,7 @@ public final class UserGate extends BaseObject {
         return createdAt;
     }
 
+    @Nullable
     public Date getPassedAt() {
         return passedAt;
     }

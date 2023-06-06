@@ -4,8 +4,8 @@ import com.idis.core.business.usersession.commandhandlers.CheckUserSessionComman
 import com.idis.core.business.usersession.commands.CheckUserSessionCommand;
 import com.idis.core.business.BusinessErrors;
 import com.idis.core.domain.usersession.UserSession;
+import com.idis.shared.database.QueryProvider;
 import com.idis.shared.time.TimeProviderContext;
-import com.nimblej.networking.database.NimbleJQueryProvider;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
@@ -23,8 +23,8 @@ public class CheckUserSessionCommandHandlerTests {
         // Arrange
         var command = command();
 
-        try (MockedStatic<NimbleJQueryProvider> mock = Mockito.mockStatic(NimbleJQueryProvider.class)) {
-            mock.when(() -> NimbleJQueryProvider.getAll(UserSession.class)).thenReturn(List.of());
+        try (var mock = Mockito.mockStatic(QueryProvider.class)) {
+            mock.when(() -> QueryProvider.getAll(UserSession.class)).thenReturn(List.of());
 
             // Act
             var exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -44,8 +44,8 @@ public class CheckUserSessionCommandHandlerTests {
         var userSession = UserSession.create(UUID.randomUUID(), "some other ip");
         var command = new CheckUserSessionCommand(userSession.getUserId(), userSession.getId(), "some ip");
 
-        try (MockedStatic<NimbleJQueryProvider> mock = Mockito.mockStatic(NimbleJQueryProvider.class)) {
-            mock.when(() -> NimbleJQueryProvider.getAll(UserSession.class)).thenReturn(List.of(userSession));
+        try (var mock = Mockito.mockStatic(QueryProvider.class)) {
+            mock.when(() -> QueryProvider.getAll(UserSession.class)).thenReturn(List.of(userSession));
 
             // Act
             var exception = assertThrows(IllegalArgumentException.class, () -> sut().handle(command));
@@ -66,8 +66,8 @@ public class CheckUserSessionCommandHandlerTests {
 
         TimeProviderContext.advanceTimeTo(new Date(userSession.getCreatedAt().getTime() + 1000 * 60 * 60 * 24 + 1));
 
-        try (MockedStatic<NimbleJQueryProvider> mock = Mockito.mockStatic(NimbleJQueryProvider.class)) {
-            mock.when(() -> NimbleJQueryProvider.getAll(UserSession.class)).thenReturn(List.of(userSession));
+        try (var mock = Mockito.mockStatic(QueryProvider.class)) {
+            mock.when(() -> QueryProvider.getAll(UserSession.class)).thenReturn(List.of(userSession));
 
             // Act
             var exception = assertThrows(IllegalArgumentException.class, () -> sut().handle(command));
@@ -86,8 +86,8 @@ public class CheckUserSessionCommandHandlerTests {
         var userSession = UserSession.create(UUID.randomUUID(), "some ip");
         var command = new CheckUserSessionCommand(UUID.randomUUID(), userSession.getId(), "some ip");
 
-        try (MockedStatic<NimbleJQueryProvider> mock = Mockito.mockStatic(NimbleJQueryProvider.class)) {
-            mock.when(() -> NimbleJQueryProvider.getAll(UserSession.class)).thenReturn(List.of(userSession));
+        try (var mock = Mockito.mockStatic(QueryProvider.class)) {
+            mock.when(() -> QueryProvider.getAll(UserSession.class)).thenReturn(List.of(userSession));
 
             // Act
             var exception = assertThrows(IllegalArgumentException.class, () -> sut().handle(command));

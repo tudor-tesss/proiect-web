@@ -1,13 +1,13 @@
 package com.idis.core.domain.usersession;
 
 import com.idis.core.domain.DomainErrors;
+import com.idis.shared.core.AggregateRoot;
 import com.idis.shared.time.TimeProviderContext;
-import com.nimblej.core.BaseObject;
 
 import java.util.Date;
 import java.util.UUID;
 
-public final class UserSession extends BaseObject {
+public final class UserSession extends AggregateRoot {
     private UUID userId;
     private String userIpAddress;
     private Date createdAt;

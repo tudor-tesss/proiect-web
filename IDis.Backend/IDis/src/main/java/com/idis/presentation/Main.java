@@ -35,9 +35,9 @@ import com.idis.core.domain.user.*;
 import com.idis.core.domain.usersession.UserGate;
 import com.idis.core.domain.usersession.UserSession;
 import com.idis.presentation.functions.*;
-import com.nimblej.core.Mediator;
-import com.nimblej.networking.database.NimbleJQueryProvider;
-import com.nimblej.networking.http.server.HttpServer;
+import com.idis.shared.database.QueryProvider;
+import com.idis.shared.infrastructure.Mediator;
+import com.idis.shared.web.server.HttpServer;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -59,7 +59,7 @@ public class Main {
         int catchCount = 0;
         for (int i = 0; i < maxRetries; i++) {
             try {
-                NimbleJQueryProvider.initiate(url, username, password);
+                QueryProvider.initiate(url, username, password);
                 System.out.println("Connected to deployed database.\n");
                 catchCount = 0;
 
@@ -85,7 +85,7 @@ public class Main {
 
             for (int i = 0; i < maxRetries; i++) {
                 try {
-                    NimbleJQueryProvider.initiate(url, username, password);
+                    QueryProvider.initiate(url, username, password);
                     System.out.println("Connected to docker database.\n");
                     catchCount = 0;
 
@@ -111,7 +111,7 @@ public class Main {
 
             for (int i = 0; i < maxRetries; i++) {
                 try {
-                    NimbleJQueryProvider.initiate(url, username, password);
+                    QueryProvider.initiate(url, username, password);
                     System.out.println("Connected to local database.\n");
                     catchCount = 0;
 
@@ -148,12 +148,12 @@ public class Main {
     }
 
     private static void addManagedClasses() {
-        NimbleJQueryProvider.addManagedClass(User.class);
-        NimbleJQueryProvider.addManagedClass(UserGate.class);
-        NimbleJQueryProvider.addManagedClass(UserSession.class);
-        NimbleJQueryProvider.addManagedClass(Category.class);
-        NimbleJQueryProvider.addManagedClass(Post.class);
-        NimbleJQueryProvider.addManagedClass(PostReply.class);
+        QueryProvider.addManagedClass(User.class);
+        QueryProvider.addManagedClass(UserGate.class);
+        QueryProvider.addManagedClass(UserSession.class);
+        QueryProvider.addManagedClass(Category.class);
+        QueryProvider.addManagedClass(Post.class);
+        QueryProvider.addManagedClass(PostReply.class);
     }
 
     private static void addMediatorHandlers() {

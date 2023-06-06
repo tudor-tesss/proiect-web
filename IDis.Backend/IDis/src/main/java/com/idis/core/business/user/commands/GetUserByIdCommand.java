@@ -1,7 +1,7 @@
 package com.idis.core.business.user.commands;
 
 import com.idis.core.domain.user.User;
-import com.nimblej.core.IRequest;
+import com.idis.shared.infrastructure.IRequest;
 
 import java.util.UUID;
 

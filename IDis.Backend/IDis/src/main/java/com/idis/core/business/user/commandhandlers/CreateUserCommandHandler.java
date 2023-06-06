@@ -3,17 +3,17 @@ package com.idis.core.business.user.commandhandlers;
 import com.idis.core.business.BusinessErrors;
 import com.idis.core.business.user.commands.CreateUserCommand;
 import com.idis.core.domain.user.User;
-import com.nimblej.core.IRequestHandler;
-import com.nimblej.networking.database.NimbleJQueryProvider;
+import com.idis.shared.database.QueryProvider;
+import com.idis.shared.infrastructure.IRequestHandler;
 
 import java.util.concurrent.CompletableFuture;
 
-import static com.nimblej.extensions.functional.FunctionalExtensions.any;
+import static com.idis.shared.functional.FunctionalExtensions.any;
 
 public final class CreateUserCommandHandler implements IRequestHandler<CreateUserCommand, User> {
     @Override
     public CompletableFuture<User> handle(CreateUserCommand createUserCommand) {
-        var users = NimbleJQueryProvider.getAll(User.class);
+        var users = QueryProvider.getAll(User.class);
 
         var duplicateResult = any(users, user -> user.getEmailAddress().equals(createUserCommand.emailAddress()));
         if (duplicateResult) {
@@ -22,7 +22,7 @@ public final class CreateUserCommandHandler implements IRequestHandler<CreateUse
 
         try {
             var user = User.create(createUserCommand.name(), createUserCommand.firstName(), createUserCommand.emailAddress());
-            NimbleJQueryProvider.insert(user);
+            QueryProvider.insert(user);
 
             return CompletableFuture.completedFuture(user);
         }

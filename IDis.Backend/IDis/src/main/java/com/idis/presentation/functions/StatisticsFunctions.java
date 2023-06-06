@@ -1,5 +1,6 @@
 package com.idis.presentation.functions;
 
+import com.idis.core.business.statistics.category.commands.ExportCategoryStatisticsAsPdfCommand;
 import com.idis.core.business.statistics.posts.commands.ExportPostStatisticsAsPdfCommand;
 import com.idis.core.business.statistics.category.commands.CreateCategoriesStatisticsCommand;
 import com.idis.core.business.statistics.category.commands.CreateCategoryStatisticsCommand;
@@ -111,6 +112,41 @@ public final class StatisticsFunctions implements IUserController {
         }
 
         var command = new ExportPostStatisticsAsPdfCommand(postId);
+        Map<String,String> headers =new HashMap<>();
+
+        headers.put("Access-Control-Allow-Origin", "*");
+        headers.put("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
+        headers.put("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        headers.put("Content-Type", "application/pdf");
+
+        try{
+            return mediator
+                    .send(command)
+                    .thenCompose(pdf ->{
+
+                        String pdfEncode = Base64.getEncoder().encodeToString(pdf);
+                        return HttpResponse.create(200, pdfEncode,headers);
+                    });
+        } catch (Exception e){
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400,responseContent);
+        }
+    }
+
+    @Route(path="/categories/{id}/statistics/pdf",method = HttpVerbs.POST)
+    @Function(name = "exportCategoryStatisticsAsPdf")
+    public static CompletableFuture <HttpResponse> exportCategoryStatisticsAsPdf (String id, String body){
+        UUID categoryId;
+        try {
+            categoryId = UUID.fromString(id);
+        } catch (Exception e) {
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400, responseContent);
+        }
+
+        var command = new ExportCategoryStatisticsAsPdfCommand(categoryId);
         Map<String,String> headers =new HashMap<>();
 
         headers.put("Access-Control-Allow-Origin", "*");

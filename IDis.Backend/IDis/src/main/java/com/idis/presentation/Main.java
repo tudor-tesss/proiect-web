@@ -6,6 +6,8 @@ import com.idis.core.business.category.commandhandlers.GetCategoriesByCreatorIdC
 import com.idis.core.business.category.commands.CreateCategoryCommand;
 import com.idis.core.business.category.commands.GetAllCategoriesCommand;
 import com.idis.core.business.category.commands.GetCategoriesByCreatorIdCommand;
+import com.idis.core.business.statistics.category.commandhandlers.ExportCategoryStatisticsAsPdfCommandHandler;
+import com.idis.core.business.statistics.category.commands.ExportCategoryStatisticsAsPdfCommand;
 import com.idis.core.business.statistics.posts.commandhandlers.ExportPostStatisticsAsPdfCommandHandler;
 import com.idis.core.business.statistics.posts.commands.ExportPostStatisticsAsPdfCommand;
 import com.idis.core.business.posts.parentpost.command.*;
@@ -186,6 +188,7 @@ public class Main {
 
         mediator.registerHandler(GetRssFeedCommand.class, new GetRssFeedCommandHandler());
         mediator.registerHandler(ExportPostStatisticsAsPdfCommand.class, new ExportPostStatisticsAsPdfCommandHandler());
+        mediator.registerHandler(ExportCategoryStatisticsAsPdfCommand.class, new ExportCategoryStatisticsAsPdfCommandHandler());
     }
 
     private static class DeployedDetails {

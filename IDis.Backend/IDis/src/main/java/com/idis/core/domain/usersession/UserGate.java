@@ -2,6 +2,7 @@ package com.idis.core.domain.usersession;
 
 import com.idis.core.domain.DomainErrors;
 import com.idis.core.domain.constants.UserGateConstants;
+import com.idis.shared.time.TimeProviderContext;
 import com.nimblej.core.BaseObject;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -21,7 +22,7 @@ public final class UserGate extends BaseObject {
 
         this.userId = userId;
         this.code = generateCode();
-        this.createdAt = new Date();
+        this.createdAt = TimeProviderContext.getCurrentProvider().now();
     }
 
     public static UserGate create(UUID userId) {
@@ -29,7 +30,7 @@ public final class UserGate extends BaseObject {
     }
 
     public void pass(String code) throws Exception {
-        if (createdAt.getTime() + UserGateConstants.UserGateTimeToLive < new Date().getTime()) {
+        if (createdAt.getTime() + UserGateConstants.UserGateTimeToLive < TimeProviderContext.getCurrentProvider().now().getTime()) {
             throw new Exception(DomainErrors.UserGate.Pass.UserGateExpired);
         }
 
@@ -41,7 +42,7 @@ public final class UserGate extends BaseObject {
             throw new Exception(DomainErrors.UserGate.Pass.UserGateAlreadyPassed);
         }
 
-        passedAt = new Date();
+        passedAt = TimeProviderContext.getCurrentProvider().now();
     }
 
     public UUID getUserId() {

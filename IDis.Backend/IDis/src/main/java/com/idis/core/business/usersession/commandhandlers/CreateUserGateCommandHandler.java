@@ -6,19 +6,19 @@ import com.idis.core.domain.user.User;
 import com.idis.core.domain.usersession.UserGate;
 import com.idis.infrastructure.services.SendGridService;
 import com.idis.infrastructure.services.SendGridTemplates;
-import com.nimblej.core.IRequestHandler;
-import com.nimblej.networking.database.NimbleJQueryProvider;
+import com.idis.shared.database.QueryProvider;
+import com.idis.shared.infrastructure.IRequestHandler;
 
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
-import static com.nimblej.extensions.functional.FunctionalExtensions.*;
+import static com.idis.shared.functional.FunctionalExtensions.filter;
 
 public final class CreateUserGateCommandHandler implements IRequestHandler<CreateUserGateCommand, UUID> {
     @Override
     public CompletableFuture<UUID> handle(CreateUserGateCommand createUserGateCommand) {
         var user = filter(
-                        NimbleJQueryProvider.getAll(User.class),
+                        QueryProvider.getAll(User.class),
                         u -> u.getEmailAddress().equals(createUserGateCommand.emailAddress()))
                 .stream().findFirst();
 
@@ -28,7 +28,7 @@ public final class CreateUserGateCommandHandler implements IRequestHandler<Creat
 
         try {
             var userGate = UserGate.create(user.get().getId());
-            NimbleJQueryProvider.insert(userGate);
+            QueryProvider.insert(userGate);
 
             SendGridService.sendEmail(user.get().getEmailAddress(), "Login code for IDis", SendGridTemplates.userGateTemplate(user.get().getFirstName(), userGate.getCode()));
 

@@ -1,12 +1,11 @@
 package com.idis.core.domain.category;
 
 import com.idis.core.domain.DomainErrors;
-import com.nimblej.core.BaseObject;
+import com.idis.shared.core.AggregateRoot;
 
-import java.time.LocalDate;
 import java.util.*;
 
-public final class Category extends BaseObject {
+public final class Category extends AggregateRoot {
 
     private String name;
     private UUID creatorId;

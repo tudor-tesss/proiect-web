@@ -1,13 +1,13 @@
 package com.idis.presentation.functions;
 
 import com.idis.core.business.rssfeed.commands.GetRssFeedCommand;
-import com.nimblej.core.Function;
-import com.nimblej.core.IUserController;
-import com.nimblej.core.Mediator;
-import com.nimblej.extensions.json.Serialization;
-import com.nimblej.networking.http.communication.HttpResponse;
-import com.nimblej.networking.http.communication.HttpVerbs;
-import com.nimblej.networking.http.routing.Route;
+import com.idis.shared.infrastructure.Mediator;
+import com.idis.shared.serialization.Serialization;
+import com.idis.shared.web.communication.Function;
+import com.idis.shared.web.communication.HttpResponse;
+import com.idis.shared.web.communication.HttpVerbs;
+import com.idis.shared.web.communication.IUserController;
+import com.idis.shared.web.routing.Route;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +30,7 @@ public class RssFeedFunctions implements IUserController {
         try {
             return mediator
                     .send(command)
-                    .thenCompose(rss -> HttpResponse.create(200,rss,headers));
+                    .thenCompose(rss -> HttpResponse.create(200, rss, headers));
         } catch (Exception e) {
             var responseContent = Serialization.serialize(e.getMessage());
 

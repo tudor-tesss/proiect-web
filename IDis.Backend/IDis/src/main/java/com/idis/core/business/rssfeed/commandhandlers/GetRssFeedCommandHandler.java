@@ -5,16 +5,16 @@ import com.idis.core.business.rssfeed.commands.GetRssFeedCommand;
 import com.idis.core.business.rssfeed.extensions.RssFeedGenerator;
 import com.idis.core.domain.posts.parentpost.Post;
 import com.idis.core.domain.posts.postreply.PostReply;
-import com.nimblej.core.IRequestHandler;
-import com.nimblej.networking.database.NimbleJQueryProvider;
+import com.idis.shared.database.QueryProvider;
+import com.idis.shared.infrastructure.IRequestHandler;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
-public final class GetRssFeedCommandHandler implements IRequestHandler<GetRssFeedCommand, String >{
+public final class GetRssFeedCommandHandler implements IRequestHandler<GetRssFeedCommand, String > {
     public CompletableFuture<String> handle (GetRssFeedCommand getRSSFeedCommand){
         String rssResult = new String();
-        var posts = sortAfterDate(NimbleJQueryProvider.getAll(Post.class));
+        var posts = sortAfterDate(QueryProvider.getAll(Post.class));
         if(posts.isEmpty()){
             throw new IllegalArgumentException(BusinessErrors.Post.NoPostsAvailable);
         }
@@ -42,17 +42,17 @@ public final class GetRssFeedCommandHandler implements IRequestHandler<GetRssFee
         return posts;
     }
 
-    private Map<UUID,Integer> getRepliesNum(List<Post> posts){
-        Map<UUID,Integer> numOfReplies = new HashMap<>();
-        var allReplies = NimbleJQueryProvider.getAll(PostReply.class);
+    private Map<UUID, Integer> getRepliesNum(List<Post> posts){
+        var numOfReplies = new HashMap<UUID, Integer>();
+        var allReplies = QueryProvider.getAll(PostReply.class);
 
-        for(Post post:posts){
-            for(PostReply reply : allReplies) {
-                if(reply.getParentPostId().equals(post.getId())) {
-
+        for (var post : posts){
+            for (var reply : allReplies) {
+                if (reply.getParentPostId().equals(post.getId())) {
                     if(numOfReplies.get(post.getId()) == null){
                         numOfReplies.put(post.getId(),0);
                     }
+
                     var updatedValue = numOfReplies.get(post.getId())+1;
                     numOfReplies.put(post.getId(),updatedValue);
                 }

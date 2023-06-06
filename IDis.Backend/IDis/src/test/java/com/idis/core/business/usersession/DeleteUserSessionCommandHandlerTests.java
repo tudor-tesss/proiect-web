@@ -3,7 +3,7 @@ package com.idis.core.business.usersession;
 import com.idis.core.business.usersession.commandhandlers.DeleteUserSessionCommandHandler;
 import com.idis.core.business.usersession.commands.DeleteUserSessionCommand;
 import com.idis.core.domain.usersession.UserSession;
-import com.nimblej.networking.database.NimbleJQueryProvider;
+import com.idis.shared.database.QueryProvider;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -19,15 +19,15 @@ public class DeleteUserSessionCommandHandlerTests {
         var session = UserSession.create(UUID.randomUUID(), "localhost");
         var command = new DeleteUserSessionCommand(session.getId());
 
-        try (var mock = Mockito.mockStatic(NimbleJQueryProvider.class)) {
-            mock.when(() -> NimbleJQueryProvider.getAll(UserSession.class)).thenReturn(List.of(session));
-            mock.when(() -> NimbleJQueryProvider.delete(any(UserSession.class))).thenAnswer(invocation -> null);
+        try (var mock = Mockito.mockStatic(QueryProvider.class)) {
+            mock.when(() -> QueryProvider.getAll(UserSession.class)).thenReturn(List.of(session));
+            mock.when(() -> QueryProvider.delete(any(UserSession.class))).thenAnswer(invocation -> null);
 
             // Act
             sut().handle(command);
 
             // Assert
-            mock.verify(() -> NimbleJQueryProvider.delete(any(UserSession.class)));
+            mock.verify(() -> QueryProvider.delete(any(UserSession.class)));
         }
     }
 

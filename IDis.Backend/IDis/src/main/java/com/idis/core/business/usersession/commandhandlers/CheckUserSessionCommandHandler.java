@@ -4,19 +4,19 @@ import com.idis.core.business.BusinessErrors;
 import com.idis.core.business.usersession.commandresponses.CheckUserSessionCommandResponse;
 import com.idis.core.business.usersession.commands.CheckUserSessionCommand;
 import com.idis.core.domain.usersession.UserSession;
+import com.idis.shared.database.QueryProvider;
+import com.idis.shared.infrastructure.IRequestHandler;
 import com.idis.shared.time.TimeProviderContext;
-import com.nimblej.core.IRequestHandler;
-import com.nimblej.networking.database.NimbleJQueryProvider;
 
 import java.util.concurrent.CompletableFuture;
 
-import static com.nimblej.extensions.functional.FunctionalExtensions.*;
+import static com.idis.shared.functional.FunctionalExtensions.filter;
 
 public final class CheckUserSessionCommandHandler implements IRequestHandler<CheckUserSessionCommand, CheckUserSessionCommandResponse> {
     @Override
     public CompletableFuture<CheckUserSessionCommandResponse> handle(CheckUserSessionCommand request) {
         var userSession = filter(
-                    NimbleJQueryProvider.getAll(UserSession.class),
+                    QueryProvider.getAll(UserSession.class),
                     u -> u.getId().equals(request.sessionId()))
                 .stream().findFirst();
 

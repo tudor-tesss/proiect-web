@@ -3,13 +3,13 @@ package com.idis.presentation.functions;
 import com.idis.core.business.category.commands.CreateCategoryCommand;
 import com.idis.core.business.category.commands.GetAllCategoriesCommand;
 import com.idis.core.business.category.commands.GetCategoriesByCreatorIdCommand;
-import com.nimblej.core.Function;
-import com.nimblej.core.IUserController;
-import com.nimblej.core.Mediator;
-import com.nimblej.extensions.json.Serialization;
-import com.nimblej.networking.http.communication.HttpResponse;
-import com.nimblej.networking.http.communication.HttpVerbs;
-import com.nimblej.networking.http.routing.Route;
+import com.idis.shared.infrastructure.Mediator;
+import com.idis.shared.serialization.Serialization;
+import com.idis.shared.web.communication.Function;
+import com.idis.shared.web.communication.HttpResponse;
+import com.idis.shared.web.communication.HttpVerbs;
+import com.idis.shared.web.communication.IUserController;
+import com.idis.shared.web.routing.Route;
 
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -19,9 +19,8 @@ public class CategoryFunctions implements IUserController {
 
     @Route(path= "/categories", method = HttpVerbs.POST)
     @Function(name = "createCategory")
-    public static CompletableFuture <HttpResponse> createCategory (String requestBody){
+    public static CompletableFuture<HttpResponse> createCategory(String requestBody){
         var command = Serialization.deserialize(requestBody, CreateCategoryCommand.class);
-
         try {
             return mediator
                     .send(command)
@@ -39,7 +38,7 @@ public class CategoryFunctions implements IUserController {
 
     @Route(path = "/categories",method = HttpVerbs.GET)
     @Function(name = "getAllCategories")
-    public static CompletableFuture <HttpResponse> getAllCategories (String requestBody){
+    public static CompletableFuture<HttpResponse> getAllCategories(String requestBody){
         var command = new GetAllCategoriesCommand();
         try {
             return mediator
@@ -58,7 +57,7 @@ public class CategoryFunctions implements IUserController {
 
     @Route(path = "/users/{id}/categories",method = HttpVerbs.GET)
     @Function(name = "getCategoriesByCreatorId")
-    public static CompletableFuture <HttpResponse> getCategoriesByCreatorId (String id, String requestBody){
+    public static CompletableFuture<HttpResponse> getCategoriesByCreatorId(String id, String requestBody){
         UUID creatorId;
         try {
             creatorId = UUID.fromString(id);

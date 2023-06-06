@@ -5,7 +5,7 @@ import com.idis.core.business.usersession.commandhandlers.PassUserGateCommandHan
 import com.idis.core.business.usersession.commands.PassUserGateCommand;
 import com.idis.core.domain.user.User;
 import com.idis.core.domain.usersession.UserGate;
-import com.nimblej.networking.database.NimbleJQueryProvider;
+import com.idis.shared.database.QueryProvider;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
@@ -25,9 +25,9 @@ public class PassUserGateCommandHandlerTests {
         // Arrange
         var command = new PassUserGateCommand(UUID.randomUUID(), "code");
 
-        try (MockedStatic<NimbleJQueryProvider> mock = Mockito.mockStatic(NimbleJQueryProvider.class)) {
-            mock.when(() -> NimbleJQueryProvider.getAll(UserGate.class)).thenReturn(new ArrayList<>());
-            mock.when(() -> NimbleJQueryProvider.insert(any(UserGate.class))).thenAnswer(invocation -> null);
+        try (MockedStatic<QueryProvider> mock = Mockito.mockStatic(QueryProvider.class)) {
+            mock.when(() -> QueryProvider.getAll(UserGate.class)).thenReturn(new ArrayList<>());
+            mock.when(() -> QueryProvider.insert(any(UserGate.class))).thenAnswer(invocation -> null);
 
             // Act
             var exception = assertThrows(IllegalArgumentException.class, () -> sut().handle(command));
@@ -46,10 +46,10 @@ public class PassUserGateCommandHandlerTests {
         var userGate = UserGate.create(user.getId());
         var command = new PassUserGateCommand(user.getId(), userGate.getCode());
 
-        try (var mock = Mockito.mockStatic(NimbleJQueryProvider.class)) {
-            mock.when(() -> NimbleJQueryProvider.getAll(User.class)).thenReturn(List.of(user));
-            mock.when(() -> NimbleJQueryProvider.getAll(UserGate.class)).thenReturn(new ArrayList<>(List.of(userGate)));
-            mock.when(() -> NimbleJQueryProvider.insert(any(UserGate.class))).thenAnswer(invocation -> null);
+        try (var mock = Mockito.mockStatic(QueryProvider.class)) {
+            mock.when(() -> QueryProvider.getAll(User.class)).thenReturn(List.of(user));
+            mock.when(() -> QueryProvider.getAll(UserGate.class)).thenReturn(new ArrayList<>(List.of(userGate)));
+            mock.when(() -> QueryProvider.insert(any(UserGate.class))).thenAnswer(invocation -> null);
 
             // Act
             var result = sut().handle(command).get();

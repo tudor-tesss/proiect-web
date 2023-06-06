@@ -1,7 +1,7 @@
 package com.idis.core.business.posts.parentpost.command;
 
 import com.idis.core.domain.posts.parentpost.Post;
-import com.nimblej.core.IRequest;
+import com.idis.shared.infrastructure.IRequest;
 
 import java.util.UUID;
 

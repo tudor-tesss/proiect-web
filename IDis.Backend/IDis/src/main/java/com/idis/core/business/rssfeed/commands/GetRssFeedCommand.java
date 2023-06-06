@@ -1,6 +1,5 @@
 package com.idis.core.business.rssfeed.commands;
 
-import com.nimblej.core.IRequest;
+import com.idis.shared.infrastructure.IRequest;
 
-public record GetRssFeedCommand() implements IRequest<String> {
-}
+public record GetRssFeedCommand() implements IRequest<String> { }

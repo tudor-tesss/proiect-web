@@ -1,7 +1,7 @@
 package com.idis.core.business.usersession.commands;
 
 import com.idis.core.business.usersession.commandresponses.CheckUserSessionCommandResponse;
-import com.nimblej.core.IRequest;
+import com.idis.shared.infrastructure.IRequest;
 
 import java.util.UUID;
 

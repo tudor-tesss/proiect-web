@@ -1,13 +1,13 @@
 package com.idis.core.domain.posts.postreply;
 
 import com.idis.core.domain.DomainErrors;
-import com.nimblej.core.BaseObject;
+import com.idis.shared.core.AggregateRoot;
 
 import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
-public final class PostReply extends BaseObject {
+public final class PostReply extends AggregateRoot {
     private UUID authorID;
     private UUID parentPostId;
     private String title;

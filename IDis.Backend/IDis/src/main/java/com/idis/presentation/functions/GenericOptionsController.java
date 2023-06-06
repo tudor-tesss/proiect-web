@@ -1,10 +1,10 @@
 package com.idis.presentation.functions;
 
-import com.nimblej.core.Function;
-import com.nimblej.core.IUserController;
-import com.nimblej.networking.http.communication.HttpResponse;
-import com.nimblej.networking.http.communication.HttpVerbs;
-import com.nimblej.networking.http.routing.Route;
+import com.idis.shared.web.communication.Function;
+import com.idis.shared.web.communication.HttpResponse;
+import com.idis.shared.web.communication.HttpVerbs;
+import com.idis.shared.web.communication.IUserController;
+import com.idis.shared.web.routing.Route;
 
 import java.util.HashMap;
 import java.util.Map;

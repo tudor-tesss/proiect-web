@@ -1,7 +1,8 @@
 import { AuthenticationService, PostsService } from "../../@shared/index.js";
+import {StatisticsService} from "../@shared";
 
 window.AuthenticationService = AuthenticationService;
-await AuthenticationService.checkSession();
+/*await AuthenticationService.checkSession();*/
 
 export class CategoryOverviewComponent {
     static async displayPosts() {
@@ -74,8 +75,39 @@ export class CategoryOverviewComponent {
         </nav>
     `;
     }
+
+    static async savePdf() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const categoryId = urlParams.get('categoryId');
+
+        const base64String = await StatisticsService
+            .getPdfForCategoryStats(categoryId)
+            .catch((error) => {
+                console.log(error);
+            });
+
+        const byteCharacters = atob(base64String);
+        const byteArrays = [];
+        for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+            const slice = byteCharacters.slice(offset, offset + 512);
+            const byteNumbers = new Array(slice.length);
+            for (let i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            byteArrays.push(byteArray);
+        }
+        const blob = new Blob(byteArrays, {type: 'application/pdf'});
+
+        const downloadLink = document.createElement('a');
+        downloadLink.href = URL.createObjectURL(blob);
+        downloadLink.download = 'category_stats.pdf';
+        downloadLink.click();
+    }
+
 }
 
 window.CategoryOverviewComponent = CategoryOverviewComponent;
 await CategoryOverviewComponent.displayPosts();
 CategoryOverviewComponent.addButton();
+CategoryOverviewComponent.savePdf();

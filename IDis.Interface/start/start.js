@@ -1,4 +1,4 @@
-import { AuthenticationService, UsersService } from "../../@shared/index.js";
+import { AuthenticationService, UsersService } from "../@shared/index.js";
 
 window.AuthenticationService = AuthenticationService;
 await AuthenticationService.resumeSession();

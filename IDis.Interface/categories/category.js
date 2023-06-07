@@ -46,7 +46,7 @@ export class CategoryOverviewComponent {
             ratingKeys.forEach(r => {
                 innerHtml += `
                     <div class="info-box thin link">
-                        <h3 class="small">${r}: ${p.ratings[r]}</h3>
+                        <h3 class="small thin">${r}: ${p.ratings[r]}</h3>
                     </div>
                 `;
             });

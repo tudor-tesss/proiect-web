@@ -1,9 +1,12 @@
-import { AuthenticationService, PostsService, UsersService } from "../@shared/index.js";
+import { AuthenticationService, Errors, PostsService, UsersService } from "../@shared/index.js";
 
 window.AuthenticationService = AuthenticationService;
 await AuthenticationService.checkSession();
 
 export class PostOverviewComponent {
+    static replyBoxOpen = false;
+    static post = null;
+
     static async displayPost() {
         const urlParams = new URLSearchParams(window.location.search);
         const postId = urlParams.get('postId');
@@ -11,7 +14,7 @@ export class PostOverviewComponent {
         let postBox = document.querySelector(".post-container");
         let innerHtml = ``;
 
-        const post = await PostsService
+        this.post = await PostsService
             .getPost(postId)
             .catch((error) => {
                 console.log(error);
@@ -19,9 +22,9 @@ export class PostOverviewComponent {
         
         innerHtml += `<div class="post-wrapper">`;
 
-        if (postId == null || postId === "" || postId === undefined || postId === "null" || post == null) {
+        if (postId == null || postId === "" || postId === undefined || postId === "null" || this.post == null) {
             postBox.innerHTML = `
-                <div class="info-box">
+                <div class="info-box on-column">
                     No post available for the given id.
                 </div>
             `;
@@ -29,28 +32,37 @@ export class PostOverviewComponent {
             return;
         }
 
-        const userInfo = await UsersService.getUserById(post.authorId);
+        const userInfo = await UsersService.getUserById(this.post.authorId);
         innerHtml += `
-            <div class="info-box">
-                <h1 class="info-box title link small animated">${post.title}</h1>
-                <h3 class="info-box title link small animated">By: ${userInfo.firstName} ${userInfo.name}</h3>
-                <p class="word-wrap">${post.body}</p>
+            <div class="info-box on-column">
+                <h1 class="info-box on-column title link small animated">${this.post.title}</h1>
+                <h3 class="info-box on-column title link small animated">By: ${userInfo.firstName} ${userInfo.name}</h3>
+                <p class="word-wrap">${this.post.body}</p>
             </div>
         `;
 
         innerHtml += `
             <div class="ratings-wrapper info-box">
         `;
-        const ratingKeys = Object.keys(post.ratings);
+        const ratingKeys = Object.keys(this.post.ratings);
         ratingKeys.forEach(r => {
             innerHtml += `
-                <div class="info-box thin link">
-                    <h3 class="small">${r}: ${post.ratings[r]}</h3>
+                <div class="info-box on-column link">
+                    <h3 class="small thin">${r}: ${this.post.ratings[r]}</h3>
                 </div>
             `;
         });
         innerHtml += `</div>`;
+
+        innerHtml += `
+                <button class="submit-b" onclick="PostOverviewComponent.toggleReplyBox()">Reply</button>
+        `;        
+
         innerHtml += `</div>`;
+
+        innerHtml += `
+            <div class="reply-box-wrapper"></div>
+        `;
 
         const replies = await PostsService
             .getPostReplies(postId)
@@ -61,7 +73,7 @@ export class PostOverviewComponent {
         if (replies) {
             innerHtml += `
                 <div class="post-wrapper small title">
-                    <h2 class="info-box title link small animated">Replies</h2>
+                    <h2 class="info-box on-column title link small animated">Replies</h2>
                 </div>
             `;
 
@@ -72,20 +84,20 @@ export class PostOverviewComponent {
                         console.log(error);
                     });
                 innerHtml += `
-                    <div class="post-wrapper">
-                        <div class="info-box">
-                            <h3 class="info-box title link small animated">${r.title}</h3>
-                            <h4 class="info-box title link small animated">By: ${replyAuthor.firstName} ${replyAuthor.name}</h4>
+                    <div class="post-wrapper on-column">
+                        <div class="info-box on-column">
+                            <h3 class="info-box on-column title link small animated">${r.title}</h3>
+                            <h4 class="info-box on-column title link small animated">By: ${replyAuthor.firstName} ${replyAuthor.name}</h4>
                             <p class="word-wrap">${r.body}</p>
                         </div>
 
-                        <div class="ratings-wrapper info-box">
+                        <div class="ratings-wrapper info-box on-column">
                 `;
                 const ratingKeys = Object.keys(r.ratings);
                 ratingKeys.forEach(k => {
                     innerHtml += `
-                        <div class="info-box thin link">
-                            <h3 class="small">${k}: ${r.ratings[k]}</h3>
+                        <div class="info-box on-column thin link">
+                            <h3 class="small thin">${k}: ${r.ratings[k]}</h3>
                         </div>
                     `;
                 });
@@ -97,6 +109,113 @@ export class PostOverviewComponent {
         innerHtml += `</div>`;        
 
         postBox.innerHTML = innerHtml;
+    }
+
+    static toggleReplyBox() {
+        if (PostOverviewComponent.replyBoxOpen) {
+            PostOverviewComponent.closeReplyBox();
+        } else {
+            PostOverviewComponent.openReplyBox();
+        }
+    }
+
+    static openReplyBox() {
+        PostOverviewComponent.replyBoxOpen = true;
+        const replyBox = document.querySelector(".reply-box-wrapper");
+
+        let innerHtml = `
+                <div class="reply-box">
+                    <div class="name-label info-box">
+                        <p>Title:</p>
+                        <input type="text" id="reply-name" class="input" required></input>
+                    </div>
+
+                    <div class="name-label info-box">
+                        <p>Description:</p>
+                        <textarea class="input" id="reply-description" required oninput="PostOverviewComponent.autoResize(this)"></textarea>
+                    </div>
+        `;
+
+        const ratingKeys = Object.keys(this.post.ratings);
+        for (let i = 0; i < ratingKeys.length; i++) {
+            innerHtml += `
+                <div class="name-label thin info-box">
+                    <p class="no-word-wrap">${ratingKeys[i]}:</p>
+                `;
+            
+            for (let j = 1; j <= 5; j++) {
+                innerHtml += `
+                    <div class="radio-item">
+                        <input type="radio" id="post-rating-${i}-${j}" name="post-rating-${i}" value="${j}" required></input>
+                        <label for="post-rating-${i}-${j}">${j}</label>
+                    </div>
+                `;
+            }
+                
+            
+            innerHtml += `</div>`;
+        }
+
+        
+        innerHtml += `
+            <button class="submit-b" onclick="PostOverviewComponent.submitReply()">Submit</button>
+            <div id="error-container" class="error-container"></div>
+        `;
+        innerHtml += `</div>`;
+        innerHtml += `</div>`;
+        replyBox.innerHTML = innerHtml;
+    }
+
+    static closeReplyBox() {
+        PostOverviewComponent.replyBoxOpen = false;
+        const replyBox = document.querySelector(".reply-box-wrapper");
+        replyBox.innerHTML = "";
+    }
+
+    static async submitReply() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const postId = urlParams.get('postId');
+        const userId = localStorage.getItem("userUuid");
+
+        const title = document.getElementById("reply-name").value;
+        if (title.length < 1) {
+            Errors.displayError("Title must be at least 1 character long.", true);
+            return;
+        }
+
+        const body = document.getElementById("reply-description").value;
+        if (body.length < 1) {
+            Errors.displayError("Description must be at least 1 character long.", true);
+            return;
+        }
+
+        const ratingFields = Object.keys(this.post.ratings);
+        const ratingValues = new Map();
+        for (let i = 0; i < ratingFields.length; i++) {
+            const ratingField = ratingFields[i];
+            const ratingValue = document.querySelector(`input[name="post-rating-${i}"]:checked`).value;
+
+            if (ratingValue.length < 1) {
+                Errors.displayError("All ratings must be filled in.", true);
+                return;
+            }
+
+            ratingValues.set(ratingField, parseInt(ratingValue));
+        }
+
+        await PostsService
+            .createPostReply(userId, postId, title, body, ratingValues)
+            .then(() => {
+                PostOverviewComponent.displayPost();
+            })
+            .catch((error) => {
+                Errors.displayError(errorMessages[error]);
+            });
+    }
+
+    static autoResize(element) {
+        element.style.height = "auto";
+        element.style.height = (element.scrollHeight) + "px";
     }
 }
 

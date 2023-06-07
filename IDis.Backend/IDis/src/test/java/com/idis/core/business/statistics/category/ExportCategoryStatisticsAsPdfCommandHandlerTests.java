@@ -32,7 +32,7 @@ public class ExportCategoryStatisticsAsPdfCommandHandlerTests {
 
             // Assert
             var actualMessage = exception.getMessage();
-            assertTrue(actualMessage.contains(BusinessErrors.Category.CategoryDoesNotExist));
+            assertTrue(actualMessage.contains(BusinessErrors.Category.CategoryNotFound));
         }
     }
 

@@ -17,7 +17,7 @@ public class ExportCategoryStatisticsAsPdfCommandHandler implements IRequestHand
         var categoryResult = categories.stream().filter(p -> p.getId().equals(exportCategoryStatisticsAsPdfCommand.categoryId())).findFirst();
 
         if (categoryResult.isEmpty()) {
-            throw new IllegalArgumentException(BusinessErrors.Category.CategoryDoesNotExist);
+            throw new IllegalArgumentException(BusinessErrors.Category.CategoryNotFound);
         }
         var categoryStatisticsCalculator = new CategoryStatisticsCalculator(categoryResult.get());
         var pdfGeneratorForCategory = new PdfGeneratorForCategory(categoryStatisticsCalculator);

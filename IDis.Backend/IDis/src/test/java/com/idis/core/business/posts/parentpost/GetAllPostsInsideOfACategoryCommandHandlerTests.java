@@ -9,12 +9,11 @@ import com.idis.shared.database.QueryProvider;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.ExecutionException;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class GetAllPostsInsideOfACategoryCommandHandlerTests {
 
@@ -22,13 +21,13 @@ public class GetAllPostsInsideOfACategoryCommandHandlerTests {
     public void when_categoryDoesNotHavePosts_then_shouldFail() {
         // Arrange
         var command = command();
-        List<String> ratings = new ArrayList<>();
-        ratings.add("rat1");
-        ratings.add("rat2");
-        var post = Post.create(UUID.randomUUID(),UUID.randomUUID(),"post","description",);
+        Map<String,Integer> ratings = new HashMap<>();
+        ratings.put("rat1",1);
+        ratings.put("rat2",2);
+        var post = Post.create(UUID.randomUUID(),UUID.randomUUID(),"post","description",ratings);
 
         try (var mock = Mockito.mockStatic(QueryProvider.class)) {
-            mock.when(() -> QueryProvider.getAll(Category.class)).thenReturn(List.of(category));
+            mock.when(() -> QueryProvider.getAll(Post.class)).thenReturn(List.of(post));
 
             // Act
             var exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -38,7 +37,29 @@ public class GetAllPostsInsideOfACategoryCommandHandlerTests {
             // Assert
             var actualMessage = exception.getMessage();
 
-            assertTrue(actualMessage.contains(BusinessErrors.Category.CreatorHasNoCategories));
+            assertTrue(actualMessage.contains(BusinessErrors.Post.CategoryHasNoPosts));
+        }
+    }
+
+    @Test
+    public void when_categoryHasPosts_then_shouldSucceed() throws ExecutionException, InterruptedException{
+        // Arrange
+
+        Map<String,Integer> ratings = new HashMap<>();
+        ratings.put("rat1",1);
+        ratings.put("rat2",2);
+        var command = command();
+        var post = Post.create(UUID.randomUUID(),command.categoryId(),"post","description",ratings);
+
+        try (var mock = Mockito.mockStatic(QueryProvider.class)) {
+            mock.when(() -> QueryProvider.getAll(Post.class)).thenReturn(List.of(post));
+
+            // Act
+            var result = sut().handle(command).get();
+
+            // Assert
+            assertNotNull(result);
+            assertFalse(result.isEmpty());
         }
     }
 

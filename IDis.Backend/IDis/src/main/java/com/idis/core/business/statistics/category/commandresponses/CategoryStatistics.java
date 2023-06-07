@@ -1,7 +1,5 @@
 package com.idis.core.business.statistics.category.commandresponses;
 
-import com.idis.core.domain.posts.parentpost.Post;
-
 import java.util.Map;
 import java.util.UUID;
 

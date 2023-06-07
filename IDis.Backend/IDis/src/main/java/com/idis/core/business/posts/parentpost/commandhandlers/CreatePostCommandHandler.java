@@ -17,19 +17,17 @@ import static com.idis.shared.functional.FunctionalExtensions.any;
 public final class CreatePostCommandHandler implements IRequestHandler<CreatePostCommand, Post> {
     @Override
     public CompletableFuture<Post> handle(CreatePostCommand createPostCommand) {
-        var users = QueryProvider.getAll(User.class);
-        var userResult = any(users, user -> user.getId().equals(createPostCommand.authorId()));
-        if (!userResult) {
+        var users = QueryProvider.getById(User.class, createPostCommand.authorId());
+        if (users.isEmpty()) {
             throw new IllegalArgumentException(BusinessErrors.Post.UserDoesNotExist);
         }
 
-        var categories = QueryProvider.getAll(Category.class);
-        var categoryResult = any(categories, category -> category.getId().equals(createPostCommand.categoryId()));
-        if (!categoryResult) {
+        var categories = QueryProvider.getById(Category.class, createPostCommand.categoryId());
+        if (categories.isEmpty()) {
             throw new IllegalArgumentException(BusinessErrors.Post.CategoryDoesNotExist);
         }
 
-        var category = categories.stream().filter(c -> c.getId().equals(createPostCommand.categoryId())).findFirst().get();
+        var category = categories.get();
         var categoryRatings = category.getRatingFields();
         Collections.sort(categoryRatings);
 

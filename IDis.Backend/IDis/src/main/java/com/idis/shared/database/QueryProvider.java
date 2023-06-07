@@ -47,35 +47,32 @@ public class QueryProvider extends Database {
         }
     }
 
-    public static <T> Optional<T> getById(Class<T> targetClass, UUID id) {
-        Optional<T> result = Optional.empty();
-        var tableName = targetClass.getSimpleName().toLowerCase() + "_table";
-        String sql = "SELECT * FROM " + tableName + " WHERE id = ?";
+    public static <T extends AggregateRoot> Optional<T> getById(Class<T> clazz, UUID id) {
+        String tableName = clazz.getSimpleName() + "_table";
+        String query = "SELECT * FROM " + tableName + " WHERE id = ?";
 
-        try (Connection connection = Database.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
 
-            preparedStatement.setObject(1, id);
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                ResultSetMetaData metaData = resultSet.getMetaData();
-                int columnCount = metaData.getColumnCount();
+            statement.setObject(1, id);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
 
                 if (resultSet.next()) {
-                    Map<String, Object> row = new HashMap<>();
-                    for (int i = 1; i <= columnCount; i++) {
-                        String columnName = metaData.getColumnLabel(i);
-                        Object columnValue = resultSet.getObject(i);
-                        row.put(columnName, columnValue);
-                    }
+                    String jsonValue = resultSet.getString("value");
 
-                    T deserializedObject = Serialization.deserialize(row, targetClass);
-                    result = Optional.of(deserializedObject);
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    T instance = objectMapper.readValue(jsonValue, clazz);
+
+                    return Optional.of(instance);
                 }
+
+                return Optional.empty();
+
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException | IOException e) {
+            throw new RuntimeException("Error retrieving data from the database.", e);
         }
-        return result;
     }
 
     public static <T extends AggregateRoot> void delete(T object) {

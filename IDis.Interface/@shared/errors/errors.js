@@ -40,7 +40,8 @@ export class Errors {
         "PostReply.User.DoesNotExist": "User does not exist.",
         "PostReply.Post.DoesNotExist": "Post does not exist.",
         "PostReply.Ratings.DoNotMatch": "Post reply ratings do not match.",
-        "PostReply.NoRepliesFound": "No replies found."
+        "PostReply.NoRepliesFound": "No replies found.",
+        "Category.NotFound": "Category not found."
     };
 
     static displayError(errorMessage, bypass = false) {

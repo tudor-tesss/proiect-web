@@ -1,17 +1,19 @@
 import { Post, PostReply } from "../models/index.js";
 
 export class PostsService {
-    static async createPost(authorId, categoryId, title, body, ratings) {
+    static async createPost(categoryId, title, body, ratings) {
         const endpoint = "http://localhost:7101/posts";
+        const authorId = localStorage.getItem("userUuid");
 
         const post = {
-            authorId,
+            authorId: authorId,
             categoryId,
             title,
             body,
-            ratings
+            ratings: Object.fromEntries(ratings)
         };
 
+        console.log(ratings);
         return await fetch(endpoint, {
             method: "POST",
             headers: {

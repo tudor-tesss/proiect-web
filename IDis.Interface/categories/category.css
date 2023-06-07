@@ -166,6 +166,13 @@ nav a:hover {
     text-decoration: none;
 }
 
+.info-box p {
+    max-height: fit-content;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
 .ratings-wrapper {
     gap: 1rem;
     flex-direction: row;

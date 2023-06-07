@@ -17,9 +17,9 @@ body {
 }
 
 .top-gradient {
-    position: relative;
+    position: fixed;
     width: 100%;
-    min-height: 75vh;
+    height: 75vh;
     background-image: linear-gradient(to top right, #6563ed, #26c3de);
     clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
     z-index: 1;
@@ -122,7 +122,6 @@ nav a:hover {
     min-height: calc(100vh - 1000px); /* Change this to min-height */
     padding: 20px; /* Add some padding around the content */
     padding-top: 250px;
-    margin-top: -75vh;
     z-index: 1000;
 }
 
@@ -151,8 +150,6 @@ nav a:hover {
 
 .info-box {
     min-width: 25vw;
-    max-width: 50vw;
-
     max-height: fit-content;
     padding: 1rem;
     background: rgba(0, 0, 0, 0.5);
@@ -170,7 +167,13 @@ nav a:hover {
 }
 
 .ratings-wrapper {
-    gap: 2rem;
+    gap: 1rem;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: .5rem;
 }
 
 .thin {
@@ -294,10 +297,6 @@ nav a:hover {
 }
 
 @media (max-width: 1000px) {
-    .info-box {
-        width: 40vw;
-    }
-
     .title {
         width: 20vw;
     }

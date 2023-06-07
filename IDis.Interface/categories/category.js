@@ -45,7 +45,7 @@ export class CategoryOverviewComponent {
             const ratingKeys = Object.keys(p.ratings);
             ratingKeys.forEach(r => {
                 innerHtml += `
-                    <div class="info-box title thin link small">
+                    <div class="info-box thin link">
                         <h3 class="small">${r}: ${p.ratings[r]}</h3>
                     </div>
                 `;

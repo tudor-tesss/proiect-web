@@ -1,3 +1,5 @@
+import { Post, PostReply } from "../models/index.js";
+
 export class PostsService {
     static async createPost(authorId, categoryId, title, body, ratings) {
         const endpoint = "http://localhost:7101/posts";
@@ -70,7 +72,8 @@ export class PostsService {
                 throw new Error(error);
             }
 
-            return response.json();
+            const postsJson = await response.json();
+            return postsJson.map(postJson => Post.fromJson(postJson));
         });
     }
 
@@ -89,7 +92,8 @@ export class PostsService {
                 throw new Error(error);
             }
 
-            return response.json();
+            const postsJson = await response.json();
+            return postsJson.map(postJson => Post.fromJson(postJson));
         });
     }
 
@@ -108,7 +112,48 @@ export class PostsService {
                 throw new Error(error);
             }
 
-            return response.json();
+            const postsJson = await response.json();
+            return postsJson.map(postJson => Post.fromJson(postJson));
+        });
+    }
+
+    static async getPost(postId) {
+        const endpoint = `http://localhost:7101/posts/${postId}`;
+
+        return await fetch(endpoint, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        .then(async (response) => {
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error);
+            }
+
+            const json = await response.json();
+            return Post.fromJson(json);
+        });
+    }
+
+    static async getPostReplies(postId) {
+        const endpoint = `http://localhost:7101/posts/${postId}/replies`;
+
+        return await fetch(endpoint, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        .then(async (response) => {
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error);
+            }
+
+            const postsJson = await response.json();
+            return postsJson.map(postJson => PostReply.fromJson(postJson));
         });
     }
 }

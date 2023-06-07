@@ -17,10 +17,9 @@ body {
 }
 
 .top-gradient {
-    position: relative;
-    overflow: visible;
+    position: fixed;
     width: 100%;
-    min-height: 75vh;
+    height: 75vh;
     background-image: linear-gradient(to top right, #6563ed, #26c3de);
     clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
     z-index: 1;
@@ -44,7 +43,6 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .header {
-
     margin-top: 20px;
     position: absolute;
     top: 0;

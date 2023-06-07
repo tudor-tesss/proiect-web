@@ -2,6 +2,7 @@ package com.idis.core.domain.posts.parentpost;
 
 import com.idis.core.domain.DomainErrors;
 import com.idis.shared.core.AggregateRoot;
+import com.idis.shared.time.TimeProviderContext;
 
 import java.util.Date;
 import java.util.Map;
@@ -24,7 +25,7 @@ public final class Post extends AggregateRoot {
         this.title = title;
         this.body = body;
         this.ratings = ratings;
-        this.createdAt = new Date();
+        this.createdAt = TimeProviderContext.getCurrentProvider().now();
     }
 
     public static Post create(UUID authorId, UUID categoryId, String title, String body, Map<String, Integer> ratings) throws IllegalArgumentException {
@@ -39,7 +40,7 @@ public final class Post extends AggregateRoot {
         }
 
         ratings.forEach((key, value) -> {
-            if(value<1 || value>5) {
+            if(value < 1 || value > 5) {
                 throw new IllegalArgumentException(DomainErrors.Post.RatingValueOutOfInterval);
             }
         });

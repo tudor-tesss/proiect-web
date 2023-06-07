@@ -1,5 +1,6 @@
 package com.idis.presentation.functions;
 
+import com.idis.core.business.statistics.posts.commands.CreatePostsStatisticsCommand;
 import com.idis.core.business.statistics.posts.commands.ExportPostStatisticsAsPdfCommand;
 import com.idis.core.business.statistics.category.commands.CreateCategoriesStatisticsCommand;
 import com.idis.core.business.statistics.category.commands.CreateCategoryStatisticsCommand;
@@ -83,6 +84,25 @@ public final class StatisticsFunctions implements IUserController {
         }
 
         var command = new CreatePostStatisticsCommand(postId);
+        try {
+            return mediator
+                    .send(command)
+                    .thenCompose(r -> {
+                        HttpResponse res = HttpResponse.create(200, Serialization.serialize(r)).join();
+
+                        return CompletableFuture.completedFuture(res);
+                    });
+        } catch (Exception e) {
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400, responseContent);
+        }
+    }
+
+    @Route(path = "/posts/statistics", method = HttpVerbs.POST)
+    @Function(name = "createPostsStatistics")
+    public static CompletableFuture<HttpResponse> createPostsStatistics(String requestBody) {
+        var command = new CreatePostsStatisticsCommand();
         try {
             return mediator
                     .send(command)

@@ -34,7 +34,7 @@ export class PostOverviewComponent {
             <div class="info-box">
                 <h1 class="info-box title link small animated">${post.title}</h1>
                 <h3 class="info-box title link small animated">By: ${userInfo.firstName} ${userInfo.name}</h3>
-                <p>${post.body}</p>
+                <p class="word-wrap">${post.body}</p>
             </div>
         `;
 
@@ -76,7 +76,7 @@ export class PostOverviewComponent {
                         <div class="info-box">
                             <h3 class="info-box title link small animated">${r.title}</h3>
                             <h4 class="info-box title link small animated">By: ${replyAuthor.firstName} ${replyAuthor.name}</h4>
-                            <p>${r.body}</p>
+                            <p class="word-wrap">${r.body}</p>
                         </div>
 
                         <div class="ratings-wrapper info-box">

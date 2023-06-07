@@ -42,6 +42,13 @@ body::-webkit-scrollbar-thumb:hover {
     background: #002dff; /* color of the thumb on hover */
 }
 
+.info-box p {
+    max-height: fit-content;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
 .add-post-button {
     background: none;
     border: none;

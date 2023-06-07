@@ -17,10 +17,12 @@ body {
 }
 
 .top-gradient {
+    position: fixed;
     width: 100%;
-    min-height: 100vh; /* Change this to min-height */
-    background-image: linear-gradient(to top right, #6563ED, #26C3DE);
-    clip-path: polygon(0 0, 100% 0, 100% 900px, 0 1000px);
+    height: 75vh;
+    background-image: linear-gradient(to top right, #6563ed, #26c3de);
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+    z-index: 1;
 }
 
 body::-webkit-scrollbar {
@@ -133,12 +135,14 @@ html {
 }
 
 .content-wrapper {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: calc(100vh - 1000px); /* Change this to min-height */
     padding: 20px; /* Add some padding around the content */
     padding-top: 250px;
+    z-index: 1000;
 }
 
 .description {

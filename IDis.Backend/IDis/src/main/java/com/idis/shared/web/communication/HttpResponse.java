@@ -15,8 +15,6 @@ public final class HttpResponse {
         this.content = content;
         this.headers = headers;
         this.cookies = cookies;
-
-        System.out.println("Headers2: " + headers);
     }
 
     public static CompletableFuture<HttpResponse> create(int status, String content) {
@@ -34,10 +32,8 @@ public final class HttpResponse {
 
     public static CompletableFuture<HttpResponse> create(int status, String content, Map<String, String> headers) {
         var cookies = new HashMap<String, String>();
-
         var response = new HttpResponse(status, content, headers, cookies);
 
-        System.out.println("Headers1: " + headers);
         return CompletableFuture.completedFuture(response);
     }
 

@@ -44,6 +44,7 @@ export class PostOverviewComponent {
         innerHtml += `
             <div class="ratings-wrapper info-box">
         `;
+        
         const ratingKeys = Object.keys(this.post.ratings);
         ratingKeys.forEach(r => {
             innerHtml += `
@@ -273,24 +274,13 @@ export class PostOverviewComponent {
         const urlParams = new URLSearchParams(window.location.search);
         const postId = urlParams.get('postId');
     
-        const base64String = await StatisticsService
+        const result = await StatisticsService
             .getDocbookForPostStats(postId)
             .catch((error) => {
                 console.log(error);
             });
     
-        const byteCharacters = atob(base64String);
-        const byteArrays = [];
-        for (let offset = 0; offset < byteCharacters.length; offset += 512) {
-            const slice = byteCharacters.slice(offset, offset + 512);
-            const byteNumbers = new Array(slice.length);
-            for (let i = 0; i < slice.length; i++) {
-                byteNumbers[i] = slice.charCodeAt(i);
-            }
-            const byteArray = new Uint8Array(byteNumbers);
-            byteArrays.push(byteArray);
-        }
-        const blob = new Blob(byteArrays, {type: 'application/xml'});
+        const blob = new Blob([result], {type: 'application/docbook+xml'});
     
         const downloadLink = document.createElement('a');
         downloadLink.href = URL.createObjectURL(blob);

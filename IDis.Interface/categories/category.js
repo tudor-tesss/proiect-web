@@ -99,6 +99,24 @@ export class CategoryOverviewComponent {
         downloadLink.download = 'catstats.xml';
         downloadLink.click();
     }
+
+    static async exportCsv() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const postId = urlParams.get('categoryId');
+    
+        const result = await StatisticsService
+            .getCsvForCategoryStats(postId)
+            .catch((error) => {
+                console.log(error);
+            });
+    
+        const blob = new Blob([result], {type: 'application/csv'});
+    
+        const downloadLink = document.createElement('a');
+        downloadLink.href = URL.createObjectURL(blob);
+        downloadLink.download = 'catstats.csv';
+        downloadLink.click();
+    }
 }
 
 window.CategoryOverviewComponent = CategoryOverviewComponent;

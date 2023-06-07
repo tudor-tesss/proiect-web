@@ -131,4 +131,42 @@ export class StatisticsService {
             return response.text()
         });
     }
+
+    static async getCsvForPostStats(postId) {
+        const endpoint = `http://localhost:7101/posts/${postId}/statistics/csv`;
+
+        return await fetch(endpoint, {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/csv",
+            }
+        })
+        .then(async (response) => {
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error);
+            }
+
+            return response.text()
+        });
+    }
+
+    static async getCsvForCategoryStats(categoryId) {
+        const endpoint = `http://localhost:7101/categories/${categoryId}/statistics/csv`;
+
+        return await fetch(endpoint, {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/csv",
+            }
+        })
+        .then(async (response) => {
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error);
+            }
+
+            return response.text()
+        });
+    }
 }

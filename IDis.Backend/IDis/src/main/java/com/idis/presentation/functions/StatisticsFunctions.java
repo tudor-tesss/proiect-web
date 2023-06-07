@@ -1,12 +1,10 @@
 package com.idis.presentation.functions;
 
+import com.idis.core.business.statistics.category.commands.ExportCategoryStatisticsAsCsvCommand;
 import com.idis.core.business.statistics.category.commands.ExportCategoryStatisticsAsDocbookCommand;
-import com.idis.core.business.statistics.posts.commands.CreatePostsStatisticsCommand;
-import com.idis.core.business.statistics.posts.commands.ExportPostStatisticsAsDocbookCommand;
-import com.idis.core.business.statistics.posts.commands.ExportPostStatisticsAsPdfCommand;
+import com.idis.core.business.statistics.posts.commands.*;
 import com.idis.core.business.statistics.category.commands.CreateCategoriesStatisticsCommand;
 import com.idis.core.business.statistics.category.commands.CreateCategoryStatisticsCommand;
-import com.idis.core.business.statistics.posts.commands.CreatePostStatisticsCommand;
 import com.idis.shared.infrastructure.Mediator;
 import com.idis.shared.serialization.Serialization;
 import com.idis.shared.web.communication.Function;
@@ -178,6 +176,34 @@ public final class StatisticsFunctions implements IUserController {
         }
     }
 
+    @Route(path = "/posts/{id}/statistics/csv", method = HttpVerbs.POST)
+    @Function(name = "exportPostStatisticsAsCsv")
+    public static CompletableFuture<HttpResponse> exportPostStatisticsAsCsv(String id, String body){
+        UUID postId;
+        try {
+            postId = UUID.fromString(id);
+        } catch (Exception e) {
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400, responseContent);
+        }
+
+        var command = new ExportPostStatisticsAsCsvCommand(postId);
+        var headers = new HashMap<String, String>();
+
+        headers.put("Content-Type", "text/csv");
+
+        try {
+            return mediator
+                    .send(command)
+                    .thenCompose(d -> HttpResponse.create(200, d, headers));
+        } catch (Exception e){
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400, responseContent);
+        }
+    }
+
     @Route(path = "/categories/{id}/statistics/docbook", method = HttpVerbs.POST)
     @Function(name = "exportCategoryStatisticsAsDocbook")
     public static CompletableFuture<HttpResponse> exportCategoryStatisticsAsDocbook(String id, String body){
@@ -194,6 +220,34 @@ public final class StatisticsFunctions implements IUserController {
         var headers = new HashMap<String, String>();
 
         headers.put("Content-Type", "application/docbook+xml");
+
+        try {
+            return mediator
+                    .send(command)
+                    .thenCompose(d -> HttpResponse.create(200, d, headers));
+        } catch (Exception e){
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400, responseContent);
+        }
+    }
+
+    @Route(path = "/categories/{id}/statistics/csv", method = HttpVerbs.POST)
+    @Function(name = "exportCategoryStatisticsAsCsv")
+    public static CompletableFuture<HttpResponse> exportCategoryStatisticsAsCsv(String id, String body){
+        UUID categoryId;
+        try {
+            categoryId = UUID.fromString(id);
+        } catch (Exception e) {
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400, responseContent);
+        }
+
+        var command = new ExportCategoryStatisticsAsCsvCommand(categoryId);
+        var headers = new HashMap<String, String>();
+
+        headers.put("Content-Type", "text/csv");
 
         try {
             return mediator

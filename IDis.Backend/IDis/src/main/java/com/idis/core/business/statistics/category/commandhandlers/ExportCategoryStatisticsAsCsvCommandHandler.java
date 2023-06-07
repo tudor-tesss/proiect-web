@@ -1,19 +1,19 @@
 package com.idis.core.business.statistics.category.commandhandlers;
 
 import com.idis.core.business.BusinessErrors;
-import com.idis.core.business.statistics.category.commands.ExportCategoryStatisticsAsDocbookCommand;
+import com.idis.core.business.statistics.category.commands.ExportCategoryStatisticsAsCsvCommand;
+import com.idis.core.business.statistics.category.extensions.CsvGeneratorForCategories;
 import com.idis.core.business.statistics.category.extensions.CategoryStatisticsCalculator;
-import com.idis.core.business.statistics.category.extensions.DocbookGeneratorForCategories;
 import com.idis.core.domain.category.Category;
 import com.idis.shared.database.QueryProvider;
 import com.idis.shared.infrastructure.IRequestHandler;
 
 import java.util.concurrent.CompletableFuture;
 
-public final class ExportCategoryStatisticsAsDocbookCommandHandler implements IRequestHandler<ExportCategoryStatisticsAsDocbookCommand, String> {
+public final class ExportCategoryStatisticsAsCsvCommandHandler implements IRequestHandler<ExportCategoryStatisticsAsCsvCommand, String> {
     @Override
-    public CompletableFuture<String> handle(ExportCategoryStatisticsAsDocbookCommand request) {
-        var docbookResult = "";
+    public CompletableFuture<String> handle(ExportCategoryStatisticsAsCsvCommand request) {
+        var result = "";
         var category = QueryProvider.getById(Category.class, request.categoryId());
 
         if (category.isEmpty()) {
@@ -21,14 +21,14 @@ public final class ExportCategoryStatisticsAsDocbookCommandHandler implements IR
         }
 
         var categoryStatisticsCalculator = new CategoryStatisticsCalculator(category.get());
-        var docbookGeneratorForCategories = new DocbookGeneratorForCategories(categoryStatisticsCalculator);
+        var csvGeneratorForCategories = new CsvGeneratorForCategories(categoryStatisticsCalculator);
 
         try {
-            docbookResult = docbookGeneratorForCategories.generateDocbook();
+            result = csvGeneratorForCategories.generateCsv();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return CompletableFuture.completedFuture(docbookResult);
+        return CompletableFuture.completedFuture(result);
     }
 }

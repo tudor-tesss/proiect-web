@@ -39,7 +39,7 @@ export class PostsService {
             parentPostId,
             title,
             body,
-            ratings
+            ratings: Object.fromEntries(ratings)
         };
 
         return await fetch(endpoint, {

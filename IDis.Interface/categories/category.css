@@ -186,6 +186,9 @@ nav a:hover {
 .thin {
     max-width: 25vw;
     min-width: 10vw;
+
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .animated {

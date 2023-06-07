@@ -217,10 +217,25 @@ export class PostOverviewComponent {
         element.style.height = "auto";
         element.style.height = (element.scrollHeight) + "px";
     }
+
+    static addButton() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const postId = urlParams.get('postId');
+
+        let div = document.querySelector(".add-wrapper");
+        div.innerHTML = `
+		<nav>
+            <a class="add-post-button" href="/statistics/statistics.html?isPost=true&targetId=${postId}">View Statistics</a>
+			<a class="add-category-button" href="/account/account.html">Account</a>
+            <button class="help-button">Help</button>
+        </nav>
+    `;
+    }
 }
 
 window.PostOverviewComponent = PostOverviewComponent;
 await PostOverviewComponent.displayPost();
+PostOverviewComponent.addButton();
 
 // async function savePdf() {
 //     const urlParams = new URLSearchParams(window.location.search);

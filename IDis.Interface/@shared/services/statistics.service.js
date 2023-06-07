@@ -93,4 +93,42 @@ export class StatisticsService {
             return response.text()
         });
     }
+
+    static async getDocbookForPostStats(postId) {
+        const endpoint = `http://localhost:7101/posts/${postId}/statistics/docbook`;
+
+        return await fetch(endpoint, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/xml",
+            }
+        })
+        .then(async (response) => {
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error);
+            }
+
+            return response.text()
+        });
+    }
+
+    static async getDocbookForCategoryStats(categoryId) {
+        const endpoint = `http://localhost:7101/categories/${categoryId}/statistics/docbook`;
+
+        return await fetch(endpoint, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/xml",
+            }
+        })
+        .then(async (response) => {
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error);
+            }
+
+            return response.text()
+        });
+    }
 }

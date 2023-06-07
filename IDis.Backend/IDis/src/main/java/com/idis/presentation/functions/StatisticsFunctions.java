@@ -17,7 +17,6 @@ import com.idis.shared.web.routing.Route;
 
 import java.util.Base64;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 

@@ -174,7 +174,10 @@ public class Main {
         mediator.registerHandler(CreatePostsStatisticsCommand.class, new CreatePostsStatisticsCommandHandler());
 
         mediator.registerHandler(GetRssFeedCommand.class, new GetRssFeedCommandHandler());
+
         mediator.registerHandler(ExportPostStatisticsAsPdfCommand.class, new ExportPostStatisticsAsPdfCommandHandler());
+        mediator.registerHandler(ExportPostStatisticsAsDocbookCommand.class, new ExportPostStatisticsAsDocbookCommandHandler());
+        mediator.registerHandler(ExportCategoryStatisticsAsDocbookCommand.class, new ExportCategoryStatisticsAsDocbookCommandHandler());
     }
 
     private static class DeployedDetails {

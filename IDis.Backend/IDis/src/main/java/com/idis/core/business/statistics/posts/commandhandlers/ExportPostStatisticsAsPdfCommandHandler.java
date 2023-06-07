@@ -11,6 +11,7 @@ import com.idis.shared.infrastructure.IRequestHandler;
 import java.util.concurrent.CompletableFuture;
 
 public final class ExportPostStatisticsAsPdfCommandHandler implements IRequestHandler<ExportPostStatisticsAsPdfCommand, byte[]> {
+    @Override
     public CompletableFuture<byte[]> handle (ExportPostStatisticsAsPdfCommand exportPostStatisticsAsPdfCommand){
         byte[] pdfResult = {};
         var posts = QueryProvider.getAll(Post.class);

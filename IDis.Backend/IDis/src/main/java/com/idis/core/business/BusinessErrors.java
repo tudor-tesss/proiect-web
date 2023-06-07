@@ -33,6 +33,7 @@ public class BusinessErrors {
         public static final String CategoryAlreadyExists = "Category.AlreadyExists";
         public static final String NoCategoriesInDatabase = "Category.NoCategoriesInDatabase";
         public static final String CreatorHasNoCategories = "Category.User.DoesntHaveCategories";
+        public static final String CategoryNotFound = "Category.NotFound";
     }
 
     public static class Post {

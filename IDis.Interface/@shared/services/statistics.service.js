@@ -40,15 +40,39 @@ export class StatisticsService {
     static async getPostStatistics(postId) {
         const endpoint = `http://localhost:7101/posts/${postId}/statistics`;
 
-        return await fetch(endpoint)
-            .then(async (response) => {
-                if (!response.ok) {
-                    const error = await response.json();
-                    throw new Error(error);
-                }
+        return await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(async (response) => {
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error);
+            }
 
                 return response.json();
-            });
+        });
+    }
+
+    static async getPostsStatistics() {
+        const endpoint = `http://localhost:7101/posts/statistics`;
+
+        return await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(async (response) => {
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error);
+            }
+
+            return response.json();
+        });
     }
 
     static async getPdfForPostStats(postId) {

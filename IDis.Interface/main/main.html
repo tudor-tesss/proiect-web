@@ -8,41 +8,40 @@
 </head>
 
 <body class="prevent-select">
-		<div class="top-gradient">
-			<div class="header">
-				<div class="logo">
-					<a href="main.html">
-						<img src="../resources/logopng.png" alt="Logo">
-					</a>
+		<div class="top-gradient"></div>
+		<div class="header">
+			<div class="logo">
+				<a href="main.html">
+					<img src="../resources/logopng.png" alt="Logo">
+				</a>
+			</div>
+			<nav>
+				 <a class ="add-category-button" href="../categories/add/add-category.html">Add Category</a>
+				 <a class ="add-category-button" href="../statistics/statistics.html?isPost=false">View Statistics</a>
+				 <a class ="add-category-button" href="../account/account.html">Account</a>
+				<button type="button" class="logout-button" onClick="AuthenticationService.deleteSessionTokenCookie()">Log Out</button>
+			</nav>
+		</div>
+
+		<div class="content-wrapper">
+			<div class="description">
+				<div class="description-text">
+					<h1>Choose a category!</h1>
+					<p>
+						Discover a world of opinions at 'I Dislike It!' Unleash your thoughts, rate topics,
+						and engage in lively discussions. From trending controversies to personal peeves, this
+						platform empowers you to express what you dislike. Join our vibrant community today and
+						ignite the conversation!
+					</p>
 				</div>
-				<nav>
-					 <a class ="add-category-button" href="../categories/add/add-category.html">Add Category</a>
-					 <a class ="add-category-button" href="../statistics/statistics.html?isPost=false">View Statistics</a>
-					 <a class ="add-category-button" href="../account/account.html">Account</a>
-					<button type="button" class="logout-button" onClick="AuthenticationService.deleteSessionTokenCookie()">Log Out</button>
-				</nav>
+
+				<div class="rev-image">
+					<img src="../resources/icons/review.svg" alt="review" width="50%" height="auto">
+				</div>
 			</div>
 
-			<div class="content-wrapper">
-				<div class="description">
-					<div class="description-text">
-						<h1>Choose a category!</h1>
-						<p>
-							Discover a world of opinions at 'I Dislike It!' Unleash your thoughts, rate topics,
-							and engage in lively discussions. From trending controversies to personal peeves, this
-							platform empowers you to express what you dislike. Join our vibrant community today and
-							ignite the conversation!
-						</p>
-					</div>
-
-					<div class="rev-image">
-						<img src="../resources/icons/review.svg" alt="review" width="50%" height="auto">
-					</div>
-				</div>
-
-				<div class="buttons-wrapper">
-					<div class="buttons-box"></div>
-				</div>
+			<div class="buttons-wrapper">
+				<div class="buttons-box"></div>
 			</div>
 		</div>
 

@@ -1,8 +1,7 @@
-import { AuthenticationService, PostsService } from "../../@shared/index.js";
-import {StatisticsService} from "../@shared";
+import { AuthenticationService, PostsService, StatisticsService } from "../@shared/index.js";
 
 window.AuthenticationService = AuthenticationService;
-/*await AuthenticationService.checkSession();*/
+await AuthenticationService.checkSession();
 
 export class CategoryOverviewComponent {
     static async displayPosts() {
@@ -46,8 +45,8 @@ export class CategoryOverviewComponent {
             const ratingKeys = Object.keys(p.ratings);
             ratingKeys.forEach(r => {
                 innerHtml += `
-                    <div class="info-box title thin link small">
-                        <h3 class="small">${r}: ${p.ratings[r]}</h3>
+                    <div class="info-box thin link">
+                        <h3 class="small thin">${r}: ${p.ratings[r]}</h3>
                     </div>
                 `;
             });
@@ -67,13 +66,20 @@ export class CategoryOverviewComponent {
 
         let div = document.querySelector(".add-wrapper");
         div.innerHTML = `
-		<nav>
-            <a class="add-post-button" href="/posts/add/add-post.html?categoryId=${categoryId}">Add Post</a>
-            <a class="add-post-button" href="/statistics/statistics.html?isPost=false&targetId=${categoryId}">View Statistics</a>
-			<a class="add-category-button" href="/account/account.html">Account</a>
-            <button class="help-button">Help</button>
-        </nav>
-    `;
+		    <nav>
+                <a class="add-post-button" href="/statistics/statistics.html?isPost=true&targetId=${categoryId}">View Statistics</a>
+                <a class="add-category-button" href="/account/account.html">Account</a>
+                <div class="dropdown">
+                    <button class="dropbtn">Export</button>
+                    <div class="dropdown-content">
+                        <button onclick="CategoryOverviewComponent.exportPdf()">PDF</button>
+                        <button onclick="CategoryOverviewComponent.exportDocbook()">Docbook</button>
+                        <button onclick="CategoryOverviewComponent.exportCsv()">CSV</button>
+                    </div>
+                </div>
+                <button class="help-button">Help</button>
+            </nav>
+        `;
     }
 
     static async savePdf() {
@@ -105,9 +111,26 @@ export class CategoryOverviewComponent {
         downloadLink.click();
     }
 
+
+    static async exportDocbook() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const postId = urlParams.get('categoryId');
+
+        const result = await StatisticsService
+            .getDocbookForCategoryStats(postId)
+            .catch((error) => {
+                console.log(error);
+            });
+
+        const blob = new Blob([result], {type: 'application/docbook+xml'});
+
+        const downloadLink = document.createElement('a');
+        downloadLink.href = URL.createObjectURL(blob);
+        downloadLink.download = 'catstats.xml';
+        downloadLink.click();
+    }
 }
 
 window.CategoryOverviewComponent = CategoryOverviewComponent;
 await CategoryOverviewComponent.displayPosts();
 CategoryOverviewComponent.addButton();
-CategoryOverviewComponent.savePdf();

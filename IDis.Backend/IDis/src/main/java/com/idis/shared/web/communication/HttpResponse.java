@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public final class HttpResponse {
-
     private int status;
     private String content;
     private Map<String, String> headers;
@@ -19,22 +18,22 @@ public final class HttpResponse {
     }
 
     public static CompletableFuture<HttpResponse> create(int status, String content) {
-        Map<String, String> headers = new HashMap<>();
+        var headers = new HashMap<String, String>();
         headers.put("Access-Control-Allow-Origin", "*");
         headers.put("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
         headers.put("Access-Control-Allow-Headers", "Content-Type, Authorization");
         headers.put("Content-Type", "application/json");
 
-        Map<String, String> cookies = new HashMap<>();
+        var cookies = new HashMap<String, String>();
 
         var response = new HttpResponse(status, content, headers, cookies);
         return CompletableFuture.completedFuture(response);
     }
 
     public static CompletableFuture<HttpResponse> create(int status, String content, Map<String, String> headers) {
-        Map<String, String> cookies = new HashMap<>();
-
+        var cookies = new HashMap<String, String>();
         var response = new HttpResponse(status, content, headers, cookies);
+
         return CompletableFuture.completedFuture(response);
     }
 

@@ -1,4 +1,4 @@
-import { AuthenticationService, PostsService, CategoriesService, StatisticsService } from "../../@shared/index.js";
+import { AuthenticationService, PostsService, CategoriesService, StatisticsService } from "../@shared/index.js";
 
 window.AuthenticationService = AuthenticationService;
 await AuthenticationService.checkSession();
@@ -15,6 +15,13 @@ export class StatisticsOverviewComponent {
         const isPost = urlParams.get('isPost');
 
         if (isPost === "true") {
+            if (targetId != null && targetId !== "" && targetId !== undefined && targetId !== "null") {
+                this.allStatistics = await StatisticsService.getPostStatistics(targetId);
+            }
+            else {
+                this.allStatistics = await StatisticsService.getPostsStatistics();
+            }
+
             await this.displayPostStatistics(targetId);
         } else {
             if (targetId != null && targetId !== "" && targetId !== undefined && targetId !== "null") {
@@ -28,12 +35,54 @@ export class StatisticsOverviewComponent {
         }
     }
 
-    static async displayPostStatistics(postId) {
-        let url = "http://localhost:7101/posts";
-        if (postId != null && postId !== "" && postId !== undefined) {
-            url = url + "/" + postId + "/statistics";
-        } else {
-            url = url + "/statistics";
+    static async displayPostStatistics() {
+        if (!Array.isArray(this.allStatistics.statistics)) {
+            this.allStatistics.statistics = [this.allStatistics.statistics];
+        }
+
+        let statisticsBox = document.querySelector(".statistics-container");
+        let innerHtml = ``;
+
+        for (const s of this.allStatistics.statistics) {
+            if (s.repliesCount === 0) {
+                continue;
+            }
+
+            innerHtml += `<div class="statistics-wrapper">`;
+            if (s.length === 0 || s === "" || s === [] || s === {} || s.title == null || s.title === "") {
+                statisticsBox.innerHTML = "No statistics available.";
+                innerHtml += '</div>';
+
+                return;
+            }
+
+            innerHtml += `
+                <a class="info-box title animated" href="../posts/post.html?postId=${s.postId}">
+                    <h2>${s.title} - ${s.repliesCount} replies</h2>
+                </a>
+            `;
+
+            const score = String(s.averageScore).substring(0, 4);
+            innerHtml += `
+                <div class="info-box with-button">
+                    <p class="info-box link">Average rating: ${score}</p>
+                </div>
+            `;
+
+            const keys = Object.keys(s.averageScoreByRating);
+            for (const key of keys) {
+                const value = s.averageScoreByRating[key];
+
+                innerHtml += `
+                    <div class="info-box">
+                        <p class="info-box link">Average rating for ${key}: ${value}</p>
+                    </div>
+                `;
+            }
+
+            innerHtml += '</div>';
+
+            statisticsBox.innerHTML = innerHtml;
         }
     }
 

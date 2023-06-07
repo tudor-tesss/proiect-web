@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
+import java.util.Date;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -37,6 +38,7 @@ public class UserSessionTests {
         // Arrange
         var userId = UUID.randomUUID();
         var ipAddress = "127.0.0.1";
+        TimeProviderContext.advanceTimeTo(new Date(0));
         var now = TimeProviderContext.getCurrentProvider().now().getTime();
 
         // Act

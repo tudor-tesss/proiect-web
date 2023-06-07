@@ -11,13 +11,12 @@ import java.util.concurrent.CompletableFuture;
 public final class GetPostByIdCommandHandler implements IRequestHandler<GetPostByIdCommand, Post> {
     @Override
     public CompletableFuture<Post> handle(GetPostByIdCommand getPostByIdCommand) {
-        var posts = QueryProvider.getAll(Post.class);
-        var postResult = posts.stream().filter(p -> p.getId().equals(getPostByIdCommand.postId())).findFirst();
+        var posts = QueryProvider.getById(Post.class, getPostByIdCommand.postId());
 
-        if(postResult.isEmpty()) {
+        if(posts.isEmpty()) {
             throw new IllegalArgumentException(BusinessErrors.Post.PostNotFound);
         }
 
-        return CompletableFuture.completedFuture(postResult.get());
+        return CompletableFuture.completedFuture(posts.get());
     }
 }

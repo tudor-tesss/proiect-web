@@ -13,11 +13,7 @@ import java.util.concurrent.CompletableFuture;
 public final class CreateCategoryStatisticsCommandHandler implements IRequestHandler<CreateCategoryStatisticsCommand, CreateCategoryStatisticsCommandResponse> {
     @Override
     public CompletableFuture<CreateCategoryStatisticsCommandResponse> handle(CreateCategoryStatisticsCommand createCategoryStatisticsCommand) {
-        var categoryResult = QueryProvider
-                .getAll(Category.class)
-                .stream()
-                .filter(category -> category.getId().equals(createCategoryStatisticsCommand.categoryId()))
-                .findFirst();
+        var categoryResult = QueryProvider.getById(Category.class, createCategoryStatisticsCommand.categoryId());
         if (categoryResult.isEmpty()) {
             throw new IllegalArgumentException(BusinessErrors.CategoryStatistics.CategoryDoesNotExist);
         }

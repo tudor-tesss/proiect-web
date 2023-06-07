@@ -17,9 +17,9 @@ body {
 }
 
 .top-gradient {
-    position: relative;
+    position: fixed;
     width: 100%;
-    min-height: 75vh;
+    height: 75vh;
     background-image: linear-gradient(to top right, #6563ed, #26c3de);
     clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
     z-index: 1;
@@ -122,7 +122,6 @@ nav a:hover {
     min-height: calc(100vh - 1000px); /* Change this to min-height */
     padding: 20px; /* Add some padding around the content */
     padding-top: 250px;
-    margin-top: -75vh;
     z-index: 1000;
 }
 
@@ -131,6 +130,62 @@ nav a:hover {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
+
+.dropdown-content button {
+    color: white;
+    width: 100%;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.dropdown-content button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-content a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropbtn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+}
+
+.dropbtn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .category-wrapper {
@@ -151,8 +206,6 @@ nav a:hover {
 
 .info-box {
     min-width: 25vw;
-    max-width: 50vw;
-
     max-height: fit-content;
     padding: 1rem;
     background: rgba(0, 0, 0, 0.5);
@@ -169,13 +222,29 @@ nav a:hover {
     text-decoration: none;
 }
 
+.info-box p {
+    max-height: fit-content;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
 .ratings-wrapper {
-    gap: 2rem;
+    gap: 1rem;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: .5rem;
 }
 
 .thin {
     max-width: 25vw;
     min-width: 10vw;
+
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .animated {
@@ -294,10 +363,6 @@ nav a:hover {
 }
 
 @media (max-width: 1000px) {
-    .info-box {
-        width: 40vw;
-    }
-
     .title {
         width: 20vw;
     }

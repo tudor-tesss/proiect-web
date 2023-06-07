@@ -8,7 +8,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.ByteArrayOutputStream;
 import java.util.Map;
 
-public class PdfGeneratorForPosts {
+public final class PdfGeneratorForPosts {
     private PostStatisticsCalculator postStatisticsCalculator;
 
     public PdfGeneratorForPosts(PostStatisticsCalculator postStatisticsCalculator) {

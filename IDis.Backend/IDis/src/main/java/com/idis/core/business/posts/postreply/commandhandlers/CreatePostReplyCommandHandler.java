@@ -17,19 +17,17 @@ import static com.idis.shared.functional.FunctionalExtensions.any;
 public final class CreatePostReplyCommandHandler implements IRequestHandler<CreatePostReplyCommand, PostReply> {
     @Override
     public CompletableFuture<PostReply> handle(CreatePostReplyCommand createPostReplyCommand) {
-        var users = QueryProvider.getAll(User.class);
-        var userResult = any(users, user -> user.getId().equals(createPostReplyCommand.authorId()));
-        if(!userResult) {
+        var users = QueryProvider.getById(User.class, createPostReplyCommand.authorId());
+        if(users.isEmpty()) {
             throw new IllegalArgumentException(BusinessErrors.PostReply.UserDoesNotExist);
         }
 
-        var posts = QueryProvider.getAll(Post.class);
-        var postResult = any(posts, post -> post.getId().equals(createPostReplyCommand.parentPostId()));
-        if(!postResult) {
+        var posts = QueryProvider.getById(Post.class, createPostReplyCommand.parentPostId());
+        if(posts.isEmpty()) {
             throw new IllegalArgumentException(BusinessErrors.PostReply.PostDoesNotExist);
         }
 
-        var post = posts.stream().filter(p -> p.getId().equals(createPostReplyCommand.parentPostId())).findFirst().get();
+        var post = posts.get();
 
         var postRatings = post.getRatings().keySet();
         var parentPostRatings = new ArrayList<>(postRatings);

@@ -13,10 +13,7 @@ import java.util.concurrent.CompletableFuture;
 public final class CreatePostStatisticsCommandHandler implements IRequestHandler<CreatePostStatisticsCommand, CreatePostStatisticsCommandResponse> {
     @Override
     public CompletableFuture<CreatePostStatisticsCommandResponse> handle(CreatePostStatisticsCommand createPostStatisticsCommand) {
-        var postResult = QueryProvider
-                .getAll(Post.class)
-                .stream().filter(p -> p.getId().equals(createPostStatisticsCommand.postId()))
-                .findFirst();
+        var postResult = QueryProvider.getById(Post.class, createPostStatisticsCommand.postId());
         if(postResult.isEmpty()) {
             throw new IllegalArgumentException(BusinessErrors.PostStatistics.PostDoesNotExist);
         }

@@ -1,0 +1,398 @@
+.prevent-select {
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
+}
+
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f5fd;
+}
+
+.top-gradient {
+    position: relative;
+    width: 100%;
+    min-height: 75vh;
+    background-image: linear-gradient(to top right, #6563ed, #26c3de);
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+    z-index: 1;
+}
+
+body::-webkit-scrollbar {
+    width: 10px; /* width of the scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+    background: #f1f1f1; /* color of the track */
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #4868fd; /* color of the thumb */
+    border-radius: 5px; /* rounded corners */
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #002dff; /* color of the thumb on hover */
+}
+
+.header {
+    margin-top: 20px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 90%; /* You can adjust this value based on your preference */
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    z-index: 1000;
+    transform: translateX(-50%);
+}
+
+.help-button {
+    background-color: transparent;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+}
+
+.help-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    text-decoration: none;
+}
+
+.logo img {
+    height: 100px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    margin-left: 20px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 1000px); /* Change this to min-height */
+    padding: 20px; /* Add some padding around the content */
+    padding-top: 250px;
+    margin-top: -75vh;
+    z-index: 1000;
+}
+
+.post-form {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.post-box {
+    min-width: 70vw;
+    max-width: 80vw;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 50px;
+    margin-left: 25px;
+    z-index: 1000;
+    gap: 2rem;
+}
+
+.post-box h2 {
+    margin: 0 0 30px;
+    padding: 0;
+    color: #fff;
+    text-align: center;
+}
+
+textarea.input {
+    width: 100%;
+    overflow: hidden;  /* Hide scrollbar */
+    resize: none;  /* Disable manual resize */
+}
+
+.post-box .name-label textarea,
+.post-box .input-field textarea {
+    width: 75%;
+    margin-left: 1rem;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+    resize: none;  /* Disable manual resize */
+    overflow: hidden;  /* Hide scrollbar */
+}
+
+.post-box form .submit-b {
+    position: relative;
+    padding: 10px 20px;
+    color: #b79726;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: 0.5s;
+    margin-top: 40px;
+    letter-spacing: 4px;
+    background: transparent; /* Add this */
+    border: none; /* Add this */
+}
+
+.ratings-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.name-label input[type="radio"] {
+    margin-right: 5px;
+    margin-left: -3rem;
+}
+
+.name-label p {
+    margin-right: 5em;
+}
+
+input[type="radio"] + label {
+    margin-right: 5px; /* Adjust this value as per your need */
+}
+
+/* make a rating-label like the name label */
+.post-box .rating-label,
+.post-box .input-field {
+    position: relative;
+    width: 90%; /* Adjust this value as needed */
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-box .submit-b:hover {
+    background: #f49803;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #f4c803, 0 0 25px #bd9d0b, 0 0 50px #f4e403,
+        0 0 100px #d5cf1e;
+}
+
+.post-box .name-label,
+.post-box .input-field {
+    position: relative;
+    width: 90%; /* Adjust this value as needed */
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-left {
+    flex: 1;
+}
+
+.flex-right {
+    flex: 2;
+}
+
+.post-box .name-label input,
+.post-box .input-field input {
+    width: 100%;
+    padding: 10px 5px; /* Adjust the left and right padding */
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+    width: 300px;
+}
+
+.post-box .name-label label,
+.post-box .input-field label {
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.post-box .name-label input:focus ~ label,
+.post-box .name-label input:valid ~ label,
+.post-box .input-field input:focus ~ label,
+.post-box .input-field input:valid ~ label {
+    top: -20px;
+    left: 0;
+    font-size: 12px;
+}
+
+.remove-field-btn {
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    border-color: rgba(255, 255, 255, 0.32);
+    color: rgba(255, 255, 255, 0.79);
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 20px;
+    padding: 5px 10px;
+    max-height: 40px;
+    transition: 0.5s;
+}
+
+.remove-field-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    text-decoration: none;
+}
+
+.add-field-btn {
+    justify-content: left;
+    background-color: transparent;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    border-color: rgba(255, 255, 255, 0.32);
+    color: rgba(255, 255, 255, 0.79);
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 5px 10px;
+    transition: 0.5s;
+}
+
+.add-field-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    text-decoration: none;
+}
+
+.submit-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.submit-field {
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+}
+
+.info-box {
+    min-width: 25vw;
+    max-height: fit-content;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    color: #fff;
+    text-decoration: none;
+}
+
+.submit-b {
+    position: relative;
+    padding: 10px 20px;
+    color: #b79726;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: 0.5s;
+    margin-top: 40px;
+    letter-spacing: 4px;
+    background: transparent; /* Add this */
+    border: none; /* Add this */
+}
+
+.submit-b:hover {
+    background: #f49803;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #f4c803, 0 0 25px #bd9d0b, 0 0 50px #f4e403,
+        0 0 100px #d5cf1e;
+}
+
+/* Responsive styles for screens less than 600px in height */
+@media (max-height: 599px) {
+    .content {
+        padding-top: 150px;
+    }
+}
+
+@media (max-width: 850px) {
+    .content {
+        padding-top: 150px;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .post-box {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+@media (min-width: 1000px) {
+    .body {
+        display: flex;
+        flex-direction: column;
+    }
+}

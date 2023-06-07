@@ -1,5 +1,8 @@
 package com.idis.presentation.functions;
 
+import com.idis.core.business.statistics.category.commands.ExportCategoryStatisticsAsDocbookCommand;
+import com.idis.core.business.statistics.posts.commands.CreatePostsStatisticsCommand;
+import com.idis.core.business.statistics.posts.commands.ExportPostStatisticsAsDocbookCommand;
 import com.idis.core.business.statistics.category.commands.ExportCategoryStatisticsAsPdfCommand;
 import com.idis.core.business.statistics.posts.commands.ExportPostStatisticsAsPdfCommand;
 import com.idis.core.business.statistics.category.commands.CreateCategoriesStatisticsCommand;
@@ -99,7 +102,26 @@ public final class StatisticsFunctions implements IUserController {
         }
     }
 
-    @Route(path="/posts/{id}/statistics/pdf",method = HttpVerbs.POST)
+    @Route(path = "/posts/statistics", method = HttpVerbs.POST)
+    @Function(name = "createPostsStatistics")
+    public static CompletableFuture<HttpResponse> createPostsStatistics(String requestBody) {
+        var command = new CreatePostsStatisticsCommand();
+        try {
+            return mediator
+                    .send(command)
+                    .thenCompose(r -> {
+                        HttpResponse res = HttpResponse.create(200, Serialization.serialize(r)).join();
+
+                        return CompletableFuture.completedFuture(res);
+                    });
+        } catch (Exception e) {
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400, responseContent);
+        }
+    }
+
+    @Route(path = "/posts/{id}/statistics/pdf", method = HttpVerbs.POST)
     @Function(name = "exportPostStatisticsAsPdf")
     public static CompletableFuture <HttpResponse> exportPostStatisticsAsPdf (String id, String body){
         UUID postId;
@@ -112,14 +134,10 @@ public final class StatisticsFunctions implements IUserController {
         }
 
         var command = new ExportPostStatisticsAsPdfCommand(postId);
-        Map<String,String> headers =new HashMap<>();
+        var headers = new HashMap<String, String>();
 
-        headers.put("Access-Control-Allow-Origin", "*");
-        headers.put("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
-        headers.put("Access-Control-Allow-Headers", "Content-Type, Authorization");
         headers.put("Content-Type", "application/pdf");
-
-        try{
+        try {
             return mediator
                     .send(command)
                     .thenCompose(pdf ->{
@@ -147,11 +165,8 @@ public final class StatisticsFunctions implements IUserController {
         }
 
         var command = new ExportCategoryStatisticsAsPdfCommand(categoryId);
-        Map<String,String> headers =new HashMap<>();
+        var headers = new HashMap<String, String>();
 
-        headers.put("Access-Control-Allow-Origin", "*");
-        headers.put("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
-        headers.put("Access-Control-Allow-Headers", "Content-Type, Authorization");
         headers.put("Content-Type", "application/pdf");
 
         try{
@@ -166,6 +181,62 @@ public final class StatisticsFunctions implements IUserController {
             var responseContent = Serialization.serialize(e.getMessage());
 
             return HttpResponse.create(400,responseContent);
+        }
+    }
+
+    @Route(path = "/posts/{id}/statistics/docbook", method = HttpVerbs.POST)
+    @Function(name = "exportPostStatisticsAsDocbook")
+    public static CompletableFuture<HttpResponse> exportPostStatisticsAsDocbook(String id, String body){
+        UUID postId;
+        try {
+            postId = UUID.fromString(id);
+        } catch (Exception e) {
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400, responseContent);
+        }
+
+        var command = new ExportPostStatisticsAsDocbookCommand(postId);
+        var headers = new HashMap<String, String>();
+
+        headers.put("Content-Type", "application/docbook+xml");
+
+        try {
+            return mediator
+                    .send(command)
+                    .thenCompose(d -> HttpResponse.create(200, d, headers));
+        } catch (Exception e){
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400, responseContent);
+        }
+    }
+
+    @Route(path = "/categories/{id}/statistics/docbook", method = HttpVerbs.POST)
+    @Function(name = "exportCategoryStatisticsAsDocbook")
+    public static CompletableFuture<HttpResponse> exportCategoryStatisticsAsDocbook(String id, String body){
+        UUID categoryId;
+        try {
+            categoryId = UUID.fromString(id);
+        } catch (Exception e) {
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400, responseContent);
+        }
+
+        var command = new ExportCategoryStatisticsAsDocbookCommand(categoryId);
+        var headers = new HashMap<String, String>();
+
+        headers.put("Content-Type", "application/docbook+xml");
+
+        try {
+            return mediator
+                    .send(command)
+                    .thenCompose(d -> HttpResponse.create(200, d, headers));
+        } catch (Exception e){
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400, responseContent);
         }
     }
 }

@@ -1,4 +1,4 @@
-import { AuthenticationService, Errors, PostsService, UsersService } from "../@shared/index.js";
+import { AuthenticationService, Errors, PostsService, UsersService, StatisticsService } from "../@shared/index.js";
 
 window.AuthenticationService = AuthenticationService;
 await AuthenticationService.checkSession();
@@ -224,46 +224,81 @@ export class PostOverviewComponent {
 
         let div = document.querySelector(".add-wrapper");
         div.innerHTML = `
-		<nav>
-            <a class="add-post-button" href="/statistics/statistics.html?isPost=true&targetId=${postId}">View Statistics</a>
-			<a class="add-category-button" href="/account/account.html">Account</a>
-            <button class="help-button">Help</button>
-        </nav>
+            <nav>
+                <a class="add-post-button" href="/statistics/statistics.html?isPost=true&targetId=${postId}">View Statistics</a>
+                <a class="add-category-button" href="/account/account.html">Account</a>
+                <div class="dropdown">
+                    <button class="dropbtn">Export</button>
+                    <div class="dropdown-content">
+                        <button onclick="PostOverviewComponent.exportPdf()">PDF</button>
+                        <button onclick="PostOverviewComponent.exportDocbook()">Docbook</button>
+                        <button onclick="PostOverviewComponent.exportCsv()">CSV</button>
+                    </div>
+                </div>
+                <button class="help-button">Help</button>
+            </nav>
     `;
+    }
+
+    static async exportPdf() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const postId = urlParams.get('postId');
+    
+        const base64String = await StatisticsService
+            .getPdfForPostStats(postId)
+            .catch((error) => {
+                console.log(error);
+            });
+    
+        const byteCharacters = atob(base64String);
+        const byteArrays = [];
+        for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+            const slice = byteCharacters.slice(offset, offset + 512);
+            const byteNumbers = new Array(slice.length);
+            for (let i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            byteArrays.push(byteArray);
+        }
+        const blob = new Blob(byteArrays, {type: 'application/pdf'});
+    
+        const downloadLink = document.createElement('a');
+        downloadLink.href = URL.createObjectURL(blob);
+        downloadLink.download = 'poststats.pdf';
+        downloadLink.click();
+    }
+
+    static async exportDocbook() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const postId = urlParams.get('postId');
+    
+        const base64String = await StatisticsService
+            .getDocbookForPostStats(postId)
+            .catch((error) => {
+                console.log(error);
+            });
+    
+        const byteCharacters = atob(base64String);
+        const byteArrays = [];
+        for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+            const slice = byteCharacters.slice(offset, offset + 512);
+            const byteNumbers = new Array(slice.length);
+            for (let i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            byteArrays.push(byteArray);
+        }
+        const blob = new Blob(byteArrays, {type: 'application/xml'});
+    
+        const downloadLink = document.createElement('a');
+        downloadLink.href = URL.createObjectURL(blob);
+        downloadLink.download = 'poststats.xml';
+        downloadLink.click();
     }
 }
 
 window.PostOverviewComponent = PostOverviewComponent;
 await PostOverviewComponent.displayPost();
 PostOverviewComponent.addButton();
-
-// async function savePdf() {
-//     const urlParams = new URLSearchParams(window.location.search);
-//     const postId = urlParams.get('postId');
-
-//     const base64String = await StatisticsService
-//         .getPdfForPostStats(postId)
-//         .catch((error) => {
-//             console.log(error);
-//         });
-
-//     const byteCharacters = atob(base64String);
-//     const byteArrays = [];
-//     for (let offset = 0; offset < byteCharacters.length; offset += 512) {
-//         const slice = byteCharacters.slice(offset, offset + 512);
-//         const byteNumbers = new Array(slice.length);
-//         for (let i = 0; i < slice.length; i++) {
-//             byteNumbers[i] = slice.charCodeAt(i);
-//         }
-//         const byteArray = new Uint8Array(byteNumbers);
-//         byteArrays.push(byteArray);
-//     }
-//     const blob = new Blob(byteArrays, {type: 'application/pdf'});
-
-//     const downloadLink = document.createElement('a');
-//     downloadLink.href = URL.createObjectURL(blob);
-//     downloadLink.download = 'poststats.pdf';
-//     // downloadLink.click();
-// }
-
-// savePdf();

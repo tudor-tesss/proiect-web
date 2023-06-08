@@ -185,6 +185,8 @@ public class Main {
 
         mediator.registerHandler(ExportPostStatisticsAsDocbookCommand.class, new ExportPostStatisticsAsDocbookCommandHandler());
         mediator.registerHandler(ExportCategoryStatisticsAsDocbookCommand.class, new ExportCategoryStatisticsAsDocbookCommandHandler());
+        mediator.registerHandler(ExportCategoryStatisticsAsCsvCommand.class, new ExportCategoryStatisticsAsCsvCommandHandler());
+        mediator.registerHandler(ExportPostStatisticsAsCsvCommand.class, new ExportPostStatisticsAsCsvCommandHandler());
     }
 
     private static class DeployedDetails {

@@ -287,6 +287,24 @@ export class PostOverviewComponent {
         downloadLink.download = 'poststats.xml';
         downloadLink.click();
     }
+
+    static async exportCsv() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const postId = urlParams.get('postId');
+    
+        const result = await StatisticsService
+            .getCsvForPostStats(postId)
+            .catch((error) => {
+                console.log(error);
+            });
+    
+        const blob = new Blob([result], {type: 'text/csv'});
+    
+        const downloadLink = document.createElement('a');
+        downloadLink.href = URL.createObjectURL(blob);
+        downloadLink.download = 'poststats.csv';
+        downloadLink.click();
+    }
 }
 
 window.PostOverviewComponent = PostOverviewComponent;

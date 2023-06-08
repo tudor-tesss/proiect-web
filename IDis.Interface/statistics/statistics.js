@@ -162,48 +162,48 @@ export class StatisticsOverviewComponent {
     }
 
     static async viewPostsByRatings(originalCategoryId, id, index) {
-                let statisticsBox = document.querySelector(".statistics-container");
+        let statisticsBox = document.querySelector(".statistics-container");
 
-                const category = this.allStatistics.statistics.find(c => c.categoryId === id);
-                if (category == null || category.length === 0 || category === "" || category === [] || category === {} || category.categoryName == null || category.categoryName === "") {
-                    statisticsBox.innerHTML = "No statistics available.";
+        const category = this.allStatistics.statistics.find(c => c.categoryId === id);
+        if (category == null || category.length === 0 || category === "" || category === [] || category === {} || category.categoryName == null || category.categoryName === "") {
+            statisticsBox.innerHTML = "No statistics available.";
 
-                    return;
-                }
+            return;
+        }
 
-                let innerHtml = `
-                    <div class="statistics-wrapper">
-                `;
+        let innerHtml = `
+            <div class="statistics-wrapper">
+        `;
 
-                innerHtml += `
-                    <button type="button" class="submit-b small" onClick="StatisticsOverviewComponent.displayCategoryStatistics('${originalCategoryId}')">
-                        Back
-                    </button>
-                `;
+        innerHtml += `
+            <button type="button" class="submit-b small" onClick="StatisticsOverviewComponent.displayCategoryStatistics('${originalCategoryId}')">
+                Back
+            </button>
+        `;
 
-                const key = Object.keys(category.postsByRatings)[index];
-                innerHtml += `
-                    <h2 class="info-box title">${key}</h2>
-                `;
+        const key = Object.keys(category.postsByRatings)[index];
+        innerHtml += `
+            <h2 class="info-box title">${key}</h2>
+        `;
 
-                const posts = Object.keys(category.postsByRatings[key]);
-                let count = 0;
-                for (const p of posts) {
-                    const postKey = Object.keys(category.postsByRatings[key])[count];
-                    const post = this.allPosts.find(p => p.id === postKey);
-                    innerHtml += `
-                        <div class="info-box">
-                            <a class="info-box link animated" href="../posts/post.html?postId=post.id">
-                                ${post.title} - ${category.postsByRatings[key][p]}
-                            </a>
-                        </div>
-                    `;
+        const posts = Object.keys(category.postsByRatings[key]);
+        let count = 0;
+        for (const p of posts) {
+            const postKey = Object.keys(category.postsByRatings[key])[count];
+            const post = this.allPosts.find(p => p.id === postKey);
+            innerHtml += `
+                <div class="info-box">
+                    <a class="info-box link animated" href="../posts/post.html?postId=post.id">
+                        ${post.title} - ${category.postsByRatings[key][p]}
+                    </a>
+                </div>
+            `;
 
-                    count++;
-                }
+            count++;
+        }
 
-                innerHtml += `</div>`;
-                statisticsBox.innerHTML = innerHtml;
+        innerHtml += `</div>`;
+        statisticsBox.innerHTML = innerHtml;
     }
 
     static async viewPostsByAverageScore(originalCategoryId, categoryId) {

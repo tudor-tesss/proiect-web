@@ -1,7 +1,7 @@
 import { AuthenticationService, PostsService, StatisticsService } from "../@shared/index.js";
 
-window.AuthenticationService = AuthenticationService;
-await AuthenticationService.checkSession();
+/*window.AuthenticationService = AuthenticationService;
+await AuthenticationService.checkSession();*/
 
 export class CategoryOverviewComponent {
     static async displayPosts() {
@@ -82,18 +82,48 @@ export class CategoryOverviewComponent {
         `;
     }
 
+    static async exportPdf() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const categoryId = urlParams.get('categoryId');
+
+        const base64String = await StatisticsService
+            .getPdfForCategoryStats(categoryId)
+            .catch((error) => {
+                console.log(error);
+            });
+
+        const byteCharacters = atob(base64String);
+        const byteArrays = [];
+        for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+            const slice = byteCharacters.slice(offset, offset + 512);
+            const byteNumbers = new Array(slice.length);
+            for (let i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            byteArrays.push(byteArray);
+        }
+        const blob = new Blob(byteArrays, {type: 'application/pdf'});
+
+        const downloadLink = document.createElement('a');
+        downloadLink.href = URL.createObjectURL(blob);
+        downloadLink.download = 'category_stats.pdf';
+        downloadLink.click();
+    }
+
+
     static async exportDocbook() {
         const urlParams = new URLSearchParams(window.location.search);
         const postId = urlParams.get('categoryId');
-    
+
         const result = await StatisticsService
             .getDocbookForCategoryStats(postId)
             .catch((error) => {
                 console.log(error);
             });
-    
+
         const blob = new Blob([result], {type: 'application/docbook+xml'});
-    
+
         const downloadLink = document.createElement('a');
         downloadLink.href = URL.createObjectURL(blob);
         downloadLink.download = 'catstats.xml';

@@ -8,14 +8,14 @@ export class StatisticsService {
                 'Content-Type': 'application/json'
             }
         })
-        .then(async (response) => {
-            if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error);
-            }
+            .then(async (response) => {
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error);
+                }
 
-            return response.json();
-        });
+                return response.json();
+            });
     }
 
     static async getCategoriesStatistics() {
@@ -27,14 +27,14 @@ export class StatisticsService {
                 'Content-Type': 'application/json'
             }
         })
-        .then(async (response) => {
-            if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error);
-            }
+            .then(async (response) => {
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error);
+                }
 
-            return response.json();
-        });
+                return response.json();
+            });
     }
 
     static async getPostStatistics(postId) {
@@ -84,14 +84,33 @@ export class StatisticsService {
                 "Content-Type": "application/pdf",
             }
         })
-        .then(async (response) => {
-            if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error);
-            }
+            .then(async (response) => {
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error);
+                }
 
-            return response.text()
-        });
+                return response.text()
+            });
+    }
+
+    static async getPdfForCategoryStats(categoryId) {
+        const endpoint = `http://localhost:7101/categories/${categoryId}/statistics/pdf`;
+
+        return await fetch(endpoint, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/pdf",
+            }
+        })
+            .then(async (response) => {
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error);
+                }
+
+                return response.text()
+            });
     }
 
     static async getDocbookForPostStats(postId) {

@@ -2,6 +2,11 @@ package com.idis.presentation;
 
 import com.idis.core.business.statistics.category.commandhandlers.*;
 import com.idis.core.business.statistics.posts.commandhandlers.*;
+import com.idis.core.business.statistics.category.commandhandlers.ExportCategoryStatisticsAsPdfCommandHandler;
+import com.idis.core.business.statistics.category.commands.ExportCategoryStatisticsAsPdfCommand;
+import com.idis.core.business.statistics.posts.commandhandlers.ExportPostStatisticsAsPdfCommandHandler;
+import com.idis.core.business.statistics.posts.commands.ExportPostStatisticsAsPdfCommand;
+import com.idis.core.business.posts.parentpost.command.*;
 import com.idis.core.business.posts.parentpost.commandhandlers.*;
 import com.idis.core.business.posts.postreply.commandhandlers.*;
 import com.idis.core.business.statistics.category.commands.*;
@@ -176,6 +181,8 @@ public class Main {
         mediator.registerHandler(GetRssFeedCommand.class, new GetRssFeedCommandHandler());
 
         mediator.registerHandler(ExportPostStatisticsAsPdfCommand.class, new ExportPostStatisticsAsPdfCommandHandler());
+        mediator.registerHandler(ExportCategoryStatisticsAsPdfCommand.class, new ExportCategoryStatisticsAsPdfCommandHandler());
+
         mediator.registerHandler(ExportPostStatisticsAsDocbookCommand.class, new ExportPostStatisticsAsDocbookCommandHandler());
         mediator.registerHandler(ExportCategoryStatisticsAsDocbookCommand.class, new ExportCategoryStatisticsAsDocbookCommandHandler());
         mediator.registerHandler(ExportCategoryStatisticsAsCsvCommand.class, new ExportCategoryStatisticsAsCsvCommandHandler());

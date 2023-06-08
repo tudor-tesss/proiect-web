@@ -1,7 +1,7 @@
 import { AuthenticationService, PostsService, StatisticsService } from "../@shared/index.js";
 
-window.AuthenticationService = AuthenticationService;
-await AuthenticationService.checkSession();
+/*window.AuthenticationService = AuthenticationService;
+await AuthenticationService.checkSession();*/
 
 export class CategoryOverviewComponent {
     static async displayPosts() {
@@ -82,7 +82,7 @@ export class CategoryOverviewComponent {
         `;
     }
 
-    static async savePdf() {
+    static async exportPdf() {
         const urlParams = new URLSearchParams(window.location.search);
         const categoryId = urlParams.get('categoryId');
 

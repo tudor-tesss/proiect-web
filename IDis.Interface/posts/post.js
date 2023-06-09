@@ -71,41 +71,46 @@ export class PostOverviewComponent {
                 console.log(error);
             });
 
-        if (replies) {
-            innerHtml += `
-                <div class="post-wrapper small title">
-                    <h2 class="info-box on-column title link small animated">Replies</h2>
-                </div>
-            `;
-
-            for (let r of replies) {
-                const replyAuthor = await UsersService
-                    .getUserById(r.authorID)
-                    .catch((error) => {
-                        console.log(error);
-                    });
-                innerHtml += `
-                    <div class="post-wrapper on-column">
-                        <div class="info-box on-column">
-                            <h3 class="info-box on-column title link small animated">${r.title}</h3>
-                            <h4 class="info-box on-column title link small animated">By: ${replyAuthor.firstName} ${replyAuthor.name}</h4>
-                            <p class="word-wrap">${r.body}</p>
-                        </div>
-
-                        <div class="ratings-wrapper info-box on-column">
-                `;
-                const ratingKeys = Object.keys(r.ratings);
-                ratingKeys.forEach(k => {
-                    innerHtml += `
-                        <div class="info-box on-column thin link">
-                            <h3 class="small thin">${k}: ${r.ratings[k]}</h3>
-                        </div>
-                    `;
+            if (replies) {
+                const replyPromises = replies.map((r) => {
+                    return UsersService
+                        .getUserById(r.authorID)
+                        .then((replyAuthor) => {
+                            let replyInnerHtml = `
+                                <div class="post-wrapper on-column">
+                                    <div class="info-box on-column">
+                                        <h3 class="info-box on-column title link small animated">${r.title}</h3>
+                                        <h4 class="info-box on-column title link small animated">By: ${replyAuthor.firstName} ${replyAuthor.name}</h4>
+                                        <p class="word-wrap">${r.body}</p>
+                                    </div>
+        
+                                    <div class="ratings-wrapper info-box on-column">
+                            `;
+        
+                            const ratingKeys = Object.keys(r.ratings);
+                            ratingKeys.forEach(k => {
+                                replyInnerHtml += `
+                                    <div class="info-box on-column thin link">
+                                        <h3 class="small thin">${k}: ${r.ratings[k]}</h3>
+                                    </div>
+                                `;
+                            });
+                            replyInnerHtml += `</div></div>`;
+        
+                            return replyInnerHtml;
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                            return '';  // return an empty string on error
+                        });
                 });
-                innerHtml += `</div>`;
-                innerHtml += `</div>`;
+        
+                const replyInnerHtmls = await Promise.all(replyPromises);
+        
+                for (let replyInnerHtml of replyInnerHtmls) {
+                    innerHtml += replyInnerHtml;
+                }
             }
-        }
 
         innerHtml += `</div>`;        
 

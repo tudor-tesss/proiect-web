@@ -13,7 +13,6 @@ import com.idis.core.business.statistics.category.commands.*;
 import com.idis.core.business.usersession.commandhandlers.*;
 import com.idis.core.business.statistics.posts.commands.*;
 import com.idis.core.business.category.commandhandlers.*;
-import com.idis.core.business.posts.parentpost.command.*;
 import com.idis.core.business.posts.postreply.command.*;
 import com.idis.core.business.rssfeed.commandhandlers.*;
 import com.idis.core.business.usersession.commands.*;

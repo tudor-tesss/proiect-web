@@ -13,13 +13,17 @@ public final class GetCategoriesByCreatorIdCommandHandler implements IRequestHan
     @Override
     public CompletableFuture<List<Category>> handle(GetCategoriesByCreatorIdCommand getCategoriesByCreatorIdCommand) {
         var creatorId = getCategoriesByCreatorIdCommand.creatorId();
-        var allCategories = QueryProvider.getAll(Category.class);
-        var categories = allCategories.stream().filter(category -> category.getCreatorId().equals(creatorId)).toList();
 
-        if (categories.isEmpty()) {
-            throw new IllegalArgumentException(BusinessErrors.Category.CreatorHasNoCategories);
-        }
+        return QueryProvider.getAllAsync(Category.class).thenApply(allCategories -> {
+            var categories = allCategories.stream()
+                    .filter(category -> category.getCreatorId().equals(creatorId))
+                    .toList();
 
-        return CompletableFuture.completedFuture(categories);
+            if(categories.isEmpty()) {
+                throw new IllegalArgumentException(BusinessErrors.Category.CreatorHasNoCategories);
+            }
+
+            return categories;
+        });
     }
 }

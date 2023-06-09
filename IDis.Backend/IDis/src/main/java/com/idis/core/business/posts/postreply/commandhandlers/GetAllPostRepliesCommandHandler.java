@@ -9,23 +9,23 @@ import com.idis.shared.infrastructure.IRequestHandler;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 public final class GetAllPostRepliesCommandHandler implements IRequestHandler<GetAllPostRepliesCommand, List<PostReply>> {
+    @Override
     public CompletableFuture<List<PostReply>> handle(GetAllPostRepliesCommand getAllPostRepliesCommand) {
         var postId = getAllPostRepliesCommand.postId();
-        var allReplies = QueryProvider.getAll(PostReply.class);
-        var replies = new ArrayList<PostReply>();
 
-        for(PostReply reply : allReplies) {
-            if(reply.getParentPostId().equals(postId)) {
-                replies.add(reply);
+        return QueryProvider.getAllAsync(PostReply.class).thenApply(allReplies -> {
+            var replies = allReplies.stream()
+                    .filter(reply -> reply.getParentPostId().equals(postId))
+                    .collect(Collectors.toList());
+
+            if(replies.isEmpty()) {
+                throw new IllegalArgumentException(BusinessErrors.PostReply.NoRepliesFound);
             }
-        }
 
-        if(replies.isEmpty()) {
-            throw new IllegalArgumentException(BusinessErrors.PostReply.NoRepliesFound);
-        }
-
-        return CompletableFuture.completedFuture(replies);
+            return replies;
+        });
     }
 }

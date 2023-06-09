@@ -20,6 +20,7 @@ dependencies {
     testImplementation 'org.powermock:powermock-module-junit4-rule-agent:2.0.9'
 
     implementation 'org.postgresql:postgresql:42.5.4'
+    implementation 'com.zaxxer:HikariCP:5.0.1'
 
     implementation 'org.checkerframework:checker:3.8.0'
     implementation 'com.sendgrid:sendgrid-java:4.9.3'

@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.regex.Pattern;
 
 /**
@@ -54,6 +56,8 @@ public final class Router implements HttpHandler {
 
     private Map<RouteKey, Method> routeMap = new HashMap<>();
     private Set<Object> controllers;
+    private static final Executor REQ_EXECUTOR = Executors.newFixedThreadPool(32);
+
 
     /**
      * Constructs a {@code Router} instance, scanning the provided controller objects for methods
@@ -92,26 +96,28 @@ public final class Router implements HttpHandler {
             return;
         }
 
-        routeRequest(requestMethod, requestPath, requestBody)
-                .thenAccept(response -> {
-                    try {
-                        // Set the CORS headers
-                        httpExchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
-                        httpExchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
-                        httpExchange.getResponseHeaders().set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        CompletableFuture.runAsync(() -> {
+            routeRequest(requestMethod, requestPath, requestBody)
+                    .thenAccept(response -> {
+                        try {
+                            // Set the CORS headers
+                            httpExchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
+                            httpExchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
+                            httpExchange.getResponseHeaders().set("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
-                        if (response.getHeaders().containsKey("Content-Type")) {
-                            httpExchange.getResponseHeaders().set("Content-Type", response.getHeaders().get("Content-Type"));
+                            if (response.getHeaders().containsKey("Content-Type")) {
+                                httpExchange.getResponseHeaders().set("Content-Type", response.getHeaders().get("Content-Type"));
+                            }
+
+                            httpExchange.sendResponseHeaders(response.getStatus(), response.getContent().length());
+                            var outputStream = httpExchange.getResponseBody();
+                            outputStream.write(response.getContent().getBytes());
+                            outputStream.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-
-                        httpExchange.sendResponseHeaders(response.getStatus(), response.getContent().length());
-                        var outputStream = httpExchange.getResponseBody();
-                        outputStream.write(response.getContent().getBytes());
-                        outputStream.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
+                    });
+        }, REQ_EXECUTOR);
     }
 
     /**

@@ -8,17 +8,32 @@ import com.idis.shared.serialization.Serialization;
 import java.io.IOException;
 import java.sql.*;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import static com.idis.shared.functional.FunctionalExtensions.any;
 
 public class QueryProvider extends Database {
     private static List<Class<? extends AggregateRoot>> managedClasses = new ArrayList<>();
     private static final ObjectMapper objectMapper = new ObjectMapper();
+    private static final Executor DB_EXECUTOR = Executors.newFixedThreadPool(32);
 
     public static void initiate(String url, String user, String password) throws SQLException {
-        Database.configure(url, user, password);
-        Database.connect();
-        createTables();
+        try {
+            configure(url, user, password);
+            createTables();
+        } catch (Exception e) {
+            throw new SQLException("Failed to connect to database.", e);
+        }
+    }
+
+    public static <T extends AggregateRoot> CompletableFuture<List<T>> getAllAsync(Class<T> clazz) {
+        return CompletableFuture.supplyAsync(() -> getAll(clazz), DB_EXECUTOR);
+    }
+
+    public static <T extends AggregateRoot> CompletableFuture<Optional<T>> getByIdAsync(Class<T> clazz, UUID id) {
+        return CompletableFuture.supplyAsync(() -> getById(clazz, id), DB_EXECUTOR);
     }
 
     public static <T extends AggregateRoot> List<T> getAll(Class<T> clazz) {

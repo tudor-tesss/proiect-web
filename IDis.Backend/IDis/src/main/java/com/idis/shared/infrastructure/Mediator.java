@@ -71,7 +71,7 @@ public class Mediator {
      * @throws IllegalStateException if no handler is registered for the command's class
      */
     public <TCommand extends IRequest<TResult>, TResult> CompletableFuture<TResult> send(TCommand command) {
-        IRequestHandler<TCommand, TResult> handler = handlers.get(command.getClass());
+        var handler = handlers.get(command.getClass());
 
         if (handler == null) {
             throw new IllegalStateException("No handler registered for command " + command.getClass());

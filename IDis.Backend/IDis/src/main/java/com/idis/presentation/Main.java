@@ -1,5 +1,19 @@
 package com.idis.presentation;
 
+import com.idis.core.business.category.queries.GetAllCategoriesQuery;
+import com.idis.core.business.category.queries.GetCategoriesByCreatorIdQuery;
+import com.idis.core.business.category.queryhandlers.GetAllCategoriesQueryHandler;
+import com.idis.core.business.category.queryhandlers.GetCategoriesByCreatorIdQueryHandler;
+import com.idis.core.business.posts.parentpost.queries.GetAllPostsQuery;
+import com.idis.core.business.posts.parentpost.queries.GetAllPostsInsideOfACategoryQuery;
+import com.idis.core.business.posts.parentpost.queries.GetPostByIdQuery;
+import com.idis.core.business.posts.parentpost.queries.GetPostsByCreatorIdQuery;
+import com.idis.core.business.posts.parentpost.queryhandlers.GetAllPostsQueryHandler;
+import com.idis.core.business.posts.parentpost.queryhandlers.GetAllPostsInsideOfACategoryQueryHandler;
+import com.idis.core.business.posts.parentpost.queryhandlers.GetPostByIdQueryHandler;
+import com.idis.core.business.posts.parentpost.queryhandlers.GetPostsByCreatorIdQueryHandler;
+import com.idis.core.business.posts.postreply.queries.GetAllPostRepliesQuery;
+import com.idis.core.business.posts.postreply.queryhandlers.GetAllPostRepliesQueryHandler;
 import com.idis.core.business.statistics.category.commandhandlers.*;
 import com.idis.core.business.statistics.posts.commandhandlers.*;
 import com.idis.core.business.statistics.category.commandhandlers.ExportCategoryStatisticsAsPdfCommandHandler;
@@ -10,6 +24,8 @@ import com.idis.core.business.posts.parentpost.command.*;
 import com.idis.core.business.posts.parentpost.commandhandlers.*;
 import com.idis.core.business.posts.postreply.commandhandlers.*;
 import com.idis.core.business.statistics.category.commands.*;
+import com.idis.core.business.user.queries.GetUserByIdQuery;
+import com.idis.core.business.user.queryhandlers.GetUserByIdQueryHandler;
 import com.idis.core.business.usersession.commandhandlers.*;
 import com.idis.core.business.statistics.posts.commands.*;
 import com.idis.core.business.category.commandhandlers.*;
@@ -158,19 +174,19 @@ public class Main {
         mediator.registerHandler(CreateUserSessionCommand.class, new CreateUserSessionCommandHandler());
         mediator.registerHandler(CheckUserSessionCommand.class, new CheckUserSessionCommandHandler());
         mediator.registerHandler(DeleteUserSessionCommand.class, new DeleteUserSessionCommandHandler());
-        mediator.registerHandler(GetUserByIdCommand.class,new GetUserByIdCommandHandler());
+        mediator.registerHandler(GetUserByIdQuery.class,new GetUserByIdQueryHandler());
 
         mediator.registerHandler(CreateCategoryCommand.class, new CreateCategoryCommandHandler());
-        mediator.registerHandler(GetAllCategoriesCommand.class, new GetAllCategoriesCommandHandler());
-        mediator.registerHandler(GetCategoriesByCreatorIdCommand.class, new GetCategoriesByCreatorIdCommandHandler());
+        mediator.registerHandler(GetAllCategoriesQuery.class, new GetAllCategoriesQueryHandler());
+        mediator.registerHandler(GetCategoriesByCreatorIdQuery.class, new GetCategoriesByCreatorIdQueryHandler());
 
         mediator.registerHandler(CreatePostCommand.class, new CreatePostCommandHandler());
-        mediator.registerHandler(GetAllPostsInsideOfACategoryCommand.class, new GetAllPostsInsideOfACategoryCommandHandler());
-        mediator.registerHandler(GetPostByIdCommand.class, new GetPostByIdCommandHandler());
-        mediator.registerHandler(GetAllPostRepliesCommand.class, new GetAllPostRepliesCommandHandler());
-        mediator.registerHandler(GetPostsByCreatorIdCommand.class, new GetPostsByCreatorIdCommandHandler());
+        mediator.registerHandler(GetAllPostsInsideOfACategoryQuery.class, new GetAllPostsInsideOfACategoryQueryHandler());
+        mediator.registerHandler(GetPostByIdQuery.class, new GetPostByIdQueryHandler());
+        mediator.registerHandler(GetAllPostRepliesQuery.class, new GetAllPostRepliesQueryHandler());
+        mediator.registerHandler(GetPostsByCreatorIdQuery.class, new GetPostsByCreatorIdQueryHandler());
         mediator.registerHandler(CreatePostReplyCommand.class, new CreatePostReplyCommandHandler());
-        mediator.registerHandler(GetAllPostsCommand.class, new GetAllPostsCommandHandler());
+        mediator.registerHandler(GetAllPostsQuery.class, new GetAllPostsQueryHandler());
 
         mediator.registerHandler(CreateCategoryStatisticsCommand.class, new CreateCategoryStatisticsCommandHandler());
         mediator.registerHandler(CreateCategoriesStatisticsCommand.class, new CreateCategoriesStatisticsCommandHandler());

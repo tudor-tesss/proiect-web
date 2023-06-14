@@ -1,8 +1,8 @@
 package com.idis.core.business.category;
 
 import com.idis.core.business.BusinessErrors;
-import com.idis.core.business.category.commandhandlers.GetCategoriesByCreatorIdCommandHandler;
-import com.idis.core.business.category.commands.GetCategoriesByCreatorIdCommand;
+import com.idis.core.business.category.queryhandlers.GetCategoriesByCreatorIdQueryHandler;
+import com.idis.core.business.category.queries.GetCategoriesByCreatorIdQuery;
 import com.idis.core.domain.category.Category;
 import com.idis.shared.database.QueryProvider;
 import org.junit.jupiter.api.Test;
@@ -12,13 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutionException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-public class GetCategoriesByCreatorIdCommandHandlerTests {
+public class GetCategoriesByCreatorIdQueryHandlerTests {
     @Test
     public void when_creatorDoesNotHaveCategories_then_shouldFail() {
         // Arrange
@@ -65,9 +64,9 @@ public class GetCategoriesByCreatorIdCommandHandlerTests {
             assertFalse(result.isEmpty());
         }
     }
-    private GetCategoriesByCreatorIdCommandHandler sut(){return new GetCategoriesByCreatorIdCommandHandler();}
+    private GetCategoriesByCreatorIdQueryHandler sut(){return new GetCategoriesByCreatorIdQueryHandler();}
 
-    private GetCategoriesByCreatorIdCommand command(){
-        return new GetCategoriesByCreatorIdCommand(UUID.randomUUID());
+    private GetCategoriesByCreatorIdQuery command(){
+        return new GetCategoriesByCreatorIdQuery(UUID.randomUUID());
     }
 }

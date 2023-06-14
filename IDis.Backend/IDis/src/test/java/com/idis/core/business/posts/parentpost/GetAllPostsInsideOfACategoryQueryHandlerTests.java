@@ -1,9 +1,8 @@
 package com.idis.core.business.posts.parentpost;
 
 import com.idis.core.business.BusinessErrors;
-import com.idis.core.business.posts.parentpost.command.GetAllPostsInsideOfACategoryCommand;
-import com.idis.core.business.posts.parentpost.commandhandlers.GetAllPostsInsideOfACategoryCommandHandler;
-import com.idis.core.domain.category.Category;
+import com.idis.core.business.posts.parentpost.queries.GetAllPostsInsideOfACategoryQuery;
+import com.idis.core.business.posts.parentpost.queryhandlers.GetAllPostsInsideOfACategoryQueryHandler;
 import com.idis.core.domain.posts.parentpost.Post;
 import com.idis.shared.database.QueryProvider;
 import org.junit.jupiter.api.Test;
@@ -15,7 +14,7 @@ import java.util.concurrent.ExecutionException;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-public class GetAllPostsInsideOfACategoryCommandHandlerTests {
+public class GetAllPostsInsideOfACategoryQueryHandlerTests {
 
     @Test
     public void when_categoryDoesNotHavePosts_then_shouldFail() {
@@ -63,8 +62,8 @@ public class GetAllPostsInsideOfACategoryCommandHandlerTests {
         }
     }
 
-    private GetAllPostsInsideOfACategoryCommandHandler sut(){return new GetAllPostsInsideOfACategoryCommandHandler();}
-    private GetAllPostsInsideOfACategoryCommand command(){
-        return new GetAllPostsInsideOfACategoryCommand(UUID.randomUUID());
+    private GetAllPostsInsideOfACategoryQueryHandler sut(){return new GetAllPostsInsideOfACategoryQueryHandler();}
+    private GetAllPostsInsideOfACategoryQuery command(){
+        return new GetAllPostsInsideOfACategoryQuery(UUID.randomUUID());
     }
 }

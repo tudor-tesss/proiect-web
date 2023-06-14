@@ -1,7 +1,7 @@
-package com.idis.core.business.category.commandhandlers;
+package com.idis.core.business.category.queryhandlers;
 
 import com.idis.core.business.BusinessErrors;
-import com.idis.core.business.category.commands.GetCategoriesByCreatorIdCommand;
+import com.idis.core.business.category.queries.GetCategoriesByCreatorIdQuery;
 import com.idis.core.domain.category.Category;
 import com.idis.shared.database.QueryProvider;
 import com.idis.shared.infrastructure.IRequestHandler;
@@ -9,9 +9,9 @@ import com.idis.shared.infrastructure.IRequestHandler;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public final class GetCategoriesByCreatorIdCommandHandler implements IRequestHandler<GetCategoriesByCreatorIdCommand, List<Category>> {
+public final class GetCategoriesByCreatorIdQueryHandler implements IRequestHandler<GetCategoriesByCreatorIdQuery, List<Category>> {
     @Override
-    public CompletableFuture<List<Category>> handle(GetCategoriesByCreatorIdCommand getCategoriesByCreatorIdCommand) {
+    public CompletableFuture<List<Category>> handle(GetCategoriesByCreatorIdQuery getCategoriesByCreatorIdCommand) {
         var creatorId = getCategoriesByCreatorIdCommand.creatorId();
 
         return QueryProvider.getAllAsync(Category.class).thenApply(allCategories -> {

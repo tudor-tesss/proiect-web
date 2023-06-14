@@ -1,7 +1,7 @@
 package com.idis.presentation.functions;
 
 import com.idis.core.business.user.commands.CreateUserCommand;
-import com.idis.core.business.user.commands.GetUserByIdCommand;
+import com.idis.core.business.user.queries.GetUserByIdQuery;
 import com.idis.core.business.usersession.commands.*;
 import com.idis.shared.infrastructure.Mediator;
 import com.idis.shared.serialization.Serialization;
@@ -183,7 +183,7 @@ public class UserFunctions implements IUserController {
             return HttpResponse.create(400, responseContent);
         }
 
-        var command = new GetUserByIdCommand(userId);
+        var command = new GetUserByIdQuery(userId);
 
         try{
             return mediator

@@ -8,7 +8,7 @@ package com.idis.shared.web.communication;
  * handling user-related actions and interactions within the application.
  * <p>
  * A {@code UserController} should typically contain methods that are annotated
- * with {@code Route} and {@code Function} annotations, allowing the application
+ * with {@code Route} and {@code Controller} annotations, allowing the application
  * to map incoming requests to the appropriate actions.
  */
-public interface IUserController { }
+public interface IController { }

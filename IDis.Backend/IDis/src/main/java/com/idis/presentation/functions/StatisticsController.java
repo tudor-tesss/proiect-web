@@ -11,23 +11,22 @@ import com.idis.core.business.statistics.category.commands.CreateCategoriesStati
 import com.idis.core.business.statistics.category.commands.CreateCategoryStatisticsCommand;
 import com.idis.shared.infrastructure.Mediator;
 import com.idis.shared.serialization.Serialization;
-import com.idis.shared.web.communication.Function;
+import com.idis.shared.web.communication.Controller;
 import com.idis.shared.web.communication.HttpResponse;
 import com.idis.shared.web.communication.HttpVerbs;
-import com.idis.shared.web.communication.IUserController;
+import com.idis.shared.web.communication.IController;
 import com.idis.shared.web.routing.Route;
 
 import java.util.Base64;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
-public final class StatisticsFunctions implements IUserController {
+public final class StatisticsController implements IController {
     private static Mediator mediator = Mediator.getInstance();
 
     @Route(path = "/categories/{id}/statistics", method = HttpVerbs.POST)
-    @Function(name = "createCategoryStatistics")
+    @Controller(name = "createCategoryStatistics")
     public static CompletableFuture<HttpResponse> createCategoryStatistics(String id, String requestBody) {
         UUID categoryId;
         try {
@@ -56,7 +55,7 @@ public final class StatisticsFunctions implements IUserController {
     }
 
     @Route(path = "/categories/statistics", method = HttpVerbs.POST)
-    @Function(name = "createCategoriesStatistics")
+    @Controller(name = "createCategoriesStatistics")
     public static CompletableFuture<HttpResponse> createCategoriesStatistics(String requestBody) {
         var command = new CreateCategoriesStatisticsCommand();
         try {
@@ -75,7 +74,7 @@ public final class StatisticsFunctions implements IUserController {
     }
 
     @Route(path = "/posts/{id}/statistics", method = HttpVerbs.POST)
-    @Function(name = "createPostStatistics")
+    @Controller(name = "createPostStatistics")
     public static CompletableFuture<HttpResponse> createPostStatistics(String id, String requestBody) {
         UUID postId;
         try {
@@ -104,7 +103,7 @@ public final class StatisticsFunctions implements IUserController {
     }
 
     @Route(path = "/posts/statistics", method = HttpVerbs.POST)
-    @Function(name = "createPostsStatistics")
+    @Controller(name = "createPostsStatistics")
     public static CompletableFuture<HttpResponse> createPostsStatistics(String requestBody) {
         var command = new CreatePostsStatisticsCommand();
         try {
@@ -123,7 +122,7 @@ public final class StatisticsFunctions implements IUserController {
     }
 
     @Route(path = "/posts/{id}/statistics/pdf", method = HttpVerbs.POST)
-    @Function(name = "exportPostStatisticsAsPdf")
+    @Controller(name = "exportPostStatisticsAsPdf")
     public static CompletableFuture <HttpResponse> exportPostStatisticsAsPdf (String id, String body){
         UUID postId;
         try {
@@ -154,7 +153,7 @@ public final class StatisticsFunctions implements IUserController {
     }
 
     @Route(path="/categories/{id}/statistics/pdf",method = HttpVerbs.POST)
-    @Function(name = "exportCategoryStatisticsAsPdf")
+    @Controller(name = "exportCategoryStatisticsAsPdf")
     public static CompletableFuture <HttpResponse> exportCategoryStatisticsAsPdf (String id, String body){
         UUID categoryId;
         try {
@@ -186,7 +185,7 @@ public final class StatisticsFunctions implements IUserController {
     }
 
     @Route(path = "/posts/{id}/statistics/docbook", method = HttpVerbs.POST)
-    @Function(name = "exportPostStatisticsAsDocbook")
+    @Controller(name = "exportPostStatisticsAsDocbook")
     public static CompletableFuture<HttpResponse> exportPostStatisticsAsDocbook(String id, String body){
         UUID postId;
         try {
@@ -214,7 +213,7 @@ public final class StatisticsFunctions implements IUserController {
     }
 
     @Route(path = "/posts/{id}/statistics/csv", method = HttpVerbs.POST)
-    @Function(name = "exportPostStatisticsAsCsv")
+    @Controller(name = "exportPostStatisticsAsCsv")
     public static CompletableFuture<HttpResponse> exportPostStatisticsAsCsv(String id, String body){
         UUID postId;
         try {
@@ -242,7 +241,7 @@ public final class StatisticsFunctions implements IUserController {
     }
 
     @Route(path = "/categories/{id}/statistics/docbook", method = HttpVerbs.POST)
-    @Function(name = "exportCategoryStatisticsAsDocbook")
+    @Controller(name = "exportCategoryStatisticsAsDocbook")
     public static CompletableFuture<HttpResponse> exportCategoryStatisticsAsDocbook(String id, String body){
         UUID categoryId;
         try {
@@ -270,7 +269,7 @@ public final class StatisticsFunctions implements IUserController {
     }
 
     @Route(path = "/categories/{id}/statistics/csv", method = HttpVerbs.POST)
-    @Function(name = "exportCategoryStatisticsAsCsv")
+    @Controller(name = "exportCategoryStatisticsAsCsv")
     public static CompletableFuture<HttpResponse> exportCategoryStatisticsAsCsv(String id, String body){
         UUID categoryId;
         try {

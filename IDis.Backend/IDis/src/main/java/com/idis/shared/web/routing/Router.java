@@ -1,6 +1,6 @@
 package com.idis.shared.web.routing;
 
-import com.idis.shared.web.communication.Function;
+import com.idis.shared.web.communication.Controller;
 import com.idis.shared.web.communication.HttpResponse;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
  * The {@code Router} class is an implementation of {@code HttpHandler} and is responsible for
  * routing incoming HTTP requests to the appropriate controller methods based on the request
  * method (HTTP verb) and path. The routing is achieved by scanning the controller class for
- * methods annotated with {@code Route} and {@code Function} annotations. The registered routes
+ * methods annotated with {@code Route} and {@code Controller} annotations. The registered routes
  * are then matched against the incoming request's method and path, and the corresponding
  * controller method is invoked.
  * <p>
@@ -61,7 +61,7 @@ public final class Router implements HttpHandler {
 
     /**
      * Constructs a {@code Router} instance, scanning the provided controller objects for methods
-     * annotated with {@code Route} and {@code Function} annotations and registering them in the route map.
+     * annotated with {@code Route} and {@code Controller} annotations and registering them in the route map.
      *
      * @param controllers The controller objects containing the route methods.
      */
@@ -212,7 +212,7 @@ public final class Router implements HttpHandler {
     }
 
     /**
-     * Scans the provided controller object for methods annotated with {@code Route} and {@code Function}
+     * Scans the provided controller object for methods annotated with {@code Route} and {@code Controller}
      * annotations and registers them in the route map.
      *
      * @param controller The controller object containing the route methods.
@@ -220,11 +220,11 @@ public final class Router implements HttpHandler {
     private void registerRoutesForController(Object controller) {
         for (var method : controller.getClass().getDeclaredMethods()) {
             var route = method.getAnnotation(Route.class);
-            var function = method.getAnnotation(Function.class);
+            var function = method.getAnnotation(Controller.class);
 
             if (route != null && function != null) {
                 if (!function.name().equals(method.getName())) {
-                    throw new IllegalStateException("Function name '" + function.name() + "' does not match method name '" + method.getName() + "'");
+                    throw new IllegalStateException("Controller name '" + function.name() + "' does not match method name '" + method.getName() + "'");
                 }
                 routeMap.put(new RouteKey(route.method(), route.path()), method);
             }

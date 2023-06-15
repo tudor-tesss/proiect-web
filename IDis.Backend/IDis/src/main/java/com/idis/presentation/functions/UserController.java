@@ -5,20 +5,20 @@ import com.idis.core.business.user.queries.GetUserByIdQuery;
 import com.idis.core.business.usersession.commands.*;
 import com.idis.shared.infrastructure.Mediator;
 import com.idis.shared.serialization.Serialization;
-import com.idis.shared.web.communication.Function;
+import com.idis.shared.web.communication.Controller;
 import com.idis.shared.web.communication.HttpResponse;
 import com.idis.shared.web.communication.HttpVerbs;
-import com.idis.shared.web.communication.IUserController;
+import com.idis.shared.web.communication.IController;
 import com.idis.shared.web.routing.Route;
 
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
-public class UserFunctions implements IUserController {
+public class UserController implements IController {
     private static Mediator mediator = Mediator.getInstance();
 
     @Route(path = "/users", method = HttpVerbs.POST)
-    @Function(name = "createUser")
+    @Controller(name = "createUser")
     public static CompletableFuture<HttpResponse> createUser(String requestBody) {
         var command = Serialization.deserialize(requestBody, CreateUserCommand.class);
 
@@ -38,7 +38,7 @@ public class UserFunctions implements IUserController {
     }
 
     @Route(path = "/users/gates", method = HttpVerbs.POST)
-    @Function(name = "createUserGate")
+    @Controller(name = "createUserGate")
     public static CompletableFuture<HttpResponse> createUserGate(String requestBody) {
         var command = Serialization.deserialize(requestBody, CreateUserGateCommand.class);
 
@@ -58,7 +58,7 @@ public class UserFunctions implements IUserController {
     }
 
     @Route(path = "/users/{id}/gates", method = HttpVerbs.PATCH)
-    @Function(name = "passUserGate")
+    @Controller(name = "passUserGate")
     public static CompletableFuture<HttpResponse> passUserGate(String id, String requestBody) {
         UUID userId;
         try {
@@ -88,7 +88,7 @@ public class UserFunctions implements IUserController {
     }
 
     @Route(path = "/users/{id}/sessions", method = HttpVerbs.POST)
-    @Function(name = "createUserSession")
+    @Controller(name = "createUserSession")
     public static CompletableFuture<HttpResponse> createUserSession(String id, String requestBody) {
         UUID userId;
         try {
@@ -121,7 +121,7 @@ public class UserFunctions implements IUserController {
     }
 
     @Route(path = "/users/{id}/sessions", method = HttpVerbs.PATCH)
-    @Function(name = "checkUserSession")
+    @Controller(name = "checkUserSession")
     public static CompletableFuture<HttpResponse> checkUserSession(String id, String requestBody) {
         UUID userId;
         try {
@@ -151,7 +151,7 @@ public class UserFunctions implements IUserController {
     }
 
     @Route(path = "/users/{id}/sessions", method = HttpVerbs.DELETE)
-    @Function(name = "deleteUserSession")
+    @Controller(name = "deleteUserSession")
     public static CompletableFuture<HttpResponse> deleteUserSession(String id, String requestBody) {
         var command = Serialization.deserialize(requestBody, DeleteUserSessionCommand.class);
 
@@ -171,7 +171,7 @@ public class UserFunctions implements IUserController {
     }
 
     @Route(path = "/users/{id}", method = HttpVerbs.GET)
-    @Function(name = "getUserById")
+    @Controller(name = "getUserById")
     public static CompletableFuture<HttpResponse> getUserById(String id, String requestBody){
 
         UUID userId;

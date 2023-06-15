@@ -9,20 +9,20 @@ import com.idis.core.business.posts.postreply.command.CreatePostReplyCommand;
 import com.idis.core.business.posts.postreply.queries.GetAllPostRepliesQuery;
 import com.idis.shared.infrastructure.Mediator;
 import com.idis.shared.serialization.Serialization;
-import com.idis.shared.web.communication.Function;
+import com.idis.shared.web.communication.Controller;
 import com.idis.shared.web.communication.HttpResponse;
 import com.idis.shared.web.communication.HttpVerbs;
-import com.idis.shared.web.communication.IUserController;
+import com.idis.shared.web.communication.IController;
 import com.idis.shared.web.routing.Route;
 
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
-public class PostFunctions implements IUserController {
+public class PostController implements IController {
     private static Mediator mediator = Mediator.getInstance();
 
     @Route(path = "/posts", method = HttpVerbs.POST)
-    @Function(name = "createPost")
+    @Controller(name = "createPost")
     public static CompletableFuture<HttpResponse> createPost(String requestBody) {
         var command = Serialization.deserialize(requestBody, CreatePostCommand.class);
 
@@ -42,7 +42,7 @@ public class PostFunctions implements IUserController {
     }
 
     @Route(path = "/categories/{id}/posts", method = HttpVerbs.GET)
-    @Function(name = "getAllPostsInsideACategory")
+    @Controller(name = "getAllPostsInsideACategory")
     public static CompletableFuture<HttpResponse> getAllPostsInsideACategory(String id, String requestBody) {
         UUID categoryId;
         try {
@@ -70,7 +70,7 @@ public class PostFunctions implements IUserController {
     }
 
     @Route(path = "/posts/{id}/replies", method = HttpVerbs.POST)
-    @Function(name = "createPostReply")
+    @Controller(name = "createPostReply")
     public static CompletableFuture<HttpResponse> createPostReply(String id, String requestBody) {
         UUID postId;
         try {
@@ -99,7 +99,7 @@ public class PostFunctions implements IUserController {
     }
 
     @Route(path = "/posts/{id}", method = HttpVerbs.GET)
-    @Function(name = "getPostById")
+    @Controller(name = "getPostById")
     public static CompletableFuture<HttpResponse> getPostById(String id, String requestBody) {
         UUID postId;
         try {
@@ -127,7 +127,7 @@ public class PostFunctions implements IUserController {
     }
 
     @Route(path = "/posts/{id}/replies", method = HttpVerbs.GET)
-    @Function(name = "getAllPostReplies")
+    @Controller(name = "getAllPostReplies")
     public static CompletableFuture<HttpResponse> getAllPostReplies(String id, String requestBody) {
         UUID postId;
 
@@ -154,7 +154,7 @@ public class PostFunctions implements IUserController {
     }
 
     @Route(path = "/users/{id}/posts", method = HttpVerbs.GET)
-    @Function(name = "getPostsByCreatorId")
+    @Controller(name = "getPostsByCreatorId")
     public static CompletableFuture<HttpResponse> getPostsByCreatorId(String id, String requestBody){
         UUID creatorId;
         try {
@@ -180,7 +180,7 @@ public class PostFunctions implements IUserController {
     }
 
     @Route(path = "/posts", method = HttpVerbs.GET)
-    @Function(name = "getAllPosts")
+    @Controller(name = "getAllPosts")
     public static CompletableFuture <HttpResponse> getAllPosts (String requestBody) {
         var command = new GetAllPostsQuery();
         try {

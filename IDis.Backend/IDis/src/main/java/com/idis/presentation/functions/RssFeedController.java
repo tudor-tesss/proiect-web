@@ -3,21 +3,20 @@ package com.idis.presentation.functions;
 import com.idis.core.business.rssfeed.commands.GetRssFeedCommand;
 import com.idis.shared.infrastructure.Mediator;
 import com.idis.shared.serialization.Serialization;
-import com.idis.shared.web.communication.Function;
+import com.idis.shared.web.communication.Controller;
 import com.idis.shared.web.communication.HttpResponse;
 import com.idis.shared.web.communication.HttpVerbs;
-import com.idis.shared.web.communication.IUserController;
+import com.idis.shared.web.communication.IController;
 import com.idis.shared.web.routing.Route;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-public class RssFeedFunctions implements IUserController {
+public class RssFeedController implements IController {
     private static Mediator mediator = Mediator.getInstance();
 
     @Route(path = "/rss", method = HttpVerbs.GET)
-    @Function(name = "getRSSFeed")
+    @Controller(name = "getRSSFeed")
     public static CompletableFuture <HttpResponse> getRSSFeed(String body){
         var command = new GetRssFeedCommand();
 

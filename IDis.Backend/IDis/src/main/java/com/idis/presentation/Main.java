@@ -145,11 +145,11 @@ public class Main {
                 .create(7101)
                 .withControllers(
                         new GenericOptionsController(),
-                        new UserFunctions(),
-                        new CategoryFunctions(),
-                        new PostFunctions(),
-                        new StatisticsFunctions(),
-                        new RssFeedFunctions()
+                        new UserController(),
+                        new CategoryController(),
+                        new PostController(),
+                        new StatisticsController(),
+                        new RssFeedController()
                 );
 
         server.start();

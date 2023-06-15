@@ -2,6 +2,7 @@ package com.idis.core.business.posts.parentpost.queryhandlers;
 
 import com.idis.core.business.BusinessErrors;
 import com.idis.core.business.posts.parentpost.queries.GetPostsByCreatorIdQuery;
+import com.idis.core.domain.category.Category;
 import com.idis.core.domain.posts.parentpost.Post;
 import com.idis.shared.database.QueryProvider;
 import com.idis.shared.infrastructure.IRequestHandler;
@@ -14,19 +15,17 @@ public final class GetPostsByCreatorIdQueryHandler implements IRequestHandler<Ge
     @Override
     public CompletableFuture<List<Post>> handle(GetPostsByCreatorIdQuery getPostsByCreatorIdCommand) {
         var creatorId = getPostsByCreatorIdCommand.creatorId();
-        var allPosts = QueryProvider.getAll(Post.class);
-        var posts = new ArrayList<Post>();
 
-        for(var post : allPosts) {
-            if(post.getAuthorId().equals(creatorId)) {
-                posts.add(post);
+        return QueryProvider.getAllAsync(Post.class).thenApply(allPosts -> {
+            var posts = allPosts.stream()
+                    .filter(post -> post.getAuthorId().equals(creatorId))
+                    .toList();
+
+            if (posts.isEmpty()) {
+                throw new IllegalArgumentException(BusinessErrors.Category.CreatorHasNoCategories);
             }
-        }
 
-        if(posts.isEmpty()) {
-            throw new IllegalArgumentException(BusinessErrors.Post.CreatorHasNoPosts);
-        }
-
-        return CompletableFuture.completedFuture(posts);
+            return posts;
+        });
     }
 }

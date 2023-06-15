@@ -10,6 +10,14 @@ export class AddPostComponent {
         const params = new URLSearchParams(window.location.search);
         const categoryId = params.get("categoryId");
 
+        const categoryForm = document.querySelector(".category-form");
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // Prevent default behavior (e.g., form submission)
+                AddPostComponent.createPost(); // Call the createCategory function
+            }
+        });
+
         if (!categoryId) {
             window.location.href = "/main/main.html";
         }

@@ -1,5 +1,6 @@
 package com.idis.core.business.statistics.category.extensions;
 
+import com.idis.core.business.BusinessErrors;
 import com.idis.core.domain.posts.parentpost.Post;
 import com.idis.shared.database.QueryProvider;
 import com.itextpdf.text.*;
@@ -11,6 +12,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.Map;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 public class PdfGeneratorForCategory {
     private CategoryStatisticsCalculator categoryStatisticsCalculator;
@@ -90,7 +92,24 @@ public class PdfGeneratorForCategory {
         var cellFont = new Font(font.getFamily(), font.getSize(), font.getStyle(), font.getColor());
 
         for (Map.Entry<?, ?> entry : map.entrySet()) {
-            var keyCell = new PdfPCell(new Paragraph(entry.getKey().toString(),cellFont));
+            var keyCell = new PdfPCell();
+            if (entry.getKey() instanceof UUID) {
+                UUID uuid = (UUID) entry.getKey();
+                String title;
+
+                try {
+                    var post = QueryProvider.getByIdAsync(Post.class, uuid);
+                    title = post.get().get().getTitle();
+                }catch (Throwable t){
+                    throw new IllegalArgumentException(BusinessErrors.Post.PostNotFound);
+                }
+
+                keyCell = new PdfPCell(new Paragraph(title, cellFont));
+
+            } else {
+                keyCell = new PdfPCell(new Paragraph(entry.getKey().toString(), cellFont));
+            }
+
             var valueCell = new PdfPCell(new Paragraph(entry.getValue().toString(),cellFont));
 
             table.addCell(keyCell);

@@ -46,6 +46,12 @@ export class AddCategoryComponent {
 
     static displayCategoryForm() {
         const categoryForm = document.querySelector(".category-form");
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // Prevent default behavior (e.g., form submission)
+                AddCategoryComponent.createCategory(); // Call the createCategory function
+            }
+        });
         categoryForm.innerHTML = `
             <div class="category-box">
               <h2>Add Category</h2>

@@ -1,6 +1,6 @@
 package com.idis.shared.web.server;
 
-import com.idis.shared.web.communication.IUserController;
+import com.idis.shared.web.communication.IController;
 import com.idis.shared.web.routing.Router;
 
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.util.Set;
 
 /**
  * The {@code HttpServer} class represents an HTTP server that listens for incoming requests on a specified port.
- * It uses the {@link com.idis.shared.web.communication.IUserController} to handle requests and routes them using the {@link Router}.
+ * It uses the {@link IController} to handle requests and routes them using the {@link Router}.
  * <p>
  * The server is implemented using the {@code com.sun.net.httpserver.HttpServer} package.
  * <p>
@@ -58,10 +58,10 @@ public final class HttpServer {
      * Sets the UserController for handling incoming requests.
      * Returns the current instance of HttpServer, allowing for method chaining.
      *
-     * @param controllers An array of IUserController objects.
+     * @param controllers An array of IController objects.
      * @return The current instance of the HttpServer class.
      */
-    public HttpServer withControllers(IUserController... controllers) {
+    public HttpServer withControllers(IController... controllers) {
         this.controllers.addAll(Arrays.asList(controllers));
         return this;
     }

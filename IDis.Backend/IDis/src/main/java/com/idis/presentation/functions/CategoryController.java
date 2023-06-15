@@ -5,20 +5,20 @@ import com.idis.core.business.category.commands.GetAllCategoriesCommand;
 import com.idis.core.business.category.commands.GetCategoriesByCreatorIdCommand;
 import com.idis.shared.infrastructure.Mediator;
 import com.idis.shared.serialization.Serialization;
-import com.idis.shared.web.communication.Function;
+import com.idis.shared.web.communication.Controller;
 import com.idis.shared.web.communication.HttpResponse;
 import com.idis.shared.web.communication.HttpVerbs;
-import com.idis.shared.web.communication.IUserController;
+import com.idis.shared.web.communication.IController;
 import com.idis.shared.web.routing.Route;
 
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
-public class CategoryFunctions implements IUserController {
+public class CategoryController implements IController {
     private static Mediator mediator = Mediator.getInstance();
 
     @Route(path= "/categories", method = HttpVerbs.POST)
-    @Function(name = "createCategory")
+    @Controller(name = "createCategory")
     public static CompletableFuture<HttpResponse> createCategory(String requestBody){
         var command = Serialization.deserialize(requestBody, CreateCategoryCommand.class);
         try {
@@ -37,7 +37,7 @@ public class CategoryFunctions implements IUserController {
     }
 
     @Route(path = "/categories",method = HttpVerbs.GET)
-    @Function(name = "getAllCategories")
+    @Controller(name = "getAllCategories")
     public static CompletableFuture<HttpResponse> getAllCategories(String requestBody){
         var command = new GetAllCategoriesCommand();
         try {
@@ -56,7 +56,7 @@ public class CategoryFunctions implements IUserController {
     }
 
     @Route(path = "/users/{id}/categories",method = HttpVerbs.GET)
-    @Function(name = "getCategoriesByCreatorId")
+    @Controller(name = "getCategoriesByCreatorId")
     public static CompletableFuture<HttpResponse> getCategoriesByCreatorId(String id, String requestBody){
         UUID creatorId;
         try {

@@ -1,18 +1,18 @@
 package com.idis.presentation.functions;
 
-import com.idis.shared.web.communication.Function;
+import com.idis.shared.web.communication.Controller;
 import com.idis.shared.web.communication.HttpResponse;
 import com.idis.shared.web.communication.HttpVerbs;
-import com.idis.shared.web.communication.IUserController;
+import com.idis.shared.web.communication.IController;
 import com.idis.shared.web.routing.Route;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-public class GenericOptionsController implements IUserController {
+public class GenericOptionsController implements IController {
     @Route(path = "/{path:.*}", method = HttpVerbs.OPTIONS)
-    @Function(name = "optionsHandler")
+    @Controller(name = "optionsHandler")
     public static CompletableFuture<HttpResponse> optionsHandler(String path, String requestBody) {
         Map<String, String> headers = new HashMap<>();
         headers.put("Access-Control-Allow-Origin", "*");

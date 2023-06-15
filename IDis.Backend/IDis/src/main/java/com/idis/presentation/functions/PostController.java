@@ -1,8 +1,12 @@
 package com.idis.presentation.functions;
 
 import com.idis.core.business.posts.parentpost.command.*;
+import com.idis.core.business.posts.parentpost.queries.GetAllPostsQuery;
+import com.idis.core.business.posts.parentpost.queries.GetAllPostsInsideOfACategoryQuery;
+import com.idis.core.business.posts.parentpost.queries.GetPostByIdQuery;
+import com.idis.core.business.posts.parentpost.queries.GetPostsByCreatorIdQuery;
 import com.idis.core.business.posts.postreply.command.CreatePostReplyCommand;
-import com.idis.core.business.posts.postreply.command.GetAllPostRepliesCommand;
+import com.idis.core.business.posts.postreply.queries.GetAllPostRepliesQuery;
 import com.idis.shared.infrastructure.Mediator;
 import com.idis.shared.serialization.Serialization;
 import com.idis.shared.web.communication.Controller;
@@ -49,7 +53,7 @@ public class PostController implements IController {
             return HttpResponse.create(400, responseContent);
         }
 
-        var command = new GetAllPostsInsideOfACategoryCommand(categoryId);
+        var command = new GetAllPostsInsideOfACategoryQuery(categoryId);
         try {
             return mediator
                     .send(command)
@@ -106,7 +110,7 @@ public class PostController implements IController {
             return HttpResponse.create(400, responseContent);
         }
 
-        var command = new GetPostByIdCommand(postId);
+        var command = new GetPostByIdQuery(postId);
         try {
             return mediator
                     .send(command)
@@ -135,7 +139,7 @@ public class PostController implements IController {
             return HttpResponse.create(400, responseContent);
         }
 
-        var command = new GetAllPostRepliesCommand(postId);
+        var command = new GetAllPostRepliesQuery(postId);
         try {
             return mediator.send(command).thenCompose(r -> {
                 var responseContent = Serialization.serialize(r);
@@ -161,7 +165,7 @@ public class PostController implements IController {
             return HttpResponse.create(400, responseContent);
         }
 
-        var command = new GetPostsByCreatorIdCommand(creatorId);
+        var command = new GetPostsByCreatorIdQuery(creatorId);
         try {
             return mediator.send(command).thenCompose(p -> {
                 var responseContent = Serialization.serialize(p);
@@ -178,7 +182,7 @@ public class PostController implements IController {
     @Route(path = "/posts", method = HttpVerbs.GET)
     @Controller(name = "getAllPosts")
     public static CompletableFuture <HttpResponse> getAllPosts (String requestBody) {
-        var command = new GetAllPostsCommand();
+        var command = new GetAllPostsQuery();
         try {
             return mediator
                     .send(command)

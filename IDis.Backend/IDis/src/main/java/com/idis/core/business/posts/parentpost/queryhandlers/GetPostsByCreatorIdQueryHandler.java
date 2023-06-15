@@ -1,7 +1,7 @@
-package com.idis.core.business.posts.parentpost.commandhandlers;
+package com.idis.core.business.posts.parentpost.queryhandlers;
 
 import com.idis.core.business.BusinessErrors;
-import com.idis.core.business.posts.parentpost.command.GetPostsByCreatorIdCommand;
+import com.idis.core.business.posts.parentpost.queries.GetPostsByCreatorIdQuery;
 import com.idis.core.domain.posts.parentpost.Post;
 import com.idis.shared.database.QueryProvider;
 import com.idis.shared.infrastructure.IRequestHandler;
@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public final class GetPostsByCreatorIdCommandHandler implements IRequestHandler<GetPostsByCreatorIdCommand, List<Post>> {
+public final class GetPostsByCreatorIdQueryHandler implements IRequestHandler<GetPostsByCreatorIdQuery, List<Post>> {
     @Override
-    public CompletableFuture<List<Post>> handle(GetPostsByCreatorIdCommand getPostsByCreatorIdCommand) {
+    public CompletableFuture<List<Post>> handle(GetPostsByCreatorIdQuery getPostsByCreatorIdCommand) {
         var creatorId = getPostsByCreatorIdCommand.creatorId();
         var allPosts = QueryProvider.getAll(Post.class);
         var posts = new ArrayList<Post>();

@@ -1,8 +1,8 @@
 package com.idis.presentation.functions;
 
 import com.idis.core.business.category.commands.CreateCategoryCommand;
-import com.idis.core.business.category.commands.GetAllCategoriesCommand;
-import com.idis.core.business.category.commands.GetCategoriesByCreatorIdCommand;
+import com.idis.core.business.category.queries.GetAllCategoriesQuery;
+import com.idis.core.business.category.queries.GetCategoriesByCreatorIdQuery;
 import com.idis.shared.infrastructure.Mediator;
 import com.idis.shared.serialization.Serialization;
 import com.idis.shared.web.communication.Controller;
@@ -39,7 +39,7 @@ public class CategoryController implements IController {
     @Route(path = "/categories",method = HttpVerbs.GET)
     @Controller(name = "getAllCategories")
     public static CompletableFuture<HttpResponse> getAllCategories(String requestBody){
-        var command = new GetAllCategoriesCommand();
+        var command = new GetAllCategoriesQuery();
         try {
             return mediator
                     .send(command)
@@ -67,7 +67,7 @@ public class CategoryController implements IController {
             return HttpResponse.create(400, responseContent);
         }
 
-        var command = new GetCategoriesByCreatorIdCommand(creatorId);
+        var command = new GetCategoriesByCreatorIdQuery(creatorId);
         try {
             return mediator
                     .send(command)

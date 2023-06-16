@@ -16,10 +16,17 @@
 				</a>
 			</div>
 			<nav>
-				 <a class ="add-category-button" href="../categories/add">Add Category</a>
-				 <a class ="add-category-button" href="../statistics/?isPost=false">View Statistics</a>
-				 <a class ="add-category-button" href="../account">Account</a>
-				<button type="button" class="logout-button" onClick="AuthenticationService.deleteSessionTokenCookie()">Log Out</button>
+				<div class="dark-button">
+					<button class="toggle-button" id="toggle-button">
+						<img id="toggle-image" src="../resources/icons/light.png">
+					</button>
+				</div>
+				<div class="nav-buttons">
+					<a class ="add-category-button" href="../categories/add">Add Category</a>
+					<a class ="add-category-button" href="../statistics/?isPost=false">View Statistics</a>
+					<a class ="add-category-button" href="../account">Account</a>
+					<button type="button" class="logout-button" onClick="AuthenticationService.deleteSessionTokenCookie()">Log Out</button>
+				</div>
 			</nav>
 		</div>
 

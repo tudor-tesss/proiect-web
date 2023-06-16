@@ -1,4 +1,4 @@
-import { AuthenticationService, PostsService, CategoriesService, StatisticsService } from "../@shared/index.js";
+import { AuthenticationService, PostsService, CategoriesService, StatisticsService, DarkmodeService } from "../@shared/index.js";
 
 window.AuthenticationService = AuthenticationService;
 await AuthenticationService.checkSession();
@@ -244,7 +244,19 @@ export class StatisticsOverviewComponent {
         innerHtml += `</div>`;
         statisticsBox.innerHTML = innerHtml;
     }
+
+    static displayDarkMode(){
+        const toggleButton = document.getElementById('toggle-button');
+        toggleButton.addEventListener('click', DarkmodeService.handleToggleDarkMode);
+
+        const storedDarkMode = localStorage.getItem('darkMode');
+        const isDarkMode = storedDarkMode === 'true' ? true : storedDarkMode === 'false' ? false : DarkmodeService.isDarkMode();
+        DarkmodeService.updateImageSource(isDarkMode);
+    
+        DarkmodeService.setTheme(isDarkMode ? 'dark' : 'light');
+    }
 }
 
 window.StatisticsOverviewComponent = StatisticsOverviewComponent;
 await StatisticsOverviewComponent.displayStatistics();
+StatisticsOverviewComponent.displayDarkMode();

@@ -1,4 +1,4 @@
-import { AuthenticationService, PostsService, CategoriesService, UsersService } from "../@shared/index.js";
+import { AuthenticationService, PostsService, CategoriesService, UsersService, DarkmodeService } from "../@shared/index.js";
 
 window.AuthenticationService = AuthenticationService;
 await AuthenticationService.checkSession();
@@ -217,6 +217,32 @@ export class AccountOverviewComponent {
         }
     }
 }
+const toggleButton = document.getElementById('toggle-button');
+const toggleImage = document.getElementById('toggle-image');
+
+function updateImageSource(isDarkMode) {
+    const imageSource = isDarkMode
+        ? '../resources/icons/dark.png'
+        : '../resources/icons/light.png';
+    toggleImage.src = imageSource;
+}
+
+function handleToggleDarkMode() {
+    const isDarkMode = DarkmodeService.toggleDarkMode();
+    updateImageSource(isDarkMode);
+
+    // Save the selected mode to local storage
+    localStorage.setItem('darkMode', isDarkMode.toString());
+}
+
+toggleButton.addEventListener('click', handleToggleDarkMode);
+
+// Check if user preference is stored in local storage
+const storedDarkMode = localStorage.getItem('darkMode');
+const isDarkMode = storedDarkMode === 'true' ? true : storedDarkMode === 'false' ? false : DarkmodeService.isDarkMode();
+updateImageSource(isDarkMode);
+// Set the initial mode based on stored value
+DarkmodeService.setTheme(isDarkMode ? 'dark' : 'light');
 
 await AccountOverviewComponent.displayPosts();
 await AccountOverviewComponent.displayCategories();

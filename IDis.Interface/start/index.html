@@ -16,10 +16,18 @@
                 <img src="../resources/logopng.png" alt="Logo">
             </div>
             <nav>
-                <a href="#" class="about-us-button">About Us</a>
-                <button class="login-button" onClick="StartComponent.displayLoginForm()">Log In</button>
-                <button class="get-started" onClick="StartComponent.displaySignUpForm()">Get Started</button>
+                <div class="dark-button">
+                    <button class="toggle-button" id="toggle-button">
+                        <img id="toggle-image" src="../resources/icons/light.png">
+                    </button>
+                </div>
+                <div class="nav-buttons">
+                    <a href="#" class="about-us-button">About Us</a>
+                    <button class="login-button" onClick="StartComponent.displayLoginForm()">Log In</button>
+                    <button class="get-started" onClick="StartComponent.displaySignUpForm()">Get Started</button>
+                </div>
             </nav>
+
         </div>
         <div class="description">
             <h1>I Dislike It!</h1>

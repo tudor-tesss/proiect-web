@@ -1,7 +1,8 @@
-import { AuthenticationService, UsersService } from "../@shared/index.js";
+import { AuthenticationService, UsersService, DarkmodeService } from "../@shared/index.js";
 
 window.AuthenticationService = AuthenticationService;
 await AuthenticationService.resumeSession();
+
 
 export class StartComponent {
     static errorMessages = {
@@ -175,7 +176,20 @@ export class StartComponent {
             </div>
         `;
     }
+
+    static displayDarkMode(){
+        const toggleButton = document.getElementById('toggle-button');
+        toggleButton.addEventListener('click', DarkmodeService.handleToggleDarkMode);
+
+        const storedDarkMode = localStorage.getItem('darkMode');
+        const isDarkMode = storedDarkMode === 'true' ? true : storedDarkMode === 'false' ? false : DarkmodeService.isDarkMode();
+        DarkmodeService.updateImageSource(isDarkMode);
+    
+        DarkmodeService.setTheme(isDarkMode ? 'dark' : 'light');
+    }
+
 }
 
 window.StartComponent = StartComponent;
+StartComponent.displayDarkMode();
 StartComponent.displaySignUpForm();

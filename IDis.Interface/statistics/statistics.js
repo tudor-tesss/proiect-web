@@ -244,7 +244,27 @@ export class StatisticsOverviewComponent {
         innerHtml += `</div>`;
         statisticsBox.innerHTML = innerHtml;
     }
+
+    static addButtons() {
+        const buttons = document.querySelector(".h-buttons-wrapper");
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const isPost = urlParams.get("isPost");
+
+        if (isPost === "true") {
+            buttons.innerHTML = `
+				 <a class ="add-category-button" href="../statistics/?isPost=false">View Categories Statistics</a>
+				 <a class ="add-category-button" href="../account">Account</a>
+            `;
+        } else {
+            buttons.innerHTML = `
+                <a class ="add-category-button" href="../statistics/?isPost=true">View Posts Statistics</a>
+                <a class ="add-category-button" href="../account">Account</a>
+            `;
+        }
+    }
 }
 
 window.StatisticsOverviewComponent = StatisticsOverviewComponent;
 await StatisticsOverviewComponent.displayStatistics();
+StatisticsOverviewComponent.addButtons();

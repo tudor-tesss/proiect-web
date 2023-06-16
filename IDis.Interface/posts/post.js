@@ -231,8 +231,8 @@ export class PostOverviewComponent {
         let div = document.querySelector(".add-wrapper");
         div.innerHTML = `
             <nav>
-                <a class="add-post-button" href="/statistics/statistics.html?isPost=true&targetId=${postId}">View Statistics</a>
-                <a class="add-category-button" href="/account/account.html">Account</a>
+                <a class="add-post-button" href="/statistics/?isPost=true&targetId=${postId}">View Statistics</a>
+                <a class="add-category-button" href="/account">Account</a>
                 <div class="dropdown">
                     <button class="dropbtn">Export</button>
                     <div class="dropdown-content">

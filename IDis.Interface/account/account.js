@@ -126,7 +126,7 @@ export class AccountOverviewComponent {
                 anch.addEventListener("click", () => {
                     // Handle button click event
                     console.log(`Button "${name}" clicked`);
-                    window.location.href = `../categories/category.html?categoryId=${categoryId}`;
+                    window.location.href = `../categories/?categoryId=${categoryId}`;
                 });
 
                 categoriesBox.appendChild(anch);
@@ -165,7 +165,7 @@ export class AccountOverviewComponent {
                 anch.addEventListener("click", () => {
                     // Handle button click event
                     console.log(`Button "${name}" clicked`);
-                    window.location.href = `../posts/post.html?postId=${postId}`;
+                    window.location.href = `../posts/?postId=${postId}`;
                 });
 
                 postsBox.appendChild(anch);

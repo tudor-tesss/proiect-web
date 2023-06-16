@@ -57,7 +57,7 @@ export class StatisticsOverviewComponent {
             }
 
             innerHtml += `
-                <a class="info-box title animated" href="../posts/post.html?postId=${s.postId}">
+                <a class="info-box title animated" href="../posts/?postId=${s.postId}">
                     <h2>${s.title} - ${s.repliesCount} replies</h2>
                 </a>
             `;
@@ -108,7 +108,7 @@ export class StatisticsOverviewComponent {
             }
 
             innerHtml += `
-                <a class="info-box title animated" href="../categories/category.html?categoryId=${s.categoryId}">
+                <a class="info-box title animated" href="../categories/?categoryId=${s.categoryId}">
                     <h2>${s.categoryName} - ${s.postCount} posts</h2>
                 </a>
             `;
@@ -128,7 +128,7 @@ export class StatisticsOverviewComponent {
             let p = this.allPosts.find(p => p.id === bestRatedPost);
             innerHtml += `
                 <div class="info-box with-button">
-                    <a class="info-box link animated" href="../posts/post.html?postId=${bestRatedPost}">
+                    <a class="info-box link animated" href="../posts/?postId=${bestRatedPost}">
                         Top rated post: ${p.title}
                     </a>
         
@@ -144,7 +144,7 @@ export class StatisticsOverviewComponent {
                 const first = this.allPosts.find(p => p.id === Object.keys(s.postsByRatings[key])[0]);
                 innerHtml += `
                     <div class="info-box with-button">
-                        <a class="info-box link animated" href="../posts/post.html?postId=${first.id}">Best in ${key}: ${first.title}</a>
+                        <a class="info-box link animated" href="../posts/?postId=${first.id}">Best in ${key}: ${first.title}</a>
         
                         <div class="submit-wrapper">
                             <button type="button" class="submit-b" onClick="StatisticsOverviewComponent.viewPostsByRatings('${categoryId}', '${s.categoryId}', ${count})">View all</button>
@@ -193,7 +193,7 @@ export class StatisticsOverviewComponent {
             const post = this.allPosts.find(p => p.id === postKey);
             innerHtml += `
                 <div class="info-box">
-                    <a class="info-box link animated" href="../posts/post.html?postId=post.id">
+                    <a class="info-box link animated" href="../posts/?postId=post.id">
                         ${post.title} - ${category.postsByRatings[key][p]}
                     </a>
                 </div>
@@ -234,7 +234,7 @@ export class StatisticsOverviewComponent {
             const score = String(posts.postsByAverageScore[key]).substring(0, 4);
             innerHtml += `
                 <div class="info-box">
-                    <a class="info-box link animated" href="../posts/post.html?postId=${post.id}">
+                    <a class="info-box link animated" href="../posts/?postId=${post.id}">
                         ${post.title} - ${score}
                     </a>
                 </div>

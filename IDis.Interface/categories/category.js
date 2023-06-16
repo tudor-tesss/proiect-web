@@ -31,7 +31,7 @@ export class CategoryOverviewComponent {
             innerHtml += `
                 <div class="category-wrapper">
                     <div class="info-box">
-                        <a class="info-box title link small animated" href="../posts/post.html?postId=${p.id}">
+                        <a class="info-box title link small animated" href="../posts/?postId=${p.id}">
                             <h1 class="small">${p.title}</h1>
                         </a>
     
@@ -67,8 +67,9 @@ export class CategoryOverviewComponent {
         let div = document.querySelector(".add-wrapper");
         div.innerHTML = `
 		    <nav>
-                <a class="add-post-button" href="/statistics/statistics.html?isPost=true&targetId=${categoryId}">View Statistics</a>
-                <a class="add-category-button" href="/account/account.html">Account</a>
+                <a class="add-post-button" href="/statistics/?isPost=false&targetId=${categoryId}">View Statistics</a>
+                <a class="add-post-button" href="/posts/add/?categoryId=${categoryId}">Add Post</a>
+                <a class="add-category-button" href="/account">Account</a>
                 <div class="dropdown">
                     <button class="dropbtn">Export</button>
                     <div class="dropdown-content">

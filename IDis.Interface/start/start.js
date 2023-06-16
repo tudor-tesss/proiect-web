@@ -86,14 +86,14 @@ export class StartComponent {
             .then(d => {
                 AuthenticationService.setCookie('sessionId', d.sessionId, 1);
                 AuthenticationService.setCookie('userId', userUuid, 1);
-                window.location.href = '/main/main.html';
+                window.location.href = '/main';
             })
             .catch(error => {
                 let errorMessage = error.message;
                 if (this.errorMessages[errorMessage] === undefined) {
                     errorMessage = "An error occurred while passing the user gate.";
 
-                    window.location.href = '/start/start.html';
+                    window.location.href = '/start';
                 }
 
                 this.displayError(this.errorMessages[errorMessage]);

@@ -13,7 +13,7 @@ export class AddCategoryComponent {
         await CategoriesService
             .createCategory(name, ratingFields, creatorId)
             .then(() => {
-                window.location.href = "/main/main.html";
+                window.location.href = "/main";
             })
             .catch((error) => {
                 this.displayError(this.errorMessages[error.message]);

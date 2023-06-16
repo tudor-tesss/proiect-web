@@ -25,11 +25,11 @@ export class AuthenticationService {
         const sessionId = this.getCookie('sessionId');
     
         if (!sessionId) {
-            window.location.href = '/start/start.html';
+            window.location.href = '/start';
         }
     
         if (!userId) {
-            window.location.href = '/start/start.html';
+            window.location.href = '/start';
         }
     
         const endpoint = 'http://localhost:7101/users/' + userId + '/sessions';
@@ -57,7 +57,7 @@ export class AuthenticationService {
         .catch(error => {
             console.error('Error:', error);
             this.deleteSessionTokenCookie();
-            window.location.href = '/start/start.html';
+            window.location.href = '/start';
         });
     }
     
@@ -93,7 +93,7 @@ export class AuthenticationService {
             return response.json();
         })
         .then(d => {
-            window.location.href = '/main/main.html';
+            window.location.href = '/main';
         })
         .catch(error => {
         });
@@ -161,7 +161,7 @@ export class AuthenticationService {
     
         localStorage.removeItem('userUuid');
     
-        window.location.href = '/start/start.html';
+        window.location.href = '/start';
     }
 
     static async createUserGate(emailAddress) {

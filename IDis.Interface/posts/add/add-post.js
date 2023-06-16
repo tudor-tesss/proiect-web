@@ -11,7 +11,7 @@ export class AddPostComponent {
         const categoryId = params.get("categoryId");
 
         if (!categoryId) {
-            window.location.href = "/main/main.html";
+            window.location.href = "/main";
         }
 
         this.category = await CategoriesService
@@ -86,7 +86,7 @@ export class AddPostComponent {
         await PostsService
             .createPost(this.category.id, name, body, ratingValues)
             .then(() => {
-                window.location.href = "/main/main.html";
+                window.location.href = "/main";
             })
             .catch((error) => {
                 this.displayError(this.errorMessages[error.message]);

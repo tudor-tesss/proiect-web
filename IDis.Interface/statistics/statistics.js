@@ -245,6 +245,39 @@ export class StatisticsOverviewComponent {
         statisticsBox.innerHTML = innerHtml;
     }
 
+    static addButtons() {
+        const buttons = document.querySelector(".h-buttons-wrapper");
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const isPost = urlParams.get("isPost");
+
+        if (isPost === "true") {
+            buttons.innerHTML = `
+                <div class="dark-button">
+                    <button class="toggle-button" id="toggle-button">
+                        <img id="toggle-image" src="../resources/icons/light.png">
+                    </button>
+                </div>
+                <div class="nav-buttons">
+				 <a class ="add-category-button" href="../statistics/?isPost=false">View Categories Statistics</a>
+				 <a class ="add-category-button" href="../account">Account</a>
+				 </div>
+            `;
+        } else {
+            buttons.innerHTML = `
+                <div class="dark-button">
+                    <button class="toggle-button" id="toggle-button">
+                        <img id="toggle-image" src="../resources/icons/light.png">
+                    </button>
+                </div>
+                <div class="nav-buttons">
+                <a class ="add-category-button" href="../statistics/?isPost=true">View Posts Statistics</a>
+                <a class ="add-category-button" href="../account">Account</a>
+                </div>
+            `;
+        }
+    }
+
     static displayDarkMode(){
         const toggleButton = document.getElementById('toggle-button');
         toggleButton.addEventListener('click', DarkmodeService.handleToggleDarkMode);
@@ -252,11 +285,12 @@ export class StatisticsOverviewComponent {
         const storedDarkMode = localStorage.getItem('darkMode');
         const isDarkMode = storedDarkMode === 'true' ? true : storedDarkMode === 'false' ? false : DarkmodeService.isDarkMode();
         DarkmodeService.updateImageSource(isDarkMode);
-    
+
         DarkmodeService.setTheme(isDarkMode ? 'dark' : 'light');
     }
 }
 
 window.StatisticsOverviewComponent = StatisticsOverviewComponent;
 await StatisticsOverviewComponent.displayStatistics();
+StatisticsOverviewComponent.addButtons();
 StatisticsOverviewComponent.displayDarkMode();

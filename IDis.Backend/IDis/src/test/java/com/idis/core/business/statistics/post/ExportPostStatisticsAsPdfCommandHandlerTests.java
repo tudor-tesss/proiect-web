@@ -43,11 +43,9 @@ public class ExportPostStatisticsAsPdfCommandHandlerTests {
         ratings.put("rat2",2);
         var post = Post.create(UUID.randomUUID(),UUID.randomUUID(),"postName","description",ratings);
         var command = command(post.getId());
-        List<Post> posts = new ArrayList<>();
-        posts.add(post);
 
         try(var mock = Mockito.mockStatic(QueryProvider.class)){
-            mock.when(() -> QueryProvider.getAll(Post.class)).thenReturn(posts);
+            mock.when(() -> QueryProvider.getById(Post.class, post.getId())).thenReturn(Optional.of(post));
 
             // Act
             var result = sut().handle(command).get();

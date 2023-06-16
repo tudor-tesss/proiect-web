@@ -152,6 +152,7 @@ nav a:hover{
 .statistics-container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .statistics-wrapper {

@@ -48,8 +48,8 @@ export class AddCategoryComponent {
         const categoryForm = document.querySelector(".category-form");
         document.addEventListener("keydown", function(event) {
             if (event.key === "Enter") {
-                event.preventDefault(); // Prevent default behavior (e.g., form submission)
-                AddCategoryComponent.createCategory(); // Call the createCategory function
+                event.preventDefault();
+                AddCategoryComponent.createCategory();
             }
         });
         categoryForm.innerHTML = `

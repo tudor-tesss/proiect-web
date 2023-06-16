@@ -18,6 +18,12 @@ export class StartComponent {
 
     static displayLoginForm() {
         const formWrapper = document.querySelector('.form-wrapper');
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                StartComponent.createUserGate();
+            }
+        });
         formWrapper.innerHTML = `
             <div class="login-box">
                 <h2>Log In</h2>
@@ -60,6 +66,12 @@ export class StartComponent {
 
     static displayUserGateForm() {
         const formWrapper = document.querySelector('.form-wrapper');
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                StartComponent.passUserGate();
+            }
+        });
         formWrapper.innerHTML = `
             <div class="login-box">
                 <h2>Enter Code</h2>
@@ -132,6 +144,12 @@ export class StartComponent {
 
     static displaySignUpForm() {
         const formWrapper = document.querySelector('.form-wrapper');
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                StartComponent.createUser();
+            }
+        });
         formWrapper.innerHTML = `
             <div class="login-box">
                 <script src="start.js"></script>

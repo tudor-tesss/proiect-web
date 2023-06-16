@@ -14,13 +14,12 @@ public final class ExportPostStatisticsAsPdfCommandHandler implements IRequestHa
     @Override
     public CompletableFuture<byte[]> handle (ExportPostStatisticsAsPdfCommand exportPostStatisticsAsPdfCommand){
         byte[] pdfResult = {};
-        var posts = QueryProvider.getAll(Post.class);
-        var postResult = posts.stream().filter(p -> p.getId().equals(exportPostStatisticsAsPdfCommand.postId())).findFirst();
 
-        if (postResult.isEmpty()) {
+        var post = QueryProvider.getById(Post.class, exportPostStatisticsAsPdfCommand.postId());
+        if (post.isEmpty()) {
             throw new IllegalArgumentException(BusinessErrors.Post.PostNotFound);
         }
-        var postStatisticsCalculator = new PostStatisticsCalculator(postResult.get());
+        var postStatisticsCalculator = new PostStatisticsCalculator(post.get());
         var pdfGeneratorForPosts = new PdfGeneratorForPosts(postStatisticsCalculator);
 
         try {

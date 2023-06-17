@@ -89,6 +89,7 @@ body::-webkit-scrollbar-thumb:hover {
     padding: 5px 10px;
     transition: background-color 0.3s;
 }
+
 .popup {
     display: none;
   position: absolute;
@@ -120,21 +121,26 @@ nav{
     justify-content: space-between;
     width: 100%;
 }
+
 .nav-buttons {
     align-items:center;
     justify-content:flex-end;
 }
+
 .dark-button{
     align-items:center;
     justify-content:flex-start;
 }
+
 .toggle-button{
     background-color: transparent;
     border-color: transparent;
 }
+
 .toggle-button img{
     height:40px;
 }
+
 nav a{
     text-decoration:none;
     font-size:18px;
@@ -145,6 +151,7 @@ nav a{
     border-radius:5px;
     transition:background-color .3s
 }
+
 nav a:hover{
     background-color:rgba(255,255,255,.1)
 }

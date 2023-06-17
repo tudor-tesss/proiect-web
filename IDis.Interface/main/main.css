@@ -65,7 +65,6 @@ body::-webkit-scrollbar-thumb:hover {
     background: var(--scrollbar-thumb-hover-color);
 }
 
-
 .header {
 
     margin-top: 20px;
@@ -111,18 +110,22 @@ nav{
     justify-content: space-between;
     width: 100%;
 }
+
 .nav-buttons {
     align-items:center;
     justify-content:flex-end;
 }
+
 .dark-button{
     align-items:center;
     justify-content:flex-start;
 }
+
 .toggle-button{
     background-color: transparent;
     border-color: transparent;
 }
+
 .toggle-button img{
     height:40px;
 }
@@ -174,7 +177,6 @@ nav a:hover {
     z-index: 1000;
 }
 
-
 .buttons-wrapper {
     flex: 1;
     display: flex;
@@ -197,7 +199,6 @@ nav a:hover {
     margin-right: 50px;
     margin-left: 25px;
     z-index: 1000;
-
 }
 
 .error-container {

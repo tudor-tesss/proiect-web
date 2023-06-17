@@ -1,4 +1,4 @@
-import { AuthenticationService, CategoriesService, DarkmodeService } from "../@shared/index.js";
+import { AuthenticationService, CategoriesService, DarkmodeLook } from "../@shared/index.js";
 
 window.AuthenticationService = AuthenticationService;
 await AuthenticationService.checkSession();
@@ -110,7 +110,7 @@ function updateImageSource(isDarkMode) {
 }
 
 function handleToggleDarkMode() {
-    const isDarkMode = DarkmodeService.toggleDarkMode();
+    const isDarkMode = DarkmodeLook.toggleDarkMode();
     updateImageSource(isDarkMode);
 
     // Save the selected mode to local storage
@@ -121,10 +121,10 @@ toggleButton.addEventListener('click', handleToggleDarkMode);
 
 // Check if user preference is stored in local storage
 const storedDarkMode = localStorage.getItem('darkMode');
-const isDarkMode = storedDarkMode === 'true' ? true : storedDarkMode === 'false' ? false : DarkmodeService.isDarkMode();
+const isDarkMode = storedDarkMode === 'true' ? true : storedDarkMode === 'false' ? false : DarkmodeLook.isDarkMode();
 updateImageSource(isDarkMode);
 // Set the initial mode based on stored value
-DarkmodeService.setTheme(isDarkMode ? 'dark' : 'light');
+DarkmodeLook.setTheme(isDarkMode ? 'dark' : 'light');
 
 window.CategoriesOverviewComponent = CategoriesOverviewComponent;
 await CategoriesOverviewComponent.displayCategories();

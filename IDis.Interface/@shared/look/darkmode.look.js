@@ -1,4 +1,4 @@
-export class DarkmodeService{
+export class DarkmodeLook {
     static setTheme(theme) {
         const body = document.querySelector('body');
         body.setAttribute('data-theme', theme);
@@ -14,22 +14,22 @@ export class DarkmodeService{
         const body = document.querySelector('body');
         const currentTheme = body.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        DarkmodeService.setTheme(newTheme);
+        DarkmodeLook.setTheme(newTheme);
         return newTheme === 'dark';
     }
 
     static updateImageSource(isDarkMode) {
         const toggleImage = document.getElementById('toggle-image');
         const imageSource = isDarkMode
-            ? '../resources/icons/dark.png'
-            : '../resources/icons/light.png';
+            ? '../../resources/icons/dark.png'
+            : '../../resources/icons/light.png';
         toggleImage.src = imageSource;
         return imageSource;
     }
     
     static handleToggleDarkMode() {
-        const isDarkMode = DarkmodeService.toggleDarkMode();
-        DarkmodeService.updateImageSource(isDarkMode);
+        const isDarkMode = DarkmodeLook.toggleDarkMode();
+        DarkmodeLook.updateImageSource(isDarkMode);
     
         // Save the selected mode to local storage
         localStorage.setItem('darkMode', isDarkMode.toString());

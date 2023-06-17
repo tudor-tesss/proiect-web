@@ -3,6 +3,7 @@
     -ms-user-select:none;
     user-select:none
 }
+
 :root {
     --background-color: #ffffff;
     --text-color: #000000;
@@ -74,6 +75,7 @@ body::-webkit-scrollbar-thumb:hover {
     z-index:1000;
     transform:translateX(-50%)
 }
+
 .get-started{
     background-color:transparent;
     border:2px solid #fff;
@@ -86,35 +88,43 @@ body::-webkit-scrollbar-thumb:hover {
     padding:5px 10px;
     transition:background-color .3s
 }
+
 .get-started:hover{
     background-color:rgba(255,255,255,.1);
     color:#fff;
     text-decoration:none
 }
+
 .logo img{
     height:100px
 }
+
 nav{
     display:flex;
     align-items:center;
     justify-content: space-between;
     width: 100%;
 }
+
 .nav-buttons {
     align-items:center;
     justify-content:flex-end;
 }
+
 .dark-button{
     align-items:center;
     justify-content:flex-start;
 }
+
 .toggle-button{
     background-color: transparent;
     border-color: transparent;
 }
+
 .toggle-button img{
     height:40px;
 }
+
 nav a{
     text-decoration:none;
     font-size:18px;
@@ -125,9 +135,11 @@ nav a{
     border-radius:5px;
     transition:background-color .3s
 }
+
 nav a:hover{
     background-color:rgba(255,255,255,.1)
 }
+
 .login-button{
     background:0 0;
     border:none;
@@ -142,9 +154,11 @@ nav a:hover{
     outline:0;
     transition:background-color .3s
 }
+
 .login-button:hover{
     background-color:rgba(255,255,255,.1)
 }
+
 .text-button{
     text-decoration:none
 }
@@ -152,6 +166,7 @@ nav a:hover{
 html{
     height:100%
 }
+
 .content-wrapper{
     position:relative;
     display:flex;
@@ -162,6 +177,7 @@ html{
     padding-top:250px;
     z-index:1000
 }
+
 .description{
     padding:20px;
     font-size:18px;
@@ -170,12 +186,14 @@ html{
     margin-left:50px;
     margin-right:25px
 }
+
 .form-wrapper{
     flex:1;
     display:flex;
     justify-content:center;
     align-items:center
 }
+
 .login-box{
     width:400px;
     padding:40px;
@@ -189,12 +207,14 @@ html{
     margin-right:50px;
     margin-left:25px
 }
+
 .login-box h2{
     margin:0 0 30px;
     padding:0;
     color:#fff;
     text-align:center
 }
+
 .login-box .user-box{
     position:relative;
     width:90%;
@@ -202,10 +222,12 @@ html{
     display:flex;
     justify-content:center
 }
+
 .error-container{
     color:#fff;
     text-align:center
 }
+
 .login-box .user-box input{
     padding:10px 5px;
     font-size:16px;
@@ -217,6 +239,7 @@ html{
     background:0 0;
     width:300px
 }
+
 .login-box .user-box label{
     position:absolute;
     top:0;
@@ -227,12 +250,14 @@ html{
     pointer-events:none;
     transition:.5s
 }
+
 .login-box .user-box input:focus~label,.login-box .user-box input:valid~label{
     top:-20px;
     left:0;
     color:#f68e44;
     font-size:12px
 }
+
 .login-box form .submit-b{
     position:relative;
     padding:10px 20px;
@@ -247,17 +272,20 @@ html{
     background:0 0;
     border:none
 }
+
 .submit-wrapper{
     display:flex;
     justify-content:center;
     width:100%
 }
+
 .login-box .submit-b:hover{
     background:#f49803;
     color:#fff;
     border-radius:5px;
     box-shadow:0 0 5px #f4c803,0 0 25px #bd9d0b,0 0 50px #f4e403,0 0 100px #d5cf1e
 }
+
 @media (max-height:599px){
     .description{
         margin-top:100px
@@ -266,6 +294,7 @@ html{
         padding-top:150px
     }
 }
+
 @media (max-width:850px){
     .description{
         display:none
@@ -286,6 +315,7 @@ html{
         padding-top:150px
     }
 }
+
 @media (min-width:1000px){
     .body{
         display:flex;

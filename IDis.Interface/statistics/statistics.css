@@ -28,7 +28,7 @@
     --scrollbar-thumb-color: #888888;
     --scrollbar-thumb-hover-color: #cccccc;
     --box-color: rgba(66, 66, 66, 0.4);
-    --info-color: rgba(0, 9, 84, 0.25);
+    --info-color: rgba(30, 35, 89, 0.15);
 }
 
 body {
@@ -65,7 +65,6 @@ body::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar-thumb:hover {
     background: var(--scrollbar-thumb-hover-color);
 }
-
 
 .header {
     margin-top: 20px;
@@ -110,21 +109,26 @@ nav{
     justify-content: space-between;
     width: 100%;
 }
+
 .nav-buttons {
     align-items:center;
     justify-content:flex-end;
 }
+
 .dark-button{
     align-items:center;
     justify-content:flex-start;
 }
+
 .toggle-button{
     background-color: transparent;
     border-color: transparent;
 }
+
 .toggle-button img{
     height:40px;
 }
+
 nav a{
     text-decoration:none;
     font-size:18px;
@@ -135,9 +139,11 @@ nav a{
     border-radius:5px;
     transition:background-color .3s
 }
+
 nav a:hover{
     background-color:rgba(255,255,255,.1)
 }
+
 .content {
     position: relative;
     display: flex;
@@ -174,7 +180,6 @@ nav a:hover{
 .info-box {
     min-width: 25vw;
     max-width: 60vw;
-
     max-height: fit-content;
     padding: 1rem;
     background: var(--info-color);

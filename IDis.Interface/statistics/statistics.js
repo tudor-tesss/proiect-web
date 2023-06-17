@@ -1,4 +1,4 @@
-import { AuthenticationService, PostsService, CategoriesService, StatisticsService, DarkmodeService } from "../@shared/index.js";
+import { AuthenticationService, PostsService, CategoriesService, StatisticsService, DarkmodeLook } from "../@shared/index.js";
 
 window.AuthenticationService = AuthenticationService;
 await AuthenticationService.checkSession();
@@ -258,10 +258,11 @@ export class StatisticsOverviewComponent {
                         <img id="toggle-image" src="../resources/icons/light.png">
                     </button>
                 </div>
+                
                 <div class="nav-buttons">
-				 <a class ="add-category-button" href="../statistics/?isPost=false">View Categories Statistics</a>
-				 <a class ="add-category-button" href="../account">Account</a>
-				 </div>
+                     <a class ="add-category-button" href="../statistics/?isPost=false">View Categories Statistics</a>
+                     <a class ="add-category-button" href="../account">Account</a>
+				</div>
             `;
         } else {
             buttons.innerHTML = `
@@ -271,8 +272,8 @@ export class StatisticsOverviewComponent {
                     </button>
                 </div>
                 <div class="nav-buttons">
-                <a class ="add-category-button" href="../statistics/?isPost=true">View Posts Statistics</a>
-                <a class ="add-category-button" href="../account">Account</a>
+                    <a class ="add-category-button" href="../statistics/?isPost=true">View Posts Statistics</a>
+                    <a class ="add-category-button" href="../account">Account</a>
                 </div>
             `;
         }
@@ -280,13 +281,13 @@ export class StatisticsOverviewComponent {
 
     static displayDarkMode(){
         const toggleButton = document.getElementById('toggle-button');
-        toggleButton.addEventListener('click', DarkmodeService.handleToggleDarkMode);
+        toggleButton.addEventListener('click', DarkmodeLook.handleToggleDarkMode);
 
         const storedDarkMode = localStorage.getItem('darkMode');
-        const isDarkMode = storedDarkMode === 'true' ? true : storedDarkMode === 'false' ? false : DarkmodeService.isDarkMode();
-        DarkmodeService.updateImageSource(isDarkMode);
+        const isDarkMode = storedDarkMode === 'true' ? true : storedDarkMode === 'false' ? false : DarkmodeLook.isDarkMode();
+        DarkmodeLook.updateImageSource(isDarkMode);
 
-        DarkmodeService.setTheme(isDarkMode ? 'dark' : 'light');
+        DarkmodeLook.setTheme(isDarkMode ? 'dark' : 'light');
     }
 }
 

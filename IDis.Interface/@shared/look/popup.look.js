@@ -1,4 +1,4 @@
-export class PopupService{
+export class PopupLook {
     static showPopup() {
         const popup = document.getElementById('popup');
         popup.style.display = 'block';

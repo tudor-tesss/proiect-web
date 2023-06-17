@@ -1,4 +1,4 @@
-import { AuthenticationService, PostsService, StatisticsService, DarkmodeService } from "../@shared/index.js";
+import { AuthenticationService, PostsService, StatisticsService, DarkmodeLook } from "../@shared/index.js";
 
 window.AuthenticationService = AuthenticationService;
 await AuthenticationService.checkSession();
@@ -67,25 +67,26 @@ export class CategoryOverviewComponent {
         let div = document.querySelector(".add-wrapper");
         div.innerHTML = `
 		    <nav>
-            <div class="dark-button">
+                <div class="dark-button">
                     <button class="toggle-button" id="toggle-button">
                         <img id="toggle-image" src="../resources/icons/light.png">
                     </button>
                 </div>
-                <div class="nav-buttons">
-                <a class="add-post-button" href="/statistics/?isPost=false&targetId=${categoryId}">View Statistics</a>
-                <a class="add-post-button" href="/posts/add/?categoryId=${categoryId}">Add Post</a>
-                <a class="add-category-button" href="/account">Account</a>
                 
-                <div class="dropdown">
-                    <button class="dropbtn">Export</button>
-                    <div class="dropdown-content">
-                        <button onclick="CategoryOverviewComponent.exportPdf()">PDF</button>
-                        <button onclick="CategoryOverviewComponent.exportDocbook()">Docbook</button>
-                        <button onclick="CategoryOverviewComponent.exportCsv()">CSV</button>
+                <div class="nav-buttons">
+                    <a class="add-post-button" href="/statistics/?isPost=false&targetId=${categoryId}">View Statistics</a>
+                    <a class="add-post-button" href="/posts/add/?categoryId=${categoryId}">Add Post</a>
+                    <a class="add-category-button" href="/account">Account</a>
+                    
+                    <div class="dropdown">
+                        <button class="dropbtn">Export</button>
+                        <div class="dropdown-content">
+                            <button onclick="CategoryOverviewComponent.exportPdf()">PDF</button>
+                            <button onclick="CategoryOverviewComponent.exportDocbook()">Docbook</button>
+                            <button onclick="CategoryOverviewComponent.exportCsv()">CSV</button>
+                        </div>
                     </div>
-                </div>
-                <button class="help-button">Help</button>
+                    <button class="help-button">Help</button>
                 </div>
             </nav>
         `;
@@ -159,13 +160,13 @@ export class CategoryOverviewComponent {
     
     static displayDarkMode(){
         const toggleButton = document.getElementById('toggle-button');
-        toggleButton.addEventListener('click', DarkmodeService.handleToggleDarkMode);
+        toggleButton.addEventListener('click', DarkmodeLook.handleToggleDarkMode);
 
         const storedDarkMode = localStorage.getItem('darkMode');
-        const isDarkMode = storedDarkMode === 'true' ? true : storedDarkMode === 'false' ? false : DarkmodeService.isDarkMode();
-        DarkmodeService.updateImageSource(isDarkMode);
+        const isDarkMode = storedDarkMode === 'true' ? true : storedDarkMode === 'false' ? false : DarkmodeLook.isDarkMode();
+        DarkmodeLook.updateImageSource(isDarkMode);
     
-        DarkmodeService.setTheme(isDarkMode ? 'dark' : 'light');
+        DarkmodeLook.setTheme(isDarkMode ? 'dark' : 'light');
     }
 }
 

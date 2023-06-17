@@ -12,7 +12,7 @@ public class RssFeedGenerator {
     private static final String RSS_FILE_PATH = "rss.xml";
     private final List <Post> posts;
     private final Map<UUID,Integer> numOfReplies;
-    private static final boolean isLocalHost = false;
+    private static final boolean isLocalHost = true;
     private static final String localHostPrefix = "https://localhost:5500/";
     private static final String deployedPrefix = "https://p02--frontend--ylsyc29qft6l.code.run/";
     private static String prefix;

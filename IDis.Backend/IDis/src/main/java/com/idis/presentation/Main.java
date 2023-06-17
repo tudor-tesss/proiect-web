@@ -176,7 +176,7 @@ public class Main {
         mediator.registerHandler(PassUserGateCommand.class, new PassUserGateCommandHandler());
 
         mediator.registerHandler(CreateUserSessionCommand.class, new CreateUserSessionCommandHandler());
-        mediator.registerHandler(CheckUserSessionCommand.class, new CheckUserSessionCommandHandler());
+        mediator.registerHandler(RefreshUserSessionCommand.class, new RefreshUserSessionCommandHandler());
         mediator.registerHandler(DeleteUserSessionCommand.class, new DeleteUserSessionCommandHandler());
         mediator.registerHandler(GetUserByIdQuery.class,new GetUserByIdQueryHandler());
 

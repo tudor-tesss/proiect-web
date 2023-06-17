@@ -28,6 +28,10 @@ public final class UserSession extends AggregateRoot {
         return new UserSession(userId, userIpAddress);
     }
 
+    public void refresh() {
+        this.createdAt = TimeProviderContext.getCurrentProvider().now();
+    }
+
     public UUID getUserId() {
         return userId;
     }

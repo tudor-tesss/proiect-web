@@ -19,9 +19,6 @@ export class AccountOverviewComponent {
                 console.error("Error:", error);
 
                 const userCategoriesBox = document.querySelector(".user-categories-box");
-
-                throw error;
-
             });
 
         return [names, categoryIds];
@@ -43,9 +40,6 @@ export class AccountOverviewComponent {
                 console.error("Error:", error);
 
                 const userPostsBox = document.querySelector(".user-posts-box");
-
-                throw error;
-
             });
 
         return [names, postsIds];
@@ -68,8 +62,6 @@ export class AccountOverviewComponent {
             })
             .catch((error) => {
                 const userPostsBox = document.querySelector(".user-info-box");
-
-                throw error;
             });
 
         return [name, firstName, email];
@@ -116,7 +108,6 @@ export class AccountOverviewComponent {
 
             // Iterate over the names array and generate buttons
             for (let i = 0; i < names.length; i++) {
-
                 const name = names[i];
                 const categoryId = categoryIds[i];
 
@@ -133,11 +124,8 @@ export class AccountOverviewComponent {
             }
 
         } catch (error) {
-
             console.error("Error:", error);
             displayError(errorMessages["Category.User.DoesntHaveCategories"], categoriesBox);
-
-            throw error;
         }
 
     }
@@ -174,7 +162,6 @@ export class AccountOverviewComponent {
         } catch (error) {
             console.error("Error:", error);
             displayError(errorMessages["Post.CreatorHasNoPosts"], postsBox);
-
         }
 
     }

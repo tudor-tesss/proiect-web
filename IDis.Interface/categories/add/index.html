@@ -17,7 +17,15 @@
             </a>
         </div>
         <nav>
-           <button class="help-button">Help</button>
+            <div class="dark-button">
+                <button class="toggle-button" id="toggle-button">
+                    <img id="toggle-image" src="../../resources/icons/light.png">
+                </button>
+            </div>
+            <div class="nav-buttons">
+                <button class="help-button" onmouseover="showPopup()" onmouseout="hidePopup()">Help</button>
+                <div class="popup" id="popup">If you didn't find a category that suits your next post, please add one!</div>
+            </div>
         </nav>
     </div>
 

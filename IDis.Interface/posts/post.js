@@ -241,7 +241,6 @@ export class PostOverviewComponent {
                         <button onclick="PostOverviewComponent.exportCsv()">CSV</button>
                     </div>
                 </div>
-                <button class="help-button">Help</button>
                 </div>
             </nav>
     `;

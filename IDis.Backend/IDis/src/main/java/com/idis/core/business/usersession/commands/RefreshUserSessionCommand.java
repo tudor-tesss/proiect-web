@@ -5,4 +5,4 @@ import com.idis.shared.infrastructure.IRequest;
 
 import java.util.UUID;
 
-public record CheckUserSessionCommand(UUID userId, UUID sessionId, String ipAddress) implements IRequest<CheckUserSessionCommandResponse> { }
+public record RefreshUserSessionCommand(UUID userId, UUID sessionId, String ipAddress) implements IRequest<CheckUserSessionCommandResponse> { }

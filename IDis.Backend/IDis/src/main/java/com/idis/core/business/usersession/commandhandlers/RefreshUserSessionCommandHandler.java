@@ -2,7 +2,7 @@ package com.idis.core.business.usersession.commandhandlers;
 
 import com.idis.core.business.BusinessErrors;
 import com.idis.core.business.usersession.commandresponses.CheckUserSessionCommandResponse;
-import com.idis.core.business.usersession.commands.CheckUserSessionCommand;
+import com.idis.core.business.usersession.commands.RefreshUserSessionCommand;
 import com.idis.core.domain.usersession.UserSession;
 import com.idis.shared.database.QueryProvider;
 import com.idis.shared.infrastructure.IRequestHandler;
@@ -12,13 +12,13 @@ import java.util.concurrent.CompletableFuture;
 
 import static com.idis.shared.functional.FunctionalExtensions.filter;
 
-public final class CheckUserSessionCommandHandler implements IRequestHandler<CheckUserSessionCommand, CheckUserSessionCommandResponse> {
+public final class RefreshUserSessionCommandHandler implements IRequestHandler<RefreshUserSessionCommand, CheckUserSessionCommandResponse> {
     @Override
-    public CompletableFuture<CheckUserSessionCommandResponse> handle(CheckUserSessionCommand request) {
-        var userSession = filter(
-                    QueryProvider.getAll(UserSession.class),
-                    u -> u.getId().equals(request.sessionId()))
-                .stream().findFirst();
+    public CompletableFuture<CheckUserSessionCommandResponse> handle(RefreshUserSessionCommand request) {
+        var userSession = QueryProvider.getByIdAsync(UserSession.class, request.sessionId())
+                .thenApplyAsync(u -> {
+
+                });
 
         if (userSession.isEmpty()) {
             throw new IllegalArgumentException(BusinessErrors.UserSession.Check.UserSessionDoesNotExist);

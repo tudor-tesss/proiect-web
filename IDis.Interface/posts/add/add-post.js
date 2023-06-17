@@ -1,4 +1,4 @@
-import { AuthenticationService, PostsService, CategoriesService } from "../../@shared/index.js";
+import { AuthenticationService, PostsService, CategoriesService, DarkmodeLook } from "../../@shared/index.js";
 
 window.AuthenticationService = AuthenticationService;
 await AuthenticationService.checkSession();
@@ -124,7 +124,19 @@ export class AddPostComponent {
         "Post.Category.DoesNotExist": "Category does not exist.",
         "Post.Ratings.DoesNotMatch": "Rating fields do not match."
     };
+
+    static displayDarkMode(){
+        const toggleButton = document.getElementById('toggle-button');
+        toggleButton.addEventListener('click', DarkmodeLook.handleToggleDarkMode);
+
+        const storedDarkMode = localStorage.getItem('darkMode');
+        const isDarkMode = storedDarkMode === 'true' ? true : storedDarkMode === 'false' ? false : DarkmodeLook.isDarkMode();
+        DarkmodeLook.updateImageSource(isDarkMode);
+    
+        DarkmodeLook.setTheme(isDarkMode ? 'dark' : 'light');
+    }
 }
 
 window.AddPostComponent = AddPostComponent;
 AddPostComponent.displayPostForm();
+AddPostComponent.displayDarkMode();

@@ -7,39 +7,67 @@
     /* Standard syntax */
 }
 
+:root {
+    --background-color: #ffffff;
+    --text-color: #000000;
+    --gradient-start: #6563ed;
+    --gradient-end: #26c3de;
+    --scrollbar-track-color: #f1f1f1;
+    --scrollbar-thumb-color: #4868fd;
+    --scrollbar-thumb-hover-color: #002dff;
+    --box-color: rgba(0, 0, 0, 0.5);
+    --info-color: rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] {
+    --background-color: #151515;
+    --text-color: #ffffff;
+    --gradient-start: #333333;
+    --gradient-end: rgba(0, 9, 84, 0.25);
+    --scrollbar-track-color: #222222;
+    --scrollbar-thumb-color: #888888;
+    --scrollbar-thumb-hover-color: #cccccc;
+    --box-color: rgba(66, 66, 66, 0.4);
+    --info-color: rgba(30, 35, 89, 0.15);
+}
+
 body {
-    font-family: "Poppins", Arial, sans-serif;
-    color: #333;
+    font-family: Poppins, Arial, sans-serif;
+    color: var(--text-color);
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #f1f5fd;
+    background-color: var(--background-color);
 }
 
 .top-gradient {
     position: fixed;
     width: 100%;
-    height: 75vh;
-    background-image: linear-gradient(to top right, #6563ed, #26c3de);
+    min-height: 95vh;
+    background-image: linear-gradient(to top right, var(--gradient-start), var(--gradient-end));
     clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
     z-index: 1;
 }
 
 body::-webkit-scrollbar {
-    width: 10px; /* width of the scrollbar */
+    width: 10px;
 }
 
 body::-webkit-scrollbar-track {
-    background: #f1f1f1; /* color of the track */
+    background: var(--scrollbar-track-color);
 }
 
 body::-webkit-scrollbar-thumb {
-    background: #4868fd; /* color of the thumb */
-    border-radius: 5px; /* rounded corners */
+    background: var(--scrollbar-thumb-color);
+    border-radius: 5px;
 }
 
 body::-webkit-scrollbar-thumb:hover {
-    background: #002dff; /* color of the thumb on hover */
+    background: var(--scrollbar-thumb-hover-color);
+}
+
+.add-wrapper{
+    width: 100%;
 }
 
 .info-box p {
@@ -126,24 +154,45 @@ textarea.input {
     height: 100px;
 }
 
-nav {
-    display: flex;
-    align-items: center;
+nav{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    width: 100%;
 }
 
-nav a {
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: 500;
-    color: #fff;
-    margin-left: 20px;
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+.nav-buttons {
+    align-items:center;
+    justify-content:flex-end;
 }
 
-nav a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+.dark-button{
+    align-items:center;
+    justify-content:flex-start;
+}
+
+.toggle-button{
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.toggle-button img{
+    height:40px;
+}
+
+nav a{
+    text-decoration:none;
+    font-size:18px;
+    font-weight:500;
+    color:#fff;
+    margin-left:20px;
+    padding:5px 10px;
+    border-radius:5px;
+    transition:background-color .3s
+}
+
+nav a:hover{
+    background-color:rgba(255,255,255,.1)
 }
 
 .content {
@@ -168,7 +217,7 @@ nav a:hover {
     min-width: 70vw;
     max-width: 90vw;
     padding: 40px;
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--box-color);
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
     border-radius: 10px;
@@ -196,7 +245,7 @@ nav a:hover {
     min-width: 160px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     z-index: 1;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--box-color);
     border-radius: 5px;
 }
 
@@ -245,7 +294,7 @@ nav a:hover {
     min-width: 25vw;
     max-height: fit-content;
     padding: 1rem;
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--info-color);
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
     border-radius: 10px;
@@ -374,7 +423,6 @@ input[type="radio"] {
     margin-right: 1rem; /* adjust as needed */
     width: auto;
 }
-
 
 input[type="radio"] + label {
     margin-right: 5px; /* Adjust this value as per your need */

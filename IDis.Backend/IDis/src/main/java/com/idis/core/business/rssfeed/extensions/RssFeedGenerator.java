@@ -57,7 +57,7 @@ public class RssFeedGenerator {
 
             String replies = (numOfReplies.get(post.getId()) != null) ? numOfReplies.get(post.getId()).toString() : "0";
             entry.setTitle(post.getTitle()+ " -> "+replies+" replies");
-            entry.setLink("http://localhost:7101/posts/" + post.getId());
+            entry.setLink("http://127.0.0.1:5500/posts/?postId=" + post.getId());
             description.setValue(post.getBody());
             entry.setDescription(description);
             entry.setPublishedDate(post.getCreatedAt());

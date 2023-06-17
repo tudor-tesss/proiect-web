@@ -1,4 +1,4 @@
-import { AuthenticationService, CategoriesService } from "../../@shared/index.js";
+import {AuthenticationService, CategoriesService, DarkmodeLook} from "../../@shared/index.js";
 
 window.AuthenticationService = AuthenticationService;
 await AuthenticationService.checkSession();
@@ -127,7 +127,18 @@ export class AddCategoryComponent {
             errorContainer.style.display = "none";
         }, 5000);
     }
+    static displayDarkMode(){
+        const toggleButton = document.getElementById('toggle-button');
+        toggleButton.addEventListener('click', DarkmodeLook.handleToggleDarkMode);
+
+        const storedDarkMode = localStorage.getItem('darkMode');
+        const isDarkMode = storedDarkMode === 'true' ? true : storedDarkMode === 'false' ? false : DarkmodeLook.isDarkMode();
+        DarkmodeLook.updateImageSource(isDarkMode);
+    
+        DarkmodeLook.setTheme(isDarkMode ? 'dark' : 'light');
+    }
 }
 
 window.AddCategoryComponent = AddCategoryComponent;
+AddCategoryComponent.displayDarkMode();
 AddCategoryComponent.displayCategoryForm();

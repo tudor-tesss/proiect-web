@@ -1,4 +1,4 @@
-import { AuthenticationService, Errors, PostsService, UsersService, StatisticsService } from "../@shared/index.js";
+import { AuthenticationService, Errors, PostsService, UsersService, StatisticsService, DarkmodeLook } from "../@shared/index.js";
 
 window.AuthenticationService = AuthenticationService;
 await AuthenticationService.checkSession();
@@ -225,6 +225,12 @@ export class PostOverviewComponent {
         let div = document.querySelector(".add-wrapper");
         div.innerHTML = `
             <nav>
+            <div class="dark-button">
+                    <button class="toggle-button" id="toggle-button">
+                        <img id="toggle-image" src="../resources/icons/light.png">
+                    </button>
+                </div>
+                <div class = "nav-buttons">
                 <a class="add-post-button" href="/statistics/?isPost=true&targetId=${postId}">View Statistics</a>
                 <a class="add-category-button" href="/account">Account</a>
                 <div class="dropdown">
@@ -236,6 +242,7 @@ export class PostOverviewComponent {
                     </div>
                 </div>
                 <button class="help-button">Help</button>
+                </div>
             </nav>
     `;
     }
@@ -304,8 +311,20 @@ export class PostOverviewComponent {
         downloadLink.download = 'poststats.csv';
         downloadLink.click();
     }
+
+    static displayDarkMode(){
+        const toggleButton = document.getElementById('toggle-button');
+        toggleButton.addEventListener('click', DarkmodeLook.handleToggleDarkMode);
+
+        const storedDarkMode = localStorage.getItem('darkMode');
+        const isDarkMode = storedDarkMode === 'true' ? true : storedDarkMode === 'false' ? false : DarkmodeLook.isDarkMode();
+        DarkmodeLook.updateImageSource(isDarkMode);
+    
+        DarkmodeLook.setTheme(isDarkMode ? 'dark' : 'light');
+    }
 }
 
 window.PostOverviewComponent = PostOverviewComponent;
 await PostOverviewComponent.displayPost();
 PostOverviewComponent.addButton();
+PostOverviewComponent.displayDarkMode();

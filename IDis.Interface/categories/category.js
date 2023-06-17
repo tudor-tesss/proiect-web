@@ -1,7 +1,7 @@
-import { AuthenticationService, PostsService, StatisticsService } from "../@shared/index.js";
+import { AuthenticationService, PostsService, StatisticsService, DarkmodeLook } from "../@shared/index.js";
 
-/*window.AuthenticationService = AuthenticationService;
-await AuthenticationService.checkSession();*/
+window.AuthenticationService = AuthenticationService;
+await AuthenticationService.checkSession();
 
 export class CategoryOverviewComponent {
     static async displayPosts() {
@@ -67,18 +67,27 @@ export class CategoryOverviewComponent {
         let div = document.querySelector(".add-wrapper");
         div.innerHTML = `
 		    <nav>
-                <a class="add-post-button" href="/statistics/?isPost=false&targetId=${categoryId}">View Statistics</a>
-                <a class="add-post-button" href="/posts/add/?categoryId=${categoryId}">Add Post</a>
-                <a class="add-category-button" href="/account">Account</a>
-                <div class="dropdown">
-                    <button class="dropbtn">Export</button>
-                    <div class="dropdown-content">
-                        <button onclick="CategoryOverviewComponent.exportPdf()">PDF</button>
-                        <button onclick="CategoryOverviewComponent.exportDocbook()">Docbook</button>
-                        <button onclick="CategoryOverviewComponent.exportCsv()">CSV</button>
-                    </div>
+                <div class="dark-button">
+                    <button class="toggle-button" id="toggle-button">
+                        <img id="toggle-image" src="../resources/icons/light.png">
+                    </button>
                 </div>
-                <button class="help-button">Help</button>
+                
+                <div class="nav-buttons">
+                    <a class="add-post-button" href="/statistics/?isPost=false&targetId=${categoryId}">View Statistics</a>
+                    <a class="add-post-button" href="/posts/add/?categoryId=${categoryId}">Add Post</a>
+                    <a class="add-category-button" href="/account">Account</a>
+                    
+                    <div class="dropdown">
+                        <button class="dropbtn">Export</button>
+                        <div class="dropdown-content">
+                            <button onclick="CategoryOverviewComponent.exportPdf()">PDF</button>
+                            <button onclick="CategoryOverviewComponent.exportDocbook()">Docbook</button>
+                            <button onclick="CategoryOverviewComponent.exportCsv()">CSV</button>
+                        </div>
+                    </div>
+                    <button class="help-button">Help</button>
+                </div>
             </nav>
         `;
     }
@@ -148,8 +157,20 @@ export class CategoryOverviewComponent {
         downloadLink.download = 'catstats.csv';
         downloadLink.click();
     }
+    
+    static displayDarkMode(){
+        const toggleButton = document.getElementById('toggle-button');
+        toggleButton.addEventListener('click', DarkmodeLook.handleToggleDarkMode);
+
+        const storedDarkMode = localStorage.getItem('darkMode');
+        const isDarkMode = storedDarkMode === 'true' ? true : storedDarkMode === 'false' ? false : DarkmodeLook.isDarkMode();
+        DarkmodeLook.updateImageSource(isDarkMode);
+    
+        DarkmodeLook.setTheme(isDarkMode ? 'dark' : 'light');
+    }
 }
 
 window.CategoryOverviewComponent = CategoryOverviewComponent;
 await CategoryOverviewComponent.displayPosts();
 CategoryOverviewComponent.addButton();
+CategoryOverviewComponent.displayDarkMode();

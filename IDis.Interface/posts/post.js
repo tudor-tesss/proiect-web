@@ -32,11 +32,13 @@ export class PostOverviewComponent {
             return;
         }
 
-        const userInfo = await UsersService.getUserById(this.post.authorId);
+        const userNames = await UsersService.getAllUserNames();
+
+        const userInfo = userNames.get(this.post.authorId);
         innerHtml += `
             <div class="info-box on-column">
                 <h1 class="info-box on-column title link small animated">${this.post.title}</h1>
-                <h3 class="info-box on-column title link small animated">By: ${userInfo.firstName} ${userInfo.name}</h3>
+                <h3 class="info-box on-column title link small animated">By: ${userInfo}</h3>
                 <p class="word-wrap">${this.post.body}</p>
             </div>
         `;
@@ -73,40 +75,32 @@ export class PostOverviewComponent {
 
             if (replies) {
                 const replyPromises = replies.map((r) => {
-                    return UsersService
-                        .getUserById(r.authorID)
-                        .then((replyAuthor) => {
-                            let replyInnerHtml = `
-                                <div class="post-wrapper on-column">
-                                    <div class="info-box on-column">
-                                        <h3 class="info-box on-column title link small animated">${r.title}</h3>
-                                        <h4 class="info-box on-column title link small animated">By: ${replyAuthor.firstName} ${replyAuthor.name}</h4>
-                                        <p class="word-wrap">${r.body}</p>
-                                    </div>
+                    const userInfo = userNames.get(r.authorID);
+                    let replyInnerHtml = `
+                        <div class="post-wrapper on-column">
+                            <div class="info-box on-column">
+                                <h3 class="info-box on-column title link small animated">${r.title}</h3>
+                                <h4 class="info-box on-column title link small animated">By: ${userInfo}</h4>
+                                <p class="word-wrap">${r.body}</p>
+                            </div>
         
-                                    <div class="ratings-wrapper info-box on-column">
-                            `;
+                        <div class="ratings-wrapper info-box on-column">
+                    `;
         
-                            const ratingKeys = Object.keys(r.ratings);
-                            ratingKeys.forEach(k => {
-                                replyInnerHtml += `
-                                    <div class="info-box on-column thin link">
-                                        <h3 class="small thin">${k}: ${r.ratings[k]}</h3>
-                                    </div>
-                                `;
-                            });
-                            replyInnerHtml += `</div></div>`;
+                    const ratingKeys = Object.keys(r.ratings);
+                    ratingKeys.forEach(k => {
+                        replyInnerHtml += `
+                            <div class="info-box on-column thin link">
+                                <h3 class="small thin">${k}: ${r.ratings[k]}</h3>
+                            </div>
+                        `;
+                    });
+                    replyInnerHtml += `</div></div>`;
         
-                            return replyInnerHtml;
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                            return '';  // return an empty string on error
-                        });
+                    return replyInnerHtml;
                 });
-        
+                
                 const replyInnerHtmls = await Promise.all(replyPromises);
-        
                 for (let replyInnerHtml of replyInnerHtmls) {
                     innerHtml += replyInnerHtml;
                 }

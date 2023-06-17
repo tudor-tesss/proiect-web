@@ -40,4 +40,26 @@ export class UsersService {
                 return response.json();
             });
     }
+
+    static async getAllUserNames() {
+        const endpoint = "http://localhost:7101/users/all/names";
+
+        return await fetch(endpoint, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(async response => {
+            if(!response.ok) {
+                const error = await response.json();
+                throw new Error(error);
+            }
+
+            const res = await response.json();
+            const map = new Map(Object.entries(res)); 
+            
+            return map;
+        });
+    }
 }

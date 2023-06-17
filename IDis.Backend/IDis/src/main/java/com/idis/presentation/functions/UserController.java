@@ -1,6 +1,7 @@
 package com.idis.presentation.functions;
 
 import com.idis.core.business.user.commands.CreateUserCommand;
+import com.idis.core.business.user.queries.GetAllUserNamesQuery;
 import com.idis.core.business.user.queries.GetUserByIdQuery;
 import com.idis.core.business.usersession.commands.*;
 import com.idis.shared.infrastructure.Mediator;
@@ -186,6 +187,26 @@ public class UserController implements IController {
         var command = new GetUserByIdQuery(userId);
 
         try{
+            return mediator
+                    .send(command)
+                    .thenCompose(user -> {
+                        var responseContent = Serialization.serialize(user);
+
+                        return HttpResponse.create(200, responseContent);
+                    });
+        } catch (Exception e){
+            var responseContent = Serialization.serialize(e.getMessage());
+
+            return HttpResponse.create(400,responseContent);
+        }
+    }
+
+    @Route(path = "/users/all/names", method = HttpVerbs.GET)
+    @Controller(name = "getAllUserNames")
+    public static CompletableFuture<HttpResponse> getAllUserNames(String requestBody) {
+        var command = new GetAllUserNamesQuery();
+
+        try {
             return mediator
                     .send(command)
                     .thenCompose(user -> {

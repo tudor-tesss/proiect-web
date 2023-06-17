@@ -552,17 +552,3 @@ input[type="radio"] + label {
         flex-direction: column;
     }
 }
-
-@media (max-width: 1000px) {
-    .info-box {
-        width: 40vw;
-    }
-
-    .title {
-        width: 20vw;
-    }
-
-    .link {
-        width: 30vw;
-    }
-}

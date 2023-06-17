@@ -14,7 +14,7 @@ public final class GetAllUserNamesQueryHandler implements IRequestHandler<GetAll
     @Override
     public CompletableFuture<Map<UUID, String>> handle(GetAllUserNamesQuery request) {
         return QueryProvider.getAllAsync(User.class).thenApply(l -> {
-            Map<UUID, String> map = new HashMap<>();
+            var map = new HashMap<UUID, String>();
             for(var u : l) {
                 map.put(u.getId(), u.getFirstName().concat(" ").concat(u.getName()));
             }

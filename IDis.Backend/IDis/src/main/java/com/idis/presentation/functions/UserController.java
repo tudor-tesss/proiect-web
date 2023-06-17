@@ -122,8 +122,8 @@ public class UserController implements IController {
     }
 
     @Route(path = "/users/{id}/sessions", method = HttpVerbs.PATCH)
-    @Controller(name = "checkUserSession")
-    public static CompletableFuture<HttpResponse> checkUserSession(String id, String requestBody) {
+    @Controller(name = "refreshUserSession")
+    public static CompletableFuture<HttpResponse> refreshUserSession(String id, String requestBody) {
         UUID userId;
         try {
             userId = UUID.fromString(id);
@@ -133,8 +133,8 @@ public class UserController implements IController {
             return HttpResponse.create(400, responseContent);
         }
 
-        var command = Serialization.deserialize(requestBody, CheckUserSessionCommand.class);
-        command = new CheckUserSessionCommand(userId, command.sessionId(), command.ipAddress());
+        var command = Serialization.deserialize(requestBody, RefreshUserSessionCommand.class);
+        command = new RefreshUserSessionCommand(userId, command.sessionId(), command.ipAddress());
 
         try {
             return mediator

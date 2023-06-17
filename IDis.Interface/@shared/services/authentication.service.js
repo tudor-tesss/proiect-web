@@ -58,6 +58,10 @@ export class AuthenticationService {
             console.error('Error:', error);
             this.deleteSessionTokenCookie();
             window.location.href = '/start';
+        })
+        .then(d => {
+            AuthenticationService.setCookie('sessionId', sessionId, 1);
+            AuthenticationService.setCookie('userId', userId, 1);
         });
     }
     

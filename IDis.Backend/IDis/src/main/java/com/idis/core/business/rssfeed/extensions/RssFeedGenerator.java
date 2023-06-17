@@ -12,10 +12,16 @@ public class RssFeedGenerator {
     private static final String RSS_FILE_PATH = "rss.xml";
     private final List <Post> posts;
     private final Map<UUID,Integer> numOfReplies;
+    private static final boolean isLocalHost = false;
+    private static final String localHostPrefix = "https://localhost:5500/";
+    private static final String deployedPrefix = "https://p02--frontend--ylsyc29qft6l.code.run/";
+    private static String prefix;
 
     public RssFeedGenerator(List<Post> posts, Map<UUID,Integer> numOfReplies) {
         this.posts = posts;
         this.numOfReplies = numOfReplies;
+
+        prefix = isLocalHost ? localHostPrefix : deployedPrefix;
     }
 
     public String generateRSS () throws Exception {
@@ -37,7 +43,7 @@ public class RssFeedGenerator {
         SyndFeed feed = new SyndFeedImpl();
         feed.setFeedType("rss_2.0");
         feed.setTitle("IDislikeIT");
-        feed.setLink("https://localhost:7017/main.html");
+        feed.setLink(prefix + "main.html");
         feed.setDescription("Welcome to I Dislike It!, a unique platform where users can create posts about various topics, rate them, and share their thoughts.");
         feed.setLanguage("en-us");
 
@@ -57,7 +63,7 @@ public class RssFeedGenerator {
 
             String replies = (numOfReplies.get(post.getId()) != null) ? numOfReplies.get(post.getId()).toString() : "0";
             entry.setTitle(post.getTitle()+ " -> "+replies+" replies");
-            entry.setLink("http://127.0.0.1:5500/posts/?postId=" + post.getId());
+            entry.setLink(prefix + "posts/?postId=" + post.getId());
             description.setValue(post.getBody());
             entry.setDescription(description);
             entry.setPublishedDate(post.getCreatedAt());

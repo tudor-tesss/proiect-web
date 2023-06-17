@@ -1,3 +1,5 @@
+import { Routes } from "../routes/index.js";
+
 export class AuthenticationService {
     static getCookie(name) {
         const cookies = document.cookie.split('; ').reduce((acc, cookie) => {
@@ -32,7 +34,7 @@ export class AuthenticationService {
             window.location.href = '/start';
         }
     
-        const endpoint = 'http://localhost:7101/users/' + userId + '/sessions';
+        const endpoint = Routes.authentication.checkSession.replace('{id}', userId);
         const checkUserSessionCommand = {
             userId: userId,
             sessionId: sessionId,
@@ -74,7 +76,7 @@ export class AuthenticationService {
             return;
         }
 
-        const endpoint = 'http://localhost:7101/users/' + userId + '/sessions';
+        const endpoint = Routes.authentication.checkSession.replace('{id}', userId);
         const checkUserSessionCommand = {
             userId: userId,
             sessionId: sessionId,
@@ -123,7 +125,7 @@ export class AuthenticationService {
     }
     
     static async deleteSessionTokenCookie() {
-        const endpoint = 'http://localhost:7101/users/' + localStorage.getItem('userUuid') + '/sessions';
+        const endpoint = Routes.authentication.deleteSessionTokenCookie.replace('{id}', localStorage.getItem('userUuid'));
     
         const cookies = document.cookie.split(';').reduce((acc, c) => {
             const [key, v] = c.trim().split('=').map(decodeURIComponent);
@@ -169,7 +171,7 @@ export class AuthenticationService {
     }
 
     static async createUserGate(emailAddress) {
-        const endpoint = 'http://localhost:7101/users/gates';
+        const endpoint = Routes.authentication.createUserGate;
 
         const createUserGateCommand = {
             emailAddress: emailAddress
@@ -193,7 +195,7 @@ export class AuthenticationService {
     }
 
     static async passUserGate(userUuid, code) {
-        const endpoint = 'http://localhost:7101/users/' + userUuid + '/gates';
+        const endpoint = Routes.authentication.passUserGate.replace('{id}', userUuid);
 
         const passUserGateCommand = {
             code: code
@@ -221,7 +223,7 @@ export class AuthenticationService {
     }
 
     static async createSession(userId) {
-        const endpoint = 'http://localhost:7101/users/' + userId + '/sessions';
+        const endpoint = Routes.authentication.createSession.replace('{id}', userId);
 
         const createSessionCommand = {
             userId: userId,

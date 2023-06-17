@@ -1,8 +1,9 @@
 import { Post, PostReply } from "../models/index.js";
+import { Routes } from "../routes/index.js";
 
 export class PostsService {
     static async createPost(categoryId, title, body, ratings) {
-        const endpoint = "http://localhost:7101/posts";
+        const endpoint = Routes.posts.createPost;
         const authorId = localStorage.getItem("userUuid");
 
         const post = {
@@ -32,7 +33,7 @@ export class PostsService {
     }
 
     static async createPostReply(authorId, parentPostId, title, body, ratings) {
-        const endpoint = `http://localhost:7101/posts/${parentPostId}/replies`;
+        const endpoint = Routes.posts.createPostReply.replace("{id}", parentPostId);
 
         const post = {
             authorId,
@@ -60,7 +61,7 @@ export class PostsService {
     }
 
     static async getAllPosts() {
-        const endpoint = "http://localhost:7101/posts";
+        const endpoint = Routes.posts.getAll;
 
         return await fetch(endpoint, {
             method: "GET",
@@ -80,7 +81,7 @@ export class PostsService {
     }
 
     static async getAllPostsInCategory(categoryId) {
-        const endpoint = `http://localhost:7101/categories/${categoryId}/posts`;
+        const endpoint = Routes.posts.getAllPostsInCategory.replace("{id}", categoryId);
 
         return await fetch(endpoint, {
             method: "GET",
@@ -100,7 +101,7 @@ export class PostsService {
     }
 
     static async getPostsByCreatorId(creatorId) {
-        const endpoint = `http://localhost:7101/users/${creatorId}/posts`;
+        const endpoint = Routes.posts.getAllPostsByCreatorId.replace("{id}", creatorId);
 
         return await fetch(endpoint, {
             method: "GET",
@@ -120,7 +121,7 @@ export class PostsService {
     }
 
     static async getPost(postId) {
-        const endpoint = `http://localhost:7101/posts/${postId}`;
+        const endpoint = Routes.posts.getPostById.replace("{id}", postId);
 
         return await fetch(endpoint, {
             method: "GET",
@@ -140,7 +141,7 @@ export class PostsService {
     }
 
     static async getPostReplies(postId) {
-        const endpoint = `http://localhost:7101/posts/${postId}/replies`;
+        const endpoint = Routes.posts.getPostReplies.replace("{id}", postId);
 
         return await fetch(endpoint, {
             method: "GET",

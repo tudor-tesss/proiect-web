@@ -1,8 +1,9 @@
 import { User } from "../models/index.js";
+import { Routes } from "../routes/index.js";
 
 export class UsersService {
     static async getUserById(userId) {
-        const endpoint = `http://localhost:7101/users/${userId}`;
+        const endpoint = Routes.users.getUserById.replace("{id}", userId);
 
         return await fetch(endpoint, {
             method: 'GET',
@@ -22,7 +23,7 @@ export class UsersService {
     }
 
     static async createUser(name, firstName, email) {
-        const endpoint = 'http://localhost:7101/users';
+        const endpoint = Routes.users.createUser;
 
         return await fetch(endpoint, {
             method: 'POST',
@@ -42,7 +43,7 @@ export class UsersService {
     }
 
     static async getAllUserNames() {
-        const endpoint = "http://localhost:7101/users/all/names";
+        const endpoint = Routes.users.getAllUserNames;
 
         return await fetch(endpoint, {
             method: 'GET',

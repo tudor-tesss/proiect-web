@@ -1,7 +1,8 @@
+import { Routes } from "../routes/index.js";
+
 export class CategoriesService {
     static async createCategory(name, ratingFields, creatorId) {
-        const endpoint = "http://localhost:7101/categories";
-
+        const endpoint = Routes.categories.createCategory;
         await fetch(endpoint, {
             method: "POST",
             headers: {
@@ -24,7 +25,7 @@ export class CategoriesService {
     }
 
     static async getAll() {
-        const endpoint = "http://localhost:7101/categories";
+        const endpoint = Routes.categories.getAll;
 
         return await fetch(endpoint, {
             method: "GET",
@@ -43,7 +44,7 @@ export class CategoriesService {
     }
 
     static async getCategoriesByCreatorId(creatorId) {
-        const endpoint = `http://localhost:7101/users/${creatorId}/categories`;
+        const endpoint = Routes.categories.getCategoriesByCreatorId.replace("{id}", creatorId);
 
         return await fetch(endpoint, {
             method: "GET",
@@ -62,7 +63,7 @@ export class CategoriesService {
     }
 
     static async getCategory(categoryId) {
-        const url = "http://localhost:7101/categories";
+        const url = Routes.categories.getAll;
 
         const categories = await fetch(url, {
             method: 'GET',

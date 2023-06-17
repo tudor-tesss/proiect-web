@@ -1,6 +1,8 @@
+import { Routes } from "../routes/routes.js";
+
 export class StatisticsService {
     static async getCategoryStatistics(categoryId) {
-        const endpoint = `http://localhost:7101/categories/${categoryId}/statistics`;
+        const endpoint = Routes.categories.getCategoryStatistics.replace("{id}", categoryId);
 
         return await fetch(endpoint, {
             method: 'POST',
@@ -19,7 +21,7 @@ export class StatisticsService {
     }
 
     static async getCategoriesStatistics() {
-        const endpoint = `http://localhost:7101/categories/statistics`;
+        const endpoint = Routes.categories.getCategoriesStatistics;
 
         return await fetch(endpoint, {
             method: 'POST',
@@ -38,7 +40,7 @@ export class StatisticsService {
     }
 
     static async getPostStatistics(postId) {
-        const endpoint = `http://localhost:7101/posts/${postId}/statistics`;
+        const endpoint = Routes.posts.getPostStatistics.replace("{id}", postId);
 
         return await fetch(endpoint, {
             method: 'POST',
@@ -57,7 +59,7 @@ export class StatisticsService {
     }
 
     static async getPostsStatistics() {
-        const endpoint = `http://localhost:7101/posts/statistics`;
+        const endpoint = Routes.posts.getPostsStatistics;
 
         return await fetch(endpoint, {
             method: 'POST',
@@ -76,7 +78,7 @@ export class StatisticsService {
     }
 
     static async getPdfForPostStats(postId) {
-        const endpoint = `http://localhost:7101/posts/${postId}/statistics/pdf`;
+        const endpoint = Routes.getPdfForPostStatistics.replace("{id}", postId);
 
         return await fetch(endpoint, {
             method: "POST",
@@ -95,7 +97,7 @@ export class StatisticsService {
     }
 
     static async getPdfForCategoryStats(categoryId) {
-        const endpoint = `http://localhost:7101/categories/${categoryId}/statistics/pdf`;
+        const endpoint = Routes.getPdfForCategoryStatistics.replace("{id}", categoryId);
 
         return await fetch(endpoint, {
             method: "POST",
@@ -114,7 +116,7 @@ export class StatisticsService {
     }
 
     static async getDocbookForPostStats(postId) {
-        const endpoint = `http://localhost:7101/posts/${postId}/statistics/docbook`;
+        const endpoint = Routes.getDocbookForPostStatistics.replace("{id}", postId);
 
         return await fetch(endpoint, {
             method: "POST",
@@ -133,7 +135,7 @@ export class StatisticsService {
     }
 
     static async getDocbookForCategoryStats(categoryId) {
-        const endpoint = `http://localhost:7101/categories/${categoryId}/statistics/docbook`;
+        const endpoint = Routes.getDocbookForCategoryStatistics.replace("{id}", categoryId);
 
         return await fetch(endpoint, {
             method: "POST",
@@ -152,7 +154,7 @@ export class StatisticsService {
     }
 
     static async getCsvForPostStats(postId) {
-        const endpoint = `http://localhost:7101/posts/${postId}/statistics/csv`;
+        const endpoint = Routes.getCsvForPostStatistics.replace("{id}", postId);
 
         return await fetch(endpoint, {
             method: "POST",
@@ -171,7 +173,7 @@ export class StatisticsService {
     }
 
     static async getCsvForCategoryStats(categoryId) {
-        const endpoint = `http://localhost:7101/categories/${categoryId}/statistics/csv`;
+        const endpoint = Routes.getCsvForCategoryStatistics.replace("{id}", categoryId);
 
         return await fetch(endpoint, {
             method: "POST",

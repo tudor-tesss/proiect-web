@@ -24,7 +24,9 @@ import com.idis.core.business.posts.parentpost.command.*;
 import com.idis.core.business.posts.parentpost.commandhandlers.*;
 import com.idis.core.business.posts.postreply.commandhandlers.*;
 import com.idis.core.business.statistics.category.commands.*;
+import com.idis.core.business.user.queries.GetAllUserNamesQuery;
 import com.idis.core.business.user.queries.GetUserByIdQuery;
+import com.idis.core.business.user.queryhandlers.GetAllUserNamesQueryHandler;
 import com.idis.core.business.user.queryhandlers.GetUserByIdQueryHandler;
 import com.idis.core.business.usersession.commandhandlers.*;
 import com.idis.core.business.statistics.posts.commands.*;
@@ -168,6 +170,8 @@ public class Main {
         var mediator = Mediator.getInstance();
 
         mediator.registerHandler(CreateUserCommand.class, new CreateUserCommandHandler());
+        mediator.registerHandler(GetAllUserNamesQuery.class, new GetAllUserNamesQueryHandler());
+
         mediator.registerHandler(CreateUserGateCommand.class, new CreateUserGateCommandHandler());
         mediator.registerHandler(PassUserGateCommand.class, new PassUserGateCommandHandler());
 

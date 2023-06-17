@@ -1,5 +1,5 @@
 export class Routes {
-    static isLocalhost = false;
+    static isLocalhost = true;
     static urlPrefix = this.isLocalhost ? "http://localhost:7101" : "https://p01--backend--ylsyc29qft6l.code.run";
 
     static authentication = {

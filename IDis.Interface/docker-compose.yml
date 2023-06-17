@@ -1,0 +1,8 @@
+version: '3'
+services:
+  frontend:
+    build: 
+      context: . # this will take the current directory as the context
+    ports:
+      - "80:80"
+    restart: always

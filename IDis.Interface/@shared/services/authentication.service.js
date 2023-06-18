@@ -125,7 +125,7 @@ export class AuthenticationService {
     }
     
     static async deleteSessionTokenCookie() {
-        const endpoint = Routes.authentication.deleteSessionTokenCookie.replace('{id}', localStorage.getItem('userUuid'));
+        const endpoint = Routes.authentication.deleteSession.replace('{id}', localStorage.getItem('userUuid'));
     
         const cookies = document.cookie.split(';').reduce((acc, c) => {
             const [key, v] = c.trim().split('=').map(decodeURIComponent);

@@ -81,6 +81,7 @@ export class StartComponent {
                         <input type="text" name="code" id="code" required>
                         <label>Code</label>
                     </div>
+                    <p class="center-text">Check your email for the code.</p>
                     <div id="error-container" class="error-container"></div>
                     <div class="submit-wrapper">
                         <button type="button" class="submit-b" onClick="StartComponent.passUserGate()">Submit</button>

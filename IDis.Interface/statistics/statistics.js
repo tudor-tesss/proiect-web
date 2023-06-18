@@ -193,7 +193,7 @@ export class StatisticsOverviewComponent {
             const post = this.allPosts.find(p => p.id === postKey);
             innerHtml += `
                 <div class="info-box">
-                    <a class="info-box link animated" href="../posts/?postId=post.id">
+                    <a class="info-box link animated" href="../posts/?postId=${post.id}">
                         ${post.title} - ${category.postsByRatings[key][p]}
                     </a>
                 </div>
@@ -274,6 +274,7 @@ export class StatisticsOverviewComponent {
                 <div class="nav-buttons">
                     <a class ="add-category-button" href="../statistics/?isPost=true">View Posts Statistics</a>
                     <a class ="add-category-button" href="../account">Account</a>
+                    <button class="add-post-button" onClick="AuthenticationService.deleteSessionTokenCookie()" type="button">Log Out</button>
                 </div>
             `;
         }

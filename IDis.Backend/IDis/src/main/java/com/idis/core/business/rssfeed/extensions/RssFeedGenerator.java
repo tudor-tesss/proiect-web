@@ -1,4 +1,5 @@
 package com.idis.core.business.rssfeed.extensions;
+
 import com.idis.core.domain.posts.parentpost.Post;
 import com.rometools.rome.feed.synd.*;
 import com.rometools.rome.io.SyndFeedOutput;

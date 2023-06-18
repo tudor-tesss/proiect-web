@@ -99,6 +99,10 @@ body::-webkit-scrollbar-thumb:hover {
     height:100px
 }
 
+.center-text {
+    text-align: center;
+}
+
 nav{
     display:flex;
     align-items:center;

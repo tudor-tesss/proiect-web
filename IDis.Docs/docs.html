@@ -121,10 +121,34 @@
                     <a href="#other-non-functional-requirements">Other non-functional requirements</a>
                     <ul>
                         <li>
-                            <a href="#performance-requirements">Performance requirements</a>
+                            <a href="#performance-req">Performance requirements</a>
                         </li>
-                        <li><a href="#security-requirements">Security requirements</a></li>
+                        <li><a href="#security-req">Security requirements</a></li>
                         <li><a href="#scalability-req">Scalability requirements</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#user-interfaces-design">User Interface Design</a>
+                    <ul>
+                        <li><a href="#design-principles">Design Principles</a></li>
+                        <li><a href="#visual-elements">Visual Elements</a></li>
+                        <li><a href="#dark-mode">Dark mode</a></li>
+                        <li><a href="#responsiveness">Responsiveness</a></li>
+                        <li><a href="#interactive">Interactive Elements</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#sys-interfaces">System Interfaces</a>
+                    <ul>
+                        <li><a href="#desc-api">Description of APIs used by the system</a>
+                            <ul><a href="#extensions">Extensions</a></ul>
+                        </li>
+                        <li><a href="#controller-doc">Controller Documentation</a>
+                            <ul><a href="#category-doc">Category Controllers</a></ul>
+                            <ul><a href="#statistics-doc">Statistics Controllers</a></ul>
+                        </li>
+
                     </ul>
                 </li>
             </ol>
@@ -583,7 +607,7 @@
                 </p>
             </section>
 
-            <section id="Scalability-req">
+            <section id="scalability-req">
 
                 <h3>6.3 Scalability requirements</h3>
 
@@ -599,6 +623,651 @@
 
             </section>
         </section>
+
+        <section id="user-interfaces-design">
+
+            <h2>
+                7. User Interface Design
+            </h2>
+
+            <section id="design-principles">
+
+                <h3>7.1 Design Principles</h3>
+
+                <p>
+                    The following design principles guide the user interface design of the application:
+
+                    <ul>Simplicity: The user interface is designed to be clean, intuitive, and free from unnecessary complexity. It employs clear layouts, concise language, and intuitive navigation to enhance usability.</ul>
+
+                    <ul>Consistency: Consistency is maintained throughout the user interface design, ensuring a familiar and cohesive experience. Conventions are followed to enhance usability and reduce user confusion.</ul>
+
+                </p>
+            </section>
+
+            <section id="visual-elements">
+
+                <h3>7.2 Visual Elements</h3>
+
+                <p>
+                    Visual elements play a crucial role in the application's user interface design. The following aspects are considered:
+
+                <ul>Colors:The application utilizes a color scheme based on blues in light mode and grays in dark mode. In light mode, shades of blue are used to create a visually pleasing and vibrant experience. In dark mode, various shades of gray are employed to provide a visually appealing and comfortable interface.</ul>
+
+                    <ul>Typography: Thoughtful typography choices ensure readability and visual hierarchy. Clear and legible fonts are used to enhance user comprehension and ease of use.</ul>
+
+                        <ul>Icons: Appropriate icons are utilized to enhance user understanding and provide visual cues. Icons are selected based on their relevance and consistency with the overall design.</ul>
+
+                </p>
+            </section>
+
+            <section id="dark-mode">
+
+                <h3>7.3 Dark mode</h3>
+
+                <p>
+                    The application features a Dark Mode option that provides a visually appealing and comfortable interface
+                    for users who prefer a darker color scheme. Dark Mode is consistent throughout the site, maintaining a
+                    unified visual experience across different pages and components.
+                </p>
+
+                <h4>7.3.1 Implementation and Theme Storage</h4>
+
+                <p>
+                    The Dark Mode theme preference is stored in the user's browser using the Local Storage API.
+                    When a user enables Dark Mode, their preference is saved, allowing the application to remember
+                    and apply the Dark Mode theme consistently across subsequent visits.
+
+                </p>
+
+                <h4>7.3.2 Benefits of Dark Mode</h4>
+
+                <p>
+
+                    <ul>Reduced Eye Strain: The darker color scheme reduces the amount of bright light emitted by the screen, which can alleviate eye strain and fatigue, particularly during extended usage.</ul>
+                    <ul> Battery Efficiency (for OLED Displays): On devices with OLED displays, Dark Mode can potentially save battery life as individual pixels can be turned off or dimmed, resulting in lower power consumption.</ul>
+                    <ul>Visual Aesthetics: Dark Mode provides a sleek and modern look</ul>
+
+                </p>
+
+            </section>
+
+            <section id="responsiveness">
+
+                <h3>7.4 Responsiveness</h3>
+
+                <p>
+                    The application is designed to be responsive and adaptive, ensuring optimal usability across different
+                    devices and screen sizes. The following considerations are implemented:
+
+                </p>
+
+                <p>
+                    The user interface seamlessly adapts to various screen sizes, including desktop, tablet, and mobile devices.
+                    Content and layout dynamically adjust to ensure readability and usability regardless of the device being used.
+                </p>
+
+                <p>
+                    Responsive design allows for efficient content presentation and intuitive navigation on different screen sizes.
+                </p>
+
+            </section>
+
+            <section id="interactive">
+
+                <h3>7.5 Interactive Elements</h3>
+
+                <p>
+                    The application employs interactive elements to facilitate user engagement and interaction.
+                    The interactive elements, such as buttons and forms, are designed to facilitate user interaction
+                    and provide a seamless user experience. These include:
+                </p>
+
+                <p>
+                    Buttons
+                    <ul>Clear and intuitive buttons are used for actions and navigation.</ul>
+                    <ul>Buttons provide visual feedback when clicked or tapped.</ul>
+                    <ul>Button labels are descriptive and indicative of the action they perform.</ul>
+                </p>
+
+                <p>
+                    Forms
+                    <ul>User-friendly forms guide users in providing input and submitting data.</ul>
+                    <ul>Forms include input guidance and real-time validation.</ul>
+                    <ul>Users receive feedback and confirmation upon form submission.</ul>
+                </p>
+
+            </section>
+
+        </section>
+
+        <section id="sys-interfaces">
+            <h2>
+                8. System Interfaces
+            </h2>
+
+            <section id="desc-api">
+
+                <h3>8.1 Description of APIs used by the system</h3>
+
+                <section id="extensions">
+                    <h4>8.1 Extensions</h4>
+
+                    <section>
+                        <h4>8.1.1 CategoryStatisticsCalculator</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            The CategoryStatisticsCalculator is a component used to generate statistics for a specific post. It performs calculations based on the provided data and produces statistical metrics that can be utilized on the frontend and for other purposes, such as generating export documents.
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Purpose<br>
+                            The CategoryStatisticsCalculator is designed to calculate various statistics for a specific category based on the provided data. It aims to provide insights into the category's post count, average score, ratings distribution, average score per rating, posts sorted by average score, posts and their creation dates, and posts count per day.
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Functionality<br>
+                            <ul>Post Count: Calculates the total number of posts in the category.</ul>
+                        <ul>Average Score: Calculates the average score across all posts in the category.</ul>
+                        <ul>Ratings Distribution: Analyzes the distribution of ratings for each rating field in the category.</ul>
+                        <ul>Average Score per Rating: Computes the average score per rating field in the category.</ul>
+                        <ul>Posts Sorted by Average Score: Sorts the posts in the category based on their average score.</ul>
+                        <ul>Posts and Creation Dates: Retrieves the titles and creation dates of the posts in the category.</ul>
+                        <ul>Posts Count per Day: Counts the number of posts created on each day in the category</ul>
+
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Usage<br>
+                            <ul>
+                            Frontend Display: The calculated statistics can be presented on the frontend to
+                            provide users with insights about the category's performance, ratings, and other relevant information.
+                            </ul>
+                            <ul>
+                                Export Functions: The statistics generated by the CategoryStatisticsCalculator can
+                                be utilized by the export functions to populate CSV, PDF and DocBook documents.
+                                These documents may include the category's post count, average score, ratings distribution,
+                                and other relevant metrics.
+                            </ul>
+
+                        </p>
+
+                    </section>
+
+                    <section>
+                        <h4>8.1.2 PostStatisticsCalculator</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            The PostStatisticsCalculator is a component used to generate statistics for a specific post.
+                            It performs calculations based on the provided data and produces statistical metrics that can
+                            be utilized on the frontend and for other purposes, such as generating export documents.
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Purpose<br>
+                            The purpose of the PostStatisticsCalculator is to analyze the data associated with a post and provide valuable insights through statistical calculations. It aims to offer meaningful statistics, such as the number of replies, average scores by rating, and overall average score.
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Functionality<br>
+                        <ul>Replies Count: Calculates the total number of replies for the post.</ul>
+                        <ul>Average Scores by Rating: Computes the average scores for each rating field based on the replies.</ul>
+                        <ul>Overall Average Score: Calculates the average score for the post, considering all rating fields.</ul>
+
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Usage<br>
+                        <ul>
+                        Frontend Display: The calculated statistics can be presented on the frontend to
+                        provide users with insights about the post, including the number of replies and average scores by rating.
+                        </ul>
+                        <ul>
+                            Other Functions: The statistics generated by the PostStatisticsCalculator can be utilized in various
+                            other functionalities, such as generating reports, exporting post statistics, or performing further analysis.
+                        </ul>
+
+                        </p>
+
+                    </section>
+
+                    <section>
+                        <h4>8.1.3 PdfGeneratorForCategory</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            This section provides information about the calculator component used for generating statistics.
+                            The PdfGeneratorForCategory class is responsible for generating a PDF document containing category statistics. It utilizes the CategoryStatisticsCalculator to calculate the statistics and formats them into a PDF file.
+
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Purpose<br>
+                            The purpose of the PdfGeneratorForCategory is to provide a convenient way to generate a PDF document that visually represents the category statistics. It aims to present the calculated statistics in a readable and organized format for easy consumption.
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Functionality<br>
+                        <ul>Generation of PDF Document: The class generates a PDF document containing category statistics, such as post count, average score, ratings distribution, average score per rating, posts sorted by average score, posts and their creation dates, and posts count per day.</ul>
+                        <ul>Customization and Formatting: The generated PDF document includes formatted text, tables, and other elements to present the category statistics in a visually appealing and informative manner.</ul>
+
+                    </section>
+
+                    <section>
+                        <h4>8.1.4 PdfGeneratorForPosts</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            This section provides information about the calculator component used for generating statistics.
+
+                            The PdfGeneratorForPosts class is responsible for generating a PDF document containing post statistics. It utilizes the PostStatisticsCalculator to calculate the statistics and formats them into a PDF file.
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Purpose<br>
+                            The purpose of the PdfGeneratorForPosts is to provide a convenient way to generate a PDF document that visually represents the post statistics. It aims to present the calculated statistics in a readable and organized format for easy consumption.
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Functionality<br>
+                        <ul>Generation of PDF Document: The class generates a PDF document containing post statistics, such as the number of replies and the average score.</ul>
+                        <ul>Customization and Formatting: The generated PDF document includes formatted text and tables to present the post statistics in a visually appealing and informative manner.</ul>
+
+                    </section>
+
+                    <section>
+                        <h4>8.1.5 DocbookGeneratorForCategories</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            This section provides information about the generator component used for generating DocBook documents.
+
+                            The DocbookGeneratorForCategories class is responsible for generating a DocBook document containing category statistics. It utilizes the CategoryStatisticsCalculator to calculate the statistics and formats them into a DocBook format.
+
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Purpose<br>
+                            The purpose of the DocbookGeneratorForCategories is to provide a convenient way to generate a structured document in DocBook format that represents the category statistics. It aims to present the calculated statistics in a well-organized and standard format suitable for documentation or further processing.
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Functionality<br>
+                        <ul>Generation of DocBook Document: The class generates a DocBook document containing category statistics, such as post count, average score, average score per rating, and post count by day.</ul>
+                        <ul>Customization and Formatting: The generated DocBook document includes structured elements and tags to represent the category statistics in a standardized format.</ul>
+
+                    </section>
+
+                    <section>
+                        <h4>8.1.6 DocbookGeneratorForPosts</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            This section provides information about the generator component used for generating DocBook documents.
+
+                            The DocbookGeneratorForPosts class is responsible for generating a DocBook document containing post statistics. It utilizes the PostStatisticsCalculator to calculate the statistics and formats them into a DocBook format
+
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Purpose<br>
+                            The purpose of the DocbookGeneratorForPosts is to provide a convenient way to generate a structured document in DocBook format that represents the post statistics. It aims to present the calculated statistics in a well-organized and standard format suitable for documentation or further processing.                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Functionality<br>
+                        <ul>Generation of DocBook Document: The class generates a DocBook document containing post statistics, such as replies count, average score, and average score by rating.</ul>
+                        <ul>Customization and Formatting: The generated DocBook document includes structured elements and tags to represent the post statistics in a standardized format.</ul>
+
+                    </section>
+
+                    <section>
+                        <h4>8.1.7 RSS Feed</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            The RSS Feed feature provides a data feed of entities' information or updates. Users can subscribe to the RSS feed to receive regular updates and stay informed about new objects, updates, and rankings within the system.
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Content Included:<br>
+                            <ul>The posts, sorted from the newest to latest</ul>
+                        <ul>The number of replies for each post</ul>
+                        <ul>The description of the post</ul>
+                        <ul>The link for the posts, to redirect them to the website</ul>
+
+                        <p>
+                            &nbsp;&nbsp;Subscription<br>
+                            Users can utilize compatible feed readers or aggregators to consume and display the RSS feed content.
+                            By subscribing to the RSS feed, users can conveniently receive updates and stay informed about the latest objects, updates, and rankings within the system.
+                        </p>
+
+                    </section>
+
+                </section>
+
+            </section>
+
+            <section id="controller-doc">
+                <h3>8.2 Controller Documentation</h3>
+                <section id="category-doc">
+                    <h3>8.2.1 Category Controllers</h3>
+
+                    <section>
+                        <h4>8.2.1.1 createCategory Controller</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            The createCategory controller handles the creation of a new category. It receives a POST request with a
+                            JSON payload containing the necessary information to create the category. Upon successful creation, it returns a
+                            200 OK response with the newly created category in the response body. In case of any errors or invalid requests,
+                            it returns a 400 Bad Request response with an error message in the response body.
+
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Endpoint<br>
+                            Path: /categories<br>
+                            Method: POST<br>
+                            Parameters: none
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Request<br>
+                            <pre>
+                                <code>
+            {
+                "name": "Category",
+                "ratingFields": ["rating1", "rating2"]
+            }
+                                </code>
+                            </pre>
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Response<br><br>
+                            &nbsp;&nbsp;Success (200 OK):<br>
+                            Body: The response body contains the newly created category in JSON format.<br><br>
+                            &nbsp;&nbsp;Error (400 Bad Request):<br>
+                            Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the creation process.<br>
+                            <i>"Category.Name.NullOrEmpty “<br>
+                            "Category.AlreadyExists"</i>
+                        </p>
+
+                    </section>
+
+                    <section>
+                        <h4>8.2.1.2 getAllCategories Controller</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            The getAllCategories controller retrieves all categories. It handles a GET request to the /categories endpoint and returns a 200 OK response with the list of all categories in the response body. In case of any errors, it returns a 400 Bad Request response with an error message in the response body.
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Endpoint<br>
+                            Path: /categories<br>
+                            Method: GET<br>
+                            Parameters: none
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Request<br>
+                            The controller does not expect any request payload or parameters.
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Response<br><br>
+                            &nbsp;&nbsp;Success (200 OK):<br>
+                            Body: The response body contains the list of all categories in JSON format.<br><br>
+                            &nbsp;&nbsp;Error (400 Bad Request):<br>
+                            Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the retrieval  process.<br>
+                            <i>"Category.NoCategoriesInDatabase"</i>
+                        </p>
+
+                    </section>
+
+                    <section>
+                        <h4>8.2.1.3 .getCategoriesByCreatorId Controller</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            The getCategoriesByCreatorId controller retrieves categories by the creator's ID. It handles a GET request to the /users/{id}/categories endpoint, where {id} represents the creator's ID. It returns a 200 OK response with the list of categories created by the specified creator in the response body. In case of any errors or invalid requests, it returns a 400 Bad Request response with an error message in the response body.
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Endpoint<br>
+                            Path: /users/{id}/categories<br>
+                            Method: GET<br>
+                            Parameters: ID (string)
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Request<br>
+                            The controller expects the creator's ID as a path parameter.
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Response<br><br>
+                            &nbsp;&nbsp;Success (200 OK):<br>
+                            Body: The response body contains the list of categories created by the specified creator in JSON format.<br><br>
+                            &nbsp;&nbsp;Error (400 Bad Request):<br>
+                            Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the retrieval  process.<br>
+                            <i>"Category.User.DoesntHaveCategories"</i>
+                        </p>
+
+                    </section>
+
+                    <section id="statistics-doc">
+                        <h3>8.2.2 Statistics Controllers</h3>
+                        <section>
+                            <h4>8.2.2.1 createCategoryStatistics Controller</h4>
+
+                            <p>
+                                &nbsp;&nbsp;Description<br>
+                                The createCategoryStatistics controller is responsible for creating statistics for a specific category. It handles a POST request to the /categories/{id}/statistics endpoint, where {id} represents the ID of the category. Upon successful creation, it returns a 200 OK response with the created statistics in the response body. In case of any errors or invalid requests, it returns a 400 Bad Request response with an error message in the response body.
+                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Endpoint<br>
+                                Path: /categories/{id}/statistics<br>
+                                Method: POST<br>
+                                Parameters: ID (string)
+                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Request<br>
+                                The controller expects the category ID as a path parameter.
+                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Response<br><br>
+                                &nbsp;&nbsp;Success (200 OK):<br>
+                                Body: The response body contains the created statistics in JSON format.<br><br>
+                                &nbsp;&nbsp;Error (400 Bad Request):<br>
+                                Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the creation process.<br>
+                                <i>"CategoryStatistics.Category.DoesNotExist"</i>
+                            </p>
+                    </section>
+
+                        <section>
+                            <h4>8.2.2.2 createCategoriesStatistics Controller</h4>
+
+                            <p>
+                                &nbsp;&nbsp;Description<br>
+                                The createCategoriesStatistics controller is responsible for creating statistics for all categories. It handles a POST request to the /categories/statistics endpoint. Upon successful creation, it returns a 200 OK response with the created statistics in the response body. In case of any errors or invalid requests, it returns a 400 Bad Request response with an error message in the response body.
+                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Endpoint<br>
+                                Path: /categories/statistics<br>
+                                Method: POST<br>
+                                Parameters: none
+                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Request<br>
+                                The controller does not expect any request payload or parameters.
+                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Response<br><br>
+                                &nbsp;&nbsp;Success (200 OK):<br>
+                                Body: The response body contains the created statistics for all categories in JSON format.<br><br>
+                                &nbsp;&nbsp;Error (400 Bad Request):<br>
+                                Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the creation process.
+                            </p>
+                        </section>
+
+                        <section>
+                            <h4>8.2.2.3 exportPostStatisticsAsPdf Controller</h4>
+
+                            <p>
+                                &nbsp;&nbsp;Description<br>
+                                The exportPostStatisticsAsPdf controller exports post statistics as a PDF document. It handles a POST request to the /posts/{id}/statistics/pdf endpoint, where {id} represents the ID of the post. Upon successful export, it returns a 200 OK response with the PDF document as the response body. In case of any errors or invalid requests, it returns a 400 Bad Request response with an error message in the response body.                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Endpoint<br>
+                                Path: /posts/{id}/statistics/pdf<br>
+                                Method: POST<br>
+                                Parameters: ID (string)
+                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Request<br>
+                                The controller expects the post ID as a path parameter.
+                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Response<br><br>
+                                &nbsp;&nbsp;Success (200 OK):<br>
+                                Body: The response body contains the exported PDF document, encoded in base 64.<br><br>
+                                &nbsp;&nbsp;Error (400 Bad Request):<br>
+                                Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the export process.
+                                <i>	"Post.NotFound"</i>
+                            </p>
+                        </section>
+
+                        <section>
+                            <h4>8.2.2.4 exportCategoryStatisticsAsPdf Controller</h4>
+
+                            <p>
+                                &nbsp;&nbsp;Description<br>
+                                The exportCategoryStatisticsAsPdf controller exports category statistics as a PDF document. It handles a POST request to the /categories/{id}/statistics/pdf endpoint, where {id} represents the ID of the category. Upon successful export, it returns a 200 OK response with the PDF document as the response body. In case of any errors or invalid requests, it returns a 400 Bad Request response with an error message in the response body.
+                            <p>
+                                &nbsp;&nbsp;Endpoint<br>
+                                Path: /categories/{id}/statistics/pdf<br>
+                                Method: POST<br>
+                                Parameters: ID (string)
+                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Request<br>
+                                The controller expects the post ID as a path parameter.
+                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Response<br><br>
+                                &nbsp;&nbsp;Success (200 OK):<br>
+                                Body: The response body contains the exported PDF document, encoded in base 64.<br><br>
+                                &nbsp;&nbsp;Error (400 Bad Request):<br>
+                                Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the export process.
+                            </p>
+                        </section>
+
+                        <section>
+                            <h4>8.2.2.5 exportPostStatisticsAsDocbook Controller</h4>
+
+                            <p>
+                                &nbsp;&nbsp;Description<br>
+                                The exportPostStatisticsAsDocbook controller exports post statistics as a DocBook XML document. It handles a POST request to the /posts/{id}/statistics/docbook endpoint, where {id} represents the ID of the post. Upon successful export, it returns a 200 OK response with the DocBook XML document as the response body. In case of any errors or invalid requests, it returns a 400 Bad Request response with an error message in the response body.
+
+                            <p>
+                                &nbsp;&nbsp;Endpoint<br>
+                                Path: /posts/{id}/statistics/docbook<br>
+                                Method: POST<br>
+                                Parameters: ID (string)
+                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Request<br>
+                                The controller expects the post ID as a path parameter.
+                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Response<br><br>
+                                &nbsp;&nbsp;Success (200 OK):<br>
+                                Body: The response body contains the exported DocBook XML document.<br><br>
+                                &nbsp;&nbsp;Error (400 Bad Request):<br>
+                                Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the export process.
+                                <i>	"Post.NotFound"</i>
+                            </p>
+                        </section>
+
+                        <section>
+                            <h4>8.2.2.6 exportCategoryStatisticsAsDocbook Controller</h4>
+
+                            <p>
+                                &nbsp;&nbsp;Description<br>
+                                The exportCategoryStatisticsAsDocbook controller exports category statistics as a DocBook XML document. It handles a POST request to the /categories/{id}/statistics/docbook endpoint, where {id} represents the ID of the category. Upon successful export, it returns a 200 OK response with the DocBook XML document as the response body. In case of any errors or invalid requests, it returns a 400 Bad Request response with an error message in the response body.
+
+                            <p>
+                                &nbsp;&nbsp;Endpoint<br>
+                                Path: /categories/{id}/statistics/docbook<br>
+                                Method: POST<br>
+                                Parameters: ID (string)
+                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Request<br>
+                                The controller expects the post ID as a path parameter.
+                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Response<br><br>
+                                &nbsp;&nbsp;Success (200 OK):<br>
+                                Body: The response body contains the exported DocBook XML document.<br><br>
+                                &nbsp;&nbsp;Error (400 Bad Request):<br>
+                                Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the export process.
+                            </p>
+                        </section>
+
+                        <section>
+                            <h4>8.2.2.7 getRSSFeed Controller</h4>
+
+                            <p>
+                                &nbsp;&nbsp;Description<br>
+                                The RssFeedController handles the RSS feed functionality, providing a data feed of entities' information or updates. It handles a GET request to the /rss endpoint and returns a 200 OK response with the RSS feed content in XML format. In case of any errors, it returns a 400 Bad Request response with an error message in the response body.
+
+                            <p>
+                                &nbsp;&nbsp;Endpoint<br>
+                                Path:  /rss<br>
+                                Method: GET<br>
+                                Parameters: None
+                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Request<br>
+                                The controller does not expect any request payload or parameters.
+                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Response<br><br>
+                                &nbsp;&nbsp;Success (200 OK):<br>
+                                Body: The response body contains the RSS feed content in XML format.<br><br>
+                                &nbsp;&nbsp;Error (400 Bad Request):<br>
+                                Body: The response body contains an error message in case of any exceptions encountered during the RSS feed generation.
+                                <i>"Post.NoPostsAvailable"</i>
+                            </p>
+                        </section>
+
+                </section>
+
+            </section>
+
+        </section>
+        </section>
+
     </article>
 
 </body>

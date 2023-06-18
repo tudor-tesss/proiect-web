@@ -129,6 +129,21 @@ nav{
     height:40px;
 }
 
+.add-post-button {
+    background: none;
+    border: none;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    margin-left: 20px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s;
+}
+
 nav a{
     text-decoration:none;
     font-size:18px;

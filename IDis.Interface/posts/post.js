@@ -225,22 +225,26 @@ export class PostOverviewComponent {
         let div = document.querySelector(".add-wrapper");
         div.innerHTML = `
             <nav>
-            <div class="dark-button">
+                <div class="dark-button">
                     <button class="toggle-button" id="toggle-button">
                         <img id="toggle-image" src="../resources/icons/light.png">
                     </button>
                 </div>
-                <div class = "nav-buttons">
-                <a class="add-post-button" href="/statistics/?isPost=true&targetId=${postId}">View Statistics</a>
-                <a class="add-category-button" href="/account">Account</a>
-                <div class="dropdown">
-                    <button class="dropbtn">Export</button>
-                    <div class="dropdown-content">
-                        <button onclick="PostOverviewComponent.exportPdf()">PDF</button>
-                        <button onclick="PostOverviewComponent.exportDocbook()">Docbook</button>
-                        <button onclick="PostOverviewComponent.exportCsv()">CSV</button>
+                    <div class = "nav-buttons">
+                        <a class="add-post-button" href="/statistics/?isPost=true&targetId=${postId}">View Statistics</a>
+                        <a class="add-category-button" href="/account">Account</a>
+
+                        <div class="dropdown">
+                            <button class="dropbtn">Export</button>
+                            <div class="dropdown-content">
+                                <button onclick="PostOverviewComponent.exportPdf()">PDF</button>
+                                <button onclick="PostOverviewComponent.exportDocbook()">Docbook</button>
+                                <button onclick="PostOverviewComponent.exportCsv()">CSV</button>
+                            </div>
+                        </div>
+                        
+                        <button class="add-post-button" onClick="AuthenticationService.deleteSessionTokenCookie()" type="button">Log Out</button>
                     </div>
-                </div>
                 </div>
             </nav>
     `;

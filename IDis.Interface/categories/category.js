@@ -86,7 +86,7 @@ export class CategoryOverviewComponent {
                             <button onclick="CategoryOverviewComponent.exportCsv()">CSV</button>
                         </div>
                     </div>
-                    <button class="help-button">Help</button>
+                    <button class="add-post-button" onClick="AuthenticationService.deleteSessionTokenCookie()" type="button">Log Out</button>
                 </div>
             </nav>
         `;

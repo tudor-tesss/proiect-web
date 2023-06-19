@@ -112,8 +112,6 @@
                         <li><a href="#post--overview">Post overview</a></li>
                         <li><a href="#statistics">Statistics</a></li>
                         <li><a href="#notifications">Notifications</a></li>
-                        <li><a href="#admin-dashboard">Administrator dashboard</a></li>
-
                     </ul>
                 </li>
 
@@ -144,11 +142,20 @@
                         <li><a href="#desc-api">Description of APIs used by the system</a>
                             <ul><a href="#extensions">Extensions</a></ul>
                         </li>
+
                         <li><a href="#controller-doc">Controller Documentation</a>
                             <ul><a href="#category-doc">Category Controllers</a></ul>
                             <ul><a href="#statistics-doc">Statistics Controllers</a></ul>
+                            <ul><a href="#authentication-doc">Authentication Controllers</a></ul>
+                            <ul><a href="#post-doc">Post Controllers</a></ul>
                         </li>
 
+                        <li><a href="#architecture-doc">System Architecture</a>
+                            <ul><a href="#back-end-architecture">Backend Architecture</a></ul>
+                            <ul><a href="#framework-architecture">Framework Architecture</a></ul>
+                            <ul><a href="#front-end-architecture">Frontend Architecture</a></ul>
+                            <ul><a href="#deployment-architecture">Docker and Deployment</a></ul>
+                        </li>
                     </ul>
                 </li>
             </ol>
@@ -260,11 +267,6 @@
                         Registered users: users who have created an account on the platform.
                         They can login, browse categories, browse posts, create categories and
                         create new posts.
-                    </li>
-                    <li>
-                        Administrators: users who have special privileges and can manage the
-                        platform. They have the right to delete categories and posts which
-                        violate common decency.
                     </li>
                 </ol>
 
@@ -554,21 +556,6 @@
                     Users can receive notifications by email, for the purpose of allowing
                     authentication.
                 </p>
-            </section>
-
-            <section id="admin-dashboard">
-
-                <h3>5.7 Administrator dashboard</h3>
-
-                <p>
-                    Administrators have access to a special dashboard that allows them to
-                    manage the platform. The dashboard includes functionality to:
-                </p>
-
-                <ul>
-                    <li>View and delete posts or categories</li>
-                    <li>View and manage user accounts</li>
-                </ul>
             </section>
         </section>
 
@@ -1057,8 +1044,9 @@
                         </p>
 
                     </section>
+                </section>
 
-                    <section id="statistics-doc">
+                <section id="statistics-doc">
                         <h3>8.2.2 Statistics Controllers</h3>
                         <section>
                             <h4>8.2.2.1 createCategoryStatistics Controller</h4>
@@ -1088,7 +1076,7 @@
                                 Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the creation process.<br>
                                 <i>"CategoryStatistics.Category.DoesNotExist"</i>
                             </p>
-                    </section>
+                        </section>
 
                         <section>
                             <h4>8.2.2.2 createCategoriesStatistics Controller</h4>
@@ -1261,11 +1249,520 @@
                             </p>
                         </section>
 
+                        <section>
+                            <h4>8.2.2.8 exportPostStatisticsAsCSV Controller</h4>
+
+                            <p>
+                                &nbsp;&nbsp;Description<br>
+                                The exportPostStatisticsAsCSV controller exports post statistics as a CSV document. It handles a POST request to the /posts/{id}/statistics/csv endpoint, where {id} represents the ID of the post. Upon successful export, it returns a 200 OK response with the CSV document as the response body. In case of any errors or invalid requests, it returns a 400 Bad Request response with an error message in the response body.
+
+                            <p>
+                                &nbsp;&nbsp;Endpoint<br>
+                                Path:  /posts/{id}/statistics/csv<br>
+                                Method: POST<br>
+                                Parameters: ID (UUID)
+                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Request<br>
+                                The controller does not expect any request payload or parameters.
+                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Response<br><br>
+                                &nbsp;&nbsp;Success (200 OK):<br>
+                                Body: The response body contains the exported CSV document.<br><br>
+                                &nbsp;&nbsp;Error (400 Bad Request):<br>
+                                Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the export process.
+                            </p>
+                        </section>
+
+                        <section>
+                            <h4>8.2.2.9 exportCategoryStatisticsAsCSV Controller</h4>
+
+                            <p>
+                                &nbsp;&nbsp;Description<br>
+                                The exportCategoryStatisticsAsCSV controller exports category statistics as a CSV document. It handles a POST request to the /categories/{id}/statistics/csv endpoint, where {id} represents the ID of the category. Upon successful export, it returns a 200 OK response with the CSV document as the response body. In case of any errors or invalid requests, it returns a 400 Bad Request response with an error message in the response body.
+                            <p>
+                                &nbsp;&nbsp;Endpoint<br>
+                                Path:  /categories/{id}/statistics/csv<br>
+                                Method: POST<br>
+                                Parameters: ID (UUID)
+                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Request<br>
+                                The controller does not expect any request payload or parameters.
+                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Response<br><br>
+                                &nbsp;&nbsp;Success (200 OK):<br>
+                                Body: The response body contains the exported CSV document.<br><br>
+                                &nbsp;&nbsp;Error (400 Bad Request):<br>
+                                Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the export process.
+                            </p>
+                        </section>
+
+                        <section>
+                            <h4>8.2.2.10 createPostStatistics Controller</h4>
+
+                            <p>
+                                &nbsp;&nbsp;Description<br>
+                                The createPostStatistics controller is responsible for creating statistics for a specific post. It handles a POST request to the /posts/{id}/statistics endpoint, where {id} represents the ID of the post. Upon successful creation, it returns a 200 OK response with the created statistics in the response body. In case of any errors or invalid requests, it returns a 400 Bad Request response with an error message in the response body.                            <p>
+                                &nbsp;&nbsp;Endpoint<br>
+                                Path: /posts/{id}/statistics<br>
+                                Method: POST<br>
+                                Parameters: ID (UUID)
+                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Request<br>
+                                The controller does not expect any request payload or parameters.
+                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Response<br><br>
+                                &nbsp;&nbsp;Success (200 OK):<br>
+                                Body: The response body contains the created statistics in JSON format.<br><br>
+                                &nbsp;&nbsp;Error (400 Bad Request):<br>
+                                Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the creation process.
+                            </p>
+                        </section>
+
+                        <section>
+                            <h4>8.2.2.11 createPostsStatistics Controller</h4>
+
+                            <p>
+                                &nbsp;&nbsp;Description<br>
+                                The createPostsStatistics controller is responsible for creating statistics for all posts. It handles a POST request to the /posts/statistics endpoint. Upon successful creation, it returns a 200 OK response with the created statistics in the response body. In case of any errors or invalid requests, it returns a 400 Bad Request response with an error message in the response body.                                &nbsp;&nbsp;Endpoint<br>
+                                Path: /posts/statistics<br>
+                                Method: POST<br>
+                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Request<br>
+                                The controller does not expect any request payload or parameters.
+                            </p>
+
+                            <p>
+                                &nbsp;&nbsp;Response<br><br>
+                                &nbsp;&nbsp;Success (200 OK):<br>
+                                Body: The response body contains the created statistics in JSON format.<br><br>
+                                &nbsp;&nbsp;Error (400 Bad Request):<br>
+                                Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the creation process.
+                            </p>
+                        </section>
                 </section>
 
+                <section id="authentication-doc">
+                    <h3>8.2.3 Authentication Controllers</h3>
+
+                    <section>
+                        <h4>8.2.3.1 createUser  Controller</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            This controller handles the creation of a user entity in the database, consisting of the user’s first and last names and their email address. This controller is called as part of the sign-up feature. Furthermore, it performs checks on the received data to ensure that the names and address are not null or empty.                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Endpoint<br>
+                            Path: /users<br>
+                            Method: POST<br>
+                            Body: Name, FirstName, EmailAddress
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Response<br><br>
+                            &nbsp;&nbsp;Success (200 OK):<br>
+                            Body: The response body contains the user information in JSON format.<br><br>
+                            &nbsp;&nbsp;Error (400 Bad Request):<br>
+                            Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the creation process.<br>
+                        </p>
+                    </section>
+
+                    <section>
+                        <h4>8.2.3.2 createUserGate Controller</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            This controller is responsible for creating a User Gate entity in the database (which is basically a gate consisting of a code). This User Gate represents a login code and a timestamp representing the exact moment of creation. This code is sent to the user’s email address via Sendgrid.
+                        <p>
+                            &nbsp;&nbsp;Endpoint<br>
+                            Path: /users/gates<br>
+                            Method: POST<br>
+                            Body: EmailAddress
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Response<br><br>
+                            &nbsp;&nbsp;Success (200 OK):<br>
+                            Body: The response body contains the user's UUID in JSON format.<br><br>
+                            &nbsp;&nbsp;Error (400 Bad Request):<br>
+                            Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the creation process.<br>
+                        </p>
+                    </section>
+
+                    <section>
+                        <h4>8.2.3.3 passUserGate Controller</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            The  Pass User Gate controller is used in order to allow the user to send a code to the backend server, as a means of authentication. This will load, from the database, the latest user gate created for the corresponding user and check if the received code matches the one assigned to the gate.                        <p>
+                            &nbsp;&nbsp;Endpoint<br>
+                            Path: /users/{id}/gates<br>
+                            Method: PATCH<br>
+                            Body: Code
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Response<br><br>
+                            &nbsp;&nbsp;Success (200 OK):<br>
+                            Body: The response body contains the user's UUID in JSON format.<br><br>
+                            &nbsp;&nbsp;Error (400 Bad Request):<br>
+                            Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the creation process.<br>
+                        </p>
+                    </section>
+
+                    <section>
+                        <h4>8.2.3.4 createUserSession Controller</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            This controller is responsible for creating a user session entity in the database, containing the details of the logged in user and the machine from which they have performed the login steps. Each session is valid for a day, unless refreshed.                            <br><br>
+                            &nbsp;&nbsp;Endpoint<br>
+                            Path: /users/{id}/sessions<br>
+                            Method: POST<br>
+                            Body: userIpAddress
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Response<br><br>
+                            &nbsp;&nbsp;Success (200 OK):<br>
+                            Body: The response body contains the session's UUID in JSON format.<br><br>
+                            &nbsp;&nbsp;Error (400 Bad Request):<br>
+                            Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the creation process.<br>
+                        </p>
+                    </section>
+
+                    <section>
+                        <h4>8.2.3.5 refreshUserSession Controller</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            This controller serves a 2-in-1 purpose: checking the validity of a user’s session and, if valid, refreshing the session’s expiration date. By default, a session is valid for one day and, on refresh, the expiration date will be refreshed to be a full day since the moment of the api call.                            <br><br>
+                            Path: /users/{id}/sessions<br>
+                            Method: PATCH<br>
+                            Body: sessionId, ipAddress
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Response<br><br>
+                            &nbsp;&nbsp;Success (200 OK)<br>
+                            &nbsp;&nbsp;Error (400 Bad Request):<br>
+                            Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the creation process.<br>
+                        </p>
+                    </section>
+
+                    <section>
+                        <h4>8.2.3.6 deleteUserSession Controller</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            This controller is used as part of the Log out functionality of the web app. When the user presses the logout button, the front-end cookie will be deleted and a request will be sent to the backend requesting the deletion of the server-side session.                            <br><br>
+                            Path: /users/{id}/sessions<br>
+                            Method: DELETE<br>
+                            Body: sessionId
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Response<br><br>
+                            &nbsp;&nbsp;Success (200 OK)<br>
+                            &nbsp;&nbsp;Error (400 Bad Request):<br>
+                            Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the creation process.<br>
+                        </p>
+                    </section>
+
+                    <section>
+                        <h4>8.2.3.7 getUserById Controller</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            This controller is used in various parts of the website and its’ sole purpose is retrieving the basic information of the user: name, first name, and email address.<br><br>
+                            Path: /users/{id}
+                            Method: GET<br>
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Response<br><br>
+                            &nbsp;&nbsp;Success (200 OK):<br>
+                            Body: The response body contains the user information in JSON format.<br><br>
+                            &nbsp;&nbsp;Error (400 Bad Request):<br>
+                            Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the creation process.<br>
+                        </p>
+                    </section>
+
+                    <section>
+                        <h4>8.2.3.7 getAllUserNames Controller</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            This controller is used as part of the posts page. In a post with a large number of comments, requesting the user data for each individual user would mean sending an immense amount of requests to the backend so, to avoid all that, we have created this endpoint which returns a list of key-value pairs consisting of the user’s unique identifier and their full name. <br><br>
+                            Path: /users/all/names<br><br>
+                            Method: GET<br>
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Response<br><br>
+                            &nbsp;&nbsp;Success (200 OK):<br>
+                            Body: The response body contains all of the user information in JSON format.<br><br>
+                            &nbsp;&nbsp;Error (400 Bad Request):<br>
+                            Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the creation process.<br>
+                        </p>
+                    </section>
+
+                </section>
+
+                <section id="post-doc">
+                    <h3>8.2.4 Post Controllers</h3>
+
+                    <section>
+                        <h4>8.2.4.1 createPost Controller</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            The createPost Controller serves the purpose of creating a post entity in the database. A post represents a set consisting of a title, body, and ratings, regarding a certain subject.<br><br>
+                            Path: /posts<br>
+                            Method: POST<br>
+                            Body: title, body, ratings, userId, categoryId<br>
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Response<br><br>
+                            &nbsp;&nbsp;Success (200 OK):<br>
+                            Body: The response body contains the post information in JSON format.<br><br>
+                            &nbsp;&nbsp;Error (400 Bad Request):<br>
+                            Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the creation process.<br>
+                        </p>
+                    </section>
+
+                    <section>
+                        <h4>8.2.4.2 getAllPostsInsideACategory Controller</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            This controller is used as part of the Category Overview Component.When a user clicks on a category, they will be redirected to a page which will show all of the posts inside of that category, with the help of this controller<br><br>
+                            Path: /categories/{id}/posts<br>
+                            Method: GET<br>
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Response<br><br>
+                            &nbsp;&nbsp;Success (200 OK):<br>
+                            Body: The response body contains the post information in JSON format.<br><br>
+                            &nbsp;&nbsp;Error (400 Bad Request):<br>
+                            Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the creation process.<br>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h4>8.2.4.3 createPostReply Controller</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            This controller is used as part of the Post Overview Component. On that page, the user can click on a button, Reply, and add a reply to the post that they are viewing, with the help of this controller.<br><br>
+                            Path: /posts/{id}/replies<br>
+                            Method: POST<br>
+                            Body: authorId, parentPostId, title, body, ratings<br>
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Response<br><br>
+                            &nbsp;&nbsp;Success (200 OK):<br>
+                            Body: The response body contains the post reply information in JSON format.<br><br>
+                            &nbsp;&nbsp;Error (400 Bad Request):<br>
+                            Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the creation process.<br>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h4>8.2.4.4 getPostById Controller</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            This controller is also used as part of the Post Overview Component. This controller receives the id of a post and returns all of the information regarding that post.<br><br>
+                            Path: /posts/{id}<br>
+                            Method: GET<br>
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Response<br><br>
+                            &nbsp;&nbsp;Success (200 OK):<br>
+                            Body: The response body contains the post information in JSON format.<br><br>
+                            &nbsp;&nbsp;Error (400 Bad Request):<br>
+                            Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the creation process.<br>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h4>8.2.4.5 getAllPostReplies Controller</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            This controller is used as part of the Post Overview Component, in order to display all of the replies for a certain post.<br><br>
+                            Path:  /posts/{id}/replies<br>
+                            Method: GET<br>
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Response<br><br>
+                            &nbsp;&nbsp;Success (200 OK):<br>
+                            Body: The response body contains the post reply information in JSON format.<br><br>
+                            &nbsp;&nbsp;Error (400 Bad Request):<br>
+                            Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the creation process.<br>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h4>8.2.4.6 getPostsByCreatorId Controller</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            This controller is used as part of the Account Overview Component and helps display all the posts that the user has created.<br><br>
+                            Path: /users/{id}/posts<br>
+                            Method: GET<br>
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Response<br><br>
+                            &nbsp;&nbsp;Success (200 OK):<br>
+                            Body: The response body contains the post information in JSON format.<br><br>
+                            &nbsp;&nbsp;Error (400 Bad Request):<br>
+                            Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the creation process.<br>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h4>8.2.4.7 getAllPosts Controller</h4>
+
+                        <p>
+                            &nbsp;&nbsp;Description<br>
+                            This controller serves the purpose of returning a list of all of the available posts and is used mostly for matching certain post ids to their actual information, as a means of avoiding making multiple requests, in various parts of the system.	<br><br>
+                            Path: /posts<br>
+                            Method: GET<br>
+                        </p>
+
+                        <p>
+                            &nbsp;&nbsp;Response<br><br>
+                            &nbsp;&nbsp;Success (200 OK):<br>
+                            Body: The response body contains the post information in JSON format.<br><br>
+                            &nbsp;&nbsp;Error (400 Bad Request):<br>
+                            Body: The response body contains an error message in case of invalid requests or any exceptions encountered during the creation process.<br>
+                        </p>
+                    </section>
+
+                </section>
             </section>
 
-        </section>
+            <section id="architecture-doc">
+                <h3>8.3 Architecture</h3>
+
+                <section id="back-end-architecture">
+                    <h3>8.3.1 Backend Architecture</h3>
+
+                    <p>
+                        The back-end server was built on Java, using a custom-built framework (explanations regarding the framework are below) and using a PostgreSQL database. The back-end code was structured following the Domain-Driven Design approach and on a monolithic design. As part of developing the back-end, the Test Driven Development design pattern was used, ensuring that all of the created features, on both the domain and business levels, are thoroughly tested. Furthermore, a custom Mediator was used in order to reduce code coupling (check framework docs). The backend server was also built to follow the REST paradigm and features the following resources (root level):
+                        <ul>
+                            <li>categories</li>
+                            <li>posts</li>
+                            <li>users</li>
+                            <li>rss</li>
+                        </ul>
+                    </p>
+                </section>
+
+                <section id="framework-architecture">
+                    <h3>8.3.2 Framework</h3>
+
+                    <p>
+                        For the backend server, we have developed a custom framework, specific to our needs. These are the main features of the framework:
+                        <ul>
+                            <li>
+                                HttpServer:
+                                The HttpServer is a class built upon Java’s native HttpServer implementation and customized for our specific needs. This HttpServer will be given a certain port and a list of controllers to use.
+                            </li>
+                            <br>
+
+                            <li>
+                                Controllers:
+                                Each controller class must implement the IController interface, which is an empty interface used for the sole purpose of identifying the controllers. Each controller class contains a list of methods representing endpoints, each annotated with the @Route(path = “.......”, method = HttpVerbs.[yourVerbHere]) and @Controller(name = “.....”). These custom-built annotations help define the specifics of the endpoint, such as the route, method and name.
+                            </li>
+                            <br>
+
+                            <li>
+                                Router:
+                                The Router class is responsible for intercepting the Http requests and then forwarding them to the appropriate endpoint, based on the route and http verb received. This Router implementation also permits the use of route parameters, such as in the above-described routes (i.e., posts/{id}). The route parameter will be matched to a corresponding parameter of the endpoint method.
+                            </li>
+                            <br>
+
+                            <li>
+                                Mediator:
+                                The Mediator is a feature inspired from Jimmy Bogard’s <a href="https://github.com/jbogard/MediatR">MediatR</a> library for C#. This Mediator acts as a “hub”, facilitating the communication between the endpoint method and the Command Handler, but without directly referencing the Command Handler class in the endpoint method, to reduce code coupling. Each Command implements the IRequest<T> interface, and that T type is to be replaced with the return type of the handler. The Command Handler class must implement the IRequestHandler<T, V> interface, where T is to be replaced with the command class and V with the return type, the same as the Command. In the Main class, where all configuration happens, the commands and handlers must be declared for the Mediator and, then, when mediator.send(command) is called, the Mediator will be able to forward that command to the appropriate handler, if one exists.
+                            </li>
+                            <br>
+
+                            <li>
+                                Database and QueryProvider:
+                                The Database class is a custom implementation and acts as a point of creating connections to the database. For this, we have used Hikari, in order to use connection pooling to prevent blocking calls to the database due to the jdbc driver. The QueryProvider class acts kind of like a repository, and contains generic methods which are used to insert entities, get all entities of a certain type, or get an entity of a certain type by id. 
+                            </li>
+                        </ul>
+                    </p>
+                </section>
+
+                <section id="front-end-architecture">
+                    <h3>8.3.3 Frontend Architecture</h3>
+
+                    The front-end code is structured in a modular design, split into services, looks, models, errors, routes and components. Each page accessed represents a Component (i.e: PostOverviewComponent is the page where you view a post and its replies). Furthermore, since each component needs to call at least one endpoint, we have created a number of services in the shared component, in order to reduce code duplication and decrease the package size and increase performance. A short summary of the responsibilities of each “module”:
+                    <ul>
+                        <li>
+                            components: the components represent pages and their custom build javascript code, along with the html and css files.
+                        </li>
+                        <br>
+
+                        <li>
+                            services: services are javascript classes which, each, represent one of the controller classes in the backend (authentication, categories, posts, statistics, users). Each of these services contains methods that make a call to the backend server and return the response either in the form of an Error, or in the form of a model.
+                        </li>
+                        <br>
+
+                        <li>
+                            models: the models are javascript classes which represent our Domain objects (i.e: post, user, etc…)  and act as containers for data, to maintain a more organized code.
+                        </li>
+                        <br>
+
+                        <li>
+                            errors: the errors class is a collection of all of the possible errors which can be returned from the backend and is used to display custom messages for each error. In case an unexpected error comes from the backend, an appropriate message will be displayed.
+                        </li>
+                        <br>
+
+                        <li>
+                            look: the look module contains the “behind the scenes” work for the dark mode implementation and for certain pop-ups.
+                        </li>
+                        <br>
+
+                        <li>
+                            routes: the routes class is a collection of all of the routes available in the backend and has the possibility of switching the prefix (from localhost to the host which hosts our backend server), to accommodate running either on localhost or on the web.
+                        </li>
+                    </ul>
+                </section>
+
+                <section id="deployment-architecture">
+                    <h3>8.3.4 Docker and Deployment</h3>
+
+                    <p>
+                        As part of this project, we have also created Dockerfiles in order to run our backend and frontend apps and our database in Docker containers. The backend server runs on an Ubuntu container, and the frontend container runs with the help of an Nginx server, and the database is a separate PostgreSQL container. With these dockerfiles, we also had the possibility of deploying the web-app on a dedicated host in a very simple manner. For deployment we have chosen <a href="https://northflank.com">Northflank</a> as our provider, as it offered a free tier for small apps, and it was relatively easy to configure.
+                    </p>
+                </section>
+            </section>
         </section>
 
     </article>
